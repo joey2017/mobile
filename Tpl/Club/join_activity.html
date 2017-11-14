@@ -1,0 +1,110 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+ <!--弹出提示框-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+        	<a href="javascript:history.go(-1)" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/meng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>活动报名</a>
+        </div>        
+    </div>
+</div>
+<!--活动报名-->
+<div class="container-fluid">
+  		<div class="form-group">
+    		<label for="inputEmail3" class="col-xs-12"><span style="color:#F00;">*</span>真实姓名</label>
+    		<div class="col-xs-12">
+      			<input type="email" id="name" class="form-control" value="<{$user_info.true_name}>"  placeholder="">
+    		</div>
+  		</div>
+        <div class="form-group">
+    		<label for="inputPassword3" class="col-xs-12"><span style="color:#F00;">*</span>联系电话</label>
+    		<div class="col-xs-12">
+            	<input type="tel" id="phone" class="form-control" value="<{$user_info.mobile}>" placeholder="" >
+            </div>            
+  		</div>  
+  		<div class="form-group">
+    		<label for="inputPassword3" class="col-xs-12"><span style="color:#F00;">*</span>参与人数</label>
+    		<div class="col-xs-12">
+      			<input type="tel" class="form-control" id="num" placeholder="">
+    		</div>
+  		</div> 
+        <div class="form-group">
+    		<label for="inputPassword3" class="col-xs-12">车牌号码</label>
+    		<div class="col-xs-12">
+      			<input type="text" class="form-control" id="plate_number" placeholder="">
+    		</div>
+  		</div>
+        <div class="form-group">
+    		<label for="inputPassword3" class="col-xs-12">备注</label>
+    		<div class="col-xs-12">
+      			<textarea class="form-control" rows="3" id="remarks"></textarea>
+    		</div>
+  		</div>
+ 
+</div>
+<div class="container-fluid">
+	<div class="row" style="margin-top:15px;">
+    	<center>    	
+        <div class="col-xs-12"><input type="button" id="submit" value="确认提交" class="btn btn-warning btn-block btn-lg" ></div>
+        </center>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#submit').click(function(){
+        var name=$('#name').val();
+        var phone=$('#phone').val();
+        var num=$('#num').val();
+        var plate_number=$('#plate_number').val();
+        var remarks=$('#remarks').val();
+        if(!name){
+            MsgBox('名字不能为空','提示');
+            $('#name').focus();
+            return false;
+        }
+        if(!phone.match(/^(((1[0-9]{1}[0-9]{1})|159|153)+\d{8})$/)){
+            MsgBox('手机号码格式不对','提示');
+           $('#phone').focus();
+           return false;
+        }  
+        if(isNaN(num)){
+              MsgBox('参与人数至少为1','提示');
+             $('#num').focus();
+             return false;
+        }
+         $('#submit').val('数据提交中..');
+         $('#submit').attr('disabled',true);        
+        $.get("<{:U('Club/dojoin_activity')}>",{"name":name,"cid":<{$cid}>,"id":<{$id}>,"phone":phone,"num":num,"plate_number":plate_number,"remarks":remarks}
+              ,function(data){ 
+                      if(data!=200){ 
+                           MsgBox(data,'提示');
+                           $('#submit').val('确认提交');
+                           $('#submit').attr('disabled',false); 
+                      }else{
+                         MsgBox('报名成功','提示');
+                        setTimeout(function () { 
+                            location.href="<{:U('Club/activity_detail',array('id'=>$id))}>";
+                        }, 1500);
+                       
+                      }
+                 }); 
+    })
+  
+ 
+</script>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

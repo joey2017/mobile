@@ -1,0 +1,97 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+        	<a href="javascript:history.go(-1)" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/meng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a href="<{:U('Club/club',array('id'=>$circle['circle_id']))}>"><{$circle.circle_name}></a>
+        </div>        
+    </div>
+</div>
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<!--标题-->
+<div class="container-fluid">
+	<div class="row">    	
+        <div class="all_Posts">
+            <a href="<{:U('Club/topic',array('id'=>$cid))}>" <if condition="$digest eq 0 or $digest eq null "> style="background-color:#f0ad4e" </if> >全部帖子</a>
+            <a href="<{:U('Club/topic',array('id'=>$cid,'digest'=>1))}>" <if condition="$digest eq 1 "> style="background-color:#f0ad4e" </if>>精华帖子</a>
+            <!--
+            <button type="button" class="btn btn-warning" style="float:right; padding:8px 15px; margin:3px 10px 0 0;">发表帖子</button>
+            -->
+        </div> 
+    </div>
+</div>
+<!--分割线-->
+<div class="container-fluid line"></div>
+<script type="text/javascript">
+        var stop=true; 
+        var currentpage=0;
+        ajaxRed()
+        $(window).scroll(function(){ 
+            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+            if($(document).height() <= totalheight){ 
+                if(stop==true){ 
+                    ajaxRed();
+                } 
+            } 
+        });
+        function ajaxRed(){
+              $("#load").show();
+              stop=false;
+              var cid="<{$cid}>";
+              var digest="<{$digest}>";
+              $.get("<{:U('Club/ajax_get_topic')}>",{"p":currentpage,"id":cid,"digest":digest}
+              ,function(html){ 
+                      if($.trim(html)!=""){ 
+                          if(currentpage==0)
+                          {
+                            $("#topic_list").html(html);
+                          } 
+                          else
+                          {
+                            $("#topic_list").append(html);
+                          }
+                        stop=true;
+                      }else{
+                         if(currentpage==0)
+                          {
+                            MsgBox('暂无帖子');
+                          } 
+                          else
+                          {
+                            MsgBox('已查出全部帖子');
+                          }
+                      } 
+                      currentpage++;
+                     $("#load").hide();  
+                 });              
+        }
+
+</script>
+<!--帖子内容-->
+<div class="container-fluid" id="topic_list">
+    
+</div>
+
+<!--加载-->
+<div class="container-fluid" id="load">
+	<div class="row">
+    	<center><div style="line-height:40px;"><img src="__PUBLIC__/images/minilodging.gif">正在加载...</div></center>
+    </div>
+</div>
+
+
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/scrolltopcontrol.js"></script>
+<p>&nbsp;</p><p>&nbsp;</p>
+<include file="Inc:footer"/>

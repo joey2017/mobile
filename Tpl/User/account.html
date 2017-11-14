@@ -1,0 +1,118 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="<{:U('User/index')}>" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>账号信息</a>
+        </div>             
+    </div>
+</div>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--号码-->
+<div class="container-fluid">	
+    <div class="row oder">
+    	<div class="col-xs-12">
+        	<a href="<{:U('User/modify_name')}>" class="oder_1">
+                <i class="Number wd"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></i>
+                <span><{$u.show_name}></span>                
+                <div style="float:right;">
+                	<em style="color:#F00;">修改昵称</em>
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                </div>  
+            </a>  	
+        </div>
+    </div>
+    <div class="row oder">
+    	<div class="col-xs-12">
+        	<a href="javascript:void(0);" class="oder_1">
+                <i class="Balance wd"><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span></i>
+                <span>车堂币余额</span> 
+                <em style="color:#F00; margin-left:10px;"><{$u.score}></em>               
+                <!-- <div style="float:right;">                	
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                </div>  --> 
+            </a>  	
+        </div>
+    </div>
+   <!--  <div class="row oder" style="border-bottom:none;">
+    	<div class="col-xs-12">
+        	<a href="" class="oder_1">
+                <i class="Address wd"></i>
+                <span>收获地址</span>                
+                <div style="float:right;">
+                	<em style="color:#F00;">修改/添加</em>
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                </div>  
+            </a>  	
+        </div>
+    </div> -->
+</div>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--安全等级-->
+<div class="container-fluid">	
+    <div class="row oder">
+    	<div class="col-xs-12">        	                
+            <div style="float:left; line-height:45px;color:#636363;">账户安全等级&nbsp;&nbsp;&nbsp;<{$u.safe}></div>                
+            <div style="float:right;font-size:12px; color:#999;margin-top:15px;">请设置一下项目保护账号</div>      	
+        </div>
+    </div> 
+    <div class="row oder">
+    	<div class="col-xs-12">
+        	<a href="<{:U('User/change_mobile')}>" class="oder_1">
+                <i class="Binding wd"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span></i>
+                <span>已绑定手机号</span> 
+                <em style="color:#999;"><{$u.mobile|substr_replace=###,'****',3,4}></em>               
+                <div style="float:right;">
+                	<em style="color:#F00;">更换</em>
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                </div>  
+            </a>  	
+        </div>
+    </div> 
+    <div class="row oder">
+    	<div class="col-xs-12">
+        	<a href="<{:U('User/modify_password')}>" class="oder_1">
+                <i class="Modification wd"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></i>
+                <span>修改账户密码</span>
+                <em style="color:#F00; margin-left:10px;">强度：<{$u.safe_pwd}></em>           
+                <div style="float:right;">
+                	<em style="color:#F00;">修改</em>
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                </div>  
+            </a>  	
+        </div>
+    </div>  
+</div>
+
+<!--退出账户
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-xs-12" style="margin-top:25px;"><center><a href="<{:U('User/loginOut')}>"><button type="button" class="btn btn-danger btn-lg" style="padding-left:40px;padding-right:40px;">退出账户</button></a></center></div>
+    </div>
+</div>
+-->
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+  WeixinJSBridge.call('hideToolbar');
+  WeixinJSBridge.call('hideOptionMenu');
+});
+</script>
+
+<include file="Inc:footer"/>

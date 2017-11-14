@@ -1,0 +1,244 @@
+<include file="Inc:header"/>
+<link rel="stylesheet" href="__PUBLIC__/css/idangerous.swiper.css">
+</head>
+
+<body>
+<include file="Inc:art_menu"/>
+<!--弹出提示框-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+
+<!--文章标题-->
+<div class="container-fluid">
+	<div class="row">
+    	<div class="col-xs-12 txttitle">
+        	<h2><{$r.title}></h2>
+            <div>
+            	<span><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<{$r.username}></span>
+                <span><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>&nbsp;<em id="hits"></em></span>   
+                <span><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;<{$r.inputtime|date="Y-m-d",###}></span>
+                <a href="#dianping" style=" float:right; color:#cd0000;"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>查看点评</a>
+            </div>
+        </div>
+        <div class="col-xs-12 txtcontent">
+        	<{$r.content}>
+        </div>
+        
+        <div class="col-xs-12 dzbox">
+        	<a id="btn" data-pid="<{$r.id}>">
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><br>
+                <i id="like_num"><{$r.likecount}></i>
+            </a>
+        </div>
+    </div>
+</div>
+<script src="http://weixin.17cct.com/news/api.php?op=count&id=<{$r.id}>&modelid=1"></script>
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--文章其他-->
+<div class="container-fluid">
+	<div class="row">
+    	<div class="col-xs-12 qtnews">
+    		<if condition="$key_array neq null">
+	        	<h3>相关资讯</h3> 
+	            <ul>
+	            	<volist id="vo" name="key_array">
+	            		<li><a href='<{:U("Article/view",array("id"=>$vo["id"]))}>'><{$vo.title}></a></li>
+	            	</volist>
+	            </ul>
+            </if>
+            <center><a href='<{:U("Article/index")}>' >查看更多推荐资讯</a></center>
+        </div>
+    </div>
+       <div class="row">
+    	<div class="col-xs-5 col-xs-offset-1"><button type="button" onclick="button2()" style="width:100%;"  class="btn btn-default button1"><span></span>发给朋友</button></div>
+        <div class="col-xs-5"><button type="button" onclick="button2()" style="width:100%;"  class="btn btn-default button2"><span></span>朋友圈</button></div>
+    </div>
+	
+	 <div class="row" id="dianping">
+    	<div class="col-xs-12 plbox">
+    	<!--评论内容开始-->
+            <!-- UY BEGIN -->
+            <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1976552"></script>
+            <!-- UY END -->
+            <div style="padding:10px;background:#fff;">
+
+             <div id="respond" class="no_webshot">
+                <form id="commentform">
+                  <!-- UY BEGIN -->
+                  <div id="uyan_frame"></div>
+                  <!-- UY END -->
+                </form>
+              </div>
+              <div id="postcomments">
+              </div>
+            </div>  
+            <!--评论内容结束--> 
+           </div>
+    </div>
+
+</div>
+<style>
+			 #mcover {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.7);
+				display: none;
+				z-index: 20000;
+			 }
+			 #mcover img {
+				position: fixed;
+				right: 18px;
+				top: 5px;
+				width: 260px!important;
+				height: 180px!important;
+				z-index: 20001;
+			 }
+			 .text {
+				margin: 15px 0;
+				font-size: 14px;
+				word-wrap: break-word;
+				color: #727272;
+			 }
+			 #mess_share {
+				margin: 15px 0;
+				display: block;
+			 }
+			 #share_1 {
+				float: left;
+				width: 49%;
+				display: block;
+			 }
+			 #share_2 {
+				float: right;
+				width: 49%;
+				display: block;
+			 }
+			 .clr {
+				display: block;
+				clear: both;
+				height: 0;
+				overflow: hidden;
+			 }
+			
+			 #mess_share img {
+				width: 22px!important;
+				height: 22px!important;
+				vertical-align: top;
+				border: 0;
+			 }
+        </style>
+	<script type="text/javascript">
+
+		function button2(){
+			$("#mcover").css("display","block")  // 分享给好友圈按钮触动函数
+		}
+		function weChat(){
+			$("#mcover").css("display","none");  // 点击弹出层，弹出层消失
+			}
+	    (function($) {
+        $.extend({
+            tipsBox: function(options) {
+                options = $.extend({
+                    obj: null,  //jq对象，要在那个html标签上显示
+                    str: "+1",  //字符串，要显示的内容;也可以传一段html，如: "<b style='font-family:Microsoft YaHei;'>+1</b>"
+                    startSize: "10px",  //动画开始的文字大小
+                    endSize: "30px",    //动画结束的文字大小
+                    interval: 600,  //动画时间间隔
+                    color: "red",    //文字颜色
+                    callback: function() {}    //回调函数
+                }, options);
+                $("body").append("<span class='num'>"+ options.str +"</span>");
+                var box = $(".num");
+                var left = options.obj.offset().left + options.obj.width() / 2;
+                var top = options.obj.offset().top;
+                box.css({
+                    "position": "absolute",
+                    "left": left + "px",
+                    "top": top + "px",
+                    "z-index": 999,
+                    "font-size": options.startSize,
+                    "line-height": options.endSize,
+                    "color": options.color
+                });
+                box.animate({
+                    "font-size": options.endSize,
+                    "opacity": "0",
+                    "top": top - parseInt(options.endSize) + "px"
+                }, options.interval , function() {
+                    box.remove();
+                    options.callback();
+                });
+            }
+        });
+	
+			/* 点赞 */
+			$("#btn").on("click", function(pid) {
+				_this=$(this);
+				pid = pid || window.event;
+				var c = $(pid.target || pid.srcElement);
+				pid = c.attr("data-pid");
+				if (!pid || !/^\d{2,8}$/.test(pid));
+               var like=$.cookie("like_click");               
+                if(like){
+                  var like_list = like.split(',');                 
+                  var has=$.inArray('<{$r.id}>',like_list);
+                  if(has!=-1){
+                      MsgBox("您已经赞过了!","提示");
+                      return false;
+                   }
+                }
+				$.ajax({
+					url: '<{:U("Article/click_like")}>?id='+<{$r.id}>,
+					type: "GET",
+					dataType: "json",									
+					success: function(pid) {                    
+                    if(pid){
+                        $("#like_num").html(pid);
+                        $.tipsBox({
+							obj: _this,
+							str: "+1",
+			                callback: function() {
+			                }
+						})
+                        if(like==null){
+                          $.cookie("like_click",<{$r.id}>); 
+                        }else{
+                          $.cookie("like_click",like+","+<{$r.id}>); 
+                        }
+                    }else{
+                      MsgBox("再点击一下试试!","提示");
+                    }										
+					}
+				});             
+			});
+    })(jQuery);
+
+
+
+</script>
+<div id="mcover" onclick="weChat()" style="display:none;">
+          <img src="https://mmbiz.qlogo.cn/mmbiz/vV3bdMHsLIjY2s0npKT0FaJ6iaC1MaiciakM61zfqBsNjYH14ovUG145GEuwMPafiaPjh5drSaAg8DMTic3a2I3icbLg/0" />
+</div>
+
+<!--以下个空格不要删-->
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<!--底部固定按钮-->
+<script src="__PUBLIC__/js/idangerous.swiper.min.js"></script>
+<!--资讯列表导航拖动-->
+<script src="__PUBLIC__/js/simple-app.js"></script>
+<script type="text/javascript">
+    /*手机站底部广告*/
+    var cpro_id = "u2250528";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></script>
+<include file="Inc:footer"/>

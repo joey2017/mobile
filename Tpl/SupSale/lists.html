@@ -1,0 +1,35 @@
+<volist name="sale_list" id="sl">
+	<div class="container-fluid">
+	    <div class="row">
+	        <div class="col-xs-12">
+	            <a class="my_od">
+	                <span style="float:left;"><{$sl.order_sn}></span>
+	                <div style="height:45px;">                   
+	                </div>  
+	            </a>    
+	        </div>
+	    </div>
+	    <div class="row" >
+	        <div class="col-xs-12">         
+	            <a class="my_od_1">
+	                <div class="my_od_f" style="white-space: normal;">
+	                    <div class="infopad">门店名称：<{$sl.location_name}></div>
+	                    <div class="infopad">联系人：<{$sl.receive_user}></div>
+	                    <div class="infopad">联系方式：<{$sl.receive_tel}></div>
+	                    <div class="infopad">销售数量：<{$sl.num|intval}></div>
+	                    <div class="infopad">销售金额：￥<{$sl.total_price|price}></div>
+	                    <div class="infopad">下单时间：<{$sl.create_time|date='Y-m-d H:i:s',###}></div>
+	                </div>
+	            </a>
+	                    
+	        </div>
+	    </div>
+	    <div class="row">
+	        <div class="col-xs-12">
+	            <a style="float:right;height:30px;"></a>                   
+	        </div>
+	    </div>
+	</div>
+
+	<div class="container-fluid line"></div>
+</volist>

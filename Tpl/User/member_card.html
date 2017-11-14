@@ -1,0 +1,92 @@
+<include file="Inc:header"/>
+<meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" href="__PUBLIC__/css/owl.carousel.min.css"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/htmleaf-demo.css">
+
+<!--[if IE]>
+	<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+<![endif]-->
+</head>
+<body>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="padding: 1em 0;">
+            <div id="news-slider" class="owl-carousel">
+			<volist name="card" id="c" key="key">
+				
+		                <div class="post-slide">
+		                    <div class="post-img">
+			                    <div class="hy_kad kad_bg0<{$key}>">
+			                        <h3>
+			                            <a class="touxiagn"><img src="<if condition="$head_img eq null">http://s.17cct.com/v3/images/man.jpg<else/><{$head_img}></if>"></a><{$c.member_card_name}>
+			                        </h3>
+			                        <p>卡号：<{$c.member_card_number}></p>
+			                        <p>余额：<{$c.member_card_balance|price}></p>
+			                    </div> 
+		                    </div>
+		                    <div class="post-content">
+
+		                        <table style="border: 0; margin-bottom:20px;" class="table table-bordered bootstrap-datatable">
+								    <tbody>
+								        <tr>
+								            <td width="50%" align="center">洗车项目:<b> <{$c.33}>折</b></td>
+								            <td width="50%" align="center">精品项目:<b><{$c.29}>折</b></td> 
+								        </tr>
+								        <tr>
+								            <td width="50%" align="center">轮胎项目:<b><{$c.30}>折</b></td>
+								            <td width="50%" align="center">快修项目:<b><{$c.31}>折</b></td> 
+								        </tr>
+								        <tr>
+								            <td width="50%" align="center">改装项目:<b><{$c.32}>折</b></td>
+								            <td width="50%" align="center">美容项目:<b><{$c.28}>折</b></td> 
+								        </tr>
+								        <tr>
+								            <td width="50%" align="center">车务项目:<b><{$c.34}>折</b></td>
+								            <td width="50%" align="center">保险项目:<b><{$c.35}>折</b></td> 
+								        </tr>
+								    </tbody>
+								</table>
+								<h3 class="post-title">适用门店：</h3>
+		                    	<p class="post-description">
+		                            <{$c.location_name}>
+		                        </p>
+		                        <h3 class="post-title">本卡说明：</h3>
+		                    	<p class="post-description">
+		                             <{$c.detail}>
+		                        </p>
+		                    </div>
+		                </div>
+				</volist>
+            </div>
+        </div>
+
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+
+		<a href="<{:U('User/index')}>" class="fhbtn">返回</a>
+    </div>
+</div>
+		
+		
+	
+
+
+<script type="text/javascript" src="__PUBLIC__/js/owl.carousel.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#news-slider").owlCarousel({
+            items:3,
+            itemsDesktop:[1199,2],
+            itemsDesktopSmall:[980,2],
+            itemsMobile:[600,1],
+            pagination:false,
+            navigationText:false,
+            autoPlay:true
+        });
+    });
+</script>
+
+</body>
+</html>

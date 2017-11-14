@@ -1,0 +1,174 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top" style="background:#4b8dfc">
+        <div class="pg-Current">
+        	<a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/jia.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>提交订单</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!--订单名-->
+<div class="container-fluid dd_name">
+	<div class="row">
+			<div class="col-xs-12"><{$route.title}></div>
+	</div>
+</div>
+<!--订单详细-->
+<form class="form-horizontal" style="margin-top:10px;" id="Form" method="post" action="<{:(U('Route/order'))}>" >
+
+<div class="container-fluid" >
+	
+ <div class="row ddxq">
+      <div class="col-xs-4">成人:</div>
+      <div style="float:right; margin:0 10px 0 0">
+        <div class="input-group input-group-sm" style="float:left;">
+              <button id="adult_minus" onclick="check_number('a','s')" class="btn btn-default bd" type="button">-</button>
+          </div>
+          <div class="input-group input-group-sm" style="float:left; margin: 7px 5px 0 5px;">
+              <input type="tel" id="adult_count" name="adult_count" readonly class="form-control" style="text-align:center; border-radius:5px; width:55px; height:34px;" value="1">
+          </div>
+          <div class="input-group input-group-sm" style="float:left;">
+              <button id="adult_plus" onclick="check_number('a','a')" class="btn btn-default bd" type="button">+</button>
+          </div>
+      </div>
+  </div>
+  <div class="row ddxq">
+      <div class="col-xs-4">儿童:</div>
+      <div style="float:right; margin:0 10px 0 0">
+        <div class="input-group input-group-sm" style="float:left;">
+              <button id="childrens_minus" onclick="check_number('c','s')" class="btn btn-default bd" type="button">-</button>
+          </div>
+          <div class="input-group input-group-sm" style="float:left; margin: 7px 5px 0 5px;">
+              <input type="tel" id="childrens_count" name="childrens_count" readonly class="form-control" style="text-align:center; border-radius:5px; width:55px; height:34px;" value="0">
+          </div>
+          <div class="input-group input-group-sm" style="float:left;">
+              <button id="childrens_plus" onclick="check_number('c','a')" class="btn btn-default bd" type="button">+</button>
+          </div>
+      </div>
+  </div>
+  <div class="row ddxq">
+			<div class="col-xs-8">总价:</div>
+      <div class="col-xs-4"><p style="float:right; color:#ff7302;">¥<strong id="total_price"><{$route.adult_price|price}></strong></p></div>
+	</div>
+</div>
+
+
+<!--分割线-->
+<!--您绑定的手机号-->
+<div class="container-fluid dd_name" style="border-top:0;">
+	<div class="row">
+			<div class="col-xs-11">您绑定的手机号：</div>
+	</div>
+</div>
+<div class="container-fluid" >
+    <div class="row ddxq">
+        <div class="col-xs-4"><{$mobile}></div>
+        <div class="col-xs-8"><p style="float:right;"><a href="<{:U('User/account')}>" style="color:#c6c6c6">绑定新手机号<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p></div>
+    </div>
+</div>
+<!--分割线-->
+<div class="container-fluid line" style="border-top:0;"></div>
+<input type="hidden" name="id" value="<{$route.id}>">
+
+
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-xs-12" style="margin-top:25px;"><center><button type="submit" id="orderSubmit" class="btn btn-warning btn-lg" style="padding-left:40px;padding-right:40px;" >提交订单</button></center></div>
+    </div>
+</div>
+</form>
+<!--下面的空格要保留-->
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+function check_number(c,t){
+   var num1=num2=0,_num,_total = $("#total_price"),_submit = $("#orderSubmit");
+      if(c=='c'){
+        num2=$('#adult_count').val();
+        if(t=='s'){
+          num1=parseInt($('#childrens_count').val())-1;          
+        }else{
+          num1=parseInt($('#childrens_count').val())+1;
+        }        
+        if(num1<0||num1>9){
+           MsgBox('请输入0-9的整数'); 
+           return false;
+        }
+        _num=$('#childrens_count');
+      }else{
+         num2=$('#childrens_count').val();
+        if(t=='s'){
+          num1=parseInt($('#adult_count').val())-1;         
+        }else{
+          num1=parseInt($('#adult_count').val())+1;
+        }        
+        if(num1<1||num1>9){
+          MsgBox('请输入1-9的整数'); 
+          return false;
+        }
+       _num=$('#adult_count');
+      }
+     $.ajax({
+              type:'post',
+              url: '<{:U("Route/check_number")}>',
+              dataType:'json',
+              data:{"id":'<{$route.id}>',"num1":num1,"num2":num2,"c":c},
+              success:function( d ){                            
+                if(d.status == 1){ 
+                    _num.val(num1);                   
+                    _total.text(d.info);                    
+                  _submit.attr('disabled',false);
+                }else{           
+                  MsgBox(d.info);
+                }
+              }
+        });
+
+}
+
+/*function orderSubmit(obj) {
+    var _this = $(obj),
+        _num = $('#count');
+  
+    _this.text('订单生成中').attr('disabled',true);
+    MsgBox('请稍候，订单生成中'),
+    $.ajax({
+         type:'post',
+         url: '<{:U("Route/ajax_order_submit")}>',
+         dataType:'json',
+         data:{"id":'<{$route.id}>'},
+         success:function( d ){  
+          if(d.status == 1){                         
+            MsgBox(d.info,'',d.data);
+          }else{
+            _this.text('提交订单').attr('disabled',false);
+            MsgBox(d.info);
+          }
+        }
+    });
+    return false;
+}  */
+
+</script>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+  WeixinJSBridge.call('hideToolbar');
+  WeixinJSBridge.call('hideOptionMenu');
+});
+</script>
+
+<include file="Inc:footer"/>

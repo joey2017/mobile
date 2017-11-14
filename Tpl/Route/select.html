@@ -1,0 +1,199 @@
+<include file="Inc:zjy_header"/>
+</head>
+<style type="text/css">.glyphicon-remove{top:2px;} .btn-xs{padding: 1px 3px}</style>
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="Current">
+        	<a href="javascript:history.back();"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="Search">
+            <h1>精品路线</h1>
+        </div>
+    </div>
+</div>
+
+<!--筛选按钮-->
+<div class="container-fluid" style="position:relative;">
+    <div class="row sxbtn">
+        <div id="li-1" class="col-xs-3 topbtn"><if condition="$select_city"><{$select_city}><else/>城市</if></div>
+        <div id="li-2" class="col-xs-3 topbtn"><if condition="$select_theme"><{$select_theme}><else/>主题</if></div>
+        <div id="li-3" class="col-xs-3 topbtn"><if condition="$select_month"><{$select_month}><else/>时间</if></div>
+        <div id="li-4" class="col-xs-3 topbtn"><if condition="$select_travel"><{$select_travel}><else/>行程</if></div>
+    </div>
+    <!--隐藏盒子-->
+  
+        <div id="box-1" class="hidden-box">
+            <ul class="tablist">
+                <volist name="city" id="c" > 
+                    <li><a href="<{$c.url}>"><{$c.name}></a></li>
+                </volist>
+            </ul>
+        </div>
+   
+        <div id="box-2" class="hidden-box">
+            <ul class="tablist">
+                <volist name="theme" id="t" >
+                    <li><a href="<{$t.url}>"><{$t.theme_name}></a></li>
+                </volist>
+            </ul>
+        </div>
+
+        <div id="box-3" class="hidden-box">
+            <ul class="tablist">
+                <volist name="month" id="m" >
+                    <li><a href="<{$m.url}>"><{$m.name}></a></li>
+                </volist>
+            </ul>
+        </div>
+
+        <div id="box-4" class="hidden-box">
+            <ul class="tablist">
+                <volist name="travel_day" id="td" >
+                    <li><a href="<{$td.url}>"><{$td.name}></a></li>
+                </volist>
+            </ul>
+        </div>
+</div>
+<div class="black"></div>
+<div class="container-fluid">
+    <div class="row">
+        <volist name="sort_order" id="s" > 
+            <if condition="$s['selected'] eq 1">
+                <div class="col-xs-3 topbtn " style="border-right:0;"><a href="<{$s.url}>"><{$s.name}></a><span class="up"></span></div>
+            <else/>
+                <div class="col-xs-3 topbtn" style="border-right:0;"><a href="<{$s.url}>"><{$s.name}></a><span class="down"></span></div>
+            </if>
+        </volist>
+    </div>
+</div>
+
+<!--分割线-->
+ <if  condition="$select">
+<div class="container-fluid line"></div>
+    
+<div class="container-fluid" style="padding-top:10px; padding-bottom:10px;">
+   <div class="row"> 
+    <div class="col-xs-12 delete_select" >
+       
+        <volist name='select' id='s'  > 
+          <a class="btn btn-default btn-xs shanchu" href="<{$s.url}>" role="button"><{$s.name}><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>      
+        </volist>
+        <a class="delete" href="<{$delete_all}>">清除筛选</a>
+       
+    </div>
+    </div>
+</div>
+ </if>
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<div class="container-fluid">
+	<div class="row">
+    	<div class="col-xs-12 ">
+            <div id="select_list">
+               
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--加载-->
+<div class="container-fluid" id="load">
+    <div class="row">
+        <div class="col-xs-12" style="margin-top:10px;"><center><img src="__PUBLIC__/images/minilodging.gif" width="24" height="24">正在加载...</center></div>
+    </div>
+</div>
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<!--底部-->
+
+
+<!--筛选按钮js-->
+<script type="text/javascript">     
+$(document).ready(function(){
+    $('body').css('position','relative');
+    var num;
+    $('.sxbtn>.topbtn[id]').click(function(){
+       
+       var Obj = $(this).attr('id');
+       num = Obj.substring(3, Obj.length);
+       $('.sxbtn').nextAll().hide();   
+       if($(this).children().hasClass('hover-up')){
+            /*图标向上旋转*/
+            $(this).siblings().children().removeClass().addClass('hover-down');       
+            $(this).children().removeClass().addClass('hover-down')
+            /*下拉框隐藏*/
+            $('#box-'+num).hide();  
+            $('.black').hide();
+       }else{
+            $(this).children().removeClass().addClass('hover-up');
+            $(this).siblings().children().removeClass().addClass('hover-down'); 
+            var Obj = $(this).attr('id');
+            num = Obj.substring(3, Obj.length);
+            $('#box-'+num).slideDown(160);
+            $('#box-'+num).show();
+            $('.black').show();   
+       }          
+    })
+    $('html,body').click(function(e){
+      if(e.target.id.indexOf("li-2")==-1&&e.target.id.indexOf("li-1")==-1&&e.target.id.indexOf("li-3")==-1&&e.target.id.indexOf("li-4")==-1){
+          $('.sxbtn>.topbtn[id]').siblings().children().removeClass().addClass('hover-down'); 
+          $('.sxbtn').nextAll().hide();
+          $('.black').hide();     
+      } 
+    });
+})
+</script>
+<script type="text/javascript">
+        var stop=true; 
+        var currentpage=0;
+        ajaxRed()
+        $(window).scroll(function(){ 
+            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+            if($(document).height() <= totalheight){ 
+                if(stop==true){ 
+                    ajaxRed();
+                } 
+            } 
+        });
+        function ajaxRed(){
+              $("#load").show();
+              stop=false;
+              id = '<{$id}>';
+              $.get("<{:U('Route/ajax_get_select')}>",{"p":currentpage,id:id}
+              ,function(html){ 
+                      if($.trim(html)!=""){ 
+                          if(currentpage==0)
+                          {
+                            $("#select_list").html(html);
+                          } 
+                          else
+                          {
+                            $("#select_list").append(html);
+                          }                          
+                       stop=true;
+                      }else{
+                         if(currentpage==0)
+                          {
+                            MsgBox('暂无路线');
+                          } 
+                          else
+                          {
+                            MsgBox('已加载全部结果');
+                          }
+                      }  
+                      currentpage++;
+                     $("#load").hide();  
+                 });              
+        }
+
+</script>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<include file="Inc:footer"/>

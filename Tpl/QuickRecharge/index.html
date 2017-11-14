@@ -1,0 +1,135 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+        	<a href="" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>优惠充值</a>
+        </div>
+        
+    </div>
+</div>
+
+<!--商品图片-->
+<div class="spshow">
+	<a href="">
+        <img src="__PUBLIC__/images/856.jpg"  />
+    </a>
+</div>
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<style type="text/css">
+.recharge{ margin:15px 0;}
+.recharge a{ width:22%; display:block; float:left; margin-left: 3px;}
+</style>
+
+<div class="container-fluid">
+	<div class="row">
+    	<div class="col-xs-12 recharge">
+            <volist name="recharge" id="r" key="key">
+              <a onclick="selrecharge(this,<{$r.id}>,'<{$r.name}>')" data="<{$r.id}>" class="btn btn-default  <if condition='$key eq 1'>btn-danger</if>"><{$r.money|sprintf="%.00f",###}>元</a>
+            </volist>
+            <a onclick="selrecharge(this,0)" data="0" class="btn btn-default">自由充</a>
+         </div>
+         <div class="col-xs-12">
+            <h1 class="pf_hd">充50送5元！</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+	<!--<form class="form-horizontal">-->
+    	  <div class="form-group">           
+          <div class="col-xs-12 diyrecharge" style="margin-top:10px;display:none">        			
+              <input type="tel"  name="diyrecharge" id="diyrecharge"  class="form-control" placeholder="请输入整数金额,1元起充" maxlength="4">
+      		</div>
+          <input type="hidden" id="sel_id" value="">
+        <div class="col-xs-12" style="margin-top:10px;"><button id="gotoCheck" type="button" class="btn btn-warning btn-block" onclick="quick_pay();">充值</button></div>        
+        </div>                 
+    <!--</form>-->
+</div>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+  $('.btn-default').each(function(i){
+      if($(this).hasClass("btn-danger")){
+        $('#sel_id').val($(this).attr('data'))
+      }
+   });
+  function selrecharge(_this,id,title){
+     $('.btn-default').removeClass('btn-danger');
+     $(_this).addClass('btn-danger');
+     $('#sel_id').val($(_this).attr('data'))
+     if(id==0){
+      $('.diyrecharge').show();
+      $('.pf_hd').html('多送10%');
+     }else{
+      $('.pf_hd').html(title);
+      $('.diyrecharge').hide();
+      $('#diyrecharge').val('');
+     }
+  }
+$('#diyrecharge').keyup(function(){
+  var diyval=parseInt($(this).val().replace(/[^\d]/g,''));
+  if(diyval){
+    var diyvalue=(parseInt(diyval)*0.1).toFixed(2)+parseInt(diyval)
+     $('.pf_hd').html('充'+diyval+"元送"+(parseInt(diyval)*0.1).toFixed(1)+"元");
+    $(this).val(parseInt($(this).val().replace(/[^\d]/g,'')))
+  }else{
+    $(this).val('');
+    $('.pf_hd').html('');
+  }
+});
+function quick_pay(){
+  var sel_id=$('#sel_id').val();
+  if(!sel_id){
+    MsgBox('请选择一个充值金额');  
+    return false;
+  } 
+  var diyrecharge=0;
+  var rechargetype=1;
+  if(sel_id==0){
+    diyrecharge=parseInt($('#diyrecharge').val().replace(/[^\d]/g,''));
+    if(!diyrecharge||diyrecharge<1){  
+       MsgBox('请输入整数金额');        
+      $('#diyrecharge').focus(); 
+      return false;
+    }
+    rechargetype=2;
+  }else{
+    diyrecharge=parseInt(sel_id);
+  }
+    $.ajax({
+       type:'post',
+       url: '<{:U("QuickRecharge/do_recharge_order")}>',
+       dataType:'json',
+       data:{"diyrecharge":diyrecharge,"rechargetype":rechargetype},
+       success:function(d){  
+        if(d.status == 1){                         
+          MsgBox(d.info,'',d.data);
+        }else{
+          MsgBox(d.info);
+          _this.text('提交订单').attr('disabled',false);
+        }
+      }
+  });
+}
+
+</script>
+
+<include file="Inc:footer"/>

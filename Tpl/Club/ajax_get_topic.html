@@ -1,0 +1,23 @@
+<volist name="list" id="list">
+<div class="row">        
+        <div class="Posts_img">
+            <a href="<{:U('User/show',array('id'=>$list['member_id']))}>"><img src="<{$list.head_img}>" onerror="imgError(this,'http://s.17cct.com/v3/images/man.jpg');"></a>
+        </div>
+        <div class="Posts_cts">
+            <div class="Posts_cts_top">
+                <div style="float:left;">
+                    <a href="<{:U('User/show',array('id'=>$list['member_id']))}>" style="font-weight:bold;color:#474747;text-decoration:none;"><{$list.user_name}></a>                    
+                </div>
+                <div class="time"><{$list.theme_addtime|date="Y-m-d H:i",###}></div>               
+            </div>
+            <h3><a href="<{:U('Club/topic_detail',array('id'=>$list['theme_id']))}>" style=" color:#474747; text-decoration:none;"><{$list.theme_name}></a></h3>
+            <p class="my_od_f"><{$list.theme_content}></p>
+            <p class="Posts_cts_img"> 
+                    <volist name="list['img_items']" id="ii">
+                         <a href="<{:U('Club/topic_detail',array('id'=>$list['theme_id']))}>"><img src="<{$ii}>" onerror="imgError(this,'http://s.17cct.com/v3/images/errorimg.jpg');"/></a>
+                    </volist>                
+            </p>
+        </div>
+        <div style="border-bottom:1px solid #e0e0e0; margin:0 10px;"></div>        
+</div>
+</volist>

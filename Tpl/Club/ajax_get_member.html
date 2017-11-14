@@ -1,0 +1,21 @@
+<volist name="member" id="m">
+	<div class="row">        
+	        <div class="Posts_img">
+	            <a href="<{:U('User/show',array('id'=>$m['member_id']))}>"><img src="<{$m.head_img}>" onerror="imgError(this,'http://s.17cct.com/v3/images/man.jpg');"></a>
+	        </div>
+	        <div class="Posts_cts">
+	            <div class="Posts_cts_top">
+	                <div style="float:left;">
+	                	<a href="<{:U('User/show',array('id'=>$m['member_id']))}>" style="font-weight:bold;color:#474747;text-decoration:none; font-size:16px;"><{$m.true_name}> </a>                    
+	                </div>
+	                <div style=" float:left; margin-left:15px; color:#F00;"><{$m.manage}></div>               
+	            </div>
+	            <p style="color:#737373;"><if condition="$m['car_info'] neq null ">爱车：<{$m.car_info}></if> <span style="float:right;">贡献油值：<{$m.oil}>L</span></p>   
+	            <if condition="$m['verify'] eq 1">        
+	            	<button type="button" class="btn btn-warning" style="padding:0 8px; font-size:12px;">认证</button>
+	            </if>
+	        </div>
+	        <div style="border-bottom:1px solid #e0e0e0; margin:0 10px;"></div>        
+	    </div>
+ 		
+</volist>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="Generator" />
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=0,minimum-scale=0.5">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>诚车堂众筹 - 预购一个梦想</title>
+        <meta name="keywords" content="SEO关键词" />
+        <meta name="description" content="SEO描述" />
+
+         <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/layout.css" />
+         <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css" />
+         <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/weebox.css" />
+         <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+         
+        <script type="text/javascript" src="__PUBLIC__/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/jquery.bgiframe.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/jquery.weebox.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/js.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/script.js"></script> 
+       
+      
+      
+        <!--百度轻应用-->
+        <meta name="baidu-tc-cerfication" content="688cdfaa49f7c8f87fd5883492587d8e">
+    </head>
+    <body   style="background: #f2f2f2;">
+        
+        <div class="container-fluid topbox">
+            <div class="row top">
+                <div class="Current">
+                    <a>南宁 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
+                </div>
+                <div class="Search">
+                    <a href="<{:U('Search/index')}>">
+                        <div class="form-control my_od_f">
+                            <i class="glyphicon glyphicon-search" aria-hidden="true" style="color:#b9b9b9;"></i>
+                            <span style="margin-left:.6rem; color:#999;">输入服务/商品/商家</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="Member">
+                    <a href="<{:U('User/index')}>">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+   <div class="wraper">
+ 
+<script type="text/javascript" src="__PUBLIC__/js/TouchSlide.1.1.js"></script>
+<!--banner 开始 -->
+<style type="text/css">
+</style>
+<section class="index">
+    <div class="oComment_height">
+      
+        <div class="oComment_1">
+             <!--banner 开始 -->
+            <div id="slideBox" class="banner">
+                <div class="bd">
+                    <ul>
+                         <li>
+                            <a href="#"><img src="__PUBLIC__/images/zc.jpg"></a>
+                        </li>  
+                        <li>
+                            <a href="#"><img src="__PUBLIC__/images/zc.jpg"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="hd">
+                    <ul></ul>
+                </div>
+            </div>
+            <script type="text/javascript">
+                if($("#slideBox .bd ul").find('li').length>1){
+                    TouchSlide({ 
+                        slideCell:"#slideBox",
+                        titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+                        mainCell:".bd ul", 
+                        effect:"leftLoop", 
+                        autoPage:true,//自动分页
+                        autoPlay:true //自动播放
+                    });
+                }
+                if($("#slideBox > .hd").find("li").length <=1){
+                    $("#slideBox > .hd").hide();
+                }
+            </script>
+     
+            <script type="text/javascript">
+                if($("#category_slidebox .bd ul").find('li').length>1){
+                    TouchSlide({ 
+                        slideCell:"#category_slidebox",
+                        titCell:"#category_slidebox .hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+                        mainCell:"#category_slidebox .bd ul", 
+                        effect:"leftLoop", 
+                        autoPage:true,//自动分页
+                        autoPlay:false //自动播放
+                    });
+                }
+                if($("#category_slidebox .hd").find("li").length <=1){
+                    $("#category_slidebox .hd").hide();
+                }
+            </script>
+            <!-- 首页分类 结束 -->
+            <!--list 开始 -->
+            <!--<div class="blank10"></div>-->
+            <h2 class="h2-title bdl sizing">
+                精品项目
+                <span class="f_r">
+                    <a href="javascript:void(0)">产品众筹&nbsp;<i class="fa fa-angle-right"></i></a>                   
+                </span>
+            </h2>
+                    
+        </div>
+    </div>
+    <volist name="deal_list" id="dl">
+        <section class="deal_item_list">
+            <a href="<{:U('Zc/view',array('id'=>$dl['id']))}>" title="<{$dl.name}>">
+                <div class="deal_item_box">
+                    <!--1-->
+                    <div class="imgbox">
+                        <img src="http://www.17cct.com/<{$dl.image}>" alt="<{$dl.name}>">
+                    </div>
+                    <div class="clear"></div>
+                    <h3 class="deal_title sizing"><{$dl.name}></h3>
+                    <div class="clear"></div>
+                    <!--2-->
+                    <div class="paiduan">
+                        <span class="caption-title">
+                            已筹资：<span class="symbol">¥</span><span class="f_money"><{$dl.support_amount}></span>&nbsp;&nbsp; 
+                            目标：<span class="symbol" style="color:#333">¥</span><span class="f_money" style="color:#333"><{$dl.limit_price}></span>
+                        </span>
+                        <span class="f_r ">  
+                    <if condition="$dl.status eq 0">
+                        <span class="common common-fail">即将开始</span>
+                    <else/>
+                            <if condition="$dl.percent egt 100">
+                                <span class="common common-success">已成功</span>
+                            <else/>
+                                <if condition="$dl.status eq 1">
+                                    <span class="common common-success">已成功</span>
+                               </if>
+                                <if condition="$dl.status eq 2">
+                                    <span class="common common-fail">筹资失败</span>
+                                </if>
+                                <if condition="$dl.status eq 3">
+                                   <span class="common common-sprite">筹资中</span>
+                                </if>
+                                 <if condition="$dl.status eq 4">
+                                   <span class="common common-sprite">长期项目</span>
+                                </if>
+                            </if>
+                        </if>                    
+                    </span>
+                    </div>
+                    <div class="clear"></div>
+                    <!--3-->
+                    <div class="deal_content_box pd">
+                        <div class="ui">
+                            <if condition="$dl.percent egt 100">
+                            <span class="common-success" style="width:100%;"></span>
+                            <else/>
+                            <span class="progress" style="width:<{$dl.percent}>%;"></span>
+                            </if>
+                        </div>
+                        <div class="blank">
+                        </div>
+                          <if condition="$dl.status eq 0">
+                            <div class="div_dt">
+                                <span class="num">距离开始还有<{$dl.left_days}>天</span><br />
+                                <span class="til"></span>
+                            </div>
+                        <else/>
+                            <div class="div_dt">
+                                <span class="num"><{$dl.percent}>%</span><br />
+                                <span class="til">已达</span>
+                            </div>
+                            <div class="div_dt">                                
+                                <if condition="$dl.remain_days gt 0">
+                                    <span class="num"><{$dl.remain_days}>天</span><br />
+                                    <span class="til">剩余时间</span>
+                                <else/>
+                                    <span class="num"><{$dl.end_time|date="Y-m-d",###}></span><br />
+                                    <span class="til">结束时间</span>
+                                </if>
+                                
+                            </div>
+                            <div class="div_dt" style="border:none;">
+                                <span class="num"><{$dl.support_count}></span><br />
+                                <span class="til">支持者</span>
+                            </div>
+                        </if>
+                      <div class="blank"></div>
+                    </div>
+                </div>
+            </a>
+        </section>
+    </volist>
+        
+</section>
+
+</div>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<include file="Inc:footer"/>
+<script type="text/javascript">
+$(function(){
+    resetWinsize();
+});
+// 底部模块固定
+var resetTimeact=null;
+function resetWinsize(){
+    clearTimeout(resetTimeact);
+    var bodyheight=$(document.body).outerHeight(true);
+    var windowheight=$(window).height();
+    if (bodyheight<windowheight) {
+        var mgheight=windowheight-bodyheight;
+        $("#foot").css("margin-top",mgheight+'px');
+    }
+    resetTimeact = setTimeout(resetWinsize,100);
+}
+
+
+</script>

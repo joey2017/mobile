@@ -1,0 +1,19 @@
+<volist name="card" id="c">
+	<div class="cardul <if condition='$c.type eq 1'>n<else/>c</if>_bg" style='position: relative;'>
+		<if condition='$c.is_promotion eq 1'><a class="yh_ico">惠</a></if>
+		<a href="<{:U('Card/detail',array('id'=>$c['id']))}>">
+		<h2><i><img class="lazy_img" src="<{$c.preview|getImgUrl=###,'little'}>" width="45" height="45"  onerror="imgError(this,'http://s.17cct.com/v3/images/errorimg.jpg');"/></i><{$c.name}></h2>
+		<p class="mintxt"><{$c.brief}></p>
+		</a>
+		<div class="row">
+			<if condition='$c.is_promotion eq 1'>
+				<div class="col-xs-7 Price">￥<b><{$c.promotion_price|price}></b><del>￥<{$c.price|price}></del></div>
+			<else/>
+				<div class="col-xs-7 Price">￥<b><{$c.price|price}></b></div>
+			</if>
+    		
+			<div class="col-xs-5"><p class="text-right"><a class="btn btn-default btn-warning" href="<{:U('Card/detail',array('id'=>$c['id']))}>" role="button">查看详情</a></p></div>   
+		</div>
+	</div>
+</volist>
+

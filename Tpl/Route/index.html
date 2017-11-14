@@ -1,0 +1,233 @@
+<include file="Inc:zjy_header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="Current">
+            <a href="javascript:history.back();"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="Search">
+            <h1>诚车堂汽车网——自驾游</h1>
+        </div>
+    </div>
+</div>
+
+<!--焦点图-->
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <a href=""><img src="__PUBLIC__/images/pic.jpg" ></a>
+      </div>
+      <div class="swiper-slide">
+        <a href=""><img src="__PUBLIC__/images/pic.jpg" ></a>
+      </div>
+      <div class="swiper-slide">
+       <a href=""><img src="__PUBLIC__/images/pic.jpg" ></a>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<!--搜索框-->
+<div class="container-fluid" style="background:#4b8dfc;padding-top: 10px;padding-bottom: 10px;">
+    <div class="col-lg-12">
+    <form action="<{:U('Route/select')}>">
+        <div class="input-group">
+            <input type="text" class="form-control" name="keyword" id="keyword" placeholder="搜索目的地/景点/游记">
+            <span class="input-group-btn" onclick="search();">
+                <button class="btn btn-default"  type="button"><span class="glyphicon glyphicon-search"aria-hidden="true"></span></button>
+            </span>
+        </div><!-- /input-group -->
+          
+        
+        </form>
+        
+    </div>
+</div>
+
+<!--导航-->
+<div class="container-fluid" style="padding-bottom:10px;">
+    <div class="row menu">
+        <div class="col-xs-4">
+            <a href="<{:U('Route/select')}>" >
+                <img src="__PUBLIC__/images/12.png">
+                <p>精品路线</p>
+            </a>
+        </div>
+        <div class="col-xs-4">
+            <a href="<{:U('Route/travel')}>" >
+                <img src="__PUBLIC__/images/13.png">
+                <p>游 记</p>
+            </a>
+            
+        </div>
+        <div class="col-xs-4">
+            <a href="<{:U('Route/book')}>" >
+                <img src="__PUBLIC__/images/9.png">
+                <p>路 书</p>
+            </a>            
+        </div>
+        <div class="col-xs-4">
+            <a href="<{:U('Search/deal')}>?type=service">
+                <img src="__PUBLIC__/images/10.png">
+                <p>车辆服务</p>
+            </a>            
+        </div>
+        <div class="col-xs-4">
+            <a href="<{:U('Club/index')}>" >
+                <img src="__PUBLIC__/images/11.png">
+                <p>车友会</p>
+            </a>
+        </div>
+        <div class="col-xs-4">
+            <a href="<{:U('Route/camp')}>" >
+                <img src="__PUBLIC__/images/14.png">
+                <p>营地</p>
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!-- 周边游 -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="tab_t">
+                <h2>周边游</h2><span>自驾游，享受不一样的风情</span>
+                <a href="<{:U('Route/select')}>">更多</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row" >
+            <volist name="route" id="r" >   
+                <div class="col-xs-6 zsimg">
+                    <a href="<{:U('Route/view',array('id'=>$r['id']))}>">
+                        <img src="<{$r.img|getImgUrl=###,'large'}>">
+                        <div><{$r.title}></div>
+                    </a>
+                </div>
+            </volist>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--热门路线-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>热门路线</h2><span>提前感受自驾过程的乐趣</span>
+                <a href="<{:U('Route/select')}>">更多</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 ">
+            <volist name="hot_route" id="r" > 
+                <div class="row" >               
+                    <a href="<{:U('Route/view',array('id'=>$r['id']))}>" class="tab_a">
+                        <div class="col-xs-5" style="margin:10px 0 0 0;">
+                            <img src="<{$r.img|getImgUrl=###,'large'}>" style=" width:100%; height:auto"> 
+                        </div>
+                        <div class="col-xs-7 txtbox" style="margin:0; padding:0;">
+                            <h3><{$r.title}></h3>
+                            <p class="tcont"><{$r.brief}></p>
+                            <p><b><{$r.adult_price|price}>元</b> <button type="button" class="btn <{$r.color}> btn-xs" style="float:right;"><{$r.word}></button></p>
+                        </div>
+                    </a>              
+                </div>
+            </volist>
+            
+            <div class="row">
+                <div class="col-xs-12">
+                    <a href="<{:U('Route/select')}>" class="tjbtn"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看全部路线<span class="glyphicon glyphicon-menu-right" style="float:right;" aria-hidden="true"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--精华游记-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>精华游记</h2><span>来自车友的亲身体验！</span>
+                <a href="<{:U('Route/travel')}>">更多</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 ">
+        <volist name="travel" id="t" > 
+            <div class="row" >
+                <a href="<{:U('Route/travel_view',array('id'=>$t['id']))}>" class="tab_a">
+                    <div class="col-xs-5" style="margin:10px 0 0 0;">
+                        <img src="<{$t.thumb|getImgUrl=###,'large'}>" style=" width:100%; height:auto"> 
+                    </div>
+                    <div class="col-xs-7 txtbox" style="margin:0; padding:0;">
+                        <h3><{$t.title}></h3>
+                        <p><span class="glyphicon glyphicon-edit"></span><{$t.comment_count}>  <span class="glyphicon glyphicon-eye-open"><{$t.view_count}></span></p>
+                        <p><{$t.user_name}> <span style="float:right;"><{$t.input_time|date="Y-m-d",###}></span></p>
+                    </div>
+                </a>
+            </div>
+        </volist>
+            
+            <div class="row">
+                <div class="col-xs-12">
+                    <a href="<{:U('Route/travel')}>" class="tjbtn"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>查看全部游记<span class="glyphicon glyphicon-menu-right" style="float:right;" aria-hidden="true"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+      function search(){
+            var keyword=$("#keyword").val();
+
+            if (keyword=='undefined' || keyword=='' || !keyword) {
+                keyword = '';
+            }
+            window.location="select/0-0-0-0-0-"+keyword;                    
+            
+        }
+        $(".input").focus(function(){
+            if($(this).val()==$(this).attr("dat")){
+            $(this).val("")
+        }
+        }).blur(function(){
+            var _v=$(this).attr("dat")
+            if($(this).val()==_v || $(this).val()==''){
+            $(this).val(_v);
+        }
+        })
+</script>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<include file="Inc:footer"/>

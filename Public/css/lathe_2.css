@@ -1,0 +1,35 @@
+.Top-all {
+  height: 2.2rem;
+  background: #cc0000;
+  overflow: hidden;
+}
+.Top-all .portrait {
+  height: 1.2rem;
+  width: 1.2rem;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  border: solid 2px #FFFFFF;
+  border-radius: 50%;
+  float: left;
+  overflow: hidden;
+}
+.Top-all .portrait img {
+  width: 100%;
+  height: 100%;
+}
+.Top-all .por-name {
+  overflow: hidden;
+  margin-top: 0.3rem;
+  margin-left: 0.5rem;
+  float: left;
+}
+.Top-all .por-name p {
+  font-size: 0.3rem;
+  color: #FFFFFF;
+}
+.Top-all .por-name span {
+  font-size: 0.22rem;
+  color: #FFFFFF;
+  display: block;
+  margin: 0.1rem 0;
+}

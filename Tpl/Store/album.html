@@ -1,0 +1,46 @@
+<include file="Inc:header"/>
+</head>
+<body id="Jlazy_img">
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a><{$top_title}></a>
+        </div>
+    </div>
+</div>
+
+<!--相册列表-->
+<div id="thumbs">
+  <foreach name="album" item="am">
+    <a href="javascript:void(0);" data-caption="<{$key+1}>/<{$album_count}>" data-href="<{$am.image|getImgUrl=###,'big'}>"><img class="lazy_img" src="http://s.17cct.com/v3/images/space.gif" src2="<{$am.image|getImgUrl=###,'middle'}>" onerror="imgError(this,'http://s.17cct.com/v3/images/errorimg.jpg');"></a>
+  </foreach>
+</div>
+<p>&nbsp;</p>
+<!--相册预览专用js-->
+<link rel="stylesheet" href="__PUBLIC__/css/baguetteBox.min.css">
+<script src="__PUBLIC__/js/baguetteBox.min.js"></script>
+<script>
+window.onload = function() {
+     $('#thumbs').find('a').each(function(i){
+        this.href = $(this).attr('data-href');
+
+    });
+    baguetteBox.run('#thumbs',{buttons:false});
+}
+var xx_lazy = Lazy.create({
+                lazyId: "Jlazy_img",
+                trueSrc: 'src2',
+                offset: 300, 
+                delay: 100, 
+                delay_tot: 5000 
+              }); 
+Lazy.init(xx_lazy);
+</script>
+<include file="Inc:footer"/>

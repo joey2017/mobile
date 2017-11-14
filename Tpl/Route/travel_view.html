@@ -1,0 +1,132 @@
+<include file="Inc:zjy_header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="Current">
+        	<a href="javascript:history.back();"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="Search">
+            <h1>游记内容</h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="spshow">
+    <a href="">
+        <img class="yjbgimg" src="__PUBLIC__/images/yjbg.jpg" />
+        <div class="" style="position:absolute; top:45px; left:0; color:#fff;">
+            <div class="container-fluid">
+            <div class="media Review">
+              <div class="media-left">
+                <a href="javascript:void()">
+                  <img class="media-object" src="<{$travel.user_img}>" width="64" height="64">
+                </a>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading"><{$travel.user_name}></h4>
+                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> <span>发布时间：<{$travel.input_time|date="Y-m-d",###}></span>
+                <h4 style="text-shadow: 0px 0px 3px #000;"><{$travel.title}></h4>
+              </div>
+            </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+
+<!--游记详情-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>游记详情</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 txtcontent">
+           <{$travel.content}>
+        </div>
+    </div>
+</div>
+<div class="container-fluid line"></div>
+
+
+<!--用户评论-->
+<div class="container-fluid">
+    <form>
+        <div class="row" >
+            <div class="col-xs-12" >
+                <div class="tab_t">
+                    <h2>用户评论</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-xs-12">
+                <textarea class="form-control" rows="3" id="content"></textarea>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-xs-4 col-xs-offset-8" style="margin-top:10px; margin-bottom:10px;">
+                <button type="button" onclick="remark()" class="btn btn-primary btn-block">提交评论</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container-fluid">
+    <volist name="remark" id="remark">
+        <div class="media Review">
+          <div class="media-left">
+            <a href="javascript:void()">
+              <img class="media-object" src="<{$remark.user_img}>"  width="64" height="64">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading"><{$remark.user_name}><span><{$remark.add_time|date="Y-m-d",###}></span></h4>
+            <{$remark.content}>
+          </div>
+        </div>
+    </volist>
+</div>
+<script type="text/javascript">
+    function remark(){
+     var content=$('#content').val();
+     if(!content){
+         MsgBox('请填写评论内容');
+         return false;
+     }
+
+    $.ajax({ 
+        type:"post",
+        url: "<{:U('Route/ajaxtravelreview')}>", 
+        data:{
+            'id':<{$travel.id}>,
+            'content':content
+        }, 
+        dataType:"json",
+        success: function(d){            
+             MsgBox(d.info);  
+            if (d.status) {
+                location.reload()
+            }
+        },
+        error:function(o){
+            MsgBox('网络繁忙，请稍后重试'); 
+        }
+    });
+    }
+    
+</script>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<include file="Inc:footer"/>
+
+
+
+

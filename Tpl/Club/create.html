@@ -1,0 +1,351 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+        	<a href="javascript:history.go(-1)" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/meng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>创建车友会</a>
+        </div>
+    </div>
+</div>
+
+<!--流程-->
+<div class="container-fluid">
+    <div class="row">
+    	<div class="col-xs-12 crumbs">
+        	<center>
+            	<i class="c-active" id="c_s">车友会信息</i> > <i id="p_s">个人信息</i> > <i id="r_s">待审状态</i>
+            </center>
+        </div>
+    </div>
+</div>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--车友会创建-->
+
+	<form class="form-horizontal" style="margin-top:10px;" id="applyForm" method="post" action="<{:(U('Club/saveClub'))}>" >
+
+      <div class="container-fluid" id="circle_info" style="display:">
+      		<div class="form-group">
+        		<label for="inputEmail3" class="col-xs-12"><span style="color:#F00;">*</span>车友会名称：</label>
+        		<div class="col-xs-12">
+          	<input type="text" class="form-control" name="c_name" placeholder="不能含有特殊字符,长度为12汉字或字母" id="c_name" >
+        		</div>
+      		</div>
+            
+            <div class="form-group">
+        		<label for="inputEmail3" class="col-xs-12"><span style="color:#F00;">*</span>地区：</label>
+        		<div class="col-xs-6">
+          			<select id="club_province_id" name="club_province_id" class="form-control">
+                        
+                      <option value="0">请选择省份</option><option value="7" selected="selected">广西</option></select>
+        		</div>
+                <div class="col-xs-6">
+          			
+                    <select id="club_city_id" name="club_city_id" class="form-control">
+                        <option value="0">请选择</option>
+                        <?php foreach($region_lv3 as $val){?>
+                          <option <?php if ($val['selected']){ ?> selected="selected" <?php }?> value="<?php echo $val['id'];?>"><?php echo $val['name'];?></option>
+                        <?php } ?>
+                      </select>
+        		</div>
+      		</div>
+            
+            <div class="form-group">
+        		<label for="inputEmail3" class="col-xs-12"><span style="color:#F00;">*</span>品牌：</label>
+        		<div class="col-xs-12">
+          		    <select id="car_brand" name="car_brand" class="form-control">
+                        <option value="">请选择品牌</option>
+                        <?php foreach($car_brand as $val){ ?>
+                          <option  value="<?php echo $val['id'];?>"><?php echo $val['name'];?></option>
+                        <?php } ?>
+                    </select>
+        		</div>
+      		</div>
+
+          <div class="form-group">
+        		<label for="inputEmail3" class="col-xs-12" class="form-control">厂商：</label>
+        		<div class="col-xs-12">
+          			<select id="factory_id" name="factory_id" disabled="disabled" class="form-control">
+                        <option value="" selected="selected">请选择厂商</option>
+                </select>
+        		</div>
+      		</div>
+
+          <div class="form-group">
+        		<label for="inputEmail3" class="col-xs-12">车系：</label>
+        		<div class="col-xs-12">
+          			  <select id="models_id" name="models_id" disabled="disabled" class="form-control">
+                        <option value="" selected="selected">请选择车系</option>
+                  </select>
+        		</div>
+      		</div>
+
+            <div class="form-group">
+        		<label for="inputEmail3" class="col-xs-12">QQ群：</label>
+        		<div class="col-xs-12">
+          			<input type="text" class="form-control" placeholder="填写此项可以加速审核速度" id="qqGroup" name="qqGroup" >
+        		</div>
+      		</div>
+           
+            <div class="form-group">
+        		<label for="inputPassword3" class="col-xs-12">简介</label>
+        		<div class="col-xs-12">
+          			<textarea class="form-control" rows="3" id="info" name="info"></textarea>
+        		</div>
+      		</div>
+          <div class="container-fluid">
+        <div class="row" style="margin-top:15px;">
+            <center>      
+              <div class="col-xs-12"><button type="button" class="btn btn-warning btn-block btn-lg" onclick="return check_circle()" >下一步</button></div>
+              </center>
+          </div>
+      </div>
+    </div>
+  
+    <div class="container-fluid" id="personal_info" style="display:none">
+          <div class="form-group">
+            <label for="inputEmail3" class="col-xs-12"><span style="color:#F00;">*</span>真实姓名：</label>
+            <div class="col-xs-12">
+                <input type="text" class="form-control" placeholder="填写姓名" name="user_name" id="user_name" >
+            </div>
+          </div>
+            
+            <div class="form-group">
+            <label for="inputEmail3" class="col-xs-12">性别：</label>
+            <div class="col-xs-12">
+                <select class="form-control" name="sex">
+                    
+                    <option value="-1" <if condition="$sex eq '-1'"> selected="selected"</if>>男</option>
+                    <option value="0" <if condition="$sex eq '0'"> selected="selected"</if>>女</option>
+                 
+                    </select>
+            </div>
+          </div>
+            
+            <div class="form-group">
+            <label for="inputEmail3" class="col-xs-12"><span style="color:#F00;">*</span>手机号码：</label>
+            <div class="col-xs-12">            
+                  <fieldset disabled>
+                     <input type="text" id="mobile"  class="form-control" value="<{$mobile}>">               
+                  </fieldset> 
+            </div>
+          </div>
+            <div class="form-group" style="display:none">
+
+            <div class="col-xs-6">
+                <input type="text" class="form-control" placeholder="手机验证码" name="code_num" id="code_num" >
+            </div>
+                <div class="col-xs-6">
+                <button id="get_number" onclick="get_code()"  type="button" class="btn btn-block btn-default" >获取验证码</button>
+                <input type="hidden" value="60" id="timeInterval">
+            </div>
+          </div>  
+          <div class="container-fluid">
+          <div class="row" style="margin-top:15px;">
+              <center>      
+                <div class="col-xs-12"><button type="button" id="do_submit" onclick="return check_person()" class="btn btn-warning btn-block btn-lg" >确认申请</button></div>
+                </center>
+            </div>
+        </div>
+    </div>
+
+	</form>    
+  <div class="container-fluid" id="success_info" style="display:none">
+  <div class="row phon">
+      <center>
+              <p class="successp">成功提交审核！</p>
+                <p class="btn-wrapper" id="show"></p>
+            </center>
+  </div>
+</div>
+
+ <!--弹出提示框-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<script type="text/javascript">  
+  function get_code () {
+  mobile = $('#mobile').val();
+  if(mobile==''){
+    MsgBox('手机号不能为空！');
+  }else{
+    if (!mobile.match(/^(((1[0-9]{1}[0-9]{1})|159|153)+\d{8})$/)||!mobile) {
+      MsgBox('请输入正确手机号！');
+    } else{
+      SendCode(mobile);
+      time();
+    }
+  }
+}
+
+var wait = 60;
+
+function time() {
+  o = $('#get_number');
+    if (wait == 0) {
+        o.attr("disabled",false);
+        o.html("获取验证码");
+        wait = 60;
+    } else {
+        o.attr("disabled", true);
+        o.html("重 发 (" + wait + ")");
+        wait--;
+        setTimeout(function() {
+          time();
+        }, 1000);
+    }
+}
+//发送手机验证码
+function SendCode(mobile) {
+    if(wait!=60){
+      return false;
+    }
+    $.ajax({
+        url: "<{:U('send_code')}>",
+        type: 'post',
+        dataType: 'json',
+        data:{'mobile':mobile},
+        async: false,
+        success: function(d) {
+            if (d.status == 1) {
+              //成功
+              MsgBox("发送成功");
+            } else {
+              MsgBox("发送失败");
+            }
+        }
+    });
+}
+
+  $(function(){
+    $("select[id='car_brand']").bind("change",function(){
+      brand = $("#car_brand").val();
+      $.get('get_car_info',{'id':brand,'type':'厂商'},function(data){  
+       if(data){
+          $("select[name='factory_id']").html(data);
+          $('#factory_id').removeAttr('disabled').addClass("selected");
+        }else{
+          $("select[name='factory_id']").html("<option value=''>请选择厂商</option>");
+          $('#factory_id').attr('disabled','true').removeClass("selected");
+        }
+      },"json");
+    });
+    $("select[name='factory_id']").bind("change",function(){
+      $.get('get_car_info',{'id':$(this).val(),'type':'车系'},function(data){                       
+         if(data){
+          $("select[name='models_id']").html(data);
+          $('#models_id').removeAttr('disabled').addClass("selected");
+         }else{
+          $("select[name='models_id']").html("<option value=''>请选择车系</option>");
+          $('#models_id').removeAttr('disabled').addClass("selected");
+         }
+      },"json");
+    });
+  });
+ function check_circle(){
+        var c_name=$('#c_name').val();
+        if(!c_name){
+            MsgBox('车友会名称不能为空');
+            $('#c_name').focus();
+             return false;
+        }
+        $.get('check_c_name',{'name':c_name},function(data){     
+          if(!data.status){
+            MsgBox('该名称已注册');
+            $('#c_name').focus();   
+           return false;
+          }else if(data.status==1){
+            var club_city=$('#club_city_id').val();              
+            if(!club_city){
+                MsgBox('请选择城市');
+                 return false;
+            }
+            var brand=$('#car_brand').val();
+            if(!brand){
+                MsgBox('请选择品牌');
+                 return false;
+            }
+            var factory=$('#factory_id').val();
+            if(!factory){
+                MsgBox('请选择厂商');
+                 return false;
+            }
+            var models=$('#models_id').val();
+            if(!models){
+                MsgBox('请选择车系');
+                 return false;
+            }
+            var info=$('#info').val();
+            if(!info){
+                MsgBox('请填写简介');
+                 return false;
+            }
+            step2();
+          }
+      },"json");
+  }  
+  function check_person(){
+     var user_name=$('#user_name').val();
+        if(!user_name){
+            MsgBox('真实名称不能为空');
+            $('#user_name').focus();
+             return false;
+        }
+      /*var code_num=$('#code_num').val();
+        if(!code_num){
+            MsgBox('验证码不能为空');
+            $('#code_num').focus();
+             return false;
+        }*/
+        //验证通过，保存并提交审核
+    $.ajax({
+          url:$("#applyForm").attr("action"),
+          data:$("#applyForm").serialize(), 
+          dataType:"json",
+          type:"post",
+          success:function(rs,textStatus){
+            if(rs.status!=200){
+               MsgBox(rs.info);
+               return false;
+             }else{
+                step3();
+             }           
+          },
+          error:function(XMLHttpRequest, textStatus, errorThrown){
+            MsgBox("创建失败");
+          }
+      });
+  }
+  function step2(){
+    $('#circle_info').css('display','none');
+    $('#personal_info').css('display','');
+    $('#c_s').removeClass('c-active');
+    $('#p_s').addClass('c-active');
+  }
+  function step3(){
+    $('#personal_info').css('display','none');
+    $('#success_info').css('display','');
+    $('#p_s').removeClass('c-active');
+    $('#r_s').addClass('c-active'); 
+      setTimeout(function () { 
+        location.href="<{:U('Club/index')}>";
+      }, 1500);
+    }
+</script>
+
+<p>&nbsp;</p><p>&nbsp;</p>
+
+<!--底部固定按钮-->
+<include file="Inc:footer"/>

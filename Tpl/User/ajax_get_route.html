@@ -1,0 +1,59 @@
+<volist name="route" id="route">
+    <!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--南宁海纳汽车服务有限公司-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <a href="" class="my_od">
+                <span style="float:left; font-size:16px; font-weight:bold;"><{$route.agency_name}></span>
+                <div style="float:left;">                   
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                </div>  
+            </a>    
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-xs-12">         
+            <a href="<{:U('User/route_order_detail',array('id'=>$route['id']))}>" class="my_od_1">
+                <div class="my_od_img">
+                    <img class="lazy_img" src="<{$route.img|getImgUrl=###,'middle'}>"  onerror="imgError(this,'http://s.17cct.com/v3/images/errorimg.jpg');"> 
+                </div>
+                <div class="my_od_f">
+                    <h3><{$route.name}></h3>
+                    <span><{$route.brief}></span>
+                    <p>
+                        <div style="float:left; color:#F00;">￥<{$route.adult_price|price}></div><del style="float:left;margin-left:5px;">¥<{$route.market_price|price}></del><div style="float:right; font-weight:bold;">X<{$route.number}></div>
+                    </p>                    
+                </div>
+            </a>
+                    
+        </div>
+    </div>
+    <div class="row">       
+        <div class="col-xs-12">
+            <div style="line-height:45px;border-bottom:1px solid #e0e0e0; overflow:hidden;">                
+                <div style="float:right; margin-left:30px;">实付：<span style="font-weight:bold;">￥<{$route.total_price|price}></span></div>              
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <if condition="$route.status eq '4' && $route.pay_time neq '' && $route.remark_id eq 0">
+                <a class="btn btn-default" href="<{:U('Route/review',array('id'=>$route['id']))}>" role="button" style="float:right; margin-left:15px; margin:15px 0 15px 15px;">点评路线</a>
+                <elseif condition="$route.status eq '4' && $route.pay_time neq '' && $route.remark_id neq 0" />
+                <a class="btn btn-warning" href="javascript:void(0)" role="button" style="float:right; margin-left:15px; margin:15px 0 15px 15px;">已点评</a>
+            </if>
+            <if condition="$route.status eq '1' && $route.pay_time eq 0 ">
+                <a type="button" href="<{$route.pay_url}>" style="float:right; margin:15px 0 0 15px;" class="btn btn-warning">付款</a>
+            </if>
+            <if condition="$route.status eq '1' OR $route.status eq '2' OR $route.status eq '3' OR $route.status eq '4'">
+                <a class="btn btn-default" href="javascript:void(0)" onclick="OperateOrder(this,<{$route.id}>,1)" role="button" style="float:right;margin:15px 0;">删除订单</a> 
+                <else/>  
+                <a class="btn btn-default" href="javascript:void(0)" onclick="OperateOrder(this,<{$route.id}>,0)" role="button" style="float:right;margin:15px 0;">重新预订</a>   
+            </if>       
+        </div>
+    </div>
+</div>
+</volist>

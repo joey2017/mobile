@@ -1,0 +1,55 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="<{:U('User/index')}>" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>我的车友会</a>
+        </div>             
+    </div>
+</div>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--车友会-->
+<div class="container-fluid">
+    <div class="row">
+<if condition="$club">
+    <if condition="$club['circle_status'] eq 0">
+        <p style="color: #5f5f5f;text-align: center;margin-top:10px;">您所在的车友会已被管理员关闭</p>
+    <elseif condition="$club['circle_status'] eq 1"/>
+    <a href="<{:U('Club/club',array('id'=>$club['cid']))}>">
+        <div class="Cheyou_1">
+            <img src="<{$club.img}>" onerror="imgError(this,'http://s.17cct.com/v3/images/errorimg.jpg');">
+        </div>
+        <div class="Cheyou_2">
+            <h3><{$club.circle_name}></h3>
+            <p class="Star"></p>
+            <p>会员：<{$club.circle_mcount}>人(已认证<{$club.circle_identification_count}>人)<span style="float:right;">油值：<{$club.circle_oil}>L</span></p>
+            <p>地区：<{$club.area}> <span style="float:right;">车系：<{$club.car}></span></p>
+        </div>
+    </a>
+    <elseif condition="($club['circle_status'] eq 2) OR ($club['circle_status'] eq 3)"/>
+        <p style="color: #5f5f5f;text-align: center;margin-top:10px;">您所在的车友会正在审核中</p>
+    </if>
+<else />
+    <p style="color: #5f5f5f;text-align: center;margin-top:10px;">您还没加入车友会</p>
+</if>
+    </div>    
+</div>
+<div class="container-fluid line"></div>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+  WeixinJSBridge.call('hideToolbar');
+  WeixinJSBridge.call('hideOptionMenu');
+});
+</script>
+<include file="Inc:footer"/>

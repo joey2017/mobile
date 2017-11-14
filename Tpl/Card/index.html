@@ -1,0 +1,89 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>诚车堂e卡</a>
+        </div>
+    </div>
+</div>
+<!-- 年卡样式 -->
+<style type="text/css">
+.n_bg{background:#cd0000 url(__PUBLIC__/images/cardbg.png) repeat-x 0 87px;}
+.c_bg{background:#f47300 url(__PUBLIC__/images/cardbg.png) repeat-x 0 87px;}
+.cardul{box-shadow: 1px 1px 0 #e9e9e9; padding: 6px; margin-top: 12px;  height:145px; border-radius: 10px;}
+
+.cardul h2{height: 45px; overflow: hidden; font-size: 20px; color: #fff; margin: 11px 0 0 0;}
+.cardul h2 i{margin-right: 6px;}
+.cardul h2 i img{border-radius: 45px;}
+.cardul p.mintxt{ color: #fff; height: 17px; overflow: hidden; font-size: 12px; text-indent: 4.2em;}
+.cardul .row{margin-top: 24px;}
+
+.yh_ico{width: 30px;height: 30px;display: block; position: absolute;top: 5px;right: 6px;border-radius: 30px;color:#cd0000;text-align: center;line-height: 30px;font-size: 12px;background:#ffe400;}
+</style>
+
+
+<script type="text/javascript">
+    var currentpage=0;
+    ajaxRed();
+    $(window).scroll(function(){ 
+            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+            if($(document).height() <= totalheight){ 
+                if(stop==true){ 
+                    ajaxRed();
+                } 
+            } 
+        });
+    function ajaxRed(){ 
+                $("#load").show();
+                  stop=false;
+                  $.get("<{:U('Card/ajax_get_card')}>",{"p":currentpage}
+                  ,function(html){
+                          if(html!=""){ 
+                            if(currentpage==0) {
+                                $("#card").html(html);
+                            }
+                            else {
+                               $("#card").append(html);                                               
+                            } 
+                          }
+                          stop=true;
+                          currentpage++;
+                         $("#load").hide();  
+                     });
+      }
+
+
+</script>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12" id="card">
+
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+var xx_lazy = Lazy.create({
+                lazyId: "shopbox",
+                trueSrc: 'src2',
+                offset: 100, 
+                delay: 300, 
+                delay_tot: 5000 
+              }); 
+Lazy.init(xx_lazy);
+</script>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<include file="Inc:footer"/>

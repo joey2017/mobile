@@ -1,0 +1,50 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<style type="text/css">
+.list_top{background:#eeb416; overflow: hidden; padding:25px; }
+
+.disimg{ width: 64px;  height: 64px; margin-right: 10px;  border-radius: 50%; overflow: hidden; border: 4px solid #fff;}
+.disimg img{width: 100%; height: 100%;}
+.nametitle{font-size: 22px; color: #fff; font-weight: bold;}
+
+.shico{font-size: 100px; }
+
+.sh_shop{border: 1px solid #eeb416;  margin-top: 15px;  padding: 10px;  border-radius: 6px;}
+.wxtsp{ color: #9a9a9a; line-height: 25px; margin-top: 15px; }
+</style>
+
+
+<div class="col-xs-12">
+	<center>
+		<if condition="$order['status'] eq 0">
+		<div class="shico" style="color: #f56060;"><i class="fa fa-clock-o"></i></div>
+			<h2 style="margin:0 0 15px 0;">审核中</h2>
+		<else/>
+			<div class="shico" style="color: #55b139;"><i class="fa fa-check-square-o"></i></div>
+			<h2 style="margin:0 0 15px 0;">审核通过</h2>
+		</if>
+	
+	</center>
+</div>
+
+
+<div class="col-xs-12">
+	<div class="sh_shop">
+		<p><if condition="$order['status'] eq 0">正在审核<else/>审核通过</if>：<{$order.location_name}></p>
+		<p>提交人：<{$order.contacts}></p>
+		<p>联系方式：<{$order.mobile}></p>
+
+	</div>
+	<center>
+		<p class="wxtsp"><if condition="$order['status'] eq 0">温馨提示 您好，在您提交『入驻资料』后，我们将在2 个工作日内进行审核。请您关注平台的系统通知来知悉您的审核结果（注：节假期期间审核期可能会有延长，请您耐心等待噢~）<else/>恭喜您通过审核，成为车堂盛世合伙人。您现在可以推荐其他门店加入平台赚取收益了！</if></p>
+	</center>
+</div>
+
+
+
+</body>
+</html>

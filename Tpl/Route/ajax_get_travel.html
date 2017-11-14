@@ -1,0 +1,14 @@
+<volist name="travel" id="t" > 
+    <div class="row" >
+        <a href="<{:U('Route/travel_view',array('id'=>$t['id']))}>" class="tab_a">
+            <div class="col-xs-5" style="margin:10px 0 0 0;">
+                <img src="<{$t.thumb|getImgUrl=###,'ig'}>" style=" width:100%; height:auto"> 
+            </div>
+            <div class="col-xs-7 txtbox" style="margin:0; padding:0;">
+                <h3><{$t.title}></h3>
+                <p><span class="glyphicon glyphicon-edit"></span><{$t.comment_count}> <span class="glyphicon glyphicon-eye-open">432</span></p>
+                <p><{$t.user_name}><span style="float:right;"><{$t.input_time|date="Y-m-d",###}></span></p>
+            </div>
+        </a>
+    </div>
+</volist>

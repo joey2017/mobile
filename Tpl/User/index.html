@@ -1,0 +1,250 @@
+<include file="Inc:header"/>
+<meta name="format-detection" content="telephone=no" />
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<style type="text/css">
+.member{background:#d32912; position:relative; height: 200px;}
+.member_info_box{width: 100%;}
+.member_bottom{position: absolute; bottom:-1px; width: 100%; height: 50px; background:url(__PUBLIC__/images/newbg.svg) no-repeat bottom; z-index: 1; }
+.member_info{color: #fff;}
+.member_info h3{font-size: 16px; margin: 40px 0 7px 0;}
+.m_user{ margin: 10px auto; position: relative; height: 64px; width: 78px;}
+.m_user img{width:78px;height:78px;border-radius: 50%; margin-right: 7px;}
+
+.erp_react{display: block; text-align: center; padding: 16px 0;border-right: 1px solid #ddd8ce; position: relative;}
+.erp_react i{font-size: 24px;}
+.erp_react span,.react2 span{position: absolute; width: 20px;height: 20px; display: inline-block; background: #d32912; color: #fff; border-radius: 15px;}
+.react2 span{top: 6px;margin-left: 20px;}
+
+.locate{position: relative;}
+.absolute_fix{position:absolute;}
+.inon_i{width: 40px; height: 40px; overflow: hidden; display:inline-block; vertical-align: middle;}
+.mem_ico{background:url(__PUBLIC__/images/memberico.svg) no-repeat;}
+
+.erp_i_bg01{ background-size: 180px; background-position: -14px -10px;}
+.erp_i_bg02{ background-size: 150px; background-position: -9px -67px;}
+
+.erp_i_bg03{ background-size: 150px; background-position: -8px -129px;}
+.erp_i_bg04{ background-size: 150px; background-position: -8px -192px;}
+.erp_i_bg05{ background-size: 188px; background-position: -15px -324px;}
+
+.erp_i_bg06{ background-size: 150px; background-position: -9px -317px;}
+.erp_i_bg07{ background-size: 163px; background-position: -10px -414px;}
+.erp_i_bg08{ background-size: 162px; background-position: -9px -480px;}
+.erp_i_bg09{ background-size: 150px; background-position: -9px -505px;}
+.erp_i_bg10{ background-size: 150px; background-position: -9px -574px;}
+.erp_i_bg11{ background-size: 150px; background-position: -9px -638px;}
+.b_0{border:0;}
+
+</style>
+
+<div class="member">
+    <div class="member_info_box">
+        <div class="m_user">
+            <a href="<{:U('User/account')}>" class="pull-left"><img src='<if condition="$user.head_img eq null">http://s.17cct.com/v3/images/man.jpg<else/><{$user.head_img}></if>' onerror="imgError(this,'http://s.17cct.com/v3/images/man.jpg');"></a>
+        </div>
+        <div class="text-center member_info">
+            <h3><{$user.true_name}></h3>
+            <span><{$user.mobile}></span>
+        </div>
+    </div>
+    <div class="member_bottom"></div>
+</div>
+
+<div class="service">
+    <div class="col-xs-inner">  
+        <a href="<{:U('User/member_card')}>" class="erp_react">         
+            <i class="inon_i mem_ico erp_i_bg01"></i>
+            会员卡  
+        </a>
+    </div>
+    <div class="col-xs-inner">
+        <a href="<{:U('User/work_order')}>" class="erp_react b_0">         
+            <i class="inon_i mem_ico erp_i_bg02"></i>
+            服务工单 <if condition="$count.all_count neq 0"><span><{$count.all_count}></span></if>          
+        </a>
+    </div>
+</div>
+
+
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--服务券-->
+<div class="service">
+    <div class="col-xs-inner">  
+        <a href="<{:U('User/work_order',array('status'=>1))}>" class="react2 b_0 locate">
+            <i class="inon_i mem_ico erp_i_bg03"></i>
+            <p>施工中</p>
+            <if condition="$count.construction neq 0"><span><{$count.construction}></span></if> 
+        </a>
+    </div>
+    <div class="col-xs-inner">  
+        <a href="<{:U('User/work_order',array('status'=>2))}>" class="react2 b_0 locate">
+            <i class="inon_i mem_ico erp_i_bg04"></i>
+            <p>验收中</p>
+            <if condition="$count.acceptance neq 0"><span><{$count.acceptance}></span></if>        
+        </a>
+    </div>
+    <div class="col-xs-inner">  
+        <a href="<{:U('User/work_order',array('status'=>3))}>" class="react2 b_0 locate">
+            <i class="inon_i mem_ico erp_i_bg05"></i>
+            <p>待结算</p>
+            <if condition="$count.settlement neq 0"><span><{$count.settlement}></span></if>  
+        </a>
+    </div>
+</div>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<div class="memberico">
+    
+    <div class="memberrigt">
+        <div class="memberrigt-box">
+            <div class="memberrigt-tab">
+                <a href="<{:U('User/package_list')}>" class="react2">
+                    <i class="inon_i mem_ico erp_i_bg06"></i>
+                    <p>套餐</p>
+                </a>
+            </div>
+            <div class="memberrigt-tab">
+                <a href="<{:U('User/mycar_info')}>" class="react2" >
+                    <i class="inon_i mem_ico erp_i_bg07"></i>
+                    <p>车况</p>
+                </a>
+            </div>
+        </div>
+        <div class="memberrigt-box">
+            <div class="memberrigt-tab">
+                <a href="<{:U('User/give_list')}>" class="react2" >
+                    <i class="inon_i mem_ico erp_i_bg10"></i>
+                    <p>赠送项目</p>
+                </a>
+            </div>
+            <div class="memberrigt-tab">
+                <a href="<{:U('User/order')}>" class="react2" >
+                    <i class="inon_i mem_ico erp_i_bg09"></i>
+                    <p>订单</p>
+                </a>
+            </div>
+        </div>
+        <div class="memberrigt-box">
+            <div class="memberrigt-tab">
+                <a href="<{:U('User/pay_note_index')}>" class="react2" style="border-bottom:none;">
+                    <i class="inon_i mem_ico erp_i_bg08"></i>
+                    <p>记账</p>
+                </a>
+            </div>
+            <div class="memberrigt-tab">
+                <a href="<{:U('Advance/reservation_record')}>" class="react2" style="border-bottom:none;">
+                    <i class="inon_i mem_ico erp_i_bg11"></i>
+                    <p>我的预约</p>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!-- 剩余天数 -->
+<div class="surplusday">
+    <div class="s-day">
+        <div>
+            <p><b><{$car_info.next_maintain_time}></b> 天</p>
+            <span>下次保养</span>
+        </div>
+    </div>
+    <div class="s-day">
+        <div>
+            <p><b><{$car_info.next_insurance_time}></b> 天</p>
+            <span>下次保险</span>
+        </div>
+    </div>
+    <div class="s-day">
+        <div>
+            <p><b><{$car_info.next_annually_time}></b> 天</p>
+            <span>下次年检</span>
+        </div>
+    </div>
+</div>
+
+<!--分割线-->
+<!-- <foreach name="news" item="news" key="key">
+<div class="container-fluid line"></div>
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <a href="<{$news.url}>" class="newsabox">
+                <div class="n_a_l">
+                    <h2><{$news.data.title|msubstr=###,0,10}></h2>
+                    <P><{$news.data.description|msubstr=###,0,13}></P>
+                    <P><span><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><{$news.views}></span>   <span><span class="glyphicon glyphicon-time" aria-hidden="true"></span><{$news.data.inputtime|default=time()|date='Y-m-d',###}></span></P>
+                </div>
+                <div class="n_a_r">
+                    <img src="<{$news.data.thumb}>" width="100"  height="73">
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+</foreach> -->
+
+
+<script type="text/javascript">
+
+    function show_err(){
+        MsgBox('正在开发中');
+    }
+
+/*$(function(){
+    loadingData();
+});
+function loadingData() {
+    $.ajax({
+        url: '<{:U("User/ajaxGetData")}>',
+        type: 'post',
+        dataType: 'json',
+        success: function(d) {
+            if (d.status == 1) {
+                var list = d.data;  
+                $('#uc_point').text(list.uc_point);
+                $('#uc_score').text(list.uc_score);
+                $('#uc_coupon').text(list.uc_coupon);
+                $('#uc_order').text(list.uc_order);
+                $('#uc_recommend_activity').text(list.uc_recommend_activity);
+                $('#uc_club').text(list.uc_club);
+                $('#uc_topic').text(list.uc_topic);
+                $('#uc_message').text(list.uc_message);
+                $('#uc_prize').text(list.uc_prize);
+                $('#uc_exchange').text(list.uc_exchange);
+                $('#uc_shaidan').text(list.uc_shaidan);
+                $('#uc_zc').text(list.uc_zc);
+                $('#uc_card').text(list.uc_card);
+            } else {
+                MsgBox('网络延迟，数据查找失败');
+            }
+        }
+    });
+}*/
+</script>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+  WeixinJSBridge.call('hideToolbar');
+  WeixinJSBridge.call('hideOptionMenu');
+});
+</script>
+
+<include file="Inc:footer"/>

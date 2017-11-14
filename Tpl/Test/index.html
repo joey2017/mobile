@@ -1,0 +1,146 @@
+<include file="Inc:header"/>
+
+</head>
+
+<style>
+
+#bdmap {width: 100%;position: relative;}
+
+#allmap {overflow: visible; position: absolute; z-index: 0; left: 0px; top: 0px;}
+
+#allmap .anchorBL {display: none;}
+
+</style>
+
+<body>
+
+<!--头部-->
+
+<div class="alertBg" id="msgBox" style="display:none;">
+
+    <h4 class="alerttitle" id="alerttitle"></h4>
+
+    <span class="vm f20" id='alertdetail'></span>
+
+</div>
+
+<div class="container-fluid topbox">
+
+    <div class="row top">
+
+        <div class="pg-Current">
+
+        	<a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+
+        </div>
+
+        <div class="pg-Current">
+
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+
+        </div>
+
+        <div class="pgt">
+
+        	<a>收集坐标</a>
+
+        </div>             
+
+    </div>
+
+</div>
+
+
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-xs-12 ">
+
+            <div class="row">
+
+                <div class="tab_b_l my_od_f">
+
+                    <div class="col-xs-12" style="margin:10px 0 0 0;">
+
+                        <h2 style="font-size:16px;margin:5px 0;font-weight:bold;"><{$supplier.name}></h2>
+
+                        <p style="font-size:14px;"><{$supplier.address}></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<!--地图内容-->
+
+<div id="bdmap">
+
+    <div id="allmap"></div>
+
+</div>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v2.0&ak=tEflu9uwxEGzOsVPA11HS9Yl"></script> 
+
+<script type="text/javascript">
+
+
+
+
+
+    MsgBox('定位中，请稍候');
+
+    var  geolocation = new BMap.Geolocation();
+
+    geolocation.getCurrentPosition(function (r) {
+
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+            console.log(r.address);
+            point_lng = '经度:'+r.point.lng+'  / 纬度:'+r.point.lat+" /  地址:"+r.address.province+r.address.city+r.address.district+r.address.street+r.address.street_number; //经度
+
+            //point_lat = r.point.lat; //纬度
+
+            //local_city = r.address.city;
+            alert(point_lng)
+           // url = 'http://api.map.baidu.com/direction?origin=latlng:'+point_lat+','+point_lng+'|name:我的位置&destination=latlng:'+s_lat+','+s_lng+'|name:商家位置&mode=driving&region='+local_city+'&output=html';
+
+        //window.location.href = url;
+
+        }else if(this.geStatus()==BMAP_STATUS_SERVICE_UNAVAILABLE) {      
+
+            MsgBox("位置结果未知");
+
+        }
+
+        else if(this.getStatus() == BMAP_STATUS_SERVICE_UNAVAILABLE) {      
+
+            MsgBox("无法通过浏览器定位您的位置.您可以在我们诚车堂微信中发送您的地理位置给我们，以便获取您附近的商家");
+
+        }else if(this.getStatus()==BMAP_STATUS_TIMEOUT) {
+
+            MsgBox("请求超时,请刷新再试");
+
+        }
+
+    });  
+
+
+
+</script> 
+
+<include file="Inc:footer"/>
+
+
+

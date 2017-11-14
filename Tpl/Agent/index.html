@@ -1,0 +1,133 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+
+
+
+<style type="text/css">
+.info_top{background: #eeb416; color: #fff; padding: 15px 0;}
+.info_top h2{font-size: 30px; font-weight: bold; margin: 5px; }
+.info_top img{width: 64px; }
+
+.infomon{padding-top: 15px;}
+.infomon span{color: #d69f0a;}
+.infoinput input{border-radius: 50px;margin: 8px 0;}
+.infoinput button{border-radius: 50px;height: 45px;}
+.btntext{margin-top: 10px;color: #6d6d6d;}
+.benefitbox{margin-bottom: 30px;}
+.benefitbox h3{font-size: 18px;}
+.benefitbox ul{margin: 0; padding:0; list-style: none;}
+.benefitbox ul li{overflow: hidden; margin-bottom: 10px;}
+.benefitbox span{ display:block; float: left; margin-right: 5px; width: 40px; height: 40px; background-image: url(__PUBLIC__/images/benefitico.png);background-size: 40px;}
+.benefitico02{background-position: 0 -43px;}
+.benefitico03{background-position: 0 -86px;}
+.benefitico04{background-position: 0 -129px;}
+.benefitico05{background-position: 0 -172px;}
+.benefitico06{background-position: 0 -215px;}
+
+</style>
+
+
+<div class="info_top">
+	<center>
+		<img src="__PUBLIC__/images/fenxiao.png">
+		<h2>成为合伙人</h2>
+		<p>Become a partner</p>
+	</center>
+</div>
+<div class="col-xs-12 infomon">
+	<p>欢迎加入<span>广西区域化龙头门店合伙人</span>，请您如实填写申请信息！</p>
+	<p>邀请人：<{$sup_name}></p>
+</div>
+
+<div class="col-xs-12 infoinput text-center">
+	<input type="text" class="form-control" name='location_name' id="location_name" placeholder="公司名称">
+	<input type="text" class="form-control" name='contacts' id="contacts" placeholder="负责人">
+	<input type="text" class="form-control" name='mobile' id="mobile" placeholder="手机号码">
+	<div class="checkbox">
+	    <label>
+	      <input type="checkbox" checked="true" id="check_agree">
+	    </label> 
+	    已阅读并同意<a href="">《车堂盛世合伙人协议》</a>
+  	</div>
+	<button type="button" id="btn_submit" class="btn btn-danger btn-block">提交认证（支付880元）</button>
+	<p class="btntext">成为门店合伙人，享有独家特权</p>
+</div>
+ <!--弹出提示框-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $("#btn_submit").click(function(){
+
+            if(!$('#check_agree').is(':checked')){ 
+                MsgBox("必须同意车堂盛世合伙人协议！");
+                return false;
+            }
+
+            var parme = {
+                location_name:$("#location_name").val(),
+                contacts:$("#contacts").val(),
+                mobile :$("#mobile").val()
+             },mobile_rule=/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+
+            if (parme.location_name == '') {
+                MsgBox("公司名称不能为空！");
+                return false;
+            }        
+            if (parme.contacts == '') {
+                MsgBox("负责人不能为空！");
+                return false;
+            }
+            if (parme.mobile == ''||!mobile_rule.test(parme.mobile)) {
+                MsgBox("请输入正确的手机号码！");
+                return false;
+            }
+            $('#btn_submit').attr('disabled',true);
+            $.post("<{:U('Agent/save_location_info')}>", parme, function(data) {
+                MsgBox(data.info);
+                if (data.status) {
+                        setTimeout(function(){
+                            location.href=data.data;
+                        },3000);                
+                }else{
+                    $('#btn_submit').attr('disabled',false);
+                }
+            })
+            
+        });
+    });
+
+</script>
+
+<div class="col-xs-12 benefitbox">
+	<h3>【合伙人特权】</h3>
+	<ul>
+		<li>
+			<span></span>获得价值5980元ITBOSS只能门店管理系统+B2B采购系统免费使用
+		</li>
+		<li>
+			<span class="benefitico02"></span>获得价值2000元产品采购现金抵用卷
+		</li>
+		<li>
+			<span class="benefitico03"></span>获得价值3000元门店B2C微商城一套
+		</li>
+		<li>
+			<span class="benefitico04"></span>获得终身享受推荐商家B2B平台采购分红（约销售金额的1%）
+		</li>
+		<li>
+			<span class="benefitico05"></span>前50家门店合伙人自动获得激励股权1000股
+		</li>
+		<li>
+			<span class="benefitico06"></span>其他福利：门店推广、宣传；项目\人才培训、交流；大客户、车主导流、门店资金扶持等
+		</li>
+	</ul>
+</div>
+
+
+
+</body>
+</html>

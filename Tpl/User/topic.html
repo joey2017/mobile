@@ -1,0 +1,112 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="<{:U('User/index')}>"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>我的帖子</a>
+        </div>             
+    </div>
+</div>
+<!--帖子内容-->
+<if condition="$count eq 0">
+    <div class="container-fluid line"></div>
+    <div class="container-fluid">
+        <div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">您还没有发表帖子</p></div>
+    </div>
+<else />
+    <div id="adlist"></div>
+    <div class="container-fluid">
+    </div>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.esn.autobrowse.js"></script>
+<script>
+    $(function() {
+        var allRows = parseInt('<{$count}>');
+        var loadingRows = 5 ;
+        var totalPage = Math.ceil(allRows/loadingRows);
+        var max = totalPage > 100 ? 100 : totalPage;
+        if (totalPage >= 1) {
+            adautobrowse('adlist', '<{:U("User/ajaxGetTopicList")}>?lnums='+loadingRows,max);
+        }
+    });
+
+    function adautobrowse(dom, url, total) {
+
+        $("#"+dom).autobrowse({
+            url: function(offset) {
+                return   url + '&p=' + offset;
+            },
+            template: function(response) {
+                return callbacks(response);
+            },
+            itemsReturned: function(response) {
+                return 1;
+            },
+            max: total,
+            offset: 1,
+            sensitivity: 100,
+            loader: '<div class="container-fluid line"></div><div class="container-fluid"><div class="row"><center><div style="line-height:40px;"><img src="__PUBLIC__/images/minilodging.gif">正在加载...</div></center></div></div>',
+            finished: function() {
+                $(this).append('<div class="container-fluid line"></div><div class="container-fluid"><div class="row"><center><div style="line-height:40px;">已加载全部内容</div></center></div></div>');
+            },
+            onError: function() {
+                alert('加载失败，请稍后重试')
+            }
+        });
+    }
+
+    function callbacks(response) {
+        var markup = '';
+        var onerror = "javascript:this.src='http://s.17cct.com/v3/images/errorimg.jpg';this.onerror='';";
+        if (response.data) {
+            var list = response.data,
+                listLength = list.length;
+            for (var i= 0;i<listLength;i++) { 
+                markup += '<div class="container-fluid line"></div>'; 
+                markup += '<div class="container-fluid">';
+                markup +=     '<div class="row">';
+                markup +=         '<div class="Posts_cts" style="margin-left:10px">'; 
+                markup +=             '<a href="'+list[i].theme_url+'" >';
+                markup +=                 '<h3 class="my_od_f" style="color:#474747;">'+list[i].theme_name+'</h3>';
+                markup +=                 '<div>';
+                markup +=                     '<p><span><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'+list[i].theme_browsecount+'</span> <span><span class="glyphicon glyphicon-time" aria-hidden="true"></span>'+list[i].theme_addtime+'</span></p>';
+                markup +=                  '</div>';
+                markup +=                  '<p class="topic_content">'+list[i].theme_content+'</p>';
+                if (list[i].imgs) {
+                    markup +=                 '<p class="Posts_cts_img2" style="margin-left:-5px; overflow:hidden">';
+                    var imgsList = list[i].imgs;
+                    var imgsListLength = imgsList.length;
+                    for (var im = 0; im < imgsListLength; im++) { 
+                        markup +=                 '<img src="'+imgsList[im]+'" onerror="'+onerror+'">';
+                    }
+                    markup +=               '</p>';
+                } 
+                markup +=              '</a>'; 
+                markup +=         '</div>';
+                markup +=     '</div>';
+                markup += '</div>';
+            }
+        } else {
+            markup = '<div class="container-fluid"><div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">加载失败，请稍后重试</p></div></div>';
+        }
+        return markup;
+    }
+</script>
+</if>
+<div class="container-fluid line"></div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+<include file="Inc:footer"/>

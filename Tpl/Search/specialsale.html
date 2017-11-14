@@ -1,0 +1,295 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+            <a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+            <img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+            <a><{$stitle}><if condition="$type eq 'service'">服务特卖<elseif condition="$type eq 'goods'"/>商品特卖<else/>未知</if></a>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">       
+        <a href="<{:U('Search/specialsale')}>?type=service" class="all wd_3 <if condition="$type eq 'service'">Underline</if>">服务特卖</a>
+        <a href="<{:U('Search/specialsale')}>?type=goods" class="all wd_3 <if condition="$type eq 'goods'">Underline</if>">商品特卖</a>    
+    </div>
+</div>
+<div class="container-fluid line"></div>
+
+<!--菜单属性筛选-->
+<nav id="cbp-hrmenu" class="cbp-hrmenu">
+    <ul>
+        <if condition="$type eq 'service'"> 
+            <li id="service_cate" date-url="<{:U('Search/service_cate')}><{$link}>"> <a href="#" class="hrmenutopa my_od_f"><{$cate_name}><span></span></a>
+                <div id="service_cate_html"></div>
+            </li>
+        <elseif condition="$type eq 'goods'"/>
+            <li id="goods_cate" date-url="<{:U('Search/goods_cate')}><{$link}>"> <a href="#" class="hrmenutopa my_od_f"><{$cate_name}><span></span></a>
+                <div id="goods_cate_html"></div>
+            </li>
+        </if>
+        <li id="area" date-url="<{:U('Search/area')}><{$link}>"> <a href="#" class="hrmenutopa my_od_f"><{$area_name}><span></span></a>
+            <div id="area_html"></div>
+        </li>
+        <li id="order_by" date-url="<{:U('Search/order_by')}><{$link}>"> <a href="#" class="hrmenutopa my_od_f"><{$orderby}><span></span></a>
+            <div id="order_by_html"></div>
+        </li>
+    </ul>
+</nav>
+
+<div class="black" id="black" style="top:145px;">
+    <div style="width:37px; height:37px; position:absolute; z-index:9; top:10px; left:50%; margin-left:-12px;"><img src="__PUBLIC__/images/kitload.gif"></div>
+</div>
+<!--筛选按钮js-->
+<script>
+$('body').css('position','relative');
+var cbpHorizontalMenu = (function() {
+    var b = $("#cbp-hrmenu > ul > li"),
+    g = b.children("a"),
+    c = $("body"),
+    bk = $("#black"),
+    d = -1;
+    function f() {
+        g.on("click", a);
+        b.on("click",
+        function(h) {
+            h.stopPropagation()
+        })
+    }
+    function a(j) {
+        if (d !== -1) {
+            b.eq(d).removeClass("cbp-hropen");
+            bk.hide();  
+        }
+        var i = $(j.currentTarget).parent("li"),
+        h = i.index();
+        if (d === h) {
+            i.removeClass("cbp-hropen");
+            bk.hide();  
+            d = -1;
+        } else {
+            i.addClass("cbp-hropen");
+            doselect(i.attr('id'),i.attr('date-url'))
+            bk.show(); 
+            d = h;
+            c.off("click").on("click", e);
+        }
+        return false
+    }
+    function e(h) {
+        b.eq(d).removeClass("cbp-hropen");
+        bk.hide(); 
+        d = -1;
+    }
+    return {
+        init: f
+    }
+})();
+
+$(function() {
+    cbpHorizontalMenu.init();
+});
+    
+//筛选菜单下的选项卡
+function nTabs(thisObj,Num){
+   if(thisObj.className == "active")return;
+    var tabObj = thisObj.parentNode.id;
+    var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+    var tabListLength = tabList.length;
+    for(i = 0 ; i < tabListLength; i++)
+    {
+        if (i == Num)
+        {
+           tabList[tabListLength-i-1].className = "active"; 
+           document.getElementById(tabObj+"_Content"+i).className = "";
+        }else{
+           tabList[tabListLength-i-1].className = "normal"; 
+           document.getElementById(tabObj+"_Content"+i).className = "none";
+        }
+    } 
+    return false;
+}
+function doselect(name, url) {
+    $.ajax({
+        url: url,
+        type: 'post',
+        dataType: 'html',
+        success: function(data) {
+            $("#" + name + "_html" ).html(data);
+        }
+    });
+}
+</script>
+
+<if condition="$count eq 0">
+    <div class="container-fluid line"></div>
+    <div class="container-fluid">
+        <div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">暂无信息</p></div>
+    </div>
+    <div class="container-fluid line"></div>
+<else />
+    <div class="none" id="position-tip">
+        <div class="container-fluid">
+            <div class="row"><center><div style="line-height:40px;"><img src=" __PUBLIC__/images/minilodging.gif">正在加载...</div></center></div>
+        </div>
+    </div>
+    <div class="line none" id="address" style=" border-top:0; min-height:3.5rem; line-height:3.5rem; padding:0 1rem;}" onclick="reGetPosition(8,'<{$count}>');">
+        <p id="address-show" style="width:90%;white-space: nowrap;text-overflow: ellipsis;overflow: hidden; float:left;color:#616161;"></p>
+        <span class="glyphicon glyphicon-repeat" aria-hidden="true" style="float:right;line-height:3.5rem;"></span>
+    </div>
+    <div class="shopbox" id="adlist" style="background:#ebebeb"></div>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.esn.autobrowse.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v2.0&ak=tEflu9uwxEGzOsVPA11HS9Yl"></script> 
+<script>
+    $(function() {
+        var oid = parseInt('<{$oid}>');
+        var allRows = parseInt('<{$count}>');
+        var loadingRows = 8 ;
+        var totalPage = Math.ceil(allRows/loadingRows);
+        var max = totalPage > 100 ? 100 : totalPage;
+        if (totalPage >= 1) {
+            if (oid == 1) { //离我最近 
+                var lng = $.cookie('lng');
+                var lat = $.cookie('lat');
+                var address = $.cookie('address');
+                if (lng && lat) {
+                    $('#address-show').text(address);
+                    $('#address').removeClass('none');
+                    adautobrowse('adlist', '<{:U("Search/ajaxGetSpecialsaleDeal")}><{$link}>&lnums='+loadingRows+'&lng='+lng+'&lat='+lat,max);
+                }else{
+                   getPosition(loadingRows,max);
+                }  
+            }else {
+                adautobrowse('adlist', '<{:U("Search/ajaxGetSpecialsaleDeal")}><{$link}>&lnums='+loadingRows,max);
+            }
+
+            var serverTime = new Date().getTime();
+            var dateTime = new Date();
+            var difference = dateTime.getTime() - serverTime;    
+            setInterval(function(){
+              $(".endtime").each(function(){
+                var obj = $(this);
+                var endTime = new Date(parseInt(obj.attr('value')) * 1000);
+                var nowTime = new Date();
+                var nMS=endTime.getTime() - nowTime.getTime() + difference;
+                var myD=Math.floor(nMS/(1000 * 60 * 60 * 24));
+                var myH=Math.floor(nMS/(1000*60*60)) % 24+(myD*24);
+                var myM=Math.floor(nMS/(1000*60)) % 60;
+                var myS=Math.floor(nMS/1000) % 60;
+                //var myMS=Math.floor(nMS/100) % 10;
+                if(myD>= 0){
+                    var str =myH+"小时"+myM+"分"+myS+"秒";
+                }else{
+                    var str = "已结束！";   
+                }
+                obj.html(str);
+              });
+            }, 300); 
+        }
+    });
+
+    function reGetPosition (rows,max) {
+        $('#adlist').html('');
+        $('#address').addClass('none');;
+        jQuery(window).unbind("scroll");
+        getPosition(rows,max);
+    }
+
+    function getPosition (rows,max) {
+        $('#position-tip').show();
+        var geolocation = new BMap.Geolocation(); 
+        geolocation.getCurrentPosition(function (r) {
+            if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                point_lng=r.point.lng;
+                point_lat=r.point.lat;
+                address = r.address.district+' '+r.address.street+r.address.street_number;
+                var expiresDate= new Date();
+                expiresDate.setTime(expiresDate.getTime() + (2*60*1000));  
+                $.cookie('lng',point_lng, {expires: expiresDate});
+                $.cookie('lat',point_lat, {expires: expiresDate});
+                $.cookie('address',address, {expires: expiresDate});
+                $('#position-tip').hide();
+                $('#address-show').text(address);
+                $('#address').removeClass('none');;
+                adautobrowse('adlist', '<{:U("Search/ajaxGetSpecialsaleDeal")}><{$link}>&lnums='+rows+'&lng='+point_lng+'&lat='+point_lat,max);
+            }else if(this.getStatus()==BMAP_STATUS_SERVICE_UNAVAILABLE){            
+                MsgBox("无法通过浏览器定位您的位置.您可以在我们诚车堂微信中发送您的地理位置给我们，以便获取您附近的商家");
+            }else if(this.getStatus()==BMAP_STATUS_TIMEOUT) {
+                MsgBox("请求超时,请刷新再试"); 
+            }
+         }); 
+    }
+
+    function adautobrowse(dom, url, total) {
+        $("#"+dom).autobrowse({
+            url: function(offset) {
+                return   url + '&p=' + offset;
+            },
+            template: function(response) {
+                return callbacks(response);
+            },
+            itemsReturned: function(response) {
+                return 1;
+            },
+            max: total,
+            offset: 1,
+            sensitivity: 100,
+            loader: '<div class="container-fluid"></div><div class="container-fluid" style="background:#FFF;"><div class="row"><center><div style="line-height:40px;"><img src="__PUBLIC__/images/minilodging.gif">正在加载...</div></center></div></div>',
+            finished: function() {
+                MsgBox("已加载全部信息");
+            },
+            onError: function() {
+                MsgBox('网络繁忙，请稍后重试');
+            }
+        });
+    }
+
+    function callbacks(response) {
+        var markup = '';
+        var errorImg = "this.src='http://s.17cct.com/v3/images/errorimg.jpg';this.onerror=''";
+        if (response.data) {
+            var list = response.data,
+                listLength = list.length;
+            for (var i= 0;i<listLength;i++) {
+                markup += '<dl>';
+                markup += '    <a href="'+list[i].url+'">';
+                markup += '        <img src="'+list[i].img+'" onerror="'+errorImg+'" style="width:100%; height:auto;">';
+                markup += '        <div>';
+                markup += '            <h3>'+list[i].name+'</h3>';
+                markup += '        </div>';
+                markup += '        <p><i>￥'+parseFloat(list[i].promote_price).toFixed(2)+'元</i><del>￥'+parseFloat(list[i].origin_price).toFixed(2)+'</del></p>';
+                markup += '        <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span>剩余：<span class="endtime"  value="'+list[i].end_time+'"></span></p>';
+                if (list[i].distance) {
+                    markup += '        <p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>距离：'+list[i].distance+'km</p>';
+                }
+                markup += '        <p><span class="glyphicon glyphicon-record" aria-hidden="true"></span>销量：<span>'+list[i].order_count+'</span></p>';
+                markup += '    </a>';
+                markup += '</dl>';
+            }
+        } else {
+            MsgBox('网络繁忙，请稍后重试');
+        }
+        return markup;
+    }
+</script>
+</if>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+<include file="Inc:footer"/>

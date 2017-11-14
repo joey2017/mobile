@@ -1,0 +1,109 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>充值卡</a>
+        </div>
+    </div>
+</div>
+
+<!--商品列表-->
+<if condition="!$exchange">
+  <div style="background:#ebebeb">
+      <div class="shopbox" id="recharge">
+              <input type="radio" name="sel" value="6" class="for">200
+              <input type="radio" name="sel" value="9" class="for">300
+              <input type="radio" name="sel" value="8" class="for">500
+              <input type="radio" name="sel" value="diy" id="diyredio">自由充
+      </div>
+      <div class="diyrecharge" style="display:none">
+           <p class="tit" title="{$ex.name}">&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"  name="diyrecharge" id="diyrecharge"   style="width:166px" placeholder="请输入整数金额,1元起充" maxlength="4">价值<label id="value"></label></p>
+      </div>
+
+  </div>
+  <input type="button" name="submit" onclick="quick_pay()" value="提交">
+<else />
+    <div class="container-fluid line"></div>
+    <div class="container-fluid">
+        <div class="row" >
+            <p style="color: #5f5f5f;text-align: center;margin-top:10px;">暂无兑换</p>
+        </div>   
+    </div>  
+    <div class="container-fluid line"></div>
+</if> 
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+$('.for').click(function(){
+    $('#diyrecharge').attr('placeholder','请输入整数金额,1元起充');    
+    $('#diyrecharge').val('');
+    $('.diyrecharge').hide();
+})
+$('#diyredio').click(function(){
+  $('.diyrecharge').show()
+})
+
+$('#diyrecharge').keyup(function(){
+  var diyval=parseInt($(this).val().replace(/[^\d]/g,''));
+  if(diyval){
+    var diyvalue=Number(diyval)*0.1+Number(diyval)
+     $('#value').html('￥'+diyvalue);
+    $(this).val(parseInt($(this).val().replace(/[^\d]/g,'')))
+  }else{
+    $(this).val('');
+    $('#value').html('￥0');
+  }
+  
+})
+
+function quick_pay(){
+  if(!$('input:radio[name="sel"]:checked').val()){
+    MsgBox('请选择一个充值金额');  
+    return false;
+  }
+  
+  var diyrecharge=0;
+  var rechargetype=1;
+  if($('input:radio[name="sel"]:checked').val()=='diy'){
+    diyrecharge=parseInt($('#diyrecharge').val().replace(/[^\d]/g,''));
+    if(!diyrecharge){  
+       MsgBox('请输入整数金额');  
+      
+      $('#diyrecharge').focus(); 
+      return false;
+    }
+    rechargetype=2;
+  }else{
+    diyrecharge=parseInt($('input:radio[name="sel"]:checked').val());
+  }
+    $.ajax({
+       type:'post',
+       url: '<{:U("QuickRecharge/do_recharge_order")}>',
+       dataType:'json',
+       data:{"diyrecharge":diyrecharge,"rechargetype":rechargetype},
+       success:function(d){  
+        if(d.status == 1){                         
+          MsgBox(d.info,'',d.data);
+        }else{
+          MsgBox(d.info);
+          _this.text('提交订单').attr('disabled',false);
+        }
+      }
+  });
+}
+
+</script>
+<include file="Inc:footer"/>

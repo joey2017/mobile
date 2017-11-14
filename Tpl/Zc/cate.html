@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="Generator" />
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=0,minimum-scale=0.5">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title><{$deal_info.name}>- 预购一个梦想</title>
+        <meta name="keywords" content="SEO关键词" />
+        <meta name="description" content="SEO描述" />
+ <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/layout.css" />
+         <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css" />
+         <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/weebox.css" />
+         <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+          <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/awesome.min.css" />  
+           <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+           <script type="text/javascript" src="__PUBLIC__/js/wap_v4_common.js"></script>
+           <!--
+        <script type="text/javascript" src="__PUBLIC__/js/bootstrap.min.js"></script>
+       
+        <script type="text/javascript" src="__PUBLIC__/js/jquery.bgiframe.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/jquery.weebox.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/js.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/script.js"></script> 
+      
+           -->
+        
+    </head>
+    <body >
+        <div class="container-fluid topbox">
+        	<div class="row top">
+        		<div class="Current">
+        			<a>南宁 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
+        		</div>
+            	<div class="Search">
+                	<a href="<{:U('Search/index')}>">
+                    	<div class="form-control my_od_f">
+                        	<i class="glyphicon glyphicon-search" aria-hidden="true" style="color:#b9b9b9;"></i>
+                            <span style="margin-left:.6rem; color:#999;">输入服务/商品/商家</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="Member">
+                	<a href="<{:U('User/index')}>">
+                    	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+</div>    <div class="wraper">
+<!--
+<script type="text/javascript" src="http://192.168.2.64/public/runtime/statics/41def16cd3f252572fd8b7a3fa442aa9.js">-->
+</script>
+<section class="cart_index">
+    <form class="pay_form" action="<{:U('Zc/go_pay')}>"  id="cart_form" method="post">
+        <div class="blocktitle">支持详情</div>
+        <div class="blocktop">
+            <div class="imglist">
+                <img src="<{$deal_info.image}>">
+            </div>
+            <div class="rtimglist">
+                <h1><{$deal_info.name}></h1>
+                <label>发起人：</label>
+                <a><{$user_name}></a>
+            </div>
+            <div class="blank"></div>
+        </div>       
+        <div class="mainlist webkit-box return_cont">
+            <label class="input_lable">回报内容：</label>
+            <div class="r_list ml10">
+                <{$deal_item.description}>
+            </div>
+        </div>
+               
+        <div class="mainlist webkit-box" style="height:50px">
+            <label class="input_lable">*真实姓名：</label>
+            <div class="r_list ml10" >
+                <input type="text" name="uname" id="uname" placeholder="身份证姓名" value="<{$uinfo.true_name}>" style="border:1px solid #ccc;margin-top:3px;color: #060606">
+            </div>
+        </div> 
+        <div class="mainlist webkit-box" style="height:50px">
+            <label class="input_lable">*手机号码：</label>
+            <div class="r_list ml10" >
+                <input type="text" name="mobile" id="mobile" placeholder="接收抽奖码" value="<{$uinfo.mobile}>" style="border:1px solid #ccc;margin-top:3px;color: #060606">
+            </div>
+        </div>  
+        <div class="mainlist webkit-box" style="height:100px;padding-left:20px">
+            <label class="input_lable">项目备注：</label>
+            <div class="r_list ml10" >
+            <textarea name="memo" class="textarea" style="border:1px solid #ccc;height:80px;margin-top:5px" ></textarea>
+                
+            </div>
+        </div> 
+         <div class="mainlist webkit-box" style="height:125px">
+            <label >*注意事项：<br/>
+            1.真实姓名必须与本人身份证的姓名一致。<br/>
+            2.领奖时请出示抽奖码,手机号码及身份证。</label>
+            
+        </div>
+		<div class="sbmbj">
+            <div class="mainlist webkit-box">
+                <font class="delivery_fee mr10">
+                    支持金额：￥<{$deal_item.price_format}>&nbsp;&nbsp;
+                </font>
+                <div class="blank">
+                </div>
+            </div>
+            <div class="blank"></div>
+        </div>          
+         <div class="sbmbj">
+            <div class="mainlist webkit-box">
+                <font class="delivery_fee mr10">
+                    支持方式：微信支付&nbsp;&nbsp;
+                </font>
+                <div class="blank">
+                </div>
+            </div>
+            <br/>
+            <input type="hidden" value="<{$deal_item.id}>" name="id">
+        </div>
+        <div style="height:50px;"></div>
+        <div class="alwaysfoot">
+            <input class="input30" style="background-color: #CD0000;" type="button" id="tjbd" value="提交表单">
+        </div>
+    </form> 
+</section>
+<style type="text/css">
+    /*提示框*/
+.alertBg { width:200px; padding:20px 0; font-size:14px; position:fixed; top:50%; left:50%; margin-top:-23px; margin-left:-100px; display:inline-block; border-radius:5px; background-color:#000; -webkit-transition-property:opacity; -webkit-transition-duration:0.3s; -webkit-transition-timing-function:linear; opacity:0.7; color:#fff; z-index:9999999999; text-align:center; }
+.alerttitle { font-size:20px; padding:0 0 5px 0; }
+.alertBg .vm { font-size:14px; padding:0 5px; display:block; line-height:20px; }
+</style>
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<script>
+    $('#tjbd').click(function(){
+        if(!$('#uname').val()){
+            MsgBox('请填写真实姓名');
+            $('#uname').focus();
+            return false;
+        }
+        if(!$("#mobile").val().match(/^(((1(3|4|5|7|8|9)[0-9]{1}))+\d{8})$/)){
+            MsgBox('请填写正确的手机号码');
+            $('#mobile').focus();
+            return false;
+        }
+        $('.alwaysfoot').hide();
+         MsgBox('数据提交中...');
+         $('#cart_form').submit();        
+    })
+</script>

@@ -1,0 +1,124 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="<{:U('User/index')}>"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>我的兑换</a>
+        </div>
+        <div class="cybtn">
+            <a href="<{:U('Index/exchange')}>?t=1"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp我要兑换</a>
+        </div>            
+    </div>
+</div>
+
+<!--标题-->
+<div class="container-fluid">
+	<div class="row">
+    	<div id="eg1" class="all wd_2"><a href="<{:U('User/exchange')}>?t=1">全部兑换</a></div>
+        <div id="eg2" class="all wd_2"><a href="<{:U('User/exchange')}>?t=2">已领取</a></div>
+        <div id="eg3" class="all wd_2"><a href="<{:U('User/exchange')}>?t=3">未领取</a></div>        
+    </div>
+</div>
+<script>
+    var __t = '<{$t}>';
+    $("#eg"+__t).addClass('Underline');
+</script>
+<if condition="$count eq 0">
+    <div class="container-fluid line"></div>
+    <div class="container-fluid">
+        <div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">暂无符合条件的兑换</p></div>
+    </div>
+<else />
+    <div id="adlist"></div>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.esn.autobrowse.js"></script>
+<script>
+    $(function() {
+        var __t  = '<{$t}>';
+        var allRows = parseInt('<{$count}>');
+        var loadingRows = 10 ;
+        var totalPage = Math.ceil(allRows/loadingRows);
+        var max = totalPage > 100 ? 100 : totalPage;
+        if (totalPage >= 1) {
+            adautobrowse('adlist', '<{:U("User/ajaxGetExchangeList")}>?t='+__t+'&lnums='+loadingRows,max);
+        }
+    });
+
+    function adautobrowse(dom, url, total) {
+
+        $("#"+dom).autobrowse({
+            url: function(offset) {
+                return   url + '&p=' + offset;
+            },
+            template: function(response) {
+                return callbacks(response);
+            },
+            itemsReturned: function(response) {
+                return 1;
+            },
+            max: total,
+            offset: 1,
+            sensitivity: 100,
+            loader: '<div class="container-fluid line"></div><div class="container-fluid"><div class="row"><center><div style="line-height:40px;"><img src="__PUBLIC__/images/minilodging.gif">正在加载...</div></center></div></div>',
+            finished: function() {
+                $(this).append('<div class="container-fluid line"></div><div class="container-fluid"><div class="row"><center><div style="line-height:40px;">已加载全部内容</div></center></div></div>');
+            },
+            onError: function() {
+                alert('加载失败，请稍后重试');
+            }
+        });
+    }
+
+    function callbacks(response) {
+        var  markup = '';
+        if (response.data) {
+            var list = response.data,
+                listLength = list.length;
+            for (var i= 0;i<listLength;i++) { 
+                markup += '<div class="container-fluid line"></div>';
+                markup += '<div class="container-fluid">';
+                markup += '    <div class="row" style="position:relative;">';
+                markup += '        <div class="Cheyou_1">';
+                markup += '            <a>'+list[i].goods.thumb+'</a>';
+                markup += '        </div>';
+                markup += '        <div class="Cheyou_2 my_od_f">';
+                markup += '            <h3><a style="color:#474747; text-decoration:none;">'+list[i].goods.name+'</a></h3>';  
+                markup += '            <p>积分&nbsp&nbsp&nbsp&nbsp：'+list[i].goods.point+'</p>';
+                markup += '            <p>车堂币：'+list[i].goods.score+'</p>';
+                markup += '            <p>兑换时间：'+list[i].add_time+'</p>';           
+                markup += '        </div>';
+                if (list[i].status == 0) {
+                    markup += '        <button type="button" class="btn btn-warning dhbt" onclick="urlDir();">未领取</button>'; 
+                }else if (list[i].status == 1) {
+                    markup += '        <button type="button" class="btn btn-default dhbt" disabled="disabled">已领取</button>'; 
+                }         
+                markup += '    </div>';    
+                markup += '</div>';
+            }
+        } else {
+            markup = '<div class="container-fluid"><div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">加载失败，请稍后重试</p></div></div>';
+        }
+        return markup;
+    }
+    function urlDir() {
+        location.href='<{:U("Index/contact_us")}>';
+    }
+</script>
+</if>
+<div class="container-fluid line"></div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+<include file="Inc:footer"/>

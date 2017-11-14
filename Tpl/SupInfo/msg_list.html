@@ -1,0 +1,13 @@
+<volist name="msg_list" id="ml">
+    <li>
+        <a href="<{:U('SupInfo/detail',array('id'=>$ml['id']))}>">
+        <div class="dope-icon"><i class="iconfont icon-laba"></i></div>
+        <div class="iconfont icon-jiantou-copy-copy next-more"></div>
+        <div class="dope-show">
+            <span>系统消息<strong><{$ml.time}>前</strong></span>
+            <p><{$ml.content}></p> 
+        </div>
+        </a>
+    </li>
+</volist>
+

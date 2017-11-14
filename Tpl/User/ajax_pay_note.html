@@ -1,0 +1,10 @@
+<volist name="user_note" id="user_note" key="k">
+   <div>
+		<div class="results_Time" style="width:90px;"><{$user_note.paytime}></div>
+		<div class="projectbox" style="width:120px;"><{$user_note.category}></div>
+		<div class="moneybox" style="width:80px;"><{$user_note.price}></div>        
+   </div>
+  <input type="hidden" value="<{$sum_price|price}>" id="sum_price"/>     
+</volist>
+
+ 

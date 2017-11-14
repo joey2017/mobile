@@ -1,0 +1,31 @@
+<!--漂浮导航 开始-->
+<div class="row pos-nav">
+    <div class="col-xs-3">
+        <a href="<{:U('Supplier/index')}>" <if condition="MODULE_NAME eq Supplier" >class="nav-red"</if>>
+            <i class="iconfont icon-shangdian1"></i>
+            <p>首页</p>
+        </a>
+    </div>
+    <div class="col-xs-3">
+        <a href="<{:U('SupOrder/navig')}>" <if condition="MODULE_NAME eq SupOrder" >class="nav-red"</if>>
+            <i class="iconfont icon-kehu"></i>
+            <p>交易/客户</p>
+        </a>
+    </div>
+    <div class="col-xs-3">
+        <a href="<{:U('SupWarehouse/navig')}>" <if condition="MODULE_NAME eq SupWarehouse" >class="nav-red"</if>>
+            <i class="iconfont icon-kucun"></i>
+            <p>财务/库存</p>
+        </a>
+    </div>
+    <div class="col-xs-3">
+        <a href="<{:U('SupMember/navig')}>" <if condition="MODULE_NAME eq SupMember" >class="nav-red"</if>>
+            <i class="iconfont icon-shouhou"></i>
+            <p>售后</p>
+        </a>
+    </div>  
+</div>
+<!--漂浮导航 结束-->
+
+</body>
+</html>

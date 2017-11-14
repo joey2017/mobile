@@ -1,0 +1,73 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>修改用户名</a>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">	
+    <div class="row">
+    	<div class="col-xs-12 xgbox">
+				<h3>用户名：</h3>
+            	<input type="text" class="input-weak" id="nickname" placeholder="请填写用户名" value="<{$nickname}>"/>
+            	<p class="btn-wrapper">限4-12个汉字或字母</p>
+                <button type="button" class="btn btn-primary  btn-block  btn-warning"  onclick="modifySubmit(this);">确定</button>
+         </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+function modifySubmit(obj) {
+    var _this = $(obj),
+        nickname = $.trim($("#nickname").val()),
+        c = /[ '.,:;*?~`!@#$%^&+=)(<>{}]|\]|\[|\/|\\\|\"|\|/;
+
+      if (nickname.length > 12 || nickname.length < 4) {
+        MsgBox("长度应为4-12个汉字或字母");
+          return false;
+        }
+      if (c.test(nickname)) {
+        MsgBox("不能含有特殊字符");
+        return false;
+      }
+
+    _this.text('数据提交中').attr("disabled", true);
+
+    $.ajax({
+        url: "<{:U('User/ajaxModifyNickName')}>",
+        type: 'post',
+        data: {"nickname": nickname},
+        dataType: 'json',
+        success: function(d) {
+            if (d.status == 1) { 
+              MsgBox(d.info,"",d.data);
+            } else {
+              _this.text('确定').attr("disabled", false);
+              MsgBox(d.info);
+            }
+        }
+    });
+}
+
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+  WeixinJSBridge.call('hideToolbar');
+  WeixinJSBridge.call('hideOptionMenu');
+});
+</script>
+
+<include file="Inc:footer"/>

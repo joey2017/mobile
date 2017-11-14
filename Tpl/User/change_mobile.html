@@ -1,0 +1,119 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>更换手机号码</a>
+        </div>
+    </div>
+</div>
+<!--流程-->
+<div class="container-fluid">	
+    <div class="row">
+    	<div class="col-xs-12 crumbs">
+        	<center>
+            	<i class="c-active">身份认证</i> > <i>验证新手机号</i> > <i>验证成功</i>
+            </center>
+        </div>
+    </div>
+</div>
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<div class="container-fluid" >
+	<div class="row phon">
+			<div class="col-xs-7" style="line-height:34px"><{$mobile|substr_replace=###,'****',3,4}></div>
+            <div class="col-xs-5"><button type="button" class="btn btn-primary  btn-block  btn-warning" id="getcode">获取验证码</button></div>
+            <div class="col-xs-12">
+            	<input type="tel" class="input-weak" id="code" style="margin-top:10px;" placeholder="请输入手机短信中的验证码"/>
+                <p class="btn-wrapper">若该手机号码无法接收短信校验码，请联系客服：0771-2756623</p>
+                <button type="button" class="btn btn-primary  btn-block  btn-warning" onclick="changSubmit(this);">验证</button>
+            </div>
+	</div>
+</div>
+<script type="text/javascript">
+var wait = 60;
+function time(o) {
+    if (wait == 0) {
+        wait = 60;
+        $(o).attr('disabled',false)
+        $(o).text('获取验证码');
+    } else {
+        wait--;
+        $(o).attr('disabled',true)
+        $(o).text('重 发 (' + wait + ')');
+        setTimeout(function(){time(o);},1000);
+    }
+}
+
+document.getElementById("getcode").onclick = function() {
+    var g = this;
+    var mobile = '<{$mob}>';
+    if(wait != 60){
+      return false;
+    }
+    SendCode(mobile,g);
+}
+
+//发送手机验证码
+function SendCode(mobile,o) {
+    $.ajax({
+        url: "<{:U('User/sendCode')}>",
+        type: 'post',
+        dataType: 'json',
+        data:{'mobile':mobile,'type':'chm_code'},
+        success: function(d) {
+            if (d.status == 1) {
+              MsgBox(d.info);
+              time(o);
+            } else {
+              MsgBox(d.info);
+            }
+        }
+    });
+}
+
+function changSubmit(obj) {
+    var _this = $(obj),
+        code = $.trim($("#code").val()),
+        mobile = '<{$mob}>';
+        c = /^\d{4}$/i;
+    if (!code||!c.test(code)) {
+        MsgBox("验证码格式错误");
+        return false;
+    }
+    _this.text('数据提交中').attr("disabled", true);
+    $.ajax({
+        url: "<{:U('User/ajaxChangeMobile')}>",
+        type: 'post',
+        data: {"mobile": mobile, "code": code},
+        dataType: 'json',
+        success: function(d) {
+            if (d.status == 1) { 
+              MsgBox(d.info,"",d.data);
+            } else {
+              _this.text('验证').attr("disabled", false);
+              MsgBox(d.info);
+            }
+        }
+    });
+}
+
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+  WeixinJSBridge.call('hideToolbar');
+  WeixinJSBridge.call('hideOptionMenu');
+});
+</script>
+<include file="Inc:footer"/>

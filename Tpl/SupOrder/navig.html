@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<title>交易/客户</title>
+		<link rel="stylesheet" href="__PUBLIC__/css/iconfont.css" />
+		<link rel="stylesheet" href="__PUBLIC__/css/reset.css" />
+		<link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/text.css"/>
+		<script type="text/javascript" src="__PUBLIC__/js/jquery.js" ></script>
+	</head>
+	<body>
+		<div class="box">
+			<!--列表 开始-->
+			<ul class="listing">
+				<li>
+					<a href="<{:U('SupOrder/store_order')}>">
+						<i class="iconfont icon-xiadan li-icon1"></i>
+						<p>代客下单</p>
+						<span class="iconfont icon-jiantou-copy-copy"></span>
+					</a>
+				</li>
+				<li>
+					<a href="<{:U('SupOrder/settlement')}>">
+						<i class="iconfont icon-jiesuan li-icon2"></i>
+						<p>结算订单</p>
+						<span class="iconfont icon-jiantou-copy-copy"></span>
+					</a>
+				</li>
+				<li>
+					<a href="<{:U('SupOrder/index')}>">
+						<i class="iconfont icon-dingdanchaxun li-icon3"></i>
+						<p>订单查询</p>
+						<span class="iconfont icon-jiantou-copy-copy"></span>
+					</a>
+				</li>
+				<li>
+					<a href="<{:U('SupMember/index')}>">
+						<i class="iconfont icon-kehuxinxi li-icon4"></i>
+						<p>客户信息</p>
+						<span class="iconfont icon-jiantou-copy-copy"></span>
+					</a>
+				</li>
+			</ul>
+			<!--列表 结束-->
+		</div>
+		
+		
+<include file="Inc:sup_footer"/>
+	
+<script type="text/javascript" src="__PUBLIC__/js/move.js" ></script>	

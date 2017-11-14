@@ -1,0 +1,74 @@
+<include file="Inc:header"/>
+
+<style type="text/css">
+.icon-ok{    padding-bottom: 15px;    border-bottom: 1px #eee solid;    margin-bottom: 15px;}
+.icon-ok i{ width:72px; height: 72px; display: block; background: url(http://s.17cct.com/v5/images/erp/success.svg) no-repeat center; background-size:72px; margin: 0 auto 10px auto; }
+</style>
+
+
+</head>
+<body>
+<!--头部
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="<{:U('User/order')}>" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>支付结果</a>
+        </div>             
+    </div>
+</div>
+-->
+
+
+<if condition="$order">
+    <div class="container-fluid">
+        <div class="text-center icon-ok">
+            <h3>
+                <i></i><p>交易成功</p>
+            </h3>
+        </div>
+    </div>
+
+
+    <!--服务名称-->
+    <div class="container-fluid">
+    	<div class="row">
+        	<div class="col-xs-12"> 
+            	<p style="padding-top:10px;">项目名称：<span class="pull-right">预付款</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12"> 
+                <p style="padding-top:10px;">支付金额：<span class="pull-right">￥<{$order.pay_money}></span></p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12"> 
+                <p style="padding-top:10px;">支付时间：<span class="pull-right"><{$order.pay_time|date="Y-m-d H:i:s",###}></span></p>
+            </div>
+        </div>
+    </div>
+
+<else />
+    <div class="container-fluid">
+        <div class="row"><center><h3 style="color:#cd0000;margin-top:10px;"><span class="glyphicon glyphicon-remove" style="top:3px;"></span>交易失败</h3></center></div>
+    </div>
+</if>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+      WeixinJSBridge.call('hideToolbar');
+      WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>

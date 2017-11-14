@@ -1,0 +1,271 @@
+<include file="Inc:header"/>
+</head>
+<style>
+    .wd_4{width:25%;}
+</style>
+<body>
+<!--头部-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="<{:U('User/index')}>"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>我的养护卡</a>
+        </div>             
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div id="od1" class="all wd_4"><a href="<{:U('User/card')}>?t=1">全部</a></div>
+        <div id="od2" class="all wd_4"><a href="<{:U('User/card')}>?t=2">已付款</a></div>
+        <div id="od3" class="all wd_4"><a href="<{:U('User/card')}>?t=3">未付款</a></div>
+        <div id="od4" class="all wd_4"><a href="<{:U('User/card')}>?t=4">已取消</a></div>
+    </div>
+</div>
+
+<div id="card_list"></div>
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--加载-->
+<div class="container-fluid" id="load">
+    <div class="row">
+        <div class="col-xs-12" style="margin-top:10px;">
+            <center>
+            <img src="__PUBLIC__/images/minilodging.gif" width="24" height="24" style="vertical-align:middle;"> 
+            正在加载... 
+            </center>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#od"+'<{$t}>').addClass('Underline');
+     var currentpage=0;
+    ajaxRed();
+    $(window).scroll(function(){ 
+            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+            if($(document).height() <= totalheight){ 
+                if(stop==true){ 
+                    ajaxRed();
+                } 
+            } 
+        });
+    function ajaxRed(){ 
+                $("#load").show();
+                  stop=false;
+                  $.get("<{:U('User/ajax_get_card')}>",{"p":currentpage,"t":<{$t}>}
+                  ,function(html){
+                          if(html!=""){ 
+                            if(currentpage==0) {
+                                $("#card_list").html(html);
+                            }
+                            else {
+                               $("#card_list").append(html);                                               
+                            } 
+                          }
+                          stop=true;
+                          currentpage++;
+                         $("#load").hide();  
+                     });
+      }
+</script>
+<!--
+
+<script>
+    var __t = '<{$t}>';
+    $("#od"+__t).addClass('Underline');
+</script>
+<if condition="$count eq 0">
+    <div class="container-fluid line"></div>
+    <div class="container-fluid">
+        <div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">暂无符合条件的订单</p></div>
+    </div>
+    <div class="container-fluid line"></div>
+<else />
+    选项卡--
+    <div id="adlist"></div>
+
+<script type="text/javascript" src="__PUBLIC__/js/jquery.esn.autobrowse.js"></script>
+<script>
+    $(function() {
+        var allRows = parseInt('<{$count}>');
+        var loadingRows = 5 ;
+        var totalPage = Math.ceil(allRows/loadingRows);
+        var max = totalPage > 100 ? 100 : totalPage;
+        if (totalPage >= 1) {
+            adautobrowse('adlist', '<{:U("User/ajaxGetCardList")}>?t='+__t+'&lnums='+loadingRows,max);
+        }
+    });
+    function adautobrowse(dom, url, total) {
+        $("#"+dom).autobrowse({
+            url: function(offset) {
+                return   url + '&p=' + offset;
+            },
+            template: function(response) {
+                return callbacks(response);
+            },
+            itemsReturned: function(response) {
+                return 1;
+            },
+            max: total,
+            offset: 1,
+            sensitivity: 100,
+            loader: '<div class="container-fluid line"></div><div class="container-fluid"><div class="row"><center><div style="line-height:40px;"><img src="__PUBLIC__/images/minilodging.gif">正在加载...</div></center></div></div><div class="container-fluid line"></div>',
+            finished: function() {
+                $(this).after('<div class="container-fluid line"></div><div class="container-fluid"><div class="row"><center><div style="line-height:40px;">已加载全部内容</div></center></div></div><div class="container-fluid line"></div>');
+            },
+            onError: function() {
+                alert('加载失败，请稍后重试')
+            }
+        });
+    }
+
+
+    function callbacks(response) {
+        var markup = '';
+        var headErrorImg = "this.src='http://s.17cct.com/v3/images/errorimg.jpg';this.onerror=''";
+        if (response.data) {
+            var list = response.data,
+                listLength = list.length;
+            for (var i= 0;i<listLength;i++) { 
+                markup +='<div class="container-fluid line" id="line'+list[i].id+'"></div>';
+                markup +='<div class="container-fluid" id="container'+list[i].id+'">';
+                markup +=    '<div class="row" style="border-bottom: 1px solid #e0e0e0;">';
+                markup +=        '<div class="col-xs-12" style="margin-top:10px;">';
+                markup +=            '<div>';
+                markup +=                '<p style="font-size:16px;font-weight:bold;">订单号：'+list[i].order_sn+'</p>';
+                markup +=                '<p>时间：'+list[i].create_time+'</p>';
+                markup +=                '<p>状态：<span style="color:#F00;font-weight:bold;" id="status'+list[i].id+'">';
+                if (list[i].card_status == 1) {
+                    markup += '已取消';
+                }else if (list[i].card_status == 2){
+                    markup += '未付款';
+                }else if (list[i].card_status == 3){
+                    markup += '已付款';
+                }else{
+                    markup += '未知';
+                }
+                markup +=                '</span></p>';
+                markup +=            '</div>';      
+                markup +=        '</div>';
+                markup +=   '</div>';
+         
+                markup +=    '<div class="row" >';
+                markup +=        '<div class="col-xs-12">';
+                markup +=            '<a href="javascript:void(0);" onclick="goToview(this,'+list[i].card_status+')"  data-url = "'+list[i].view_url+'" class="my_od_1">';
+                markup +=                '<div class="my_od_img">';
+                markup +=                    '<img src="'+list[i].img+'" onerror="'+headErrorImg+'">'; 
+                markup +=                '</div>';
+                markup +=                '<div class="my_od_f">';
+                markup +=                    '<h3>'+list[i].card_name+'</h3>';
+                markup +=                    '<span>'+list[i].brief+'</span>';
+                markup +=                    '<p>';
+                markup +=                        '<div style="float:left; color:#F00;">￥'+list[i].total_price+'</div><div style="float:right; font-weight:bold;">X1</div>';
+                markup +=                    '</p>'; 
+                markup +=                    '<div style="clear:both;color:#ff7302;margin-top:38px;font-weight:bold;">类型：';
+                        if (list[i].type == '1') {
+                            markup += '年卡';
+                        }else if (list[i].type == '2'){
+                             markup += '次卡';
+                        }
+                markup +=                    '</div>';                         
+                markup +=                '</div>';
+                markup +=            '</a>';       
+                markup +=        '</div>';
+                markup +=    '</div>';                    
+
+                markup +=    '<div class="row">';       
+                markup +=        '<div class="col-xs-12">';
+                markup +=            '<div style="line-height:45px;border-bottom:1px solid #e0e0e0; overflow:hidden;">';          
+                markup +=                '<div style="float:right; margin-left:30px;">实付：<span style="font-weight:bold;">￥'+list[i].total_price+'</span></div>';
+                markup +=                '<div style="float:right;">数量：<span style="font-weight:bold;">1</span></div>';
+                markup +=            '</div>';
+                markup +=        '</div>';
+                markup +=    '</div>';
+                markup +=    '<div class="row">';
+                markup +=        '<div class="col-xs-12">';
+                if (list[i].card_status == 1) {//已取消
+                     markup +=            '<button tpye="button" class="btn btn-default" style="float:right;margin-left:15px;margin:15px 0 15px 15px;" onclick="OperateCard(this,'+list[i].id+',2)">删除订单</button>';
+                }else if (list[i].card_status == 2){//未付款
+                    markup +=           '<a class="btn btn-warning" href="'+list[i].pay_url+'" role="button" style="float:right; margin:15px 0 0 15px;">立即付款</a>';
+                    markup +=            '<button tpye="button" class="btn btn-default" style="float:right; margin-left:15px; margin:15px 0 15px 15px;" onclick="OperateCard(this,'+list[i].id+',1)">取消订单</button>';
+                   
+                }else if (list[i].card_status == 3){//已付款
+                    markup +=            '<button tpye="button" class="btn btn-default" style="float:right;margin-left:15px;margin:15px 0 15px 15px;" onclick="OperateCard(this,'+list[i].id+',2)">删除订单</button>';
+                }else{//未知
+                    markup +=            '<button tpye="button" class="btn btn-default" style="float:right;margin-left:15px;margin:15px 0 15px 15px;" onclick="OperateCard(this,'+list[i].id+',2)">删除订单</button>';
+                }    
+                markup +=        '</div>';
+                markup +=    '</div>';
+                markup +='</div>';
+            }
+        } else {
+            markup = '<div class="container-fluid line"></div><div class="container-fluid"><div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">加载失败，请稍后重试</p></div></div>';
+        }
+        return markup;
+    }
+    //删除订单
+    function OperateCard(obj,oid,t) {
+        if (t != 1 && t != 2) {
+             MsgBox('非法操作');
+             return false;
+        }
+        var tpye = '删除';
+        if (t == 1) {
+            tpye = '取消';
+        }
+        if (confirm("确定要"+tpye+"订单吗？")) {
+            var _this = $(obj),
+                text = _this.text();
+            _this.text('提交请求中').attr('disabled',true);
+            $.ajax({
+                type:'post',
+                url: '<{:U("User/ajaxOperateCardOrder")}>',
+                dataType:'json',
+                data:{"id":oid,"t":t},
+                success:function( d ){                            
+                  if(d.status == 1){ 
+                    if (t == 1) {
+                        _this.prev().remove();
+                        $('#status'+oid).text('已取消');
+                        _this.attr({'disabled': false,'onclick':'OperateCard(this,'+oid+',2)'}).text('删除订单');
+                    }else {
+                       $('#container'+oid).remove();
+                       $('#line'+oid).remove(); 
+                    }
+                  }else{
+                    _this.text(text).attr('disabled',false);
+                  }
+                  MsgBox(d.info);
+                }
+            });
+        }
+    }
+    function goToview (obj,t) {
+        if (t==3) {
+            location.href = $(obj).data('url');
+        } else{
+            MsgBox('付款后才能查看详情');
+        }
+    }
+</script>
+</if>-->
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+      WeixinJSBridge.call('hideToolbar');
+      WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+<include file="Inc:footer"/>

@@ -1,0 +1,433 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+<!--头部-->
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/css/carinfo.css">
+
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+        	<a href="" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>车辆信息</a>
+        </div>
+    </div>
+</div>
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<form action="" name="form" method="get">
+<div class="Condition" >
+    <a class="flex" id="brandbox">
+        <div class="carname">
+            品牌车系
+        </div>
+        <div class="carenter" id="brand_name">
+            请选择 			
+        </div>
+		<input type="hidden" name="brand_id" value="" id="car_b"/>
+		<input type="hidden" name="car_id" value="" id="car_c"/>
+        <div class="infoicor">
+            <i class="fa fa-angle-right"></i>
+        </div>
+    </a>
+</div>
+
+<div class="brandbox">
+  <ul id="accordion" class="accordion">
+  <foreach name="brands" item="brands" key="key">
+          <span class="markspan"><{$key}></span>
+		<li><foreach name="brands" item="bc" key="bk">
+        <div class="link" onclick="c_brand('<{$bk}>','<{$bc}>')"><{$bc}><i class="fa fa-angle-down"></i></div>
+        <ul class="submenu" id="brand">
+           
+        </ul>
+		</foreach>
+    </li>
+  </foreach>   
+</ul>
+</div>
+
+<div class="Condition">
+    <a class="flex" id="modelsbox" title="">
+        <div class="carname">
+           车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型
+        </div>
+        <div class="carenter" id="brand_mode">
+            请选择			
+        </div>
+		<input type="hidden" name="models_id" value="" id="c_brand_mode"/>
+        <div class="infoicor">
+            <i class="fa fa-angle-right"></i>
+        </div>
+    </a>
+</div>
+<div class="modelsbox">
+  <ul id="accordion2" class="accordion">
+  
+    
+</ul>
+</div>
+
+<div class="flex Condition">
+    <div class="carname">
+        车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;牌
+    </div>
+    <div class="carenter flex">
+        <div id="areabox">选择地区</div>
+		 <input type="hidden" value="" id="areas" name="areas"/>
+        <div class="Plateenter">
+            <input type="text" class="bytime_btn" id="Plate" name="bd_bp_messNumber" placeholder="输入车牌号" value="" dat="输入车牌"  style="margin-top:-5px;text-transform:uppercase;border:none" maxlength="5" />
+        </div>
+    </div>
+</div>
+<div class="areabox">
+  <ul id="accordion3" class="accordion">
+    <foreach name="citys" item="ct" key="key">
+	    <span class="markspan"><{$key}></span>
+	<li>
+	<foreach name="ct" item="ctc" key="key">
+        <div class="link"><{$key}><i class="fa fa-angle-down"></i></div>
+        <ul class="submenu">
+            <foreach name="ctc" item="v" key="key">		
+            <li><a href="javascript:void(0);" onclick="c_areas('<{$v}>');" ><{$v}></a></li>	
+			</foreach>
+        </ul>
+	</foreach>
+    </li>
+	</foreach>
+    
+</ul>
+</div>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<div class="Condition">
+    <a href="" class="flex">
+        <div class="main_time">
+            下次保养
+        </div>
+        <div class="carenter">
+           <input type="text" name="next_maintain_time" id="bytime" class="bytime_btn" placeholder="请选择下次保养时间" style="margin-top:-5px" />
+        </div>
+    </a>
+</div>
+
+<div class="Condition">
+    <a href="" class="flex">
+        <div class="main_time">
+            下次保险
+        </div>
+        <div class="carenter">
+           <input type="text" name="next_insurance_time" id="bxtime" class="bytime_btn" placeholder="请选择下次保险时间" style="margin-top:-5px"/>
+        </div>
+    </a>
+</div>
+<div class="Condition">
+    <a href="" class="flex">
+        <div class="main_time">
+            下次年检
+        </div>
+        <div class="carenter">
+           <input type="text" name="next_annually_time" id="njtime" class="bytime_btn" placeholder="请选择下次年检时间" style="margin-top:-5px" />
+        </div>
+    </a>
+</div>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+<div class="flex Condition">
+    <div class="main_time" style="width:112px;">
+        上次保养里程
+    </div>
+    <div class="carenter">
+       <input type="number" class="last_time_mileage" id="Plate2" name="last_time_mileage"  placeholder="请输入上次保养里程数(km)" style="border:none;width:180px;margin-top:-5px"/>
+    </div>
+</div>
+<div class="flex Condition">
+    <div class="main_time">
+        保险公司
+    </div>
+    <div class="carenter">
+       <select class= "" name="insurance_company" id="bxc">
+               <option value="0">请选择车辆保险公司</option>
+           <foreach name="insurance_company" item="insurance_company" key="key">
+               <option <if condition='$key eq $bx'>selected="selected"</if> value="<{$key}>"><{$insurance_company}></option>
+		  </foreach>
+       </select>
+    </div>
+</div>
+<div class="flex Condition">
+    <div class="main_time">
+        投保时间
+    </div>
+    <div class="carenter">
+       <input type="text" name="insure_time" id="tbtime" class="bytime_btn" placeholder="请选择车辆投保时间" style="margin-top:-5px;" />
+    </div>
+</div>
+</form>
+
+<!-- 时间插件 start -->
+<link href="__PUBLIC__/css/mobiscroll.css" rel="stylesheet" />
+<link href="__PUBLIC__/css/mobiscroll_date.css" rel="stylesheet" />
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="__PUBLIC__/js/mobiscroll_date.js" charset="gb2312"></script> 
+<script src="__PUBLIC__/js/mobiscroll.js"></script> 
+<script type="text/javascript">
+    $(function () {
+        var currYear = (new Date()).getFullYear();  
+        var opt={};
+        opt.date = {preset : 'date'};
+        opt.datetime = {preset : 'datetime'};
+        opt.time = {preset : 'time'};
+        opt.default = {
+            theme: 'android-ics light', //皮肤样式
+            display: 'modal', //显示方式 
+            mode: 'scroller', //日期选择模式
+            dateFormat: 'yyyy-mm-dd',
+            lang: 'zh',
+            showNow: true,
+            nowText: "今天",
+            startYear: currYear - 50, //开始年份
+            endYear: currYear + 10 //结束年份
+        };
+
+        $("#bytime").mobiscroll($.extend(opt['date'], opt['default']));
+        $("#bxtime").mobiscroll($.extend(opt['date'], opt['default']));
+        $("#njtime").mobiscroll($.extend(opt['date'], opt['default']));
+        $("#tbtime").mobiscroll($.extend(opt['date'], opt['default']));
+
+    });
+</script>
+<!-- 时间插件 end -->
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="black" style="top:0"></div>
+<script>
+    $(function(){
+        $("#Plate").focus(function(){
+            if($(this).val()==$(this).attr("dat")){
+                $(this).val("")
+            }
+        }).blur(function(){
+            var _v=$(this).attr("dat")
+            if($(this).val()==_v || $(this).val()==''){
+                $(this).val(_v);
+            }
+        });
+        $("#Plate2").focus(function(){
+            if($(this).val()==$(this).attr("dat")){
+                $(this).val("")
+            }
+        }).blur(function(){
+            var _v=$(this).attr("dat")
+            if($(this).val()==_v || $(this).val()==''){
+                $(this).val(_v);
+            }
+        })
+    })
+</script>
+
+
+
+<!-- 点击下拉 插件 -->
+<script type="text/javascript">
+$(function() {
+    var Accordion = function(el, multiple) {
+        this.el = el || {};
+        this.multiple = multiple || false;
+
+        // Variables privadas
+        var links = this.el.find('.link');
+        // Evento
+		
+        links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+    }
+    Accordion.prototype.dropdown = function(e) {
+        var $el = e.data.el;
+            $this = $(this),
+            $next = $this.next();
+
+        $next.slideToggle();
+        $this.parent().toggleClass('open');
+       
+        if (!e.data.multiple) {
+		 
+            $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+			
+        };
+    }   
+    var accordion = new Accordion($('#accordion'), false);
+    var accordion = new Accordion($('#accordion2'), false);
+    var accordion = new Accordion($('#accordion3'), false);
+});
+</script>
+
+<!--弹窗效果-->
+<script type="text/javascript">
+  $('body').css('position','relative');
+  $(document).ready(function(){
+    $(".black").click(function(){
+	
+        $(".brandbox").slideUp(500);
+        $(".modelsbox").slideUp(500);
+        $(".areabox").slideUp(500);
+        $(".black").hide();
+    });
+    $("#brandbox").click(function(){
+        $(".brandbox").slideDown(500);
+        $(".black").show(10);
+    });
+	
+    $("#modelsbox").click(function(){
+	   if($("#modelsbox").attr('title')==1){
+        $(".modelsbox").slideDown(500);
+        $(".black").show(10);
+		}else{
+		
+		  alert("请选择品牌车系列");
+		}
+    });
+    $("#areabox").click(function(){
+        $(".areabox").slideDown(500);
+        $(".black").show(10);
+    });
+  });
+</script>
+<!--底部固定按钮-->
+<div class="container-fluid">
+	<div class="gwbt" style="height:auto;position: fixed;">
+    	<a class="btn-danger" href="javascript:save();" ><i class="fa fa-check-square-o"></i> 保存</a>
+    </div>
+</div>
+<script>
+    var d = new Date()
+	var vYear = d.getFullYear();
+	var vMon = d.getMonth() + 1;
+	var vDay = d.getDate();
+  if(vMon < 10){
+    vMon = '0'+vMon;
+  }
+	var nowtime=vYear+""+vMon+""+vDay;
+function c_brand(id,name){
+   $("#modelsbox").attr("title","1");
+   $.get("<{:U('User/mycar_add_bc')}>",{"id":id,'name':name}
+		,function(html){	
+              $("#accordion ul").html(html);
+				 					  									  
+	  })  
+}
+function c_brand_m(id,name,b_name,parent_id){
+       
+	    $(".brandbox").slideUp(500);
+        $(".modelsbox").slideUp(500);
+        $(".areabox").slideUp(500);
+        $(".black").hide();
+	   
+       $("#car_b").val(parent_id);
+	   $("#car_c").val(id);
+       $("#brand_name").html(name);
+	$.get("<{:U('User/mycar_add_bm')}>",{"id":id}
+		,function(html){	
+           $("#accordion2").html(html);		  									  
+	  })
+}
+function c_mode(id,name){
+     
+	    $(".brandbox").slideUp(500);
+        $(".modelsbox").slideUp(500);
+        $(".areabox").slideUp(500);
+        $(".black").hide();
+	    $("#brand_mode").html(name);
+        $("#c_brand_mode").val(id);
+}
+function c_areas(name){
+      $(".brandbox").slideUp(500);
+      $(".modelsbox").slideUp(500);
+      $(".areabox").slideUp(500);
+      $(".black").hide();
+	  $("#areabox").html(name);
+	  $("#areas").val(name);
+
+}
+
+function save(){
+   
+   var brand_id=$("#car_b").val();//品牌顶级ID 
+   var models_id=$('#c_brand_mode').val();
+   var car_sn=$("#Plate").val();//车牌号
+   var check=/^[0-9A-Za-z]+$/;
+   var result= check.exec(car_sn);
+   var bytime=$("#bytime").val();//下次保养时间
+   var bxtime=$("#bxtime").val();//下次保险时间
+   var njtime=$("#njtime").val();//年检时间
+   var tbtime=$("#tbtime").val();//投保时间
+   var bytime=bytime.replace(/-/g,'');
+   var bxtime=bxtime.replace(/-/g,'');
+   var njtime=njtime.replace(/-/g,'');
+   var tbtime=tbtime.replace(/-/g,'');
+   if(brand_id==''){
+      MsgBox('请选择品牌车系');	
+      return false;
+   }
+   if(models_id==''){
+      MsgBox('请选择车型');	
+      return false;
+   }
+   if(car_sn==''){
+   
+      MsgBox('车牌不能为空');	
+      return false;	  
+   }
+   if(result==null){
+      MsgBox('车牌号格式不正确');	
+	 $("#Plate").val("");	
+     $("#Plate").focus();	
+      return false;
+   }
+   if(bytime!=''){
+	  if(bytime<nowtime){
+		   MsgBox('下次保养时间不能是今天以前');	
+		  return false;	
+	   
+	   }
+   }
+   if(bxtime!=''){
+	   if(bxtime<nowtime){
+		   MsgBox('下次保险时间不能是今天以前');	
+		  return false;	
+	   } 
+   }
+   if(njtime!=''){
+	   if(njtime<nowtime){
+		   MsgBox('下次年检时间不能是今天以前');	
+		  return false;	
+	   }
+   }
+	 $.ajax({
+	   type: "GET",
+	   url: "<{:U('User/mycar_add_save')}>",
+	   //dataType: "json",
+	   data: $("form").serialize(),
+	   success: function(msg){
+		if(msg==1){
+		     MsgBox('新增成功');										
+		     location.href="<{:U('User/mycar_info')}>";
+		}else{
+		    MsgBox('新增失败');
+		}
+	   }
+	});
+			
+ }
+</script>
+</body>
+</html>

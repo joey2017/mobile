@@ -1,0 +1,115 @@
+<include file="Inc:header"/>
+<meta name="format-detection" content="telephone=no" />
+</head>
+
+<body>
+
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+<style type="text/css">
+.order_top{ padding-bottom: 20px; background: #e95454 url(images/order.svg) repeat-x bottom;background-size: 17px; position: relative; margin-bottom: 10px;padding-top: 20px;}
+
+
+
+.state_tab{color: #fffc02; top: 86px; padding: 8px 13px; background: #d73a3a;width: 100px;margin: 16px auto; text-align: center;}
+.box-flex{ display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -moz-flex; display: -ms-flexbox;  display: flex; }
+.flex1{-webkit-box-flex: 1;-moz-box-flex: 1;-webkit-flex: 1;-ms-flex: 1;flex: 1;}
+.order_name{ font-size: 15px; color: #fff; line-height: 31px;}
+.order_name b{font-size: 26px;}
+.staff{border-bottom: 1px solid #ddd8ce;border-right: 1px solid #ddd8ce; padding: 9px 0;}
+
+/*项目*/
+.th_title{text-align: center; border: 0 !important;}
+.order_b{color: #f7b608; font-size: 16px;}
+tbody td{line-height: 1.8em !important; padding: 10px 4px !important;}
+.numberspan{width: 20px;  height: 20px; display: inline-block; background-color: #E40E0E;   color: #fff; border-radius: 11px; margin-right: 5px;}
+
+
+
+
+.infotab{padding: 7px 0; border-bottom: 1px solid #eaeaea;}
+.infotab a{color: #333;}
+.infotab_ico{ float: left;  margin-left:10px; width: 64px; height: 64px; display: inline-block; border-radius: 50%; vertical-align: middle; margin-right: 10px;}
+.project_0{background: url(__PUBLIC__/images/reserve.svg) no-repeat -57px -55px; background-size: 420px; background-color: #F565A1;}
+.project_1{background: url(__PUBLIC__/images/reserve.svg) no-repeat -132px 11px; background-size: 420px; background-color: #65b3f5;}
+.project_2{background: url(__PUBLIC__/images/reserve.svg) no-repeat -208px 11px; background-size: 420px; background-color: #e75eec;}
+.project_3{background: url(__PUBLIC__/images/reserve.svg) no-repeat -283px 11px; background-size: 420px; background-color: #65cfc6;}
+.project_4{background: url(__PUBLIC__/images/reserve.svg) no-repeat 17px -55px; background-size: 420px; background-color: #F56565;}
+.project_5{background: url(__PUBLIC__/images/reserve.svg) no-repeat -350px 11px; background-size: 420px; background-color: #f5ba65;}
+
+.infotxt h3{ color: #939393; font-size: 14px;margin: 13px 0 3px 0;}
+.infotxt p{font-size: 16px;}
+
+</style>
+
+<!-- 顶部信息 -->
+<div class="order_top">
+    <if condition="$oi.sn neq null">
+        <div class="text-center">
+            <div class="order_name">验证码：<b><{$oi.sn}></b></div>
+        </div>
+        <div class="state_tab"><{$oi.status}></div>
+        <else/>
+        <div class="state_tab"><a href="<{:U('Advance/advance_info',array('id'=>$oi['id']))}>" style="color:#fff">立即付款</a></div>
+    </if>
+  
+</div>
+
+
+<div class="container-fluid">
+    <div class="row infotab">
+        <div class="infotab_ico project_0"></div>
+        <div class="infotxt">
+            <h3>订单编号</h3>
+            <p><{$oi.order_sn}></p>
+        </div>
+    </div>
+    <div class="row infotab">
+        <div class="infotab_ico project_1"></div>
+        <div class="infotxt">
+            <h3>预约时间</h3>
+            <p><{$oi.advance_time|date="Y-m-d H:i",###}></p>
+        </div>
+    </div>
+    <div class="row infotab">
+        <div class="infotab_ico project_2"></div>
+        <div class="infotxt">
+            <h3>预约项目</h3>
+            <p><{$oi.project_name}></p>
+        </div>
+    </div>
+    <div class="row infotab">
+        <div class="infotab_ico project_3"></div>
+        <div class="infotxt">
+            <h3>预约门店</h3>
+            <p><{$oi.name}></p>
+        </div>
+    </div>
+    <div class="row infotab">
+        <a href="">
+            <div class="infotab_ico project_4"></div>
+            <div class="infotxt" style="padding-right: 10px;">
+                <a href="<{:U('Store/map',array('id'=>$oi['sid']))}>">
+                    <h3>门店地址</h3>
+                    <p><{$oi.address}></p>
+                </a>
+            </div>
+        </a>
+    </div>
+    <div class="row infotab">
+        <div class="infotab_ico project_5"></div>
+        <div class="infotxt">
+            <h3>订单金额</h3>
+            <p><{$oi.total_price|price}>元</p>
+        </div>
+    </div>
+</div>
+
+<div style="height:47px;"></div>
+
+<div class="gwbt" style="height:auto;position: fixed;">
+    <a class="btn-danger" href="<{:U('Advance/advance_order')}>"><i class="fa fa-reply"></i> 返回</a>
+</div>
+
+</body>
+</html>

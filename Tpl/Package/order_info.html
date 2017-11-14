@@ -1,0 +1,62 @@
+<include file="Inc:header"/>
+    <style type="text/css">
+        .card_details{border-bottom: 1px solid #eee;  line-height: 18px; padding: 15px 15px;}
+        .card_details td{padding: 0 15px 0 0;}
+        .deta_name{width: 73px;text-align: right; margin-right: 10px;}
+        .box-flex{ display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -moz-flex; display: -ms-flexbox;  display: flex; }
+        .flex1{-webkit-box-flex: 1;-moz-box-flex: 1;-webkit-flex: 1;-ms-flex: 1;flex: 1;}
+        .payment_btn{background:#fa9d0a; color: #fff;padding: 4px 12px; font-size: 12px; border-radius: 2px; margin-top: -3px;}
+        .payment_btn:hover{color: #fff;}
+        .tab_parent{padding-left: 15px;}
+        .tab_subset{margin:0; padding: 0 15px 0 0;}
+
+        .userinfo{padding: 0 0 0 15px; }
+        .userinfo h4{font-size: 16px;}
+        .userinfo p{color: #848484; /*font-size: 12px;*/}
+    </style>
+</head>
+
+<body>
+
+<volist name="order" id="o" key="key">
+        <div class="card_details box-flex">
+            <div class="deta_name"><if condition="$key eq 1"><b>购买项目：</b></if></div>
+            <div class="flex1"><{$o.p_name}> <{$o.num}>次×<{$o.price}>元=<{$o.item_price}>元</div>
+        </div>  
+
+</volist>
+
+<div class="card_details box-flex">
+    <div class="deta_name"><b>全返礼品：</b></div>
+    <div class="flex1">
+        <{$o.wine_num}> 瓶 <{$o.wine_name}>
+    </div>
+</div>
+
+<div class="card_details box-flex">
+            <div class="deta_name"><b>应付金额：</b></div>
+            <div class="flex1">￥<{$order[0].total_price|price}></div>
+</div>
+<div class="card_details box-flex">
+            <div class="deta_name"><b>下单时间：</b></div>
+            <div class="flex1"><{$order[0].create_time|date='Y-m-d H:i:s',###}></div>
+</div>
+
+
+
+<div class=" tab_parent" style="margin-top:15px;">
+    <div class="col-xs-6 text-center tab_subset">
+        <a onclick="javascript:history.back(-1)" class="btn btn-lg  btn-block btn-info">返回</a>
+    </div>
+    <div class="col-xs-6 text-center tab_subset">
+        <a href="<{:U('Pay/package_go_pay',array('id'=>$id))}>" class="btn btn-lg  btn-block btn-danger">确认支付</a>
+    </div>
+</div>
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</body>
+</html>

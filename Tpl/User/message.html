@@ -1,0 +1,107 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="<{:U('User/index')}>"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>我的消息</a>
+        </div>             
+    </div>
+</div>
+<!--标题-->
+<div class="container-fluid">
+	<div class="row">
+    	<div id="msg1" class="all wd_3"><a href="<{:U('User/message')}>?t=1">未读消息</a></div>
+        <div id="msg2" class="all wd_3"><a href="<{:U('User/message')}>?t=2">已读消息</a></div>                
+    </div>
+</div>
+<script>
+    var __t = '<{$t}>';
+    $("#msg"+__t).addClass('Underline');
+</script>
+<!--我的消息-->
+<div class="container-fluid line"> </div>
+<if condition="$count eq 0">
+    <div class="container-fluid">
+        <div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">暂无符合条件的消息</p></div>
+    </div>
+<else />
+    <div id="adlist">
+    </div>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.esn.autobrowse.js"></script>
+<script>
+    $(function() {
+        var __t  = '<{$t}>';
+        var allRows = parseInt('<{$count}>');
+        var loadingRows = 10 ;
+        var totalPage = Math.ceil(allRows/loadingRows);
+        var max = totalPage > 100 ? 100 : totalPage;
+        if (totalPage >= 1) {
+            adautobrowse('adlist', '<{:U("User/ajaxGetMessageList")}>?t='+__t+'&lnums='+loadingRows,max);
+        }
+    });
+
+    function adautobrowse(dom, url, total) {
+
+        $("#"+dom).autobrowse({
+            url: function(offset) {
+                return   url + '&p=' + offset;
+            },
+            template: function(response) {
+                return callbacks(response);
+            },
+            itemsReturned: function(response) {
+                return 1;
+            },
+            max: total,
+            offset: 1,
+            sensitivity: 100,
+            loader: '<div class="row" style="margin:0;"><center><div style="line-height:40px;"><img src="__PUBLIC__/images/minilodging.gif">正在加载...</div></center></div>',
+            finished: function() {
+                $(this).append('<div class="row" style="margin:0;"><center><div style="line-height:40px;">已加载全部内容</div></center></div>');
+            },
+            onError: function() {
+                alert('加载失败，请稍后重试');
+            }
+        });
+    }
+
+    function callbacks(response) {
+        var  markup = '';
+        if (response.data) {
+            var list = response.data,
+                listLength = list.length;
+            for (var i= 0;i<listLength;i++) { 
+                markup += '    <div class="row" style="margin:0;">';
+                markup += '        <div class="" style="border-bottom:1px solid #e0e0e0;">';
+                markup += '            <div class="my_od_f">';
+                markup += '                <div style="margin-top:10px; overflow:hidden;"><span style="float:left;font-weight:bold;color:#474747;">【系统信息】</span><span style="color: #999;float:right;font-size:12px; margin-right:10px;">'+list[i].create_time+'</span></div>';
+                markup += '                <p class="my_od_f" style="margin:2px 0">标题：'+list[i].title+'</p>';
+                markup += '                <p class="my_od_f" style="margin:2px 0;">内容：'+list[i].content+'</p>';                
+                markup += '            </div>';
+                markup += '        </div>';     
+                markup += '    </div>';
+            }
+        } else {
+            markup = '<div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">加载失败，请稍后重试</p></div>';
+        }
+        return markup;
+    }
+</script>
+</if>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+<include file="Inc:footer"/>

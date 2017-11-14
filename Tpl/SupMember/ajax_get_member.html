@@ -1,0 +1,14 @@
+<volist name="order_info" id="oi">
+	<li>
+		<div class="brief-left" style="width:160px;">
+			<h2 style="font-size: 14px;"><{$oi.location_name}></h2>
+			<strong><{$oi.contact}></strong>
+		</div>
+		<div class="brief-right">
+			<p>交易订单：<{$oi.order_count|intval}></p>
+			<p>交易金额：<span><{$oi.order_price|price}></span></p>
+			<p>余额：<span><{$oi.balance|price}></span></p>
+		</div>
+	</li>
+</volist>
+

@@ -1,0 +1,20 @@
+<volist name="goods" id="g">
+	<div class="productlist  col-xs-12">
+		<a href="<{:U('SupWarehouse/detail',array('id'=>$g['id']))}>" class="box_flex">
+	    	<div class="leftimg">
+	    		<img src="<{$g.thumbnail}>!middle">
+	    	</div>
+	    	<div class="rightinfo flex1">
+	    		<h3 style="height: 35px"><{$g.goods_name}></h3>
+				<div style="font-size: 12px">库存量：<{$g.stock}></div>
+				<div style="font-size: 12px">警报值：<{$g.alarm_minstock}></div>
+	    		<div class="d-main">
+	    			<span class="price">￥:<{$g.price|price}></span>
+	    			<span>/<{$g.unit}></span>
+	    			<span class="pull-right">已售 <{$g.sales}></span>
+	    		</div>
+	    	</div>
+	    </a>
+	</div>
+</volist>
+

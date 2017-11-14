@@ -1,0 +1,26 @@
+<if condition="$zc_list neq null">
+    <volist name="zc_list" id="list">
+        <div class="container-fluid">
+            <div class="row" style="position:relative;">
+                <div class="Posts_img">
+                    <a href="<{:U('Zc/view',array('id'=>$list['deal_id']))}>">
+                    <img src="http://www.17cct.com/<{$list.image}>" onerror="imgError(this,'http://s.17cct.com/v3/images/errorimg.jpg');"></a>
+                </div>
+                <div class="Cheyou_2 my_od_f"> 
+                <h3><a href="<{:U('Zc/view',array('id'=>$list['deal_id']))}>" style="color:#474747; text-decoration:none;"><{$list.deal_name}></a></h3> 
+                <p>下单时间：<{$list.create_time|date="Y-m-d H:i",###}></p>
+                <p>支付时间： <if condition="$list['lottery_sn'] neq null"><{$list.pay_time|date="Y-m-d H:i",###}><else/>未支付</if></p>
+                <if condition="$list['lottery_sn'] neq null">
+                <p>抽奖码：<b style="font-size: 16px;color: #cd0000;line-height: 30px;"><{$list.lottery_sn}></b></p>
+                </if>
+                </div>        
+            </div>
+
+            <div class="row"><div class="col-xs-12"><if condition="$list['order_status'] neq 3"><a class="btn btn-warning" href="<{:U('Zc/jump',array('id'=>$list['id']))}>" role="button" style="float:right; margin:15px 0 0 15px;">立即付款</a></if><a class="btn btn-default" href="<{:U('Zc/view',array('id'=>$list['deal_id']))}>" role="button" style="float:right; margin:15px 0 0 15px;">查看</a></div></div>
+
+            <p></p>
+        </div>
+        
+        <div class="container-fluid line"></div>
+    </volist>
+</if>

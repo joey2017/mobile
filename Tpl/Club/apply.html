@@ -1,0 +1,172 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+        	<a href="javascript:history.go(-1)" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>车友会>加入车友会</a>
+        </div>             
+    </div>
+</div>
+<!--标题-->
+<div class="container-fluid">
+	<div class="row">
+    	<div class="col-xs-12">
+        	<span style="font-size:16px;line-height:40px;font-weight:bold;">个人信息</span>
+        </div>
+    </div>
+</div>
+<!--分割线-->
+<div class="container-fluid line"></div>
+<!--申请加入-->
+<div class="container-fluid">
+	<form class="form-horizontal" style="margin-top:10px;">
+  		<div class="form-group">
+    		<label for="" class="col-xs-12">真实姓名：</label>
+    		<div class="col-xs-12">
+      			<input type="text" class="form-control" id="cName" value="<{$user.true_name}>" placeholder="请在此输入姓名...">
+    		</div>
+  		</div>
+        <div class="form-group">
+   		  	<label for="" class="col-xs-12">性别：</label>
+    		<div class="col-xs-12">
+            	
+                    <label style="margin-right:10px;">
+                      <input type="radio" name="gender" value="-1" id="man" <if condition=" $user['sex'] eq -1 "> checked </if>  style="margin-right:5px;">男
+                    </label>                    
+                    <label>
+                      <input type="radio" name="gender" value="0" id="woman" <if condition=" $user['sex'] eq 0 " >checked </if> style="margin-right:5px;">女
+                    </label>                    
+                           	  
+            </div>          
+  		</div> 
+        <div class="form-group">        	
+            <label class="col-xs-12">地区：</label>
+            <div class="col-xs-6">
+                <select name="province_id" id="province_id"  class="form-control">
+                    <option>广西</option>            
+                </select>
+            </div>         
+            <div  class="col-xs-6">
+                <select name="city_id" id="city_id"  class="form-control">
+                   <option value="">城市</option>
+                    <volist name="region_lv3" id="r">
+                        <option value="<{$r.id}>" <{$r.sel}>><{$r.name}></option>
+                    </volist>               
+                </select>                
+            </div>
+        </div> 
+        <div class="form-group">
+    		<label for="" class="col-xs-12">联系电话</label>
+    		<div class="col-xs-12">
+      			<input type="text" class="form-control" id="mobile" value="<{$user.mobile}>" readonly="true">
+    		</div>
+  		</div>
+  		<div class="form-group">
+        	<label class="col-xs-12">车系品牌：</label>
+            <div  class="col-xs-12">
+                <select id="car_brand" name="car_brand" class="form-control">
+                        <option value="">请选择品牌</option>
+                        <?php foreach($car_brand as $val){ ?>
+                          <option  value="<?php echo $val['id'];?>"><?php echo $val['name'];?></option>
+                        <?php } ?>
+                    </select>             
+            </div>
+            <div class="col-xs-12" style="margin:10px 0;">
+                <select name="factory_id" id="factory_id" class="form-control" disabled="disabled" >
+                    <option>车型</option>                                                           
+                </select>                
+            </div>
+            <div class="col-xs-12">
+                <select name="models_id" id="models_id"  class="form-control" disabled="disabled" >
+                    <option value="">车系</option>                                                             
+                </select>                
+            </div>
+        </div>
+        <div class="form-group">
+        	<div class="col-xs-12"><button type="button" class="btn btn-warning btn-block" id="d-apply">申请加入</button></div>
+             <input type="hidden" value="<{$circle_info.circle_id}>" id="circle_id">
+        </div>
+	</form>    
+</div>
+ <!--弹出提示框-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<!--注意事项-->
+<div class="container-fluid">
+	<div class="row">
+    	<div class="col-xs-12">
+        	<div style="border:1px solid #dbd3d0; border-radius:5px; background-color:#fbf7f4; padding:10px;">
+            	<p>注意事项</p>
+                <p>1.申请加入车友会，填写个人真实信息</p>
+                <p>2.车友会进行审核，审核通过</p>
+                <p>3.个人信息不对外公开，仅车友会会长可见</p>
+            </div>
+        </div>
+    </div>
+</div>
+      <script type="text/javascript">
+         $(function(){
+        $("select[id='car_brand']").bind("change",function(){
+          brand = $("#car_brand").val();
+          $.get("<{:U('Club/get_car_info')}>",{'id':brand,'type':'厂商'},function(data){  
+           if(data){
+              $("select[name='factory_id']").html(data);
+              $('#factory_id').removeAttr('disabled').addClass("selected");
+            }else{
+              $("select[name='factory_id']").html("<option value=''>请选择厂商</option>");
+              $('#factory_id').attr('disabled','true').removeClass("selected");
+            }
+          },"json");
+        });
+        $("select[name='factory_id']").bind("change",function(){
+          $.get("<{:U('Club/get_car_info')}>",{'id':$(this).val(),'type':'车系'},function(data){                       
+             if(data){
+              $("select[name='models_id']").html(data);
+              $('#models_id').removeAttr('disabled').addClass("selected");
+             }else{
+              $("select[name='models_id']").html("<option value=''>请选择车系</option>");
+              $('#models_id').removeAttr('disabled').addClass("selected");
+             }
+          },"json");
+        });
+      });
+
+    // 提交申请
+            $('#d-apply').click(function() {              
+                  if(!$('#cName').val()){
+                      MsgBox('请填写真实名称');
+                      return false;
+                }
+                if(!$('#city_id').val()){
+                      MsgBox('请选择城市');
+                      return false;
+                }
+                if(!$('#models_id').val()){
+                    MsgBox('请选择车系');
+                    return false;
+                }
+                $.get("<{:U('Club/ajax_apply')}>",{"cid":$("#city_id").val(),"bid":$("#car_brand").val(),"fid":$("#factory_id").val(),"mid":$("#models_id").val(),"name":$("#cName").val(),"circle_id":$('#circle_id').val(),"sex":$("input[name='gender']:checked").val()}
+                  ,function(data){ 
+                          if(data.status){
+                            window.location.href=data.info;
+                          }else{
+                            MsgBox(data.info);
+                          }                        
+                });   
+            });
+</script>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<!--底部固定按钮-->
+<include file="Inc:footer"/>

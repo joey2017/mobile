@@ -1,0 +1,61 @@
+<if condition="$back_list neq null">
+    <volist name="back_list" id="bl">
+    <if condition="$bl.location_name eq null"><a href="<{:U('Package/view',array('id'=>$bl['id']))}>"></if>
+            <div class="order_list">
+                <div class="order_title" style="    background: #ec731a;">
+                    <b><{$bl.name}></b>
+                   <if condition="$bl.location_name eq null"> <span class="pull-right"><i class="fa fa-angle-right pull-right" style="margin-top: 12px;"></i></span></if>
+                </div>
+                <volist name="bl['item']" id="i">
+                    <div class="order_info">
+                        <div class="box-flex">
+                            <h3 class="flex1"><b><{$i.p_name}></b></h3>
+                            <span class="pull-right">剩<{$i.num}>次</span>
+                        </div>
+                        <div class="tc_info">
+                            <span>单价：<{$i.price|price}>元</span> 
+                        </div>                   
+                    </div> 
+                </volist> 
+               <!--  <div class="tc_info">
+                            <span>总价：<{$bk.total_price|price}>元</span> 
+                </div>   -->
+                <div class="package_bottom">
+                   <p>适用门店：<if condition="$bl.location_name neq null"><{$bl.location_name}><else/>全城所有活动门店</if></p>
+                   <p>套餐总价：￥<{$bl.total_price|price}></p>
+                   <!-- <span class="pull-right">总价：￥<{$bl.total_price|price}></span> -->
+                </div> 
+            </div>
+        <if condition="$bl.location_name eq null"></a></if>
+    </volist>
+</if>
+
+<if condition="$package_list neq null">
+    <volist name="package_list" id="pl">
+        <div class="order_list">
+            <div class="order_title">
+                <b><{$pl.package_name}></b>
+                <span class="pull-right">￥<{$pl.package_price|price}></span>
+            </div>
+            <volist name="pl['item']" id="i">
+                <div class="order_info">
+                    <div class="box-flex">
+                        <h3 class="flex1"><b><{$i.p_name}></b></h3>
+                        <span class="pull-right"><{$i.old_num}>次 / 剩<{$i.num}>次</span>
+                    </div>
+                    <div class="tc_info">
+                        <span>价值：<{$i.price|price}>元</span> 
+                        <span class="pull-right">有效期：<if condition="$i.end_time gt 0"><{$i.end_time|date="Y-m-d",###}> 前<else/>永久</if></span>
+                    </div>
+                    <div class="tc_info">
+                        <span><if condition="$i.car_sn neq '0'">限制车牌：<{$i.car_sn}><else/>不限制车牌</if></span>
+                        <span class="pull-right"><if condition="$i.month_limit_user gt 0">限每月使用 <{$i.month_limit_user}>次<else/>不限制次数</if></span>
+                    </div>
+                </div> 
+            </volist> 
+            <div class="package_bottom">
+                适用门店：<{$pl.location_names}>
+            </div> 
+        </div>
+    </volist>
+</if>

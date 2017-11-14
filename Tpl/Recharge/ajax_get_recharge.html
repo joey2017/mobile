@@ -1,0 +1,10 @@
+<volist name="recharge" id="r">
+             <dl>
+              <a>
+                  <img class="lazy_img" src="<{$r.img}>" onerror="imgError(this,'http://s.17cct.com/v3/images/errorimg.jpg');"  style="width:178px;height:109px">
+                  <div><h3 style="-webkit-line-clamp:1"><{$r.name}></h3> </div>
+                  <p><i>价值：<{$r.value|price}></i><span style="float:right;">支付：<{$r.money|price}></span></p>
+                  <center><a type="button" class="btn btn-warning btn-xs" style="margin-bottom:10px;color: #fff;" href="<{:U('Recharge/done',array('id'=>$r['id']))}>">马上充值</a></center>
+             </a>
+          </dl> 		
+</volist>

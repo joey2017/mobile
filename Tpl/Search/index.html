@@ -1,0 +1,200 @@
+<include file="Inc:header"/>
+</head>
+<style type="text/css">
+body{ background:#f0efed}
+.TabTitles { clear: both; height:46px; margin-top:10px; padding:0 10px; overflow:hidden; }
+.TabTitles ul { margin: 0; padding: 0; }
+.TabTitles li { float: left; width: 80px; border-radius:5px; text-align:center; cursor: pointer; margin-right:10px; padding: 6px 0 7px 0; list-style-type: none; }
+.TabTitles .active { border:1px #cd0000 solid;background:#cd0000;color:#fff; }
+.TabTitles .normal { border: 1px #C7C7CD solid; background:#fff  }
+.TabContents .input-group { padding: 0 10px; }
+.none { display: none; }
+.hotsearch-words a{ font-size:14px; min-width:80px; margin:0 5px 5px 0;}
+
+.searchsuggest{margin-top:10px; border-top:1px solid #E4E4E4; background:#fff}
+.searchsuggest .col-xs-12{ border-bottom:1px solid #E4E4E4}
+.searchsuggest a{ color:#999; height:36px; line-height:36px; display:block;}
+.searchsuggest span{ color:#999999; margin-right:5px;}
+</style>
+<body>
+<!--头部-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current"style="float:left"> <a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a> </div>
+        <div class="pg-Current"> <img src="__PUBLIC__/images/cheng.png" width="30" height="30"> </div>
+        <div class="pgt"> <a>搜索</a> </div>
+        <div class="pgbtn"> <a href="<{:U('Index/index')}>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a> </div>
+    </div>
+</div>
+
+<!-- 标题开始 -->
+<div class="TabTitles">
+    <ul>
+        <li class="active" onclick="nTabs(this,0);">服务</li>
+        <li class="normal" onclick="nTabs(this,1);">商品</li>
+        <li class="normal" onclick="nTabs(this,2);">商家</li>
+    </ul>
+</div>
+
+<!-- 内容开始 -->
+<div class="TabContents">
+    <div id="TabContent0">
+        <div class="input-group">
+            <input type="text" id="keyword1" class="form-control" placeholder="搜服务" value="" onfocus="kFocus()" onblur="kBlur()" onkeyup="kKeyUp(this,1)">
+            <span class="input-group-btn">
+                <button class="btn btn-danger" type="button" onclick="Search(this,1)">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true" style="color:#fff;"></span> 
+                </button>
+            </span> 
+        </div>
+    </div>
+    <div id="TabContent1" class="none">
+        <div class="input-group">
+            <input type="text" id="keyword2" class="form-control" placeholder="搜商品" value="" onfocus="kFocus()" onblur="kBlur()" onkeyup="kKeyUp(this,2)">
+            <span class="input-group-btn">
+                <button class="btn btn-danger" type="button" onclick="Search(this,2)">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true" style="color:#fff;"></span>
+                </button>
+            </span> 
+        </div>
+    </div>
+    <div id="TabContent2" class="none">
+        <div class="input-group">
+            <input type="text" id="keyword3" class="form-control" placeholder="搜商家" value="" onfocus="kFocus()" onblur="kBlur()" onkeyup="kKeyUp(this,3)">
+            <span class="input-group-btn">
+                <button class="btn btn-danger" type="button" onclick="Search(this,3)">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true" style="color:#fff;"></span>
+                </button>
+            </span> 
+        </div>
+    </div>
+</div>
+
+<!-- 搜索建议 -->
+<div class="container-fluid searchsuggest none" id="suggest1">
+    <div class="row" id="ssl1"></div>
+</div>
+<div class="container-fluid searchsuggest none" id="suggest2">
+    <div class="row" id="ssl2"></div>
+</div>
+<div class="container-fluid searchsuggest none" id="suggest3">
+    <div class="row" id="ssl3"></div>
+</div>
+
+<!-- 热门搜索 -->
+<div class="container-fluid" id="hotsearch">
+    <div class="row">
+            <div class="col-xs-12"><h2 style="font-size:14px; color:#FDBF1F">热门搜索：</h2></div>
+            <div class="col-xs-12 hotsearch-words">
+                <a href="<{:U('Search/deal')}>?type=service&keyword=洗车" class="btn btn-default btn-sm" role="button">洗车</a>
+                <a href="<{:U('Search/deal')}>?type=service&keyword=打蜡" class="btn btn-default btn-sm" role="button">打蜡</a>
+                <a href="<{:U('Search/deal')}>?type=service&keyword=小保养" class="btn btn-default btn-sm" role="button">小保养</a>
+                <a href="<{:U('Search/deal')}>?type=service&keyword=大保养" class="btn btn-default btn-sm" role="button">大保养</a>
+                <a href="<{:U('Search/deal')}>?type=service&keyword=抛光" class="btn btn-default btn-sm" role="button">抛光</a>
+                <a href="<{:U('Search/deal')}>?type=goods&keyword=润滑油" class="btn btn-default btn-sm" role="button">润滑油</a>
+                <a href="<{:U('Search/deal')}>?type=goods&keyword=机油" class="btn btn-default btn-sm" role="button">机油</a>
+            </div>
+    </div>
+</div>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    WeixinJSBridge.call('hideToolbar');
+    WeixinJSBridge.call('hideOptionMenu');
+});
+
+function nTabs(thisObj,Num){
+    if(thisObj.className == "active")return;
+    var tabList = thisObj.parentNode.getElementsByTagName("li");
+    for(i=0; i <tabList.length; i++)
+    {
+        if (i == Num)
+        {
+            thisObj.className = "active"; 
+            document.getElementById("TabContent"+i).className = "";
+            $('#suggest'+(i+1)).removeClass('none');
+        }else{
+            tabList[i].className = "normal"; 
+            document.getElementById("TabContent"+i).className = "none";
+             $('#suggest'+(i+1)).addClass('none');
+        }
+        
+    } 
+}
+
+function Search (obj,t) {
+    var _this = $(obj),
+        _k    = $.trim($('#keyword'+t).val());
+    if (_k) {
+        if (t == 1) {
+            location.href = "<{:U('Search/deal')}>?type=service&keyword="+encodeURIComponent(_k);
+        } else if (t == 2) {
+            location.href = "<{:U('Search/deal')}>?type=goods&keyword="+_k;
+        } else if (t == 3) {
+            location.href = "<{:U('Search/store')}>?keyword="+_k;
+        } 
+    }else{
+        MsgBox('请输入搜索内容');
+    }
+}
+
+function kFocus()  {
+    $('#hotsearch').hide();
+}
+function kBlur() {
+    $('#hotsearch').show();
+}
+function kKeyUp(obj,t) {
+    var _this = $(obj),
+        _k    = $.trim(_this.val());
+    $('#ssl'+t).html('');
+    $('#suggest'+t).addClass('none');
+    $.ajax({ 
+        type:"post",
+        url: "<{:U('Search/ajaxGetSuggest')}>", 
+        data:{'keyword':_k,'t':t}, 
+        dataType:"json",
+        success: function(d){
+          if (d.status == 1 && d.data) {
+            var  list = d.data;
+            var  listLength = list.length;
+            var  html = '';
+            if (t == 1) {
+                url = "<{:U('Search/deal')}>?type=service&keyword=";
+            } else if (t == 2) {
+                url = "<{:U('Search/deal')}>?type=goods&keyword=";
+            } else if (t == 3) {
+                url = "<{:U('Search/store')}>?keyword=";
+            } 
+            for (var i = 0; i < listLength; i++) {
+                html += '<div class="col-xs-12">';
+                html += '    <a href="'+url+encodeURIComponent(list[i].name)+'" class="my_od_f"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>'+list[i].name+'</a>'; 
+                html += '</div>';
+            }
+            $('#ssl'+t).html('');
+            $('#ssl'+t).append(html);
+            $('#suggest'+t).removeClass('none');
+          }else {
+            $('#ssl'+t).html('');
+            $('#suggest'+t).addClass('none');
+          }
+        },
+        error:function(o){
+          
+       }
+    });
+}
+</script>
+<p>&nbsp;</p>
+<script type="text/javascript" src="__PUBLIC__/js/scrolltopcontrol.js"></script>
+<div style="display:none"> 
+  <script type="text/javascript">var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F03cd056a246346cf751fb46815664c80' type='text/javascript'%3E%3C/script%3E"));</script> 
+</div>
+</body>
+</html>
+
+
+

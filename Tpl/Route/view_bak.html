@@ -1,0 +1,307 @@
+<include file="Inc:header"/>
+</head>
+<body id="Jlazy_img">
+<!--头部-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>服务详情</a>
+        </div>
+    </div>
+</div>
+<!--服务概况-->
+<div class="container-fluid" >
+	<div class="row" style="position:relative;">
+			<img class="lazy_img" src="http://s.17cct.com/v3/images/space.gif" src2="<{$route.img|getImgUrl=###,'large'}>" onerror="imgError(this,'http://s.17cct.com/v3/images/errorimg.jpg');" style="width:100%; height:auto;"> 
+	</div>
+</div>
+<!--抢购-->
+<div class="container-fluid" >
+    
+
+
+        <div class="row phon">
+            <div class="col-xs-12 Price">
+                <b><{$route.adult_price|price}></b><i>元</i>
+                <del><{$route.market_price|price}>元</del>
+                <a href="<{:U('Route/submit',array('id'=>$route['id']))}>" class="btn btn-default btn-warning" style="float:right;" role="button">立即抢购</a>
+            </div>      
+        </div>
+  
+</div>
+<!--分割线-->
+<div class="container-fluid line"></div>
+<!--服务信息-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2><{$route.name}></h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 ">
+            <div class="row">
+                <div class="tab_a tab_b_l">
+                    <div class="col-xs-12" style="margin:10px 0 0 0;">
+                        <p style="font-size:14px;"><{$route.brief}></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--分割线-->
+<div class="container-fluid line"></div>
+<!--商家信息-->
+<div class="container">
+	<div class="row" >
+    	<div class="col-xs-12" >
+        	<div class="tab_t">
+    			<h2>商家信息</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+    	<div class="col-xs-12 ">
+        	<div class="row">
+            	<a href="<{:U('Agency/view',array('id'=>$route['agency_id']))}>" class="tab_a tab_b_l">
+                    <div class="col-xs-12" style="margin:10px 0 0 0;">
+                        <h2 style="font-size:16px; margin:10px 0;"><{$route.agency_name}></h2>
+                        <p><{$route.address}></p>                       
+                    </div>
+                
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--拨打电话-->
+<if condition="$deal['tel']">
+<!--分割线-->
+<div class="container-fluid line"></div>
+<div class="container-fluid" >
+    <div class="row phon">
+            <div class="col-xs-8">预约电话：<{$route.mobile}></div>
+            <div class="col-xs-4"><a href="tel:<{$route.mobile}>" style="float:right; color:#ff7302;"><strong>拨打电话</strong></a></div>
+    </div>
+</div>
+</if>
+<!--分割线-->
+<div class="container-fluid line"></div>
+<!--交易评价-->
+<div class="container">
+	<div class="row" >
+    	<div class="col-xs-12" >
+        	<div class="tab_t">
+    			<h2>交易评价</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+<if condition="$reviews">
+	<div class="row">
+    	<div class="col-xs-12" id="reviews-box">
+            <foreach name="reviews" item="re">
+        	<div class="row" style="border-bottom:1px solid #cbcbcb;">
+                    <div class="col-xs-12 pltop" style="margin:10px 0 0 0;">
+                   		<h4 class="my_od_f">
+                        	<span class="glyphicon glyphicon-user" aria-hidden="true"></span><{$re.user_name}>
+                        </h4>
+                        <time><{$re.create_time|date="Y-m-d",###}></time>
+                        <p class="text-right"><span class="djx" id="pf0<{$re.point}>"></span><{$re.point}>.0分</p>
+                    </div>
+                    <div class="col-xs-12" style="margin:10px 0 0 0;">
+                   		<{$re.content}>
+                    </div>
+                    <if condition="!empty($re['imgs'])">
+                        <div class="col-xs-12 plimg">
+                            <foreach name="re.imgs" item="rei">
+                            <span style="margin-right: 5px;"><img class="lazy_img" src="http://s.17cct.com/v3/images/space.gif" src2="<{$rei|getImgUrl=###,'thumbnail'}>" onerror="imgError(this,'http://s.17cct.com/v3/images/errorimg.jpg');" style="width: 79px;height: 79px;"></span>
+                            </foreach>
+                        </div>
+                    </if>
+                    <div class="col-xs-12" style="margin:10px 0 10px 0;">
+                     	<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span><span style="margin-left:5px;"><{$re.title}></span>
+                    </div>  
+            </div>
+            </foreach>
+        <if condition="$reviews_count_nums gt 3">           
+            <div class="row" id="d-loading">
+                <div class="col-xs-12">
+                    <a href="javascript:void(0);" onclick="loadReviews('<{$deal.did}>');" class="tjbtn"><p class="text-center"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span style="margin-left:5px;" id='loading-tip'>查看其他<{$reviews_count_nums-3}>条评价</span><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></p></a>
+                </div>
+            </div>
+<script type="text/javascript">
+var r_page = 1 ;
+function loadReviews(did) {
+    var loadingTip  =  $('#loading-tip'),                   // 防止重复点击
+        allRows     =  parseInt('<{$reviews_count_nums}>'), // 所有的行数
+        loadingRows =  5 ,                                  // 每次加载的行数
+        existRows   =   parseInt('<{$reviews|count}>') ;    // 页面初始已经加载的行数   
+    if (loadingTip.text() == '努力加载中...') {
+        MsgBox("正在加载中，请稍候");
+        return false;
+    }
+    $.ajax({ 
+        type:"post",
+        url: "<{:U('Service/ajaxGetReviews')}>", 
+        data:{
+            id:did,
+            page:r_page,
+            arows:allRows,
+            lrows:loadingRows,
+            erows:existRows
+        }, 
+        dataType:"json",
+        beforeSend:function (XMLHttpRequest) {
+            loadingTip.text('努力加载中...');
+        },
+        success: function(d){
+            if(d){
+                if (d.status == 1 || d.status == 2) {
+                    var reviewsList = d.data,
+                        reviewsListLength = reviewsList.length,
+                        html = '';
+                    for (var i = 0; i < reviewsListLength; i++) {
+                        html += '<div class="row" style="border-bottom:1px solid #cbcbcb;">';
+                        html +=    '<div class="col-xs-12 pltop" style="margin:10px 0 0 0;">';
+                        html +=      '<h4 class="my_od_f"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>'+reviewsList[i].user_name+'</h4>';
+                        html +=      '<time>'+reviewsList[i].create_time+'</time>';
+                        html +=      '<p class="text-right"><span class="djx" id="pf0'+reviewsList[i].point+'"></span>'+reviewsList[i].point+'.0分</p>';
+                        html +=    '</div>';
+                        html +=    '<div class="col-xs-12" style="margin:10px 0 0 0;">'+reviewsList[i].content+'</div>';
+                        if (reviewsList[i].imgs && reviewsList[i].imgs !='') {
+                            var imgsList = reviewsList[i].imgs,
+                                imgsListLength = imgsList.length,
+                                errorImg = "this.src='http://s.17cct.com/v3/images/errorimg.jpg';this.onerror=''";
+                            html +=       '<div class="col-xs-12 plimg">';
+                            for (var g = 0; g < imgsListLength; g++) {
+                                html +=              '<span style="margin-right: 5px;"><img class="lazy_img" src="http://s.17cct.com/v3/images/space.gif" src2="'+imgsList[g]+'" onerror="'+errorImg+'" style="width: 79px;height: 79px;"></span>';
+                            }
+                            html +=       '</div>';
+                        }
+                        html +=    '<div class="col-xs-12" style="margin:10px 0 10px 0;">';
+                        html +=       '<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>';
+                        html +=       '<span style="margin-left:5px;">'+reviewsList[i].title+'</span>';
+                        html +=    '</div>';  
+                        html +='</div>';
+                    }
+                    $('#d-loading').before(html);
+                    var imgs_lazy = Lazy.create({
+                                    lazyId: 'reviews-box',
+                                    trueSrc: 'src2',
+                                    offset: 0, 
+                                    delay: 0, 
+                                    delay_tot: 0 
+                                  }); 
+                        Lazy.init(imgs_lazy);
+
+                    if (d.status == 1) {
+                       loadingTip.text('查看余下'+(allRows-existRows-loadingRows*r_page)+'条评价');
+                       r_page++; 
+                    } else{
+                        $('#d-loading').after('<div class="row" ><p style="color: #5f5f5f;text-align: center;margin-top:10px;">已加载全部评论</p></div>');   
+                        $('#d-loading').remove();
+                    }
+
+                }else {
+                    loadingTip.text('查看余下'+(allRows-existRows-loadingRows*(r_page-1))+'条评价');
+                    MsgBox("加载失败，请稍候重试");
+                }
+
+            }else{
+                loadingTip.text('查看余下'+(allRows-existRows-loadingRows*(r_page-1))+'条评价');
+                MsgBox("加载失败，请稍候重试");
+            } 
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown){
+            loadingTip.text('查看余下'+(allRows-existRows-loadingRows*(r_page-1))+'条评价');
+            MsgBox("加载失败，请稍候重试");
+        }
+    });
+    return false; 
+}
+</script>
+        </if>
+        </div>
+    </div>
+<else />
+    <div class="row" >
+        <p style="color: #5f5f5f;text-align: center;margin-top:10px;">暂无评论</p>
+    </div>     
+</if>   
+</div>
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--查看图文详情-->
+<if condition="$route['content']">
+<div class="container-fluid line" style="height:50px; line-height:50px;">
+	<P class="text-center"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span style="margin-left:5px;" onclick="getImgDetail(this);">查看图文详情</span><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></P>
+</div>
+<!--隐藏的详情内容-->
+<div class="container-fluid" id="deal-detail">
+	<div class="row">
+        <!--详情文字内容放这里-->
+    	<div class="col-xs-12" id="deal-text-detail">
+        </div>
+        <!--详情图片内容放这里-->
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+	</div>
+</div>
+<script type="text/javascript">
+function getImgDetail (obj) {
+    var html = '';
+    
+        html = <{$route['content']|json_encode}> ;;
+ 
+    $('#deal-text-detail').html(html);
+   
+    $(obj).text('收起图文详情').next(".glyphicon").removeClass('glyphicon-menu-down').addClass('glyphicon-menu-up');
+    $(obj).attr('onclick','showOrhide(this);');
+}
+function showOrhide(obj) {
+    var _this = $(obj);
+        text = _this.text();
+    if (text == '收起图文详情') {
+        $('#deal-text-detail').slideToggle("hide");
+        _this.text('展开图文详情').next(".glyphicon").removeClass('glyphicon-menu-up').addClass('glyphicon-menu-down');
+        
+    }else{
+        $('#deal-text-detail').slideToggle("show");
+        _this.text('收起图文详情').next(".glyphicon").removeClass('glyphicon-menu-down').addClass('glyphicon-menu-up');
+    }
+}
+</script>
+<else />
+<div class="container-fluid line" style="height:70px; line-height:50px;"></div>
+</if>
+<script type="text/javascript">
+var xx_lazy = Lazy.create({
+                lazyId: "Jlazy_img",
+                trueSrc: 'src2',
+                offset: 300, 
+                delay: 100, 
+                delay_tot: 5000 
+              }); 
+Lazy.init(xx_lazy);
+</script>
+<include file="Inc:footer"/>

@@ -1,0 +1,770 @@
+
+@borcolor:#e5e5e5; @fontcolor:#313131;
+
+
+.box{
+    max-width: 640px;
+    margin: auto;
+    overflow: hidden;
+    padding-bottom: 45px;
+    a:active{
+        background: #EEEEEE;
+    }
+}
+.portrait-all{
+    height: 110px;
+    background: #cc0000;
+    overflow: hidden;
+    .portrait{
+        margin:25px 20px;
+        width: 60px;
+        height: 60px;
+        float: left;
+        border: solid 2px #FFFFFF;
+        border-radius: 50%;
+        overflow: hidden;
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .por-name{
+        color: #FFFFFF;
+        float: left;
+        margin-left: 0.3rem;
+        margin:25px 0px;
+        overflow: hidden;
+        h2{      
+            font-size:18px;
+            margin-top:5px; 
+        }  
+        p{
+            font-size: 14px;
+            line-height: 24px;
+        }
+    }   
+}
+//------头像end--------
+@fontcolor:#535353;@borcolor:#eee;
+.nav-top{
+    height: 62px;
+    margin:10px 0;
+    overflow: hidden;
+    div{
+        margin: 0;
+        padding: 0;
+        position: relative;
+        &:before{
+            content: '';
+            height: 45px;
+            width: 1px;
+            background: #EEEEEE;
+            position: absolute;
+            right: 0;
+            top:8.5px;
+            
+        }
+    }
+    a{
+        overflow: hidden;
+        text-align: center;
+        display: block;
+        color: #535353;
+        padding-top:8px;               
+        text-decoration: none;
+        i{
+            margin-top:5px ;
+            font-size: 22px;
+        }
+        p{
+            font-size: 14px;
+        }   
+    }
+}
+//------分类 end--------
+.title{
+    overflow: hidden;
+    height: 32px;
+    background: #f2f2f2;
+    h2{
+        line-height: 32px;
+        margin: 0;
+        font-size: 16px;
+        color: #444444;
+        font-weight: normal;        
+    }
+}
+.order{
+    padding:0 15px;
+    border-bottom: solid 1px @borcolor;
+    border-top: solid 1px @borcolor;
+    overflow: hidden;
+    div{
+        width: 20%;
+        margin: 0;
+        padding: 0;        
+        border-right: solid 1px @borcolor;
+        a{
+            overflow: hidden;
+            text-align: center;
+            display: block;
+            padding: 10px 0;             
+            text-decoration: none;
+            i{
+                font-size: 30px;
+                color: #cc0000;
+            }
+            p{
+                font-size: 14px;
+                color: #535353;                
+            }   
+        }    
+    }
+}
+//------订单  end--------
+.query{
+    height: 213px;
+    border-top: solid 1px @borcolor;
+    padding-bottom: 20px;
+    overflow: hidden;
+    margin: 0;
+    div{
+        height: 105px;
+        padding:0;
+        margin: 0;
+        border-right: solid 1px @borcolor;
+        border-bottom: solid 1px @borcolor;
+        overflow: hidden;
+    }
+    a{
+        overflow: hidden;
+        padding-top:25px ;
+        text-align: center;
+        display: block;               
+        text-decoration: none;
+        i{
+            font-size: 24px;
+            color: #FFFFFF;
+        }
+        p{
+            font-size: 14px;
+            color: #535353;
+            line-height: 40px;                
+        }
+    .icon-1,.icon-2,.icon-3,.icon-4{
+        background: #af5ef9;
+        padding:8px;
+        border-radius:3px;
+        }
+    .icon-2{
+        background: #a5b392;
+        }    
+    .icon-3{
+        background: #ff3300;
+        }    
+    .icon-4{
+        background: #b28850;
+        }       
+    }
+}
+//------查询 end--------
+//------漂浮导航--------
+.pos-nav{
+    margin: 0;
+    height: 45px;
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    background: #FFFFFF;
+    border-top: solid 1px @borcolor;
+    padding-top: 1px;
+    overflow: hidden;
+    div{
+        padding: 0;
+    }
+    a{
+        text-decoration:none;
+        overflow: hidden;
+        color: #535353;
+        display: block;
+        text-align: center;
+    }
+    i{
+        font-size: 16px;
+        overflow: hidden;
+    }
+    p{
+       font-size: 14px;
+       color: @fontcolor; 
+    }
+    .nav-red{
+        i{
+            color: #cc0000 !important;
+        }
+        p{
+            color: #cc0000 !important;
+        }
+    }
+}
+//------客户/交易  页面--------
+.listing{
+    overflow: hidden;
+    li{
+        height: 50px;
+        padding: 0 15px;
+        border-bottom:solid 1px @borcolor ;
+        overflow:hidden ;
+        &:active{
+            background: #eee;
+        }    
+        a{
+            text-decoration:none;
+            overflow: hidden;
+            color: #535353;
+            display: block;
+            i{
+                font-size: 22px;
+                color: #FFF;
+                float: left;
+            }
+            p{
+                text-align: left;
+                font-size: 14px;
+                margin-left:10px ;
+                line-height: 50px;
+                float: left;
+            }
+            span{
+               font-size: 22px;
+               color: #707070; 
+               float: right;
+               line-height: 50px;
+            }
+        .li-icon1,.li-icon2,.li-icon3,.li-icon4{
+            background: #af5ef9;
+            padding:4px 8px;
+            margin-top:5px;
+            border-radius:3px;
+            }
+        .li-icon2{
+            background: #a5b392;
+            }    
+        .li-icon3{
+            background: #ff3300;
+            }    
+        .li-icon4{
+            background: #77c416;
+            }    
+        }
+    }
+}
+//------客户信息------------
+.search{
+    height: 60px;
+    border-bottom: solid 1px #EEEEEE;
+    padding: 0 15px;
+    overflow:hidden ;
+    div{
+        height: 60px;
+        margin: 0;
+        padding:0 5px;
+    }
+    div:nth-child(1){
+      width: 80%;
+    }
+    div:nth-child(2){
+      width: 20%;
+      margin: 10px 0;
+    }
+    .search-input{
+        overflow: hidden;
+        width: 100%;
+        height: 42px;
+        margin: 10px 0;
+        border: solid 1px @borcolor;
+        border-radius: 5px;
+        position: relative;
+        i{
+            position: absolute;
+            font-size: 22px;
+            line-height: 40px;
+            padding-left: 5px;
+            margin-top: 2px;
+            color: #CCCCCC;
+        }
+        input{
+            width:100%;
+            height: 44px;
+            padding-left: 30px;
+            background: #eaeaea;
+            margin-top: -1px;
+            color: @fontcolor;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+        }
+    }
+    a{
+        height: 40px;
+        display: block;
+        text-align: center;
+        padding: 0;
+        text-decoration: none;
+        font-size: 16px;
+        color: #FFFFFF;
+        line-height: 40px;
+        background: #eeb415;
+        border-radius: 3px;
+        overflow: hidden;
+    }    
+}
+//---筛选样式----------
+.shaixuan{
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    position: absolute;
+    background: #CCCCCC;
+    margin: 0;
+    z-index: 999;
+    .sx-lfet{
+        ul{
+            overflow:hidden;
+            li{
+                height: 40px;
+                background: #FFFFFF;
+                overflow: hidden;
+               a{
+                   text-decoration: none;
+                   display: block;
+                   line-height: 40px;
+               }
+            }
+        }
+    }
+}
+//------------选择
+.select{
+    overflow: hidden;
+    div{
+        text-align: center;
+        overflow: hidden;
+        border-bottom:solid 1px @borcolor ;
+        position: relative;
+        &:active{
+            background: #EEEEEE;
+        }
+        &:before{
+            content: '';
+            position: absolute;
+            width: 1px;
+            height: 20px;
+            right: 0;
+            top: 10px;
+            background: @borcolor;
+        }
+        p{
+            font-size: 14px;
+            line-height: 40px;
+            margin: 0;
+            padding: 0;
+            span{
+                padding-left: 5px;
+            }
+        }
+    }
+}
+.their{
+   overflow: hidden;
+   .modal-dialog{
+       margin-top: 120px;
+   }
+   .modal-header{
+       padding:0;
+       button{
+           padding: 10px;
+       }
+   }
+   .modal-footer{
+    padding:10px;
+    button{
+           padding:5px;
+       }
+    button:first{
+        background: #E4B9B9 !important;
+    }     
+   }
+   h4{
+        font-size: 16px;
+        padding: 10px;
+   } 
+}
+.brief{
+    overflow: hidden;
+    li{
+        height: 82.5px;
+        border-bottom: solid 1px @borcolor;
+        overflow: hidden;
+    }
+    .brief-left{
+        padding: 0 10px;
+        float: left;
+        overflow: hidden;
+        h2{
+            font-size: 16px;
+            margin-top: 6px;
+        }
+        strong{
+            font-size: 14px;
+            color: #a0a0a0;
+            padding-top: 5px;
+            font-weight: normal;
+            display: block;
+        }
+    }
+    .brief-right{
+        padding: 0 10px;        
+        float: right;
+        overflow: hidden;
+        p{  margin: 0;
+            margin-top:6px;
+            font-size:14px ;
+            text-align: right;
+        }
+        span{
+            color: #eeb415;
+        }
+    }
+    
+}
+//------------库存
+.stock{
+    overflow: hidden;
+    li{
+        height: 105px;
+        border-bottom: solid 1px @borcolor;
+        overflow: hidden;
+    }
+    div{
+        height: 110px;
+        padding:10px 0;
+        overflow: hidden;
+    }
+    div:nth-child(1){
+        width:195px;
+        float: left;
+        margin-left:25px ;
+        overflow: hidden;
+        p{
+            font-size: 16px;
+            margin: 0;
+            color: #535353;
+            margin-bottom: 5px;
+        }
+        span{
+            font-size: 14px;
+            color: #a0a0a0;
+        }
+    }
+    div:nth-child(2){
+        width: 105px;
+        float: right;
+        margin-right: 25px;
+        overflow: hidden;
+        p{
+            text-align: right;
+            font-size: 14px;
+            span{
+                color: #eeb415;
+            }   
+        }
+        P:nth-child(2){
+            margin: 0;
+            margin-top: 25px;
+        }
+    }
+    
+}
+//------------库存数量
+.serial{
+    height: 30px;
+    text-align: left;
+    line-height: 30px;
+    background: #fcf0d0;
+    color: #7d7d7d;
+    padding: 0 10px;
+    overflow: hidden;
+    font-size: 14px;
+}
+.product-name{
+    height: 55px;
+    font-size: 16px;
+    padding: 10px 10px;
+    overflow: hidden;
+}
+.shoujia{
+    height: 60px;
+    margin-top: 15px;
+    border-bottom: solid 1px @borcolor;
+    overflow: hidden;
+    div{
+        padding:0 25px;
+    }
+    p{
+        font-size: 16px;
+        color: #959595;
+        text-align: left;
+    }
+    strong{
+        font-weight: normal;
+        color: #eeb415;
+    }
+}
+.kc-list{
+    overflow: hidden;
+    li{
+        height:40px;
+        padding:0 10px;
+        border-bottom: solid 1px @borcolor;
+        overflow: hidden;
+        p{
+            font-size: 14px;
+            line-height: 40px;
+            span{
+                float: right;
+                color: #a0a0a0;
+            }
+        .ts-color{
+            color: #eeb415;       
+        }    
+        }        
+    }
+    
+}
+//------------信息
+.dope{
+    overflow: hidden;
+    li{
+        height: 75px;
+        border-bottom: solid 1px @borcolor;
+        overflow: hidden;
+        padding: 20px 10px;
+        .dope-icon{
+            width: 35px;
+            height: 35px;
+            background: #eeb415;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 34px;
+            color: #FFF;
+            font-size: 22px;
+            float: left;
+            overflow: hidden;   
+        }
+        .dope-show{
+            width:83%;
+            float: right;
+            overflow: hidden;
+            span{
+                font-size: 14px;
+                color: #a0a0a0;
+                strong{
+                    font-weight: normal;
+                    font-size: 14px;
+                    float: right;
+                }
+            }
+            p{
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                color: #535353;   
+            }
+        }
+    }
+}
+//------------汇总----------
+.gather-top{
+    height: 60px;
+    border-bottom: solid 1px @borcolor;
+    padding: 10px 0;
+    overflow: hidden;
+    .gather-cont{
+        height: 40px;
+        overflow: hidden;
+        position: relative;
+        div:nth-child(1){
+            width: 80%;
+            padding-left: 35px;
+            overflow: hidden;      
+        select{
+            width: 100%;
+            height: 40px;
+            border-radius: 5px;
+            padding: 0 10px;
+            background: #EEEEEE;
+            color: #969696;
+            option{
+                border-color:#EEEEEE ;
+            }
+        }
+    .fugai{
+        width: 20px;
+        height: 20px;
+        background: #EEEEEE;
+        position: absolute;
+        right:20px;
+        top: 10px;
+        overflow: hidden;
+        color: #707070;
+        }
+    }
+        div:nth-child(2){
+            width: 20%;
+            margin: 0;
+            padding: 0;
+            padding-right: 35px;
+            overflow: hidden;
+            a{
+                height: 40px;
+                display: block;
+                text-align: center;
+                text-decoration: none;
+                font-size: 16px;
+                color: #FFFFFF;
+                line-height: 40px;
+                background: #eeb415;
+                border-radius: 3px;
+                overflow: hidden;
+                &:active{
+                    background: #EEEEEE;
+                }
+            }  
+        }
+    }   
+}
+.gather-time{
+    overflow: hidden;
+    div{
+        height: 60px;
+        padding: 0;
+        margin: 0;
+        
+    }
+    div:nth-child(1){
+        width: 45%;
+        position:relative;
+        overflow: hidden;
+        padding-left: 20px;
+        padding-top: 10px;
+        select{
+            width: 100%;
+            height: 40px;
+            border-radius: 5px;
+            padding: 0 10px;
+            background: #EEEEEE;
+            color: #535353;
+            option{
+                color: #535353;
+            }
+        }
+    }
+    div:nth-child(2){ width: 10%;text-align: center; line-height: 60px; font-size: 22px;}
+    div:nth-child(3){
+        width: 45%;
+        position:relative;
+        overflow: hidden;
+        padding-right: 20px;
+        padding-top: 10px;
+        select{
+            width: 100%;
+            height: 40px;
+            border-radius: 5px;
+            padding: 0 10px;
+            background: #EEEEEE;
+            color: #535353;
+            option{
+                text-align: center;
+                border-color:#EEEEEE ;
+            }
+        }
+    }
+}
+.kewu,.kehen,.wunai{
+    position: absolute;
+    right: 5px;
+    top: 20px;
+    background: #EEEEEE;
+}
+.kehen{
+    right: 25px;
+}
+.wunai{
+    width: 40px;
+    right: 20px;
+    top: 10px;
+    background: #FFFFFF;
+}
+.debt{
+    overflow: hidden;
+    .debt-l,.debt-r{
+        float: left;
+        font-size: 14px;
+        line-height: 30px;
+        padding-left: 10px;
+    }
+    .debt-r{
+        float: right;
+        padding-right: 10px;
+    }
+    span{
+        color: #eeb415;
+    }
+}
+//------------余额
+.yuer{
+    overflow: hidden;
+    div:nth-child(1){
+        height: 60px;
+        overflow: hidden;
+        padding-left: 20px;
+        select{
+            width: 100%;
+            height: 40px;
+            border: none; 
+            padding-left:30px;  
+        }
+        option{
+            
+        }
+    }
+    div:nth-child(2){
+        height: 60px;
+        overflow: hidden;
+        padding-left: 40px;
+        select{
+            width: 100%;
+            height: 40px;
+            border: none;   
+        }
+    }
+}
+.should{
+    width: 101%;
+    margin-left: -1px;
+    border: solid 1px #CCCCCC;
+    overflow: hidden;
+    td{
+       height: 40px;
+       color:#626262;
+       text-align: center;
+        tr{
+            
+            width: 25%;
+        }
+    }
+}
+
+
+

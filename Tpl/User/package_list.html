@@ -1,0 +1,117 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+<style type="text/css">
+body{background: #efeff4;}
+.work_order_top{padding:5px 15px; color: #fff; font-size: 25px; position:relative;}
+.work_order_top a{color: #fff;}
+.order_list{margin-top: 15px;}
+.order_title{height: 40px; line-height: 40px; padding: 0 10px; background: #e95454; color: #fff;}
+.order_title a{color: #fff;}
+.order_title span{margin-left:10px;}
+.order_info{padding:10px; background: #fff; border-bottom: 1px solid #eee;}
+.order_info h3{margin:0 10px 0 0; font-size: 14px; line-height: 1.5em;}
+.order_info .box-flex span{color: #f7b608;}
+.order_info span b{font-size: 16px;}
+.tc_info{ color: #8c8c8c;  margin: 7px 0 5px 0;}
+.box-flex{ display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -moz-flex; display: -ms-flexbox;  display: flex; }
+.flex1{-webkit-box-flex: 1;-moz-box-flex: 1;-webkit-flex: 1;-ms-flex: 1;flex: 1;}
+.order_time{padding: 10px;color: #A2A2A2; background: #fff; text-align: right;}
+
+.no_record{height: 24px;  padding-top: 205px;  text-align: center;  background: url(http://s.17cct.com/v5/images/erp/empty.png) no-repeat center 20px;  background-size: 180px 180px;}
+.package_bottom{padding: 10px;color: #999;background-color: #fff;font-size:14px;}
+a:link, a:active{ color: #333;}
+</style>
+
+
+
+<!-- 顶部筛选 刷新 -->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+          <a href="<{:U('User/index')}>"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+          <img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+          <a>套餐列表</a>
+        </div>             
+    </div>
+</div>
+
+<script type="text/javascript">
+      var currentpage=1;
+    ajaxRed();
+    $(window).scroll(function(){ 
+            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+            if($(document).height() <= totalheight){ 
+                if(stop==true){ 
+                    ajaxRed();
+                } 
+            } 
+        });
+    function ajaxRed(){ 
+                $("#load").show();
+                  stop=false;
+                  $.get("<{:U('User/ajax_get_package_list')}>",{"p":currentpage}
+                  ,function(html){
+                          if(html!=""){ 
+                            if(currentpage==1) {                                
+                                $("#package_list").html(html);
+                            }
+                            else {
+                               $("#package_list").append(html);                                               
+                            } 
+                          }else{
+                            if(currentpage==1) {                                
+                                $("#package_list").html('<div class="no_record col-sm-12">暂无数据</div>');
+                            }else{
+                                MsgBox('已加载全部数据');  
+                            }
+                          }
+                          stop=true;
+                          currentpage++;
+                         $("#load").hide();  
+                     });
+      }
+</script>
+
+<!-- 列表 -->
+<div class="container-fluid" id="package_list">
+
+
+</div>
+
+<!--加载-->
+<div class="container-fluid" id="load">
+    <div class="row">
+        <div class="col-xs-12" style="margin-top:10px;">
+            <center>
+            <img src="__PUBLIC__/images/minilodging.gif" width="24" height="24" style="vertical-align:middle;"> 
+            正在加载... 
+            </center>
+        </div>
+    </div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+  WeixinJSBridge.call('hideToolbar');
+  WeixinJSBridge.call('hideOptionMenu');
+});
+</script>
+
+<include file="Inc:footer"/>

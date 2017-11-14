@@ -1,0 +1,47 @@
+<style type="text/css">
+.my_od_1{border-bottom: 1px solid #eee;}
+.infopad{margin:8px 0;}
+</style>
+<volist name="order_list" id="ol">
+	<div class="container-fluid">
+	    <div class="row refundsearch">
+	        <div class="col-xs-12">
+	            <div class="my_od">
+	                <span style="float:left; font-size:16px; font-weight:bold;"><{$ol.order_sn}></span>
+	                <div class="pull-right">                   
+	                    <span class="goods_item tickNull" data-val="<{$ol.id}>" data-price="<{$ol.total_price|price}>" data-paid="<{$ol.paid_amount|price}>" data-unpay="<{$ol.unpay|price}>"></span>
+	                </div>  
+	            </div>    
+	        </div>
+	    </div>
+	    <div class="row" >
+	        <div class="col-xs-12">         
+	            <div class="my_od_1">
+	                <div class="my_od_f">
+	                    <div class="infopad">下单时间：<{$ol.create_time|date="Y-m-d H:i:s",###}></div>
+	                    <div class="infopad">门店名称：<{$ol.location_name}></div>
+	                    <div class="infopad">订单状态：<{$ol.status_msg}></div>
+	                    <div class="infopad">支付状态：<{$ol.pay_status_msg}></div>
+	                    <div class="infopad">订单金额：￥<{$ol.total_price|price}></div>
+	                    <div class="infopad">已核销金额：￥<{$ol.paid_amount|price}></div>
+	                    <div class="infopad">未核销金额：￥<{$ol.unpay|price}></div>
+	                    <div class="infopad">制单人：<{$ol.make_user_name}></div>
+	                </div>
+	            </div>
+	                    
+	        </div>
+	    </div>
+	    <div class="row" style="height:20px;"></div>
+	</div>
+
+	<div class="container-fluid line"></div>
+</volist>
+<script type="text/javascript">
+	$('.refundsearch').find('.goods_item').each(function(i){
+      var that = $(this);
+      that.click(function(){
+        $('#CarWash').find('.goods_item').removeClass('tickico').addClass('tickNull');
+        that.removeClass('tickNull').addClass('tickico');
+      });
+  });
+</script>

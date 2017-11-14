@@ -1,0 +1,234 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="javascript:history.back();"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>我的晒单</a>
+        </div>             
+    </div>
+</div>
+
+<!--晒单详情-->
+<div class="container-fluid">
+	<div class="row">        
+        <div class="Posts_img">
+            <a><img src="<{$shaidan.user.head_img}>" onerror="imgError(this,'http://www.17cct.com/public/avatar/noavatar_middle.gif');"></a>
+        </div>
+        <div class="Posts_cts">
+            <div class="Posts_cts_top">
+                <div style="float:left;">
+                	<a style="font-weight:bold;color:#474747;text-decoration:none;"><{$shaidan.user.user_name}></a>                    
+                </div>
+                <div class="time"><{$shaidan.pubtime|date='Y-m-d H:i:s',###}></div>               
+            </div>
+            <p><{$shaidan.title}></p>
+        </div>    
+    </div>
+</div>
+
+<if condition="$shaidan['store']">
+<!--分割线-->
+<div class="container-fluid line"></div>
+<!--拨打电话-->
+<div class="container-fluid" >
+	<div class="row phon">
+			<div class="col-xs-9"><a href="<{:U('Store/view',array('id'=>$shaidan['supid']))}>">来自商家：<{$shaidan.store.name}></a></div>
+            <div class="col-xs-3"><a href="tel:<{$shaidan.store.tel}>"><center><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span></center></a></div>
+	</div>
+</div>
+</if>
+<!--分割线-->
+<div class="container-fluid line"></div>
+<script type="text/javascript">
+$(function () {
+    $('#shaidan-detail').find('img').addClass('lazy_img').attr('loaded','');
+    var xx_lazy = Lazy.create({
+                lazyId: "shaidan-detail",
+                trueSrc: 'image_url',
+                offset: 100, 
+                delay: 300, 
+                delay_tot: 5000 
+              }); 
+    Lazy.init(xx_lazy);
+});
+  
+</script>
+
+<!--文章标题-->
+<div class="container-fluid">
+	<div class="row">
+        <div class="col-xs-12 txtcontent" style="padding-top:10px;" id='shaidan-detail'>
+        	<{$shaidan.detail}>
+        </div>
+        <div class="col-xs-12 dzbox">
+        	<a>
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><br>
+                <i><{$shaidan.viewcount}></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>大家的评价：</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 pl_tab">
+            <textarea class="form-control" rows="2" id='reply-content'></textarea>
+            <button type="button" class="btn btn-primary  btn-block  btn-warning" onclick="replySubmit(this,'<{$shaidan.sid}>');">发布评论</button> 
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    
+function replySubmit (obj,sid){
+    var _this = $(obj);
+        sid = parseInt(sid),
+        content = $('#reply-content').val();
+    if (sid <= 0) {
+        _this.attr("disabled", true);
+        MsgBox('非法操作');
+        return false;
+    }
+    if (content == '') {
+        MsgBox('评论内容不能为空');
+        return false;
+    }
+    _this.text('数据提交中...').attr("disabled", true);
+    $.post("<{:U('Shaidan/ajaxPostReply')}>",{"id":sid,"content":content},function(d){
+        if(d.status == 1){  
+            var imgError = "javascript:this.src='http://www.17cct.com/public/avatar/noavatar_middle.gif';this.onerror='';" 
+            var result = d.data;
+            var markup = '';
+                markup += '<div class="row">';        
+                markup += '    <div class="Posts_img">';
+                markup += '        <a><img src="'+result.head_img+'" onerror="'+imgError+'" ></a>';
+                markup += '    </div>';
+                markup += '    <div class="Posts_cts">';
+                markup += '        <div class="Posts_cts_top">';
+                markup += '            <div style="float:left;">';
+                markup += '                <a style="font-weight:bold;color:#474747;text-decoration:none;">'+result.user_name+'</a>';
+                markup += '            </div>';
+                markup += '            <div class="time">'+result.addtime+'</div>';               
+                markup += '        </div>';
+                markup += '        <p>'+result.content+'</p>';           
+                markup += '    </div>';
+                markup += '    <div style="border-bottom:1px solid #e0e0e0; margin:0 10px;"></div>';        
+                markup += '</div>';       
+            $('#no-reply').remove();
+            $('#adlist').prepend(markup);
+        }
+        MsgBox(d.info);
+        _this.text('发布评论').attr("disabled", false);
+    });
+}
+</script>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<if condition="$count eq 0">
+    <div class="container-fluid" id="no-reply">
+        <div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">暂无评论</p></div>
+    </div>
+    <div class="container-fluid" id="adlist"></div>
+<else />
+    <div class="container-fluid" id="adlist"></div>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.esn.autobrowse.js"></script>
+<script>
+    $(function() {
+        var id = '<{$shaidan.sid}>';
+        var allRows = parseInt('<{$count}>');
+        var loadingRows = 5 ;
+        var totalPage = Math.ceil(allRows/loadingRows);
+        var max = totalPage > 100 ? 100 : totalPage;
+        if (totalPage >= 1) {
+            adautobrowse('adlist', '<{:U("Shaidan/ajaxGetShaidanReplyList")}>?id='+id+'&lnums='+loadingRows,max);
+        }
+    });
+
+    function adautobrowse(dom, url, total) {
+
+        $("#"+dom).autobrowse({
+            url: function(offset) {
+                return   url + '&p=' + offset;
+            },
+            template: function(response) {
+                return callbacks(response);
+            },
+            itemsReturned: function(response) {
+                return 1;
+            },
+            max: total,
+            offset: 1,
+            sensitivity: 100,
+            loader: '<div class="row"><center><div style="line-height:40px;"><img src="__PUBLIC__/images/minilodging.gif">正在加载...</div></center></div>',
+            finished: function() {
+                MsgBox("已加载全部信息");
+            },
+            onError: function() {
+                MsgBox('网络繁忙，请稍后重试');
+            }
+        });
+    }
+    function callbacks(response) {
+        var  markup = '';
+        var  imgError = "javascript:this.src='http://www.17cct.com/public/avatar/noavatar_middle.gif';this.onerror='';" 
+        if (response.data) {
+            var list = response.data,
+                listLength = list.length;
+            for (var i= 0;i<listLength;i++) { 
+                markup += '<div class="row">';        
+                markup += '    <div class="Posts_img">';
+                markup += '        <a><img src="'+list[i].head_img+'" onerror="'+imgError+'" ></a>';
+                markup += '    </div>';
+                markup += '    <div class="Posts_cts">';
+                markup += '        <div class="Posts_cts_top">';
+                markup += '            <div style="float:left;">';
+                markup += '                <a style="font-weight:bold;color:#474747;text-decoration:none;">'+list[i].user_name+'</a>';
+                markup += '            </div>';
+                markup += '            <div class="time">'+list[i].addtime+'</div>';               
+                markup += '        </div>';
+                markup += '        <p>'+list[i].content+'</p>';           
+                markup += '    </div>';
+                markup += '    <div style="border-bottom:1px solid #e0e0e0; margin:0 10px;"></div>';        
+                markup += '</div>';
+            }
+        } else {
+            MsgBox('网络繁忙，请稍后重试');
+        }
+        return markup;
+    }
+</script>
+</if>
+
+<div class="container-fluid line"></div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+  WeixinJSBridge.call('hideToolbar');
+  WeixinJSBridge.call('hideOptionMenu');
+});
+</script>
+<include file="Inc:footer"/>

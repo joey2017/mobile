@@ -1,0 +1,390 @@
+<include file="Inc:header"/>
+<link rel="stylesheet" type="text/css" href="http://s.17cct.com/v3/js/dialog/skins/dialog.css" />
+<script src="http://s.17cct.com/v3/js/dialog/artDialog.js?v=20141216"></script>
+</head>
+<body id="Jlazy_img">
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+            <a href="" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+            <img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+            <a><{$detail.strore_name}></a>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+    .aui_content{
+        padding:0;
+    }
+    .aui_buttons {
+        border-top: none;
+    }
+    .aui_buttons {
+        padding: 10px 8px;
+    }
+</style>
+
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+
+
+<!-- 年卡详情样式 -->
+<style type="text/css">
+body{background: #f7f7f7;}
+.cardul_pg{padding: 6px;  height:117px; border-top: #a00303 1px solid; position: relative;}
+.n_bg{background:#cd0000 url(__PUBLIC__/images/cardbg.png) repeat-x 0 101px;}
+.c_bg{background:#f47300 url(__PUBLIC__/images/cardbg.png) repeat-x 0 101px;}
+.cardul_pg h2{height: 45px; overflow: hidden; font-size: 14px; color: #fff; margin: 11px 0 3px 0;}
+.cardul_pg h2 i{margin-right: 6px;}
+.cardul_pg h2 i img{border-radius: 45px;}
+.cardul_pg p.minptitle{ height: 19px; position: absolute; top: 53px; color: #fff; overflow: hidden; font-size: 14px;text-indent: 3.6em;text-overflow: ellipsis;white-space: nowrap;width: 90%;}
+.cardul_pg .row{margin-top: 24px;}
+.c_btnbg{background: #F9F9F9;}
+.tab_t{margin-bottom: 10px;}
+.Project div{margin-bottom: 10px; padding: 10px; border:1px solid #ccc; background: #fff;}
+.Project div p i{width: 20px;height: 20px;border-radius: 10px;background: #cd0000;display: block;float: left;text-align: center;color: #fff;font-style: normal;margin: 0 5px 0 0;}
+</style>
+
+
+<!--年卡详情-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="cardul_pg <if condition='$detail.type eq 1'>n<else/>c</if>_bg">
+            <h2><i><img src="<{$detail.preview|getImgUrl=###,'little'}>" width="45" height="45" /></i><{$detail.card_name}></h2> 
+              <p class="minptitle"><{$detail.brief}></p>
+        </div>
+       
+            
+    </div> 
+</div>
+
+<if condition="$detail">
+    <!--基本信息 S-->
+    <!--
+    <div class="container-fluid">
+        <div class="row" >
+        	<div class="col-xs-12">        	
+                <a href="<{:U('Card/detail',array('id'=>$detail['scid']))}>" class="my_od_1" style="border:0;">
+                    <div class="my_od_img">
+                        <img class="lazy_img" src="http://s.17cct.com/v3/images/space.gif" src2="<{$detail.img|getImgUrl=###,'160x100'}>" onerror="imgError(this,'http://s.17cct.com/v3/images/errorimg.jpg');"> 
+                    </div>
+                    <div class="my_od_f">
+                        <h3><{$detail.card_name}></h3>
+                        <span style='height: 77px;display: block;line-height: 1.8em;white-space: normal;'><{$detail.brief}></span>                   
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    -->
+    <!--基本信息 E-->
+    <!--项目 S-->
+    <div class="container-fluid">
+        <div class="row" >
+            <div class="col-xs-12" style="margin:0 0 10px 0;" >
+                有效时间:截止<{$detail.end_time}> 
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid line"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="" id="">
+                 <div class="container-fluid" style="margin:20px 0 0 0;">
+                    <div class="row">
+                        <div class="col-xs-12" style="font-size:16px;font-weight:bold;">请选择服务项目</div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row" id="xs-box">  
+                        <ul id="myTab0" class="shopul">
+                        <foreach name="detail.cate" item="dc" key="key">
+                            <li class="normal" <if condition="($dc['number_of_user'] gt 0) OR ($dc['number_of_user'] eq -1)"><else/>disabled="disabled"</if>  onclick="nTabs(this,<{$key}>,'cate');" data-catid="<{$dc.deal_cate_type_id}>" data-catname="<{$dc.cate_name}>"><div class='<if condition="($dc['number_of_user'] gt 0) OR ($dc['number_of_user'] eq -1)">jcdiv<else/>jydiv</if>'><{$dc.cate_name}><i class="sy_i">已用/可用：<span class="disspan"><{$dc.user_count}>/<if condition="$dc.number_of_user eq -1">不限<else /><{$dc.number_of_user}></if></span></i></div><em class="Project_em"></em></li>
+                        </foreach>
+                           
+                       </ul>
+                    </div>                                              
+                </div>
+                <div class="gwbt2">
+                    
+                <if condition="$detail['no_start'] eq 1">                
+
+                    <div class="col-xs-12 btn-danger" ><a  href="javascript:void(0);">E卡未生效</a></div>
+
+                <elseif condition="$detail['be_overdue'] eq 1" />                        
+
+                    <div class="col-xs-12 btn-danger" ><a  href="javascript:void(0);">E卡已过期</a></div>
+
+                 <else />
+
+                    <div class="col-xs-12" style=""><a id="trigger-overlay" href="javascript:void(0);">下一步,选择使用门店</a></div>
+
+                </if>
+
+                   <!-- <div class="col-xs-12" style=""><a id="trigger-overlay" href="javascript:void(0);">下一步,选择使用门店</a></div>-->
+                </div>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="overlay-slidedown" id="overlay-slidedown">
+                <div class="container">
+                    <div class="row">
+                         <a class="btn btn-default" role="button" id="overlay-close" style="width:auto;margin:-17px 20px 0px 0;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                    </div>
+                </div>
+                 <div class="container-fluid" style="margin:-10px 0 10px 0;">
+                    <div class="row">
+                        <div class="col-xs-12" style="font-size:16px;font-weight:bold;">请选择门店</div>
+                    </div>
+                </div>
+                
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="tab_t">
+                                <h2 class="cate_name"></h2>
+                                <a>选择以下门店</a>
+                            </div>
+                        </div>
+                       <div class="col-xs-12 sxlist" id="sxlist">
+                        <foreach name="detail.cate" item="dc">
+                           <ul id="shop_list_<{$dc.deal_cate_type_id}>" class="shopul show_li" style="display:none">
+                            <foreach name="dc.deal" item="dcd" key="key">
+                                <li class="<if condition='$key eq 0'>active<else/>normal</if>" onclick="nTabs(this,<{$key}>,'deal');" data-did="<{$dcd.did}>" data-clid="<{$dc.id}>" data-scoid="<{$detail.scoid}>"><{$dcd.lname}><em class="Project_em"></em></li>
+                            </foreach>
+                               
+                           </ul>
+                        </foreach>
+						
+                       </div>
+                    </div>
+                </div>
+
+                <div class="gwbt">
+                    <div class="col-xs-12" ><button id="next-spet"  class="btn  btn-danger  btn-lg btn-block" href="javascript:void(0);" onclick="create_card_num();">生成验证码</button></div>
+                </div>
+                <div class="load-black" id="load-black">
+                    <div style="width:37px; height:37px; position:absolute; top:10px; left:50%; margin-left:-12px;"><img src="__PUBLIC__/images/kitload.gif"></div>
+                </div>
+            </div>
+        </div>
+        <div class="black" id="black" style="top:0"></div>
+
+    </div>
+
+
+
+<style type="text/css">
+.shopul{padding:0; margin:10px 0; overflow: hidden; list-style: none; }
+.shopul li{width: 100%; margin: 2px 0; padding:10px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; position: relative;}
+.shopul li .sy_i{float:right;font-style: normal;font-size: 12px; }
+.shopul li span{color: #cd0000;}
+
+.active{border:1px solid #cd0000;}
+.normal{border:1px solid #eee; }
+
+.jydiv,.jydiv .disspan{color: #ccc;}
+.jcdiv{color: #333;}
+.jcdiv i{color: #7B7B7B;}
+.jcdiv .disspan{color: #cd0000;}
+
+.gwbt2{width: 100%; left: 0; text-align: center; height: 47px; line-height: 47px; position: fixed; bottom: 0px; background:#eea236;}
+.gwbt2 a{color: #fff; }
+
+.Project_em { display: none; width: 12px; height: 12px; position: absolute; background: url(http://s.17cct.com/v4/images/dagou.png) no-repeat; right: 0px; bottom: 0;}
+.active .Project_em{display: block;}
+</style>
+
+
+
+
+<!--锁定属性特效-->
+<script type="text/javascript">
+function nTabs(thisObj,Num,type){
+    if(thisObj.getAttribute("disabled")=='disabled'){
+       return;    
+    }
+    if(thisObj.className == "active")return;
+    if(type=='cate'){
+       // $('.show_li').hide();   
+        if(!thisObj.getAttribute("data-catid")){
+            MsgBox('请刷新后再试');
+            return false;
+        } 
+        $('#cate_id').val(thisObj.getAttribute("data-catid"));
+        $('.cate_name').html(thisObj.getAttribute("data-catname"));
+    }
+    var tabObj = thisObj.parentNode.id;
+    var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+    for(i=0; i <tabList.length; i++)
+    {
+      if (i == Num)
+      {
+       thisObj.className = "active"; 
+      }else{
+       tabList[i].className = "normal";
+      }
+    } 
+}
+</script>
+
+<script type="text/javascript">
+    var w_h = $(window).height(),
+        black = $("#black"),
+        overlay_slidedown = $('#overlay-slidedown'),
+        load_black = $('#load-black');
+    $('body').css('position','relative');
+    $('#sxlist').css('height',w_h*0.9-145);
+    overlay_slidedown.css('height',w_h*0.9);
+    load_black.css({'height':w_h*0.9-145,'bottom':94});
+
+    $(function(){
+        $("#overlay-close").click(function(){
+            overlay_slidedown.slideUp(500);
+            black.hide();
+            $('#sxlist').find('ul').hide();
+        });
+        $("#trigger-overlay").click(function(){
+            var cate_id=$('#cate_id').val();
+            if(cate_id==0){
+                MsgBox('请先选择一个服务项目');
+                return false;
+            }
+            $('#shop_list_'+cate_id).show();
+            overlay_slidedown.slideDown(500);
+            black.show(10);
+        });
+    });
+</script>    
+<else />
+    <div class="container-fluid line"></div>
+    <div class="container-fluid">
+        <div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">该订单不存在</p></div>
+    </div>
+    <div class="container-fluid line"></div>
+</if>
+<input type="hidden" value="0" id="cate_id">
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script type="text/javascript">
+var xx_lazy = Lazy.create({
+                lazyId: "Jlazy_img",
+                trueSrc: 'src2',
+                offset: 300, 
+                delay: 100, 
+                delay_tot: 5000 
+              }); 
+Lazy.init(xx_lazy);
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    WeixinJSBridge.call('hideToolbar');
+    WeixinJSBridge.call('hideOptionMenu');
+});
+
+
+function create_card_num(){
+    $('#next-spet').attr('disabled',true);
+	
+    var cate_link_id,deal_id,card_order_id;
+    $('#shop_list_'+$('#cate_id').val()+" li").each(function(){
+
+            if($(this).hasClass('active')){
+				
+                cate_link_id = $(this).data('clid');
+                deal_id = $(this).data('did');
+                card_order_id = $(this).data('scoid');
+				
+            }
+    });
+    if(!cate_link_id||!deal_id||!card_order_id||cate_link_id==''||deal_id==''||card_order_id=='')
+    {  
+	
+        MsgBox('非法操作');
+        return false;
+    }
+    if(confirm("确认消费？")){
+        $.ajax({
+            url:'<{:U("User/ajaxCreateCardNum")}>',
+            type:'post',
+            dataType:'json',
+            data:{'deal_id':deal_id,'cate_link_id':cate_link_id,'card_order_id':card_order_id},
+            success:function (d) {
+                if (d.status == 1) {
+                    MsgBox(d.info);
+                    setTimeout("location.reload();",2000);
+                } else {
+                    if (d.status == -1) {
+                        car_number(card_order_id)
+                    } else{
+                        MsgBox(d.info);
+                    }
+                }
+            }
+        });
+    }
+    $("#overlay-close").click()
+    $('#next-spet').attr('disabled',false);
+}
+
+function car_number (oid) {
+        
+        var car_number  = '<div>';
+            car_number += '  <div style="padding: 10px 0 10px 0; height: 45px;background: #FFF;margin: 10px 0 20px 0;" >';
+            car_number+='<select name="province_sn" id="province_sn"  style="width:50px; height:35px;float:left"  class="myselect"><foreach name="city" item="ct"><option <if condition="$car_in_sn[0] eq $ct">selected="selected"</if> value="<{$ct}>"><{$ct}></option></foreach></select>&nbsp;';
+            car_number+='<select name="city_sn" id="city_sn" style="width:50px;  height:35px;" onchange="" class="myselect"><foreach name="a_z" item="az"><option <if condition="$car_in_sn[1] eq $az">selected="selected"</if> value="<{$az}>"><{$az}></option></foreach></select>';      
+        car_number += '     <input type="text" id="car_number"  placeholder="请输入车牌后五位" value="<if condition="$car_in_sn[2]"><{$car_in_sn[2]}></if>" maxlength="5" style="width:150px;  height:35px; font-size:16px;"/>';        
+        car_number += '  </div>';
+        car_number += '   <p id="car_tip" style="color:red;font-size: 14px;display:none;"></p>';
+        car_number += '</div>';
+         art.dialog({
+        title:'绑定车牌(不能修改)',
+        width: 320,
+        content:car_number,
+        noFn:true,
+        ok:function(){ 
+
+                var number=$("#car_number").val(); 
+                var reg = /^[0-9A-Za-z]{5,16}$/;	
+                var result = reg.exec(number);
+                if(result==null){
+				
+				    $('#car_tip').text('车牌号码格式不对').show();
+                    return false;
+				
+				}				
+                if (!number) 
+                {
+                    $('#car_tip').text('车牌号码不能为空').show();
+                    return false;
+                } 
+                number=$('#province_sn').val()+$('#city_sn').val()+$('#car_number').val();
+                $.ajax({
+                    url:'<{:U("User/car_number")}>',
+                    async:false,
+                    type:'post',
+                    dataType:'json',
+                    data:{'number':number,'oid':oid},
+                    success:function (d) { 
+                        art.dialog({
+                          top: 100,
+                          icon: d.icon,
+                          time:2,
+                          content:d.msg
+                        })
+                    }
+                })
+        },cancel:true
+    });
+
+}
+</script>

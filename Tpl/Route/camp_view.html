@@ -1,0 +1,200 @@
+<include file="Inc:zjy_header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="Current">
+        	<a href="javascript:history.back();"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="Search">
+            <h1>营地</h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="spshow">
+    <a href="">
+        <img  class="yjbgimg" src="<if condition='$camp.thumb'><{$camp.thumb|getImgUrl=###,'big'}><else/>__PUBLIC__/images/im.jpg</if>" />
+        <!--
+        <div class="desc">
+            10 <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+        </div>
+        -->
+    </a>
+</div>
+
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-xs-12 title_h">
+            <{$camp.title}>
+        </div>
+    </div>
+</div>
+<div class="container-fluid line"></div>
+
+<!--电话地址-->
+<div class="container-fluid" >
+    <div class="row phon">
+            <div class="col-xs-1"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></div>
+            <div class="col-xs-8"><a href=""><{$camp.address}></a></div>
+            <div class="col-xs-2"><a href="tel:<{$camp.tel}>"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span></a></div>
+    </div>
+</div>
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--吃住玩景-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>吃住玩景</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 txtcontent">
+            <{$camp.play}>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid line"></div>
+
+<!--概括介绍-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>概括介绍</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 txtcontent">
+             <{$camp.detail}>
+        </div>
+    </div>
+</div>
+<div class="container-fluid line"></div>
+
+<!--交通指南-->
+<if condition="$camp['xpoint']&&$camp['ypoint']">
+    <div class="container-fluid">
+        <div class="row" >
+            <div class="col-xs-12" >
+                <div class="tab_t">
+                    <h2>交通指南</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+               <div id="allmap"></div>
+            </div>
+        </div>
+    </div>
+</if>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v2.0&ak=tEflu9uwxEGzOsVPA11HS9Yl"></script> 
+
+<script type="text/javascript">
+
+var map_w = $(document.body).width(),
+
+    map_h = $(window).height();
+
+$("#allmap").css("width",map_w);
+
+$("#allmap").css("height",map_h-200);
+
+$("#bdmap").css("height",map_h-200);
+
+
+
+
+
+var s_lng = parseFloat('<{$camp.xpoint}>'),
+
+    s_lat = parseFloat('<{$camp.ypoint}>');
+
+
+
+$(function(){
+
+    initialize();
+
+});
+
+
+
+//地图参数
+
+function initialize() {
+
+    // 百度地图API功能
+
+    var map = new BMap.Map("allmap");         // 创建Map实例
+
+    var point = new BMap.Point(s_lng,s_lat);  // 创建点坐标
+
+    map.centerAndZoom(point,15);              // 初始化地图,设置中心点坐标和地图级别。
+
+    var myIcon = new BMap.Icon("http://s.17cct.com/v3/images/Map_icon2.png", new BMap.Size(27,34));//标注图标
+
+    var marker = new BMap.Marker(point,{icon:myIcon});  // 创建标注 
+
+    map.addControl(new BMap.NavigationControl({offset: new BMap.Size(10, 10), anchor: BMAP_ANCHOR_TOP_RIGHT})); // + - 按钮
+
+    map.addOverlay(marker);                   // 将标注添加到地图中
+
+}
+</script>
+
+
+
+<!--筛选按钮js-->
+<script type="text/javascript">     
+$(document).ready(function(){
+    $('body').css('position','relative');
+    var num;
+    $('.sxbtn>.topbtn[id]').click(function(){
+       
+       var Obj = $(this).attr('id');
+       num = Obj.substring(3, Obj.length);
+       $('.sxbtn').nextAll().hide();   
+       if($(this).children().hasClass('hover-up')){
+            /*图标向上旋转*/
+            $(this).siblings().children().removeClass().addClass('hover-down');       
+            $(this).children().removeClass().addClass('hover-down')
+            /*下拉框隐藏*/
+            $('#box-'+num).hide();  
+            $('.black').hide();
+       }else{
+            $(this).children().removeClass().addClass('hover-up');
+            $(this).siblings().children().removeClass().addClass('hover-down'); 
+            var Obj = $(this).attr('id');
+            num = Obj.substring(3, Obj.length);
+            $('#box-'+num).slideDown(160);
+            $('#box-'+num).show();
+            $('.black').show();   
+       }          
+    })
+    $('html,body').click(function(e){
+      if(e.target.id.indexOf("li-2")==-1&&e.target.id.indexOf("li-1")==-1&&e.target.id.indexOf("li-3")==-1&&e.target.id.indexOf("li-4")==-1){
+          $('.sxbtn>.topbtn[id]').siblings().children().removeClass().addClass('hover-down'); 
+          $('.sxbtn').nextAll().hide();
+          $('.black').hide();     
+      } 
+    });
+})
+</script>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<include file="Inc:footer"/>
+

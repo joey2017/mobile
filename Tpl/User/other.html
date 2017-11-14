@@ -1,0 +1,98 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+<!--头部-->
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+        	<a href="" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>其它项目</a>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .s-day{padding:0;}
+</style>
+<!--头像-->
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<div class="container-fluid">
+    <div class="row member">
+        <div class="col-xs-2 member_1">
+            <a href="<{:U('User/account')}>" style="display:block;margin:0 0 -8px 9px;"><img src='<if condition="$user.head_img eq null">http://s.17cct.com/v3/images/man.jpg<else/><{$user.head_img}></if>' onerror="imgError(this,'http://s.17cct.com/v3/images/man.jpg');"></a>
+            <p><{$user.mobile}></p>
+        </div>
+        <div class="col-xs-10 member_2">
+            <a href="<{:U('User/account')}>" style="display:block; overflow:hidden;">
+                <div class="member_2_1">  
+                <if condition="$car_info">				
+                    <span style="font-size:24px;"><{$car_info.car_sn}></span>
+                    <p><{$car_info.name}></p>
+				</if>
+                    <!--<p>余额：90</p>-->
+                </div>
+                <div class="member_2_2">
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                </div>                
+             </a>  
+        </div>     
+    </div>
+</div>
+<div class="surplusday">
+    <div class="s-day">
+        <a href="<{:U('Index/club_activity')}>" class="react2">
+            <span class="i-icon2 i-colorstar"><i class="fa fa-star-o"></i></span>
+            <p>活动推荐</p>
+        </a>
+    </div>
+    <div class="s-day">
+        <a href="<{:U('User/club')}>" class="react2">
+            <span class="i-icon2 i-colorusers"><i class="fa fa-users"></i></span>
+            <p>我的车友会</p>
+        </a>
+    </div>
+     <div class="s-day">
+        <a href="<{:U('User/topic')}>" class="react2">
+            <span class="i-icon2 i-colornote"><i class="fa fa-sticky-note-o"></i></span>
+            <p>我的帖子</p>
+        </a>
+    </div>
+</div>
+<div class="surplusday">    
+    <div class="s-day">
+        <a href="<{:U('User/exchange')}>" class="react2">
+            <span class="i-icon2 i-colorexchange"><i class="fa fa-exchange"></i></span>
+            <p>我的兑换</p>
+        </a>
+    </div>
+    <div class="s-day">
+        <a href="<{:U('User/shaidan')}>" class="react2">
+            <span class="i-icon2 i-colorphoto"><i class="fa fa-file-photo-o"></i></span>
+            <p>我的晒单</p>
+        </a>
+    </div>
+    <div class="s-day">
+        <a href="<{:U('Index/contact_us')}>" class="react2">
+            <span class="i-icon2 i-colorenvelope"><i class="fa fa-envelope-o"></i></span>
+            <p>联系我们</p>
+        </a>
+    </div>
+</div>
+
+
+
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<!--底部固定按钮-->
+<include file="Inc:footer"/>

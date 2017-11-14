@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>诚车堂网</title>
+<style type="text/css">
+	.btn_blue,.btn_red{
+		width: 100%;
+		color: #fff;
+		cursor: pointer;
+		text-align: center;
+	}
+	.btn_blue{
+		background-color: #1d63f3;
+	}
+	.wrap{
+	width: 81.25%;
+	margin: 20px auto;
+	background-color: #fff;
+	border-radius: 0.5rem;
+	padding: 3.125% 6.25% 6.25%;
+	font-size: 2.2rem;
+	line-height: 3.8rem;
+}
+.wrap h2{
+	font-size: 2.6rem;
+	font-weight: normal;
+	text-align: center;
+}
+.userinfo h2{
+	text-align: left;
+}
+.wrap input{
+	line-height: 2.5rem;
+	border: 0;
+	margin: 10px 0;
+	width: 100%;
+	height: 6.25rem;
+	border-radius: 0.5rem;
+	font-size: 2.2rem;
+	-webkit-appearance:none;
+}
+.wrap input.lhalf,.wrap input.rhalf{
+	width: 45%;
+}
+.wrap input.rhalf{
+	float: right;
+}
+.wrap input[type="text"]{
+	background-color: #f1f3f5;
+	width: 80%;
+	height: 2.5rem;
+	padding: 1.875rem 10%;
+}
+.wrap input[type="tel"]{
+    background-color: #f1f3f5;
+    width: 80%;
+    height: 2.5rem;
+    padding: 1.875rem 10%;
+}
+.wrap input[type="password"]{
+    background-color: #f1f3f5;
+    width: 80%;
+    height: 2.5rem;
+    padding: 1.875rem 10%;
+}
+</style>
+</head>
+<body >
+<div class="wrap"> 
+   <div align="center" id="qrcode" >
+   <img src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=<{$result->ticket}>">
+  </div>
+</div>
+
+</body>
+</html>

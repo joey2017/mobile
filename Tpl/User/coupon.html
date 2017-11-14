@@ -1,0 +1,118 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="<{:U('User/index')}>"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>我的服务券</a>
+        </div>             
+    </div>
+</div>
+<!--标题-->
+<div class="container-fluid">
+	<div class="row">
+        <div id="cp1" class="all wd_2"><a href="<{:U('User/coupon')}>?t=1">未使用</a></div>   
+    	<div id="cp2" class="all wd_2"><a href="<{:U('User/coupon')}>?t=2">已使用</a></div>
+        <div id="cp3" class="all wd_2"><a href="<{:U('User/coupon')}>?t=3">已过期</a></div>              
+    </div>
+</div>
+<script>
+    var __t = '<{$t}>';
+    $("#cp"+__t).addClass('Underline');
+</script>
+<if condition="$count eq 0">
+    <div class="container-fluid line"></div>
+    <div class="container-fluid">
+        <div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">暂无符合条件的服务券</p></div>
+    </div>
+<else />
+    <div id="adlist"></div>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.esn.autobrowse.js"></script>
+<script>
+    $(function() {
+        var __t  = '<{$t}>';
+        var allRows = parseInt('<{$count}>');
+        var loadingRows = 5 ;
+        var totalPage = Math.ceil(allRows/loadingRows);
+        var max = totalPage > 100 ? 100 : totalPage;
+        if (totalPage >= 1) {
+            adautobrowse('adlist', '<{:U("User/ajaxGetCouponList")}>?t='+__t+'&lnums='+loadingRows,max);
+        }
+    });
+
+    function adautobrowse(dom, url, total) {
+
+        $("#"+dom).autobrowse({
+            url: function(offset) {
+                return   url + '&p=' + offset;
+            },
+            template: function(response) {
+                return callbacks(response);
+            },
+            itemsReturned: function(response) {
+                return 1;
+            },
+            max: total,
+            offset: 1,
+            sensitivity: 100,
+            loader: '<div class="container-fluid line"></div><div class="container-fluid"><div class="row"><center><div style="line-height:40px;"><img src="__PUBLIC__/images/minilodging.gif">正在加载...</div></center></div></div>',
+            finished: function() {
+                $(this).append('<div class="container-fluid line"></div><div class="container-fluid"><div class="row"><center><div style="line-height:40px;">已加载全部内容</div></center></div></div>');
+            },
+            onError: function() {
+                alert('加载失败，请稍后重试')
+            }
+        });
+    }
+
+    function callbacks(response) {
+        var _t  = '<{$t}>',
+            markup = '';
+        if (response.data) {
+            var list = response.data,
+                listLength = list.length;
+            for (var i= 0;i<listLength;i++) { 
+                markup += '<div class="container-fluid line"></div>'; 
+                markup += '    <div class="container-fluid">'; 
+                markup += '        <div class="row" style="position:relative;">';       
+                markup += '            <div class="Posts_img"><a href="'+list[i].deal.url+'">'+list[i].deal.img+'</a></div>'; 
+                markup += '            <div class="Cheyou_2 my_od_f">'; 
+                markup += '                <h3><a href="'+list[i].deal.url+'" style="color:#474747; text-decoration:none;">'+list[i].deal.name+'</a></h3>';
+                if (list[i].begin_time == '' && list[i].end_time == '') {
+                    markup += '                <p>使用期限：无限制</p>'; 
+                }else{
+                    markup += '                <p>使用期限：'+list[i].begin_time+'~'+list[i].end_time+'</p>'; 
+                } 
+                if (_t == '2') {
+                    markup += '                <p>使用时间：'+list[i].confirm_time+'</p>'; 
+                } 
+                markup += '<p>服务条码：<b style="font-size: 16px;color: #cd0000;line-height: 30px;">'+list[i].sn+'</b></p>';             
+                markup += '            </div>';                  
+                markup += '        </div>'; 
+                markup += '    </div>'; 
+            }
+        } else {
+            markup = '<div class="container-fluid"><div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">加载失败，请稍后重试</p></div></div>';
+        }
+        return markup;
+    }
+</script>
+</if>
+<div class="container-fluid line"></div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+<include file="Inc:footer"/>
+

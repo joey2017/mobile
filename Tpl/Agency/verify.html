@@ -1,0 +1,103 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+        	<a href="javascript:history.go(-1)" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>服务验证中心</a>
+        </div>             
+    </div>
+</div>
+ <!--弹出提示框-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<style type="text/css">
+    .gift_item_dis a, .gift_wide a {
+        float: left;
+        width: 100%;
+        margin-top: 5px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        background: #f3a906;
+        }
+        .gift_form span{
+            margin: 0;
+            padding: 0;
+            font-family: "微软雅黑";
+            font-size: 28px;
+            color: #000;
+        }
+    /*应用特效时*/
+    #bigGlass{height:45px;position:absolute;background-color:#BB570F;display:none;line-height:45px;font-size:30px;font-weight:bold;padding:0 5px;}
+    #bigGlass span{margin-left:8px;}
+    #bigGlass span:first-child{margin-left:0;}
+</style>
+<script src="__PUBLIC__/js/bigGlass.js?v=20150602"></script>
+<!--内容-->
+<div class="container-fluid">
+        <form class="form-horizontal" style="margin-top:10px;">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-xs-12">服务验证中心</label>
+                <div class="col-xs-7">
+                    <input type="tel" class="form-control btn-block"  id="dhm" placeholder="请输入服务码">                      
+                </div>
+                <div class="col-xs-5" >
+                	<button id="gotoCheck" type="button" class="btn btn-warning btn-block"  onclick="sel_lb();">验证服务码</button>
+                </div>            
+            </div>
+                
+        </form>
+     </div>  
+     <div class="col-xs-12" id="info_div" style="margin-top:30px">
+             
+                
+     </div>  
+</div>
+<script type="text/javascript">
+
+    function sel_lb(){
+        var dhm=$("#dhm").val();
+        if(dhm=='请输入服务码'||dhm==""){
+            MsgBox("请输入服务码");
+            return false;
+        }
+        $.get("<{:U('Agency/ajax_verify')}>",{"dhm":dhm},function(data){
+            if(data.status){
+                var htmlstr='<p ><div class="form-group" >'+data.msg+'&nbsp;&nbsp;&nbsp;&nbsp;'+'</p> ';           
+                htmlstr+='<button id="gotoCheck" type="button" class="btn btn-danger btn-block" onclick="qrcommit();">确认使用</button>';              
+                $("#info_div").html(""+htmlstr);
+            }else{
+                //alert(data.info)
+                //location.href = data.data;
+               
+                var htmlstr='<p class="con"><b>'+data.msg+'</b></p>';
+                $("#info_div").html(htmlstr);
+            }
+        })
+    }
+    
+    function qrcommit(){
+        $.get("<{:U('Agency/user_account')}>",{},function(data){
+            if(data.status){
+                var htmlstr='<p class="con"><b>'+data.msg+'</b></p>';
+                $("#info_div").html(htmlstr);
+            }  else{
+                alert(data.msg)
+            }         
+        })
+    }
+</script>
+<include file="Inc:footer"/>

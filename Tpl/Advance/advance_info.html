@@ -1,0 +1,162 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+<style type="text/css">
+.reservelist{ padding: 10px 0; border-bottom: 1px solid #eaeaea;}
+.reservelist h3{ font-size: 16px; line-height: 25px;  color: #cd0000;padding: 0 25px;}
+.infotab{padding: 6px 0; border-bottom: 1px solid #eaeaea;}
+.infotab_ico{ float: left;  margin-left:10px; width: 64px; height: 64px; display: inline-block; border-radius: 50%; vertical-align: middle; margin-right: 10px;}
+.project_1{background: url(__PUBLIC__/images/reserve.svg) no-repeat -132px 11px; background-size: 420px; background-color: #65b3f5;}
+.project_2{background: url(__PUBLIC__/images/reserve.svg) no-repeat -208px 11px; background-size: 420px; background-color: #e75eec;}
+.project_3{background: url(__PUBLIC__/images/reserve.svg) no-repeat -283px 11px; background-size: 420px; background-color: #65cfc6;}
+.project_4{background: url(__PUBLIC__/images/reserve.svg) no-repeat -351px 11px; background-size: 420px; background-color: #f5ba65;}
+
+.infotxt h3{ color: #939393; font-size: 14px;margin: 13px 0 3px 0;}
+.infotxt p{font-size: 18px;}
+
+/*支付方式*/
+.payul{padding: 14px 0 0 0;}
+.payul li{ list-style: none;  position: relative; padding: 10px;margin-left: 2px; text-align: left; overflow: hidden; border: 1px solid #d2d2d2; cursor: pointer;  font-size: 12px;}
+.payul li span { display: block; width: 18px; height: 18px;  vertical-align: middle; margin-right: 4px;}
+.payul li em{display: none;}
+.pay_1{background: url(__PUBLIC__/images/pay.svg) no-repeat -5px -2px; background-size: 147px; background-color: #48D238;}
+.pay_2{background: url(__PUBLIC__/images/pay.svg) no-repeat -26px 0px; background-size: 124px; background-color: #F34949;}
+.pay_3{background: url(__PUBLIC__/images/pay.svg) no-repeat -50px 0px; background-size: 118px; background-color: #49B2FD;}
+
+.disabled {color: #ccc;}
+.disabled span{ background-color: #ccc;}
+
+.selected_pay{padding: 9px !important; border: 2px solid #ff5200 !important;}
+.selected_pay em{display: block !important; position: absolute; bottom: -11px;  right: -16px; width: 35px; text-align: center; height: 28px; background: #ff5200; color: #fff; position: absolute; transform: rotate(-45deg); -o-transform: rotate(-45deg); -webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg);} 
+.selected_pay em  i{transform: rotate(45deg); -o-transform: rotate(45deg); -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); } 
+
+</style>
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+            <a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+            <img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+            <a>核对订单</a>
+        </div>
+       
+    </div>
+</div>
+
+<div class="container-fluid">
+<!-- 	<div class="row reservelist">
+		<h3 class="text-center">
+		尊敬的会员，您正在预约洗车服务<br>
+		请核对您的订单信息
+		</h3>
+	</div> -->
+	<div class="row infotab">
+		<div class="infotab_ico project_1"></div>
+		<div class="infotxt">
+			<h3>预约时间</h3>
+			<p><{$order.advance_time|date="Y-m-d H:i",###}></p>
+		</div>
+	</div>
+	<div class="row infotab">
+		<div class="infotab_ico project_2"></div>
+		<div class="infotxt">
+			<h3>预约项目</h3>
+			<p><{$order.project_name}></p>
+		</div>
+	</div>
+	<div class="row infotab">
+		<div class="infotab_ico project_3"></div>
+		<div class="infotxt">
+			<h3>预约门店</h3>
+			<p><{$order.location_name}></p>
+		</div>
+	</div>
+	<div class="row infotab">
+		<div class="infotab_ico project_4"></div>
+		<div class="infotxt">
+			<h3>支付金额</h3>
+			<p>
+				<{$order.total_price|price}>元
+				<if condition="$member_card_name neq null">
+				<span>(<{$member_card_name}>)</span>
+				</if>
+			</p>
+		</div>
+	</div>
+	
+	<ul class="text-center flex payul">
+		<li class="col-xs-inner selected_pay" data-pay='1' id="wx_pay" data-url="<{:U('Pay/erp_go_pay',array('id'=>$order[id]))}>">
+			<span class="pull-left pay_1"></span>微信付款
+			<em><i class="fa fa-check"></i></em>
+		</li>
+		<li class="col-xs-inner <if condition='$member_card_balance eq null'>disabled</if>" data-pay='3'>
+			<span class="pull-left pay_2 " ></span>会员卡付款
+			<em><i class="fa fa-check"></i></em>
+		</li>
+		<li class="col-xs-inner <if condition='$old_card_balance eq null'>disabled</if>" data-pay='6'>
+			<span class="pull-left pay_3"></span>E卡付款
+			<em><i class="fa fa-check"></i></em>
+		</li>
+	</ul>
+	<input type="hidden" value="1" id="pay_type">
+	<button type="button" id="pay" class="btn btn-danger btn-lg btn-block" style="margin-top:15px;">确认付款</button>
+	
+</div>
+
+<script type="text/javascript">
+	$('.col-xs-inner').click(function(){
+		if($(this).hasClass('disabled')){
+			return false;
+		}
+		$(this).addClass('selected_pay').siblings().removeClass('selected_pay');
+		$('#pay_type').val($(this).attr('data-pay'));
+	})
+	$('#pay').click(function(){
+		var pay_type=$('#pay_type').val();
+		if(!pay_type){
+			MsgBox('请选择支付方式');
+		}
+		$('#pay').attr('disabled',true);
+		if(pay_type==1){
+			MsgBox('跳转支付中');
+			setTimeout("location.href='"+$('#wx_pay').attr('data-url')+"'",2000);
+		}else{
+			$.ajax({
+	            url: '<{:U("Advance/erp_e_member_pay")}>',
+	            type: 'get',
+	            dataType: 'json',
+	            data:{
+	            	'pay_type':pay_type,
+	            	'id':<{$order.id}>
+	        	},
+	            success: function(d) {
+	                MsgBox(d.msg);
+	               if(d.status==1){
+	                 setTimeout('location.href="'+d.data+'"',2000);
+	               }else{
+	                 $('#pay').attr('disabled',false);
+	               }
+	            }
+	        });
+		}
+
+
+	})
+</script>
+
+
+
+
+</body>
+</html>

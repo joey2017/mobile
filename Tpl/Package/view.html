@@ -1,0 +1,325 @@
+<include file="Inc:header"/>
+<link rel="stylesheet" type="text/css" href="http://s.17cct.com/v3/js/dialog/skins/dialog.css" />
+<script src="http://s.17cct.com/v3/js/dialog/artDialog.js?v=20141216"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v2.0&ak=tEflu9uwxEGzOsVPA11HS9Yl"></script> 
+</head>
+<body id="Jlazy_img">
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+            <a href="" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+            <img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+            <a>盛世全返套餐-通卡</a>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+    .aui_content{
+        padding:0;
+    }
+    .aui_buttons {
+        border-top: none;
+    }
+    .aui_buttons {
+        padding: 10px 8px;
+    }
+</style>
+
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+
+
+<!-- 年卡详情样式 -->
+<style type="text/css">
+body{background: #f7f7f7;height:100%;}
+.tc_title{    padding: 10px 0; background: #cd0000; color: #ffffff; font-size: 16px; border-top: 1px solid #bd1111; }
+.tab_t{margin-bottom: 10px;}
+.Project div{margin-bottom: 10px; padding: 10px; border:1px solid #ccc; background: #fff;}
+.Project div p i{width: 20px;height: 20px;border-radius: 10px;background: #cd0000;display: block;float: left;text-align: center;color: #fff;font-style: normal;margin: 0 5px 0 0;}
+</style>
+
+
+<!--年卡详情
+<div class="container-fluid">
+    <div class="row tc_title text-center" >
+       <b>盛世全返套餐-通卡</b>
+    </div> 
+</div>-->
+
+<if condition="$info">
+
+  
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="" id="">
+                 <div class="container-fluid" style="margin:20px 0 0 0;">
+                    <div class="row">
+                        <div class="col-xs-12" style="font-size:16px;font-weight:bold;">请选择服务项目</div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row" id="xs-box">  
+                        <ul id="myTab0" class="shopul">
+                        <foreach name="info" item="i" key="key">
+                            <li class="normal" <if condition="($i['num'] gt 0)"><else/>disabled="disabled"</if>  onclick="nTabs(this,<{$key}>,'cate');" data-catid="<{$i.cate_id}>" data-iid="<{$i.id}>" data-catname="<{$i.p_name}>"><div class='<if condition="($i['num'] gt 0)">jcdiv<else/>jydiv</if>'><{$i.p_name}><i class="sy_i">已用/可用：<span class="disspan"><{$i.used_times}>/<if condition="$i.num eq -1">不限<else /><{$i.num}></if></span></i></div><em class="Project_em"></em></li>
+                        </foreach>
+                           
+                       </ul>
+                    </div>                                              
+                </div>
+                <div class="gwbt2">
+
+                    <div class="col-xs-12" style=""><a id="trigger-overlay" href="javascript:void(0);">下一步,选择使用门店</a></div>
+
+                   <!-- <div class="col-xs-12" style=""><a id="trigger-overlay" href="javascript:void(0);">下一步,选择使用门店</a></div>-->
+                </div>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="overlay-slidedown" id="overlay-slidedown">
+                <div class="container">
+                    <div class="row">
+                         <a class="btn btn-default" role="button" id="overlay-close" style="width:auto;margin:-17px 20px 0px 0;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                    </div>
+                </div>
+                 <div class="container-fluid" style="margin:-10px 0 10px 0;">
+                    <div class="row">
+                        <div class="col-xs-12" style="font-size:16px;font-weight:bold;">请选择服务门店</div>
+                    </div>
+                    <div class="row none" id="address-box">
+                        <div class="col-xs-12" id="address" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+                
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="tab_t">
+                                <h2 class="cate_name"></h2>
+                                <a>选择以下门店</a>
+                            </div>
+                        </div>
+                        <div class="none" id="position-tip">
+                            <div class="container-fluid">
+                                <div class="row"><center><div style="line-height:40px;"><img src=" __PUBLIC__/images/minilodging.gif">正在加载...</div></center></div>
+                            </div>
+                        </div>
+                       <div class="col-xs-12 sxlist" id="sxlist">                        
+                           <ul id="store_list" class="shopul show_li"> 
+                                <!-- <foreach name="store_list" item="s" key="k">                          
+                                     <li class="<if condition='$k eq 0'>active<else/>normal</if>" onclick="nTabs(this,<{$k}>,'deal');" data-sid="<{$s.id}>" ><{$s.name}><em class="Project_em"></em></li>         
+                                </foreach>  -->                     
+                           </ul>   
+                       </div>
+                    </div>
+                </div>
+
+                <div class="gwbt">
+                    <div class="col-xs-12" ><button id="next-spet"  class="btn  btn-danger  btn-lg btn-block" href="javascript:void(0);" onclick="create_card_num();">生成验证码</button></div>
+                </div>
+                <div class="load-black" id="load-black">
+                    <div style="width:37px; height:37px; position:absolute; top:10px; left:50%; margin-left:-12px;"><img src="__PUBLIC__/images/kitload.gif"></div>
+                </div>
+            </div>
+        </div>
+        <div class="black" id="black" style="top:0"></div>
+
+    </div>
+
+
+
+<style type="text/css">
+.shopul{padding:0; margin:10px 0 55px 0; overflow: hidden; list-style: none; }
+.shopul li{width: 100%; margin: 2px 0; padding:10px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; position: relative;}
+.shopul li .sy_i{float:right;font-style: normal;font-size: 12px; }
+.shopul li span{color: #cd0000;}
+
+.active{border:1px solid #cd0000;}
+.normal{border:1px solid #eee; }
+
+.jydiv,.jydiv .disspan{color: #ccc;}
+.jcdiv{color: #333;}
+.jcdiv i{color: #7B7B7B;}
+.jcdiv .disspan{color: #cd0000;}
+
+.gwbt2{width: 100%; left: 0; text-align: center; height: 47px; line-height: 47px; position: fixed; bottom: 0px; background:#eea236;}
+.gwbt2 a{color: #fff; }
+
+.Project_em { display: none; width: 12px; height: 12px; position: absolute; background: url(http://s.17cct.com/v4/images/dagou.png) no-repeat; right: 0px; bottom: 0;}
+.active .Project_em{display: block;}
+</style>
+
+
+
+
+<!--锁定属性特效-->
+<script type="text/javascript">
+function nTabs(thisObj,Num,type){
+    if(thisObj.getAttribute("disabled")=='disabled'){
+       return;    
+    }
+    if(thisObj.className == "active")return;
+    if(type=='cate'){
+        if(!thisObj.getAttribute("data-catid")){
+            MsgBox('请刷新后再试');
+            return false;
+        } 
+        $('#cate_id').val(thisObj.getAttribute("data-catid"));
+        $('#id').val(thisObj.getAttribute("data-iid"));
+        $('.cate_name').html(thisObj.getAttribute("data-catname"));
+    }else{
+        $('#location_id').val(thisObj.getAttribute("data-sid"));
+    }   
+    var tabObj = thisObj.parentNode.id;
+    var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+    for(i=0; i <tabList.length; i++)
+    {
+      if (i == Num)
+      {
+       thisObj.className = "active"; 
+      }else{
+       tabList[i].className = "normal";
+      }
+    } 
+}
+</script>
+
+<script type="text/javascript">
+    var w_h = $(window).height(),
+        black = $("#black"),
+        overlay_slidedown = $('#overlay-slidedown'),
+        load_black = $('#load-black');
+    //$('body').css('position','relative');
+    $('#sxlist').css('height',w_h*0.9-145);
+    overlay_slidedown.css('height',w_h*0.9);
+    load_black.css({'height':w_h*0.9-145,'bottom':94});
+
+    $(function(){
+        $("#overlay-close").click(function(){
+            overlay_slidedown.slideUp(500);
+            black.hide();
+           // $('#sxlist').find('ul').hide();
+        });
+        $("#trigger-overlay").click(function(){
+            var cate_id=$('#cate_id').val();
+            if(cate_id==0){
+                MsgBox('请先选择一个服务项目');
+                return false;
+            }
+            get_store_list();
+            overlay_slidedown.slideDown(500);
+            black.show(10);
+        });
+    });
+
+    //获得门店列表
+    function get_store_list() {
+        $('#position-tip').show();
+        var geolocation = new BMap.Geolocation(); 
+        geolocation.getCurrentPosition(function (r) {
+            if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                point_lng=r.point.lng;
+                point_lat=r.point.lat;
+                address = '您的位置：'+r.address.district+' '+r.address.street+r.address.street_number;
+                $('#address').html(address);
+                $('#address-box').show();
+                $.ajax({
+                    url:"<{:U('Package/get_store_list')}>",
+                    type:"post",
+                    data:{
+                        "lat":point_lat,
+                        "lng":point_lng
+                    },
+                    dataType:"json",
+                    success:function(data){  
+                        if(data.status==1){
+                           $('#position-tip').hide();
+                           $('#store_list').html(data.data['html']);
+                           $('#location_id').val(data.data['location_id']);
+                        }
+                }});
+            }else if(this.getStatus()==BMAP_STATUS_SERVICE_UNAVAILABLE){            
+                MsgBox("无法定位您的位置.您可以在我们诚车堂微信中发送您的地理位置给我们，以便获取您附近的商家");
+            }else if(this.getStatus()==BMAP_STATUS_TIMEOUT) {
+                MsgBox("请求超时,请刷新再试"); 
+            }
+         }); 
+    }
+
+</script>    
+<else />
+    <div class="container-fluid line"></div>
+    <div class="container-fluid">
+        <div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">该订单不存在</p></div>
+    </div>
+    <div class="container-fluid line"></div>
+</if>
+<input type="hidden" value="0" id="cate_id">
+<input type="hidden" value="0" id="location_id">
+<input type="hidden" value="0" id="id">
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script type="text/javascript">
+var xx_lazy = Lazy.create({
+                lazyId: "Jlazy_img",
+                trueSrc: 'src2',
+                offset: 300, 
+                delay: 100, 
+                delay_tot: 5000 
+              }); 
+Lazy.init(xx_lazy);
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    WeixinJSBridge.call('hideToolbar');
+    WeixinJSBridge.call('hideOptionMenu');
+});
+
+
+function create_card_num(){    
+	
+    var cate_id=$('#cate_id').val(),id=$('#id').val(),location_id=$('#location_id').val();
+  
+    if(!id){
+       MsgBox('请刷新后再试');
+        return false; 
+    }
+    if(!location_id||location_id==0)
+    {  	
+        MsgBox('请选择服务门店');
+        return false;
+    }
+
+    if(confirm("确认消费？")){
+        $('#next-spet').attr('disabled',true);
+        $.ajax({
+            url:'<{:U("Package/ajaxCreateCardNum")}>',
+            type:'post',
+            dataType:'json',
+            data:{'cate_id':cate_id,'location_id':location_id,'id':id},
+            success:function (d) {
+                if (d.status == 1) {
+                    MsgBox(d.info);
+                    setTimeout("location.reload();",2000);
+                } else {                   
+                    MsgBox(d.info);
+                    
+                }
+            }
+        });
+    }
+    $("#overlay-close").click()
+    $('#next-spet').attr('disabled',false);
+}
+
+
+</script>

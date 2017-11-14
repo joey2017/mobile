@@ -1,0 +1,217 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+
+        <div class="pg-Current">
+        	<a href="" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a><{$card.s_name}></a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- 年卡详情样式 -->
+<style type="text/css">
+body{background: #f7f7f7;}
+.cardul_pg{padding: 6px;  height:117px; border-top: #a00303 1px solid;}
+.n_bg{background:#cd0000 url(__PUBLIC__/images/cardbg.png) repeat-x 0 101px;}
+.c_bg{background:#f47300 url(__PUBLIC__/images/cardbg.png) repeat-x 0 101px;}
+.cardul_pg h2{height: 45px; overflow: hidden; font-size: 20px; color: #fff; margin: 11px 0 0 0;}
+.cardul_pg h2 i{margin-right: 6px;}
+.cardul_pg h2 i img{border-radius: 45px;}
+.cardul_pg p.minptitle{ color: #fff; overflow: hidden; font-size: 12px;text-indent: 4.4em;}
+.cardul_pg .row{margin-top: 33px;}
+.c_btnbg{background: #F9F9F9;}
+.tab_t{margin-bottom: 10px;}
+.Project{margin-bottom: 10px; border:1px solid #E7E7E7; background: #fff;}
+.Project_inline{width:100%; display:block; height:1px; background:#E7E7E7;}
+.Project p{padding: 8px 8px 0 8px;}
+.Project_i{width: 20px;height: 20px;line-height: 20px;border-radius: 10px;background: #cd0000;display: block;float: left;text-align: center;color: #fff;font-style: normal;margin: 0 5px 0 0;}
+
+.yh_ico{width: 30px;height: 30px;display: block; position: absolute;top: 5px;right: 6px;border-radius: 30px;color:#cd0000;text-align: center;line-height: 30px;font-size: 12px;background:#ffe400;}
+.yuding-time s{
+    text-decoration: initial;
+}
+.panel-group { margin-bottom: 0px;}
+.fluid_p img{width: 100%;}
+</style>
+
+
+<!--年卡详情-->
+<div class="container-fluid">
+
+	<div class="row">
+		<div class="cardul_pg <if condition='$card.type eq 1'>n<else/>c</if>_bg" style="position:relative;"> 
+           <if condition='$card.is_promotion eq 1'> <a class="yh_ico">惠</a></if>
+			<h2><i><img src="<{$card.preview|getImgUrl=###,'little'}>" width="45" height="45" /></i><{$card.name}></h2>
+			<p class="minptitle"><{$card.brief}></p>
+        </div>
+    </div>
+    <div class="row c_btnbg">
+        <if condition='$card.is_promotion eq 1'>
+            <div class="col-xs-7 Price">￥<b><{$card.promotion_price|price}></b><del>￥<{$card.price|price}></del></div>
+        <else/>
+            <div class="col-xs-7 Price">￥<b><{$card.price|price}></b></div>
+        </if>
+        <div class="col-xs-5"><p class="text-right" style="padding-top: 5px;"><a class="btn btn-default btn-warning" href="<{:U('Card/done',array('id'=>$card['id']))}>" role="button">立即购买</a></p></div>
+        <if condition='$card.is_promotion eq 1'>
+         <div class="col-xs-12" style="margin-bottom:10px;">
+         <span class="yuding-time" endtime="<{$card.promotion_time_end|date="Y-m-d H:i:s",###}>"><p><s>99</s>天<s>99</s>时<s>99</s>分<s>99</s>秒</p> </span>
+         </div>
+        </if>
+
+    </div>
+</div>
+<script type="text/javascript">
+     var endtime = $(".yuding-time").attr("endtime").replace(/-/g, "/");
+              var tt = new Date(endtime);
+              var obj = $(".yuding-time").find("p");
+              if(tt-(new Date())>0){
+              setInterval(function() {
+                var _t = new Date(),
+                  less = (tt - _t) / 1000;
+                  if(tt-_t<0) 
+                  {
+                   location.reload();
+                  }
+                var one = 60 * 60 * 24;
+                var d = Math.floor(less / one);
+                var h = Math.floor((less - d * one) / 3600);
+                var m = Math.floor((less - d * one - h * 3600) / 60);
+                var s = Math.floor((less - d * one - h * 3600 - m * 60));
+
+                obj.html("<s>" + d + "</s>天<s>" + h + "</s>时<s>" + m + "</s>分<s>" + s + "</s>秒")
+              }, 1000)
+            }else obj.html("<s>已经结束</s>");
+</script>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-6 topbtn" style="border:0;">浏览次数(<{$card.view_count}>)</div>
+        <!--<div class="col-xs-4 topbtn" style="border:0;">适用门店(<{$card.store_count}>)</div>-->
+        <div class="col-xs-6 topbtn" style="border:0;">销售数量(<{$card.buy_count}>)</div>
+    </div>
+</div>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--购买须知-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>购买须知</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 ">
+            <!--<p>有效时间：一年</p>-->
+            <p>使用时间：9：00-18：00</p>
+        </div>
+    </div>
+</div>
+
+
+<!--服务内容-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>查看适用门店</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+<!--
+<volist name="cate_list" id="cl" key="key">
+    <div class="row">
+        <div class="col-xs-12">
+            <p><i class='Project_i'><{$key}></i><b><{$cl.name}>【总次数 <{$cl.number_of_user}> 次】</b></p>
+        </div>
+        <div class="col-xs-12 Project">
+            <volist name="cl['location']" id="location" key="k">
+                <div>
+                    <p><i><{$k}></i><{$location.deal_name}></p><i class="Project_inline"></i>
+                    <p>适用门店：<{$location.name}></p>
+                </div>
+            </volist>
+        </div>        
+    </div>    
+      
+</volist>-->
+
+<div class="row">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <volist name="cate_list" id="cl" key="key">
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" style="display:block;" data-parent="#accordion" href="#<{$key}>" aria-expanded="true" aria-controls="<{$key}>">
+                  <i class='Project_i'><{$key}></i><{$cl.name}>【总次数 <{$cl.number_of_user}> 次】
+                  <span class="glyphicon glyphicon-menu-down" style="float:right;" aria-hidden="true"></span>
+                </a>
+              </h4>
+            </div>
+            <div id="<{$key}>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+
+                 <volist name="cl['location']" id="location" key="k">
+                <div class="Project">
+                    <p><{$location.deal_name}></p><i class="Project_inline"></i>
+                    <p>适用门店：<{$location.name}></p>
+                </div>
+            </volist>
+              </div>
+            </div>
+          </div>
+        </volist>
+       
+        </div>   
+    </div>
+
+</div>
+
+<!--其他说明-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>其他说明</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid fluid_p">
+    <div class="row">
+        <div class="col-xs-12 ">
+            <p><{$card.detail}></p>
+        </div>
+    </div>
+</div>
+
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<include file="Inc:footer"/>

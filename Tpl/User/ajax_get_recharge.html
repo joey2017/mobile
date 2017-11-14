@@ -1,0 +1,61 @@
+<volist name="order" id="order">
+    <div class="container-fluid line" id="line<{$order.id}>"></div>
+                <div class="container-fluid" id="container<{$order.id}>">
+                <div class="row" style="border-bottom: 1px solid #e0e0e0;">
+                    <div class="col-xs-12" style="margin-top:10px;">
+                    <div>
+                    <p style="font-size:16px;font-weight:bold;">订单号：<{$order.order_sn}></p>
+                    <p>时间：<{$order.create_time|date="Y-m-d H:i",###}></p>
+                    <p>状态：<span style="color:#F00;font-weight:bold;" id="status<{$order.id}>">
+                    <if condition="$order['status'] eq '2' || $order['pay_time'] neq 0">已付款</if>
+                    <if condition="$order['status'] eq '1'">未付款</if>
+                    <if condition="$order['status'] eq '0' && $order['pay_time'] eq 0">已删除</if>
+                    </if>
+                    </span></p>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col-xs-12">
+                    <a href="javascript:void(0)" class="my_od_1">
+                    <div class="my_od_img">
+                        <img src="<{$order.img}>" onerror="this.src='http://s.17cct.com/v3/images/errorimg.jpg';this.onerror=''">
+                    </div>
+                    <div class="my_od_f"><h3><{$order.name}></h3><span></span><p style="padding-bottom:10px"></p>
+                        <div style="float:left; color:#F00;">￥<{$order.price|price}></div>
+                        <div style="float:right; font-weight:bold;">X1</div><p></p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                <div style="line-height:45px;border-bottom:1px solid #e0e0e0; overflow:hidden;">
+                <div style="float:right; margin-left:30px;">实付：<span style="font-weight:bold;">￥<{$order.total_price|price}></span></div>
+                <div style="float:right;">数量：<span style="font-weight:bold;">1</span></div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                <if condition="$order['status'] eq '1'">
+                    <a class="btn btn-warning" href="<{$order.pay_url}>" role="button" style="float:right; margin:15px 0 0 15px;">立即付款</a>
+                     <button tpye="button" class="btn btn-default" style="float:right;margin-left:15px;margin:15px 0 15px 15px;" onclick="OperateOrder(this,<{$order.id}>,0)">删除订单</button>
+                </if>
+                <if condition="$order['status'] eq '2'">                   
+                     <button tpye="button" class="btn btn-default" style="float:right;margin-left:15px;margin:15px 0 15px 15px;" onclick="OperateOrder(this,<{$order.id}>,0)">删除订单</button>
+                </if>
+                <if condition="$order['status'] eq '0' && $order['pay_time'] neq 0">                   
+                     <button tpye="button" class="btn btn-default" style="float:right;margin-left:15px;margin:15px 0 15px 15px;" onclick="OperateOrder(this,<{$order.id}>,3)">永久删除</button>
+                </if>
+                <if condition="$order['status'] eq '0' && $order['pay_time'] eq 0"> 
+                     <button tpye="button" class="btn btn-default" style="float:right;margin-left:15px;margin:15px 0 15px 15px;" onclick="OperateOrder(this,<{$order.id}>,3)">永久删除</button>                  
+                     <button tpye="button" class="btn btn-default" style="float:right;margin-left:15px;margin:15px 0 15px 15px;" onclick="OperateOrder(this,<{$order.id}>,1)">重新预订</button>
+                </if>
+               
+
+                </div>
+
+            </div>
+        </div>
+</volist>

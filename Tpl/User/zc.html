@@ -1,0 +1,72 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="<{:U('User/index')}>"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>我的众筹</a>
+        </div>             
+    </div>
+</div>
+    <script type="text/javascript">
+    var currentpage=0;
+    ajaxRed();
+    $(window).scroll(function(){ 
+            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+            if($(document).height() <= totalheight){ 
+                if(stop==true){ 
+                    ajaxRed();
+                } 
+            } 
+        });
+    function ajaxRed(){ 
+                $("#load").show();
+                  stop=false;
+                  $.get("<{:U('User/ajax_get_zc')}>",{"p":currentpage}
+                  ,function(html){
+                          if(html!=""){ 
+                            if(currentpage==0) {
+                                $("#zclist").html(html);
+                            }
+                            else {
+                               $("#zclist").append(html);                                               
+                            } 
+                          }
+                          stop=true;
+                          currentpage++;
+                         $("#load").hide();  
+                     });
+      }
+
+
+</script>
+
+    <div id="zclist">
+     
+   
+    </div>
+    
+
+<!--加载-->
+<div class="container-fluid" id="load">
+    <div class="row">
+        <center><div style="line-height:40px;"><img src="__PUBLIC__/images/minilodging.gif">正在加载...</div></center>
+    </div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+<include file="Inc:footer"/>
+

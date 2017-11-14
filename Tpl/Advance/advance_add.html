@@ -1,0 +1,173 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<style type="text/css">
+
+.shoptitle{background: #f4f4f4; height: 70px; }
+.shoptitle p,.shoptitle em{font-size: 12px; color: #808080;}
+.shoptitle em,.money-h i{font-style: normal;}
+.reservelist{ padding: 10px 0; border-bottom: 1px solid #eaeaea;}
+.reservelist span{ width: 64px; height: 64px; display: inline-block; border-radius: 50%; vertical-align: middle; margin-right: 10px;}
+.project1{background: url(__PUBLIC__/images/reserve.svg) no-repeat 14px 9px; background-size: 420px; background-color: #f2d445;}
+.project2{background: url(__PUBLIC__/images/reserve.svg) no-repeat -57px 9px; background-size: 420px; background-color: #4db9f9;}
+.money-h{font-size: 14px; margin-top: 16px;    display: inline-block;}
+.money-h i{font-size: 16px; color: #ffa800;}
+.re_more{padding: 10px 0; border-bottom: 1px solid #eaeaea;}
+
+
+.dlbox {margin: 15px auto; border-bottom: 1px solid #F1F1F1; height: 35px;}
+.dlbox input { border: 0; outline: none; background-color: transparent;  height: 35px; margin-top: -17px;    margin-left: 10px; font-size: 16px;}
+</style>
+
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+            <a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+            <img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+            <a>预约洗车</a>
+        </div>
+       
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row shoptitle">
+        <div class="col-xs-7">
+            <h4 class="my_od_f"><{$goods.goods_name}></h4>
+            <if condition="$member.member_card_type neq null"><p  class="my_od_f"><del>原价：<{$goods.selling_price|price}></del></p></if>
+        </div>
+        <div class="col-xs-5 text-right">
+            <h5 class="money-h"><p><if condition="$member.member_card_type neq null"><{$member.member_card_name}>折后<else/>非会员</if>价</p><i><{$goods.discount_price|price}></i>元</h5>
+        </div>
+    </div>
+    <form action="<{:U('Advance/advance_save')}>" method="post" id="advance_form">
+        <div class="dlbox">
+            <label for="appDateTime">预约门店</label>
+            &nbsp;&nbsp;<{$goods.name}>
+        </div>
+        <div class="dlbox">
+            <label for="appDateTime">预约时间</label>
+            <input  class="search" readonly="true" id="advance_time" name="advance_time" type="text" placeholder="请选择时间">
+        </div>
+        <div class="dlbox">
+            <label for="appDateTime">会员姓名</label>
+            <input type="text" class="search" maxlength="30" value="<{$user_name}>" id="advance_user_name" name="advance_user_name" placeholder="请输入姓名">
+        </div>
+
+        <div class="dlbox">
+            <label for="appDateTime">手机号码</label>
+            <input type="text"class="search" maxlength="11" value="<{$mobile}>" id="advance_mobile" name="advance_mobile"  placeholder="请输入手机号">
+            <input type="hidden" name="advance_goods_id" value="<{$goods_id}>">
+        </div>
+
+         <div class="dlbox">
+            <label for="appDateTime">车牌号码</label>
+            <input type="hidden" id="car_sn" value="<{$car_sn}>">
+            <select id="prov" name="prov" style="height:30px;border-radius:2px;margin-left:10px;">
+                <foreach name="prov" item="p">
+                    <option value="<{$p}>"><{$p}></option>
+                </foreach>
+            </select>
+            <select id="letter" name="letter" style="height:30px;border-radius:2px;">
+                <foreach name="letter" item="l">
+                    <option value="<{$l}>"><{$l}></option>
+                </foreach>
+            </select>
+            <input type="text" class="search" maxlength="5" value="" id="advance_car_sn" name="advance_car_sn" placeholder="请输入车牌号码" style="text-transform:uppercase;width:115px;">
+        </div>
+
+        <div class="">
+            <label for="appDateTime">预约备注</label>
+            <textarea class="search" id="advance_remark" style="vertical-align: top;border-color: #ccc;margin-left: 10px;" name="advance_remark"></textarea>
+        </div>
+
+        <button type="button" id="submit" class="btn btn-danger btn-lg btn-block" style="margin-top:15px;" onclick="advance_submit()">提交预约信息</button>
+    <form>
+</div>
+
+<script type="text/javascript">
+    var car_sn=$('#car_sn').val();
+
+    $("#prov option[value='"+car_sn.substr(0,1)+"']").prop("selected",true); 
+    $("#letter option[value='"+car_sn.substr(1,1)+"']").prop("selected",true); 
+    $("#advance_car_sn").val(car_sn.substr(2,5));
+
+    function advance_submit(){
+
+        var m=/^1[3|4|5|7|8]\d{9}$/,mobile=$('#advance_mobile').val();
+
+        if(!$('#advance_time').val()){
+            MsgBox('请选择预约时间');
+            return false;
+        }
+        if(!$('#advance_user_name').val()){
+            MsgBox('请输入您的姓名');
+            return false;
+        }
+        if(!m.test(mobile)){
+            MsgBox('请填写正确的手机号码');
+            return false;
+        }
+
+        if(!$('#advance_car_sn').val()){
+            MsgBox('请输入车牌号码');
+            return false;
+        }
+        $('#submit').attr('disabled',true);
+        $.ajax({
+            url:"<{:U('Advance/advance_save')}>",
+            type:"post",
+            data:$("#advance_form").serialize(),
+            dataType:"json",
+            success:function(data){  
+                if(data.status==1){
+                    MsgBox(data.info);
+                    setTimeout('location.href="'+data.data+'"',2000);
+                }else{
+                    MsgBox(data.info);
+                    $('#submit').attr('disabled',false);
+                }
+        }});
+
+    }
+</script>
+
+<link href="http://s.17cct.com/v5/js/time/mobiscroll_date.css" rel="stylesheet" />
+<script src="http://s.17cct.com/v5/js/time/mobiscroll_date.js" charset="gb2312"></script> 
+<script src="http://s.17cct.com/v5/js/time/mobiscroll.js"></script> 
+<script type="text/javascript">
+    $(function () {
+        var currYear = (new Date()).getFullYear();  
+        var opt={};
+        opt.date = {preset : 'date'};
+        opt.datetime = {preset : 'datetime'};
+        opt.time = {preset : 'time'};
+        opt.default = {
+            theme: 'android-ics light', //皮肤样式
+            display: 'modal', //显示方式 
+            mode: 'scroller', //日期选择模式
+            dateFormat: 'yyyy-mm-dd',
+            lang: 'zh',
+            showNow: true,
+            nowText: "今天",
+            startYear: currYear - 10, //开始年份
+            endYear: currYear + 10 //结束年份
+        };
+        var optDateTime = $.extend(opt['datetime'], opt['default']);
+        $("#advance_time").mobiscroll(optDateTime).datetime(optDateTime);
+    });
+</script>
+
+</body>
+</html>

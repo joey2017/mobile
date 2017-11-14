@@ -1,0 +1,189 @@
+<include file="Inc:zjy_header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="Current">
+        	<a href="javascript:history.back();"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="Search">
+            <h1>精品路线</h1>
+        </div>
+    </div>
+</div>
+
+
+<div class="spshow">
+    <a href="">
+    <img class="yjbgimg" src="<{$route.img|getImgUrl=###,'large'}>" src2="" onerror="imgError(this,'http://s.17cct.com/v3/images/errorimg.jpg');" style="width:100%; height:auto;"> 
+        <!--
+        <div class="desc">
+            10 <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+        </div>
+        -->
+    </a>
+</div>
+
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-xs-12 title_h">
+            <{$route.title}>
+        </div>
+    </div>
+</div>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--预定按钮-->
+<div class="container-fluid" >
+    <div class="row phon">
+            <div class="col-xs-7 Price"><b><{$route.adult_price|price}></b><i>元</i><del><br>原价：<{$route.market_price|price}>元</del></div>
+            <div class="col-xs-5"><p class="text-right"><a class="btn <{$route.color}>" <if condition="$route.color eq 'btn-info'"> href="<{:U('Route/submit',array('id'=>$route['id']))}>"</if>  role="button"><{$route.word}></a></p></div>
+    </div>
+</div>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+<div class="container-fluid" >
+<div class="row phon" style="padding-top: 10px;padding-bottom: 10px;">
+    		
+			<div class="col-xs-9"><a href="/index.php/Store/map/id/35.html" style="line-height: 40px;">0771-2756623</a></div>
+            <div class="col-xs-2"><a href="tel:0771-2756623"><span aria-hidden="true" class="glyphicon glyphicon-earphone"></span></a></div>
+</div>
+</div>
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--购买须知-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>购买须知</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 txtcontent">
+            <{$route.leader_tips}>
+        </div>
+    </div>
+</div>
+<div class="container-fluid line"></div>
+
+
+<!--行程安排-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>行程安排</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 txtcontent">
+            <{$route.schedule}>
+        </div>
+    </div>
+</div>
+<div class="container-fluid line"></div>
+
+<!--详情介绍-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>详情介绍</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 txtcontent">
+           <{$route.content}>
+        </div>
+    </div>
+</div>
+<div class="container-fluid line"></div>
+
+
+<!--用户评价-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>用户评价</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 Score">
+           评 价：<i><{$route.all_point}></i>人
+           <!--
+           <span class="glyphicon glyphicon-star"></span>
+           <span class="glyphicon glyphicon-star"></span>
+           <span class="glyphicon glyphicon-star"></span>
+           <span class="glyphicon glyphicon-star"></span>
+           <span class="glyphicon glyphicon-star-empty"></span>
+           -->
+        </div>
+        <div class="col-xs-3"> 好 评：</div>
+        <div class="col-xs-9" style="margin-left: -32px;">
+            <div class="progress">
+              <div class="progress-bar  progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <{$point[0]}>;">
+                <{$point[0]}>
+              </div>
+            </div>
+        </div>
+        <div class="col-xs-3"> 中 评：</div>
+        <div class="col-xs-9" style="margin-left: -32px;">
+            <div class="progress">
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <{$point[2]}>;">
+               <{$point[2]}>
+              </div>
+            </div>
+        </div>
+        <div class="col-xs-3"> 差 评：</div>
+        <div class="col-xs-9" style="margin-left: -32px;">
+            <div class="progress">
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <{$point[1]}>;">
+                <{$point[1]}>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <volist name="remark" id="r">
+        <div class="media Review">
+          <div class="media-left">
+            <a href="javascript:void(0)">
+              <img class="media-object" src="__PUBLIC__/images/head.jpg" alt="..." width="64" height="64">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading"><{$r.user_name}><span><{$r.add_time|date="Y-m-d",###}></span></h4>
+            <{$r.content}>
+            <p class="Posts_cts_img">
+                <if condition="$r['imgs'][0]">
+                 <a><img src="<{$r['imgs'][0]|getImgUrl=###,'thumbnail'}>"></a>
+                </if>
+                <if condition="$r['imgs'][1]">
+                 <a><img src="<{$r['imgs'][1]|getImgUrl=###,'thumbnail'}>"></a>
+                </if>
+                <if condition="$r['imgs'][2]">
+                 <a><img src="<{$r['imgs'][2]|getImgUrl=###,'thumbnail'}>"></a>
+                </if>               
+            </p>
+          </div>
+        </div>
+    </volist>    
+</div>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<include file="Inc:footer"/>

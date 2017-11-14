@@ -1,0 +1,68 @@
+<include file="Inc:header"/>
+
+</head>
+
+<body>
+<!--弹出提示框-->
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <a href="<{:U('Store/view',array('id'=>$info['sid']))}>" ><div class="pg-Current">
+            <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pgt">
+            <a>返回门店</a>
+        </div>
+    </div>
+</div>
+
+<!--文章标题-->
+<div class="container-fluid">
+	<div class="row">
+    	<div class="col-xs-12 txttitle">
+        	<h2><{$info.title}></h2>
+            <div>
+            	<span><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<{$info.sname}></span>
+                <span><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>&nbsp;<{$info.view}></span>   
+                <span><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;<{$info.create_time|date="Y-m-d",###}></span>             
+            </div>
+        </div>
+        <div class="col-xs-12 txtcontent">
+        	<{$info.content}>
+        </div>
+   
+    </div>
+</div>
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<div id="dianping">
+    <div class="col-xs-12 plbox">
+    <!--评论内容开始-->
+        <!-- UY BEGIN -->
+        <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1976552"></script>
+        <!-- UY END -->
+        <div style="padding:10px;background:#fff;">
+
+         <div id="respond" class="no_webshot">
+            <form id="commentform">
+              <!-- UY BEGIN -->
+              <div id="uyan_frame"></div>
+              <!-- UY END -->
+            </form>
+          </div>
+          <div id="postcomments">
+          </div>
+        </div>  
+        <!--评论内容结束--> 
+       </div>
+</div>
+
+<!--以下个空格不要删-->
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<!--底部固定按钮-->
+
+
+<include file="Inc:footer"/>

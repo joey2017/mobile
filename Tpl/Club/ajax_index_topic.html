@@ -1,0 +1,13 @@
+<volist name="list" id="l">
+    <div class="container-fluid">
+        <div class="cyPosts"><a href="<{:U('topic_detail',array('id'=>$l['theme_id']))}>">
+            <h2><{$l.theme_name}></h2>
+            <img src="http://image.17cct.com<{$l.homepage_img}>!tiny" onerror="imgError(this,'http://s.17cct.com/v3/images/errorimg.jpg');" height="90px">
+            <p><{$l.theme_content}></p>
+            <div class="cyPosts_1">
+                <{$l.circle_name}>  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><{$l.theme_browsecount}> <!--<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>67845-->
+            </div>
+            </a>
+        </div>
+    </div>
+</volist>

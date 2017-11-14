@@ -1,0 +1,310 @@
+<include file="Inc:header"/>
+</head>
+<body id="Jlazy_img">
+<!--头部-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+            <a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+            <img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+            <a>发表评价</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){	
+    choose("point","span");
+    choose("point_group1","span");
+    choose("point_group2","span");
+    choose("point_group3","span");
+});
+function choose(id,doc) {
+    var _id = "#"+id;
+        c1  = "#ff8524",
+        c2  = "#d2d2d2",
+        c3  = "#f9f9f9",
+        attr1 = "color",
+        attr2 = "background";
+        index = 0 ;
+    
+    $(_id).find(doc).click(function(){
+        index = $(this).index(_id+" "+doc)+1;
+        if (id == "point") {
+            $(_id).find(doc).css(attr1,c1);
+            $(this).nextAll().css(attr1,c2);
+        }else {
+            $(_id).find(doc).css(attr2,c1);
+            $(this).nextAll().css(attr2,c3);
+        }
+        if (index != 0) {
+            $("#dp_"+id).val(index);
+        }
+    }); 
+}
+</script>
+<body>
+<div class="container-fluid">
+	<div class="row">    	
+        <a href="" style="display:block;color:#636363;overflow:hidden;">
+            <div class="Cheyou_1">
+                <img src="<{$route.img|getImgUrl=###,'thumbnail'}>" onerror="imgError(this,'http://s.17cct.com/v3/images/errorimg.jpg');">
+            </div>
+            <div class="my_od_f">
+                <h3><{$route.name}></h3>
+                <span><{$route.brief}></span>                                        
+            </div>            
+        </a>  
+        <div style="border-bottom:1px dashed #e0e0e0;margin:0 10px; overflow:hidden;"></div>      
+    </div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+    	<div style="margin:0 10px;">
+    		<h1 style="color:#ff8524; font-weight:bold; font-size:26px;">发表评价</h1>
+            <div style="border:1px solid #e0e0e0; overflow:hidden; margin-bottom:15px;">
+            	<form>                	    
+                    <dl>
+                    	<dd style="margin:10px 0 0 5px; overflow:hidden;">
+                        	<div style="width:100px; font-size:16px; color:#525252; float:left;"><span style="color:#F00; margin-right:5px; line-height:35px;">*</span>总体评价：</div>
+                            <div style="float:left; font-size:31px;" id="point">
+                            	<span class="glyphicon glyphicon-star Original-color"></span>
+                                <span class="glyphicon glyphicon-star Original-color"></span>
+                                <span class="glyphicon glyphicon-star Original-color"></span>
+                                <span class="glyphicon glyphicon-star Original-color"></span>
+                                <span class="glyphicon glyphicon-star Original-color"></span>
+                            </div>                            
+                        </dd>
+                        <dd style="overflow:hidden;color:#FFF; background-color:#ff8524; width:190px; font-size:12px; margin-left:105px; padding:0 5px;">点击星星为机构打分，最高5颗星</dd>
+                        <dd style="margin:10px 0 0 5px; overflow:hidden;">
+                        	<div style="width:100px; font-size:16px; color:#525252; float:left;"><span style="color:#F00; margin-right:5px;">*</span>服务态度：</div>
+                            <div id="point_group1">
+                            	<span class="Service-attitude"></span>
+                                <span class="Service-attitude"></span>
+                                <span class="Service-attitude"></span>
+                                <span class="Service-attitude"></span>
+                                <span class="Service-attitude"></span>
+                            </div>
+                        </dd>
+                        <dd style="margin:10px 0 0 5px; overflow:hidden;">
+                        	<div style="width:100px; font-size:16px; color:#525252; float:left;"><span style="color:#F00; margin-right:5px;">*</span>施工质量：</div>
+                            <div id="point_group2">
+                            	<span class="Service-attitude"></span>
+                                <span class="Service-attitude"></span>
+                                <span class="Service-attitude"></span>
+                                <span class="Service-attitude"></span>
+                                <span class="Service-attitude"></span>
+                            </div>
+                        </dd>
+                        <dd style="margin:10px 0 0 5px; overflow:hidden;">
+                        	<div style="width:100px;font-size:16px;color:#525252;float:left;letter-spacing:4px;"><span style="color:#F00;margin-right:5px;">*</span>性价比：</div>
+                            <div id="point_group3">
+                            	<span class="Service-attitude"></span>
+                                <span class="Service-attitude"></span>
+                                <span class="Service-attitude"></span>
+                                <span class="Service-attitude"></span>
+                                <span class="Service-attitude"></span>
+                            </div>
+                        </dd>
+                        <dd style="margin:10px 0 0 5px; overflow:hidden;">
+                        	<div style="width:100px;font-size:16px;color:#525252;float:left;letter-spacing:7px;"><span style="color:#F00;margin-right:5px;">*</span>内&nbsp;容：</div>
+                            <div>
+                            	<textarea id="content" class="form-control" rows="5" placeholder="亲，写点什么吧，您的意见对其他车友有很大的帮助喔！" style="width:65%;"></textarea>
+                            </div>
+                        </dd>
+                        <dd style="margin:10px 0 0 26px; overflow:hidden;">
+                        	<div style="width:80px;font-size:16px;color:#525252;float:left;letter-spacing:6px;">图&nbsp;片：</div>
+                            <div>
+                            	<span id='imgs1' ck-Click='0' class="Upload-Photos"><span class="glyphicon glyphicon-plus Upload-Photos-mg"></span></span>
+                                <span id='imgs2' ck-Click='0' class="Upload-Photos"><span class="glyphicon glyphicon-plus Upload-Photos-mg"></span></span>
+                                <span id='imgs3' ck-Click='0' class="Upload-Photos"><span class="glyphicon glyphicon-plus Upload-Photos-mg"></span></span>
+                            </div>
+                        </dd>                       
+                    </dl>
+                    <input type="hidden" value="<{$route.id}>"  name="order_id" id="order_id"/> 
+                    <input type="hidden" value="0" name="dp_point" id="dp_point"> 
+                    <input type="hidden" value="0" name="dp_point_group1" id="dp_point_group1"/>
+                    <input type="hidden" value="0" name="dp_point_group2" id="dp_point_group2"/> 
+                    <input type="hidden" value="0" name="dp_point_group3" id="dp_point_group3"/>
+                    <input type="hidden" value="0,0,0"  name="dp_imgs" id="dp_imgs"/>   
+                    <div class="col-xs-8 col-xs-offset-2" style="margin-bottom:10px;">
+                        <center>
+                            <button id="gotoCheck" type="button" class="btn btn-warning btn-block btn-lg" onclick="ajaxReviewSubmit(this);">发表评价</button>
+                        </center>
+                    </div> 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script src="__PUBLIC__/js/uploader.min.js"></script>
+<script type="text/javascript">
+(function($) {
+    $.fn.uploader = function(options) {
+        var settings = {
+            size_Limit: 2048000,
+            btnid: $(this).attr('id'),
+            action_url: '',
+            input_id: 'J_img',
+            input_name: 'img',
+            showMessage: function(message) {
+                MsgBox(message)
+            },
+            onSubmit: function(id, fileName) {},
+            onComplete: function(id, fileName, result) {}
+        };
+        if (options) {
+            $.extend(settings, options);
+        }
+        new qq.FileUploaderBasic({
+            //allowedExtensions: ['jpg', 'gif', 'jpeg', 'png', 'bmp', 'pdg', 'swf'],
+            allowedExtensions: ['jpg','jpeg','png'],
+            button: document.getElementById(settings.btnid),
+            multiple: false,
+            action: settings.action_url,
+            inputName: settings.input_name,
+            sizeLimit: settings.size_Limit,
+            forceMultipart: true,
+            messages: {
+                typeError: '不允许上传的文件类型！',
+                sizeError: '文件大小不能超过{sizeLimit}！',
+                minSizeError: '文件大小不能小于{minSizeLimit}！',
+                emptyError: '文件为空，请重新选择！',
+                noFilesError: '没有选择要上传的文件！',
+                onLeave: '正在上传文件，离开此页将取消上传！'
+            },
+            showMessage: settings.showMessage,
+            onSubmit: settings.onSubmit,
+            onComplete: settings.onComplete
+        })
+    }
+})(jQuery);
+
+uploader_btn('#imgs1',0); 
+uploader_btn('#imgs2',1); 
+uploader_btn('#imgs3',2); 
+
+var ckClick0 = false;
+var ckClick1 = false;
+var ckClick2 = false;
+//上传按钮 方法
+function uploader_btn(btn_name,btn_id){
+    var btn = $(btn_name);
+    btn.uploader({      
+        action_url: "<{:U('Review/ajaxUploadImg')}>",
+        onSubmit:function(id,fileName){     
+            if (btn.attr('ck-Click') == '1') {
+                MsgBox('上传中，请稍候');
+                return false;
+            } 
+            btn.attr('ck-Click','1');
+            btn.html('').css('padding-top','8px').append('<img src="__PUBLIC__/images/minilodging.gif">');
+        },
+        onComplete: function(id, fileName, result) {
+            if(result.status == 1){   
+                btn.attr('ck-Click','0');  
+                btn.html('').css('padding-top',0).append('<span style="display:block; width:100%; height:100%;"><img src="'+result.data.img_url+'" style="width:100%; height:100%;"></span><a href="javascript:void(0);" class="Crossed" onclick="deleteImg(this,'+btn_id+')"><span class="glyphicon glyphicon-remove-circle"></span></a>');
+                imgsVal(btn_id,'up',result.data.img_url);
+            }else{
+                btn.html('').css('padding-top',0).append('<span class="glyphicon glyphicon-plus Upload-Photos-mg"></span>');
+                btn.attr('ck-Click','0'); 
+                MsgBox(result.info);
+            }
+        }
+    });
+}
+//删除照片
+function deleteImg(obj, btn_id){
+    imgsVal(btn_id,'del','');
+    var _imgs = $(obj).parent();
+    _imgs.html('').append('<span class="glyphicon glyphicon-plus Upload-Photos-mg"></span>');
+    uploader_btn('#'+_imgs.attr('id'),btn_id);
+}
+
+//input[name=dp_imgs]值
+function imgsVal(btn_id,type,url){
+    var _imgs = $('#dp_imgs');
+    var caseImgs = _imgs.val();
+    var caseImgsArr = caseImgs.split(',');
+    if(type=='up'){
+        caseImgsArr.splice(btn_id, 1,url);
+    }else if(type=='del'){
+        caseImgsArr.splice(btn_id, 1,'0');
+    }
+    caseImgs = caseImgsArr.join(',');
+    _imgs.val(caseImgs);
+}
+
+
+function ajaxReviewSubmit(obj) {
+    var _this    = $(obj);
+    var order_id     = parseInt($('#order_id').val());
+    var dp_point = parseInt($('#dp_point').val());
+    var content  = $('#content').val();
+    var dp_point_group1 = parseInt($('#dp_point_group1').val());
+    var dp_point_group2 = parseInt($('#dp_point_group2').val());
+    var dp_point_group3 = parseInt($('#dp_point_group3').val());
+    var dp_imgs = $('#dp_imgs').val();
+    var error_msg = '';
+    _this.text('提交评论中').attr('disabled',true);
+    if (dp_point <= 0 || dp_point > 5) {
+        error_msg = '请选择总体评价';
+    }else if (dp_point_group1 <= 0 || dp_point_group1 > 5){
+        error_msg = '请选择服务态度';
+    }else if (dp_point_group2 <= 0 || dp_point_group2 > 5) {
+        error_msg = '请选择施工质量';
+    }else if (dp_point_group3 <= 0 || dp_point_group3 > 5) {
+        error_msg = '请选择性价比';
+    }else if (content == '') {
+        error_msg = '评价不能为空';
+    }else if (order_id == '' || order_id <= 0) {
+        error_msg = '网络繁忙，请稍后重试';
+    }
+    if (error_msg != '') {
+        MsgBox(error_msg);
+        _this.text('发表评论').attr('disabled',false);
+        return false;
+    }
+    $.ajax({ 
+        type:"post",
+        url: "<{:U('Route/ajax_submit_review')}>", 
+        data:{
+            'id':order_id,
+            'point':dp_point,
+            'point_g1':dp_point_group1,
+            'point_g2':dp_point_group2,
+            'point_g3':dp_point_group3,
+            'content':content,
+            'imgs':dp_imgs
+        }, 
+        dataType:"json",
+        success: function(d){
+            if (d.status ==1 ) {
+                MsgBox(d.info,'',d.data);  
+            }else {
+                MsgBox(d.info);
+                _this.text('发表评论').attr('disabled',false);  
+            }
+        },
+        error:function(o){
+            MsgBox('网络繁忙，请稍后重试');
+            _this.text('发表评论').attr('disabled',false);  
+        }
+    });
+    return false;
+}
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+   WeixinJSBridge.call('hideToolbar');
+   WeixinJSBridge.call('hideOptionMenu');
+});
+</script>
+<include file="Inc:footer"/>

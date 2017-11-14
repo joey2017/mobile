@@ -1,0 +1,254 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>服务优惠</a>
+        </div>
+    </div>
+</div>
+
+<!--菜单属性筛选-->
+<nav id="cbp-hrmenu" class="cbp-hrmenu">
+    <ul>
+        <li id="area" date-url="<{:U('Search/area')}><{$link}>"> <a href="#" class="hrmenutopa"><{$area_name}><span></span></a>
+            <div id="area_html"></div>
+        </li>
+        <li id="service_cate" date-url="<{:U('Search/service_cate')}><{$link}>"> <a href="#" class="hrmenutopa"><{$cate_name}><span></span></a>
+            <div id="service_cate_html"></div>
+        </li>
+        <li id="order_by" date-url="<{:U('Search/order_by')}><{$link}>"> <a href="#" class="hrmenutopa"><{$orderby}><span></span></a>
+            <div id="order_by_html"></div>
+        </li>
+    </ul>
+</nav>
+<div class="black" id="black"></div>
+<!--筛选按钮js-->
+<script>
+$('body').css('position','relative');
+var cbpHorizontalMenu = (function() {
+    var b = $("#cbp-hrmenu > ul > li"),
+    g = b.children("a"),
+    c = $("body"),
+    bk = $("#black"),
+    d = -1;
+    function f() {
+        g.on("click", a);
+        b.on("click",
+        function(h) {
+            h.stopPropagation()
+        })
+    }
+    function a(j) {
+        if (d !== -1) {
+            b.eq(d).removeClass("cbp-hropen");
+            bk.hide();  
+        }
+        var i = $(j.currentTarget).parent("li"),
+        h = i.index();
+        if (d === h) {
+            i.removeClass("cbp-hropen");
+            bk.hide();  
+            d = -1;
+        } else {
+            i.addClass("cbp-hropen");
+            doselect(i.attr('id'),i.attr('date-url'))
+            bk.show(); 
+            d = h;
+            c.off("click").on("click", e);
+        }
+        return false
+    }
+    function e(h) {
+        b.eq(d).removeClass("cbp-hropen");
+        bk.hide(); 
+        d = -1;
+    }
+    return {
+        init: f
+    }
+})();
+
+$(function() {
+    cbpHorizontalMenu.init();
+});
+    
+//筛选菜单下的选项卡
+function nTabs(thisObj,Num){
+   if(thisObj.className == "active")return;
+    var tabObj = thisObj.parentNode.id;
+    var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+    var tabListLength = tabList.length;
+    for(i = 0 ; i < tabListLength; i++)
+    {
+        if (i == Num)
+        {
+           tabList[tabListLength-i-1].className = "active"; 
+           document.getElementById(tabObj+"_Content"+i).className = "";
+        }else{
+           tabList[tabListLength-i-1].className = "normal"; 
+           document.getElementById(tabObj+"_Content"+i).className = "none";
+        }
+    } 
+    return false;
+}
+function doselect(name, url) {
+    $.ajax({
+        url: url,
+        type: 'post',
+        dataType: 'html',
+        success: function(data) {
+            $("#" + name + "_html" ).html(data);
+        }
+    });
+}
+</script>
+
+<if condition="$count eq 0">
+    <div class="container-fluid line"></div>
+    <div class="container-fluid">
+        <div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">暂无信息</p></div>
+    </div>
+<else />
+<div class="none" id="position-tip">
+    <div class="container-fluid line"></div>
+    <div class="container-fluid">
+        <div class="row"><center><div style="line-height:40px;"><img src=" __PUBLIC__/images/minilodging.gif">正在加载...</div></center></div>
+    </div>
+</div>
+    <div id="adlist"></div>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.esn.autobrowse.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v2.0&ak=tEflu9uwxEGzOsVPA11HS9Yl"></script> 
+<script>
+    $(function() {
+        var allRows = parseInt('<{$count}>');
+        var loadingRows = 5 ;
+        var totalPage = Math.ceil(allRows/loadingRows);
+        var max = totalPage > 100 ? 100 : totalPage;
+        if (totalPage >= 1) {
+            var lng = $.cookie('lng');
+            var lat = $.cookie('lat');
+            if (lng && lat) {
+                adautobrowse('adlist', '<{:U("Search/ajaxGetDeal")}><{$link}>&lnums='+loadingRows+'&lng='+lng+'&lat='+lat,max);
+            }else{
+                $('#position-tip').show();
+                getPosition(loadingRows,max);
+            }
+        }
+    });
+
+    function getPosition (rows,max) {
+        var geolocation = new BMap.Geolocation(); 
+        geolocation.getCurrentPosition(function (r) {
+            if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                point_lng=r.point.lng;
+                point_lat=r.point.lat;
+                var expiresDate= new Date();
+                expiresDate.setTime(expiresDate.getTime() + (2*60*1000));  
+                $.cookie('lng',point_lng, {path:'/',expires:expiresDate});
+                $.cookie('lat',point_lat, {path:'/',expires:expiresDate});
+                $('#position-tip').hide();
+                adautobrowse('adlist', '<{:U("Search/ajaxGetDeal")}><{$link}>&lnums='+rows+'&lng='+point_lng+'&lat='+point_lat,max);
+            }else if(this.getStatus()==BMAP_STATUS_SERVICE_UNAVAILABLE){            
+                alert("无法通过浏览器定位您的位置.您可以在我们诚车堂微信中发送您的地理位置给我们，以便获取您附近的商家");
+            }else if(this.getStatus()==BMAP_STATUS_TIMEOUT) {
+                alert("请求超时,请刷新再试"); 
+            }
+
+         }); 
+    }
+
+    function adautobrowse(dom, url, total) {
+        $("#"+dom).autobrowse({
+            url: function(offset) {
+                return   url + '&p=' + offset;
+            },
+            template: function(response) {
+                return callbacks(response);
+            },
+            itemsReturned: function(response) {
+                return 1;
+            },
+            max: total,
+            offset: 1,
+            sensitivity: 100,
+            loader: '<div class="container-fluid line"></div><div class="container-fluid"><div class="row"><center><div style="line-height:40px;"><img src="__PUBLIC__/images/minilodging.gif">正在加载...</div></center></div></div>',
+            finished: function() {
+                $(this).append('<div class="container-fluid line"></div><div class="container-fluid"><div class="row"><center><div style="line-height:40px;">已加载全部内容</div></center></div></div>');
+            },
+            onError: function() {
+                alert('加载失败，请稍后重试')
+            }
+        });
+    }
+
+    function callbacks(response) {
+        var markup = '';
+        var errorImg = "this.src='http://s.17cct.com/v3/images/errorimg.jpg';this.onerror=''";
+        if (response.data) {
+            var list = response.data,
+                listLength = list.length;
+            for (var i= 0;i<listLength;i++) {
+                markup += '<div class="container-fluid line"></div>';
+                markup += '<div class="container-fluid">';
+                markup += '    <div class="row" >';
+                markup += '        <div class="col-xs-12" >';
+                markup += '            <div class="sjpg_t">';
+                markup += '                <a href="'+list[i].url+'"><h2 style="margin-top:10px;">'+list[i].sname+'<span><img src="__PUBLIC__/images/chuang.png" width="40" height="40"></span></h2></a>';
+                markup += '                <p class="text-left" style="float:left;margin:0 0 1px;"><span class="djx" id="pf0'+parseInt(list[i].avg_point)+'"></span>'+parseFloat(list[i].avg_point).toFixed(2)+'分</p>';
+                markup += '                <p class="text-right" style="font-weight:bold;color:#ff9d09;margin:0 0 1px;">'+list[i].distance+'km</p>';
+                markup += '                <p class="my_od_f" style="color:#919191;margin:0 0 5px;">'+list[i].address+'</p>';
+                markup += '            </div>';
+                markup += '        </div>';
+                markup += '    </div>';
+                markup += '</div>';
+                markup += '<div class="container-fluid">';
+                markup += '    <div class="row">';
+                markup += '        <div class="col-xs-12 ">';
+                if (list[i].items) {
+                    var listItem = list[i].items;
+                    var listItemLength = listItem.length;
+                    for (var itm = 0; itm < listItemLength; itm++) {
+                        markup += '            <div class="row">';
+                        markup += '                <a href="'+listItem[itm].url+'" class="tab_a tab_b_l">';
+                        markup += '                    <div class="col-xs-5" style="margin:10px 0 0 0;">';
+                        markup += '                        <img src="'+listItem[itm].img+'" onerror="'+errorImg+'" style=" width:100%; height:auto">'; 
+                        markup += '                    </div>';
+                        markup += '                    <div class="col-xs-7 txtbox" style="margin:0; padding:0;">';
+                        markup += '                        <h3>'+listItem[itm].name+'</h3>';
+                        markup += '                        <p class="tcont">'+listItem[itm].brief+'</p>';
+                        markup += '                        <p><b>'+parseFloat(listItem[itm].current_price).toFixed(2)+'元</b><del>'+parseFloat(listItem[itm].origin_price).toFixed(2)+'元</del></p>';
+                        markup += '                    </div>';
+                        markup += '                </a>';
+                        markup += '            </div>';
+                    }
+                }
+                markup += '        </div>';
+                markup += '    </div>';
+                markup += '</div>';
+            }
+        } else {
+            markup = '<div class="container-fluid"><div class="row"><p style="color: #5f5f5f;text-align:center;margin-top:10px;">加载失败，请稍后重试</p></div></div>';
+        }
+        return markup;
+    }
+</script>
+</if>
+<div class="container-fluid line"></div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+<include file="Inc:footer"/>

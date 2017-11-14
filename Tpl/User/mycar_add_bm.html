@@ -1,0 +1,9 @@
+<foreach name="brand" item="brand" key="key">
+ <span class="markspan"><{$key}></span>
+   <li><foreach name="brand" item="bd" key="k">
+        <div class="link" onclick="c_mode('<{$bd.id}>','<{$bd.name}>')"><a href="javascript:void(0);"><{$bd.name}></a></div>
+        </foreach>
+   </li>
+	 
+</foreach>
+

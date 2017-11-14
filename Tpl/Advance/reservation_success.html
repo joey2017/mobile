@@ -1,0 +1,117 @@
+<include file="Inc:header"/>
+
+<style type="text/css">
+.pgt{padding: 0;}
+.tab_parent{padding-left: 10px;}
+.tab_subset{margin:0; padding: 0 10px 0 0;}
+ul{margin:0;list-style: none; padding: 0;}
+a{color: #333;}
+a:focus,a:active, a:hover{color: #333; text-decoration: none;}
+.box_flex{font-size:14px; display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -moz-flex; display: -ms-flexbox; display: flex;}
+.flex1{ -webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;}
+
+body{height: 100%;background: #eee; position:relative;}
+.reserve_tab{ padding: 15px;}
+.resbox,.storebox{border:1px solid #ccc; background: #fff;  margin-bottom: 15px; overflow: hidden; border-radius: 6px;}
+.name_a{padding: 5px 15px 5px 5px; height: 58px;}
+.resimg,.resico{width: 48px; height: 48px; margin-right: 10px; display: block; float: left; overflow: hidden;border-radius: 24px;}
+.resbox p{line-height: 47px; margin: 0;}
+
+.resul li{height: 60px; border-bottom:1px solid #ccc;padding: 5px 15px 5px 5px;  }
+.resul li:last-child{border:0;}
+.resico{width:30px; margin-top: 8px; height:30px;background-image: url(__PUBLIC__/images/reserve2.svg); background-repeat: no-repeat; background-size: 62px; border-radius: 0;}
+.re01{background-position: 3px 2px;}
+.re02{background-position: 3px -47px;}
+.re03{background-position: 3px -94px;}
+.re04{background-position: 3px -142px;}
+.re05{background-position: -36px 3px;}
+.re06{background-position: -36px -44px}
+.reserve_span{padding-right: 10px; color: #989898;}
+.shico{ color: #ff7800; }
+</style>
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<!--头部-->
+
+<!-- <div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+       
+        <div class="pg-Current">
+        	 <a href=""><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pgt">
+        	<a href="<{:U('Advance/reservation')}>">返回</a>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="col-xs-12">
+	<center>
+		<h2 class="shico" style="font-size: 35px;" ><i class="fa fa-check-square-o"></i> 预约成功</h2>
+	</center>
+	<p>尊敬车主，我们已经收到您的预约通知！感谢您对<span class="shico"><{$info[0].store_name}></span>的信赖和支持！我们将在三十分钟内与您电话确认。若有任何问题，欢迎致电：<span class="shico"><{$info[0].store_contact}></span></p>
+</div>
+
+
+
+<div class="reserve_tab">
+	<div class="resbox">
+		<ul class="resul">
+			<li>
+				<a class="box_flex">
+					<span class="resico re01"></span>
+					<p class="flex1"><span class="reserve_span">用户姓名</span><{$info[0].car_owner}></p>
+				</a>
+			</li>
+			<li>
+				<a class="box_flex">
+					<span class="resico re02"></span>
+					<p class="flex1"><span class="reserve_span">联系电话</span><{$info[0].user_mobile}></p>
+				</a>
+			</li>
+			<li>
+				<a class="box_flex">
+					<span class="resico re03"></span>
+					<p class="flex1"><span class="reserve_span">到店时间</span><{$info[0].service_time|date="Y-m-d H:i",###}></p>
+				</a>
+			</li>
+			<li>
+				<a class="box_flex">
+					<span class="resico re04"></span>
+					<p class="flex1"><span class="reserve_span">预约项目</span><{$info[0].item}></p>
+				</a>
+			</li>
+			<li>
+				<a class="box_flex">
+					<span class="resico re05"></span>
+					<p class="flex1"><span class="reserve_span">服务门店</span><{$info[0].store_name}></p>
+				</a>
+			</li>
+			<li>
+				<a class="box_flex">
+					<span class="resico re06"></span>
+					<p class="flex1"><span class="reserve_span">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</span><{$info[0].remark}></p>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="resbox">
+		<button id="btn" class="btn btn-lg btn-block btn-warning">查看我的预约</button>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+    document.getElementById("btn").onclick=function(){
+        window.location.href = "<{:U('Advance/reservation_record')}>";
+    };
+</script>
+
+<div style="height:60px; clear:both;"></div>
+
+<!--底部固定按钮-->
+<include file="Inc:footer"/>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<title>消息详情</title>
+		<link rel="stylesheet" href="__PUBLIC__/css/iconfont.css" />
+		<link rel="stylesheet" href="__PUBLIC__/css/reset.css" />
+		<link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/text.css"/>
+		<script type="text/javascript" src="__PUBLIC__/js/jquery.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<div class="box">
+			<div class="detail-text">
+				<p><{$msg.content}></p>
+			</div>			
+			<div class="detail-time">
+				<p><{$msg.time|date='Y-m-d H:i:s',###}></p>
+			</div>	
+		</div>
+		<!--盒子 结束-->
+	<include file="Inc:sup_footer" />
+<script type="text/javascript" src="__PUBLIC__/js/move.js" ></script>	
+<script type="text/javascript">
+	$('.pos-nav a').eq(0).addClass('nav-red');
+</script>

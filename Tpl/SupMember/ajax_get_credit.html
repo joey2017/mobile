@@ -1,0 +1,14 @@
+<volist name="order_info" id="oi">
+	<li>
+		<div class="brief-left" style="width:133px;">
+			<h2 style="font-size: 14px;"><{$oi.location_name}></h2>
+			<strong><{$oi.contact}></strong>
+		</div>
+		<div class="brief-right">
+			<p>联系方式：<{$oi.mobile}></p>
+			<p>授权额度：<span><{$oi.credit_line|price}></span></p>
+			<p>剩余额度：<span><{$oi.surplus|price}></span></p>
+		</div>
+	</li>
+</volist>
+

@@ -1,0 +1,79 @@
+<if condition="$card neq ''">
+<!-- 年卡样式 -->
+<style type="text/css">
+.Member_car{box-shadow: 1px 1px 0 #e9e9e9; padding: 6px; margin-top: 12px;  border-radius: 10px;position: relative;}
+.n_bg{background:#cd0000 url(__PUBLIC__/images/cardbg.png) repeat-x 0 100px;}
+.c_bg{background:#f47300 url(__PUBLIC__/images/cardbg.png) repeat-x 0 100px;}
+.Member_car h2{height: 45px; overflow: hidden; font-size: 20px; color: #fff; margin: 14px 0 0 0;}
+.Member_car h2 i{margin-right: 6px;}
+.Member_car h2 i img{border-radius: 45px;}
+.Member_car p.mintxt{ color: #fff; height: 17px; overflow: hidden; font-size: 12px; text-indent:  4.4em;}
+.Member_car .row{margin-top: 34px; }
+.Member_car .text-left{white-space: nowrap; text-overflow: ellipsis;}
+.Member_car .row .btn{float: right; margin-left:5px !important; }
+
+.guanbi{width: 30px;
+height: 30px;
+display: block;
+position: absolute;
+top: 5px;
+right: 6px;
+border-radius: 30px;
+color: #fff;
+text-align: center;
+line-height: 25px;
+font-size: 30px;
+background: rgba(0, 0, 0, 0.3);}
+
+</style>
+<volist name="card" id="card">
+<!--年卡列表-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="Member_car <if condition='$card.type eq 1'>n<else/>c</if>_bg">
+                <if condition="$card['status'] eq 1">
+                   <a class="guanbi" onclick="javascript:OperateCard(<{$card.id}>)">×</a>
+                  </if>
+                <h2><i><img src="<{$card.preview|getImgUrl=###,''}>" width="45" height="45" /></i><{$card.card_name}></h2>
+                <p class="mintxt"><{$card.brief}></p>
+                <div class="row">
+                    <div class="col-xs-6"><p style="font-size: 12px;color: #888;line-height: 32px; margin: 0;"><if condition="$card['user_end_time'] neq '' ">有效时间:<{$card.user_end_time}></if></p></div>  
+                     <div class="col-xs-6">
+                        <if condition="$card['status'] eq 2">
+                            <button type="button" onclick="window.location.href='<{:U('User/card_view',array('id'=>$card['id']))}>'" class="btn btn-sm btn-danger">查看详情</button>
+                        </if>
+                        <if condition="$card['status'] eq 1">
+                            <!--<button type="button" onclick="window.location.href='<{:U('Card/order',array('id'=>$card['id']))}>'" class="btn btn-xs btn-warning">支付订单</button>-->
+                             <button type="button" onclick="window.location.href='<{:U('Card/order',array('id'=>$card['id']))}>'" class="btn btn-sm btn-warning">支付订单</button>
+                        </if>
+                    </div> 
+                </div>
+               
+            </div>
+            
+        </div>
+    </div>
+</div>
+</volist>
+<script type="text/javascript">
+      function OperateCard(oid) {
+       
+        if (confirm("确定要删除订单吗？")) {            
+            $.ajax({
+                type:'post',
+                url: '<{:U("User/ajaxOperateCardOrder")}>',
+                dataType:'json',
+                data:{"id":oid,"t":2},
+                success:function( d ){                            
+                  if(d.status == 1){ 
+                    location.reload();
+                  }
+                  MsgBox(d.info);
+                }
+            });
+        }
+    }
+</script>
+<p style="height:5px;">&nbsp;</p>
+</if>

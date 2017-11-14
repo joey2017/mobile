@@ -1,0 +1,133 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>今日抽奖</a>
+        </div>
+        <div class="cybtn">
+            <a href="<{:U('Index/exchange')}>?t=1"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp兑换奖品</a>
+        </div> 
+    </div>
+</div>
+<!--抽奖转盘-->
+<div class="container-fluid" style=" height:100%; background:#a31a0a;">
+	<div class="row">
+        <!-- Demo start  -->
+        <div class="rotary">
+			<div class="col-xs-12 rotaryArrow" id="rotaryArrow">
+            </div>
+            <div class="result" id="result">
+                <p id="resultTxt"></p>
+                <a href="javascript:" id="resultBtn" title="关闭">关闭</a>
+            </div>
+        </div>
+        <!-- Demo end -->
+        <div class="cjbox">
+            <div class="col-xs-12 cjbt">活动规则</div>
+            <div class="col-xs-12 cjtxt">
+                <p>参与人员：诚车堂汽车网会员</P>
+                <P>抽奖限制：每人每日限制3次</P>
+                <p>温馨提示：</p>
+                <p>抽奖获得的积分可兑换奖品哦！</p>
+            </div>
+        </div>
+    </div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<!--抽奖大转盘-->
+<script src="__PUBLIC__/js/zhuanpan.js"></script>
+<script type="text/javascript">
+$("body").css("background","#a31a0a")
+$(function(){
+	var $rotaryArrow = $('#rotaryArrow');
+	    $result = $('#result'),
+	    $resultTxt = $('#resultTxt'),
+	    $resultBtn = $('#result');
+        $ckClick = false;
+	$rotaryArrow.unbind('click').click(function(){
+        if ($ckClick) {
+           $resultTxt.html('正在抽奖中');
+           $result.show(); 
+           return false;
+        } 
+        $ckClick = true;
+        $.ajax({
+            url: "<{:U('Index/ajaxDoLottery')}>",
+            type: 'post',
+            dataType: 'json',
+            success: function(d) {
+                if (d.status == 1) {
+                    resFunc(d.data);
+                } else {
+                    $ckClick = false;
+                    $resultTxt.html(d.info);
+                    $result.show();
+                }
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){
+                $ckClick = false;
+                $resultTxt.html('网络延迟，请稍后重试');
+                $result.show();
+             }
+        });
+        return  false;
+	});
+	var rotateFunc = function(awards,angle,text){  //awards:奖项，angle:奖项对应的角度
+		$rotaryArrow.rotate({
+			angle: 0,
+			duration: 5000,
+			animateTo: angle + 1440,  //angle是图片上各奖项对应的角度，1440是让指针固定旋转4圈
+			callback: function(){
+                $ckClick = false;
+				$resultTxt.html(text);
+				$result.show();
+			}
+		});
+	};
+    var resFunc = function(num){  //抽奖结果
+        var n = parseInt(num);
+        switch(n){
+            case 1: 
+                rotateFunc(1,268,'恭喜您获得了 <em>50</em> 个积分');
+                break;
+            case 2: 
+                rotateFunc(2,316,'恭喜您获得了 <em>30</em> 个积分');
+                break;
+            case 3: 
+                rotateFunc(3,223,'恭喜您获得了 <em>20</em> 个积分');
+                break;
+            case 4: 
+                rotateFunc(4,134,'恭喜您获得了 <em>10</em> 个积分');
+                break;
+            case 5: 
+                rotateFunc(5,43,'恭喜您获得了 <em>5</em> 个积分');
+                break;
+            case 6: 
+                rotateFunc(6,87,'恭喜您获得了 <em>1</em> 个积分');
+                break;
+            case 7: 
+                rotateFunc(7,177,'很遗憾，这次您未抽中奖，继续加油吧');
+                break;
+            case 8: 
+                rotateFunc(8,0,'很遗憾，这次您未抽中奖，继续加油吧');
+                break;
+            default:
+                rotateFunc(8,0,'很遗憾，这次您未抽中奖，继续加油吧');
+        }
+    };
+	$resultBtn.click(function(){
+		$result.hide();
+	});
+});
+</script>
+<include file="Inc:footer"/>

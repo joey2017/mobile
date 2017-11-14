@@ -1,0 +1,237 @@
+<include file="Inc:header"/>
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<style type="text/css">
+html,body{margin: 0; padding: 0; height: 100%;}
+.userbg{position: relative; width: 100%; min-height: 100%; background: url(__PUBLIC__/images/uesrbg.jpg) no-repeat 0 0 ; background-size: 100%;}
+
+.sign_in_logo{width: 72px; height: 72px; margin: 30px auto; padding: 10px; border-radius:50%; background: #cd0000;}
+.sign_in_logo img{width: 100%; height: 100%;}
+
+.bossbox{position:absolute; width: 280px; height: 460px; top: 50%; left: 50%; margin-left:-140px; margin-top: -230px; border-radius: 8px; }
+
+.dlbox{ margin: 10px auto; border-bottom: 1px solid #a8a8a8; height: 40px;position: relative;}
+.dlbox span{ width: 27px; height: 35px; line-height: 37px; display: inline-block; font-size: 18px; text-align: center; vertical-align: middle; color: #fff;}
+.dlbox input{ border:0; outline:none; background-color:transparent; vertical-align:middle; width: 230px; height: 35px;  margin-left: 5px; font-size: 14px; color: #fff;}
+.dlbtn{ height: 50px; line-height: 50px; font-size: 20px; display: block; margin:0 auto;   color: #fff;   background:#ef2626; border-radius: 6px;}
+.confirm{ position: absolute; width: 95px; line-height: 18px; display: block; right: 0; top: 0;  background: #fff;  color: #5a5656;  text-align: center;  border-radius: 5px;}
+
+/*已有账号*/
+.sign_in{position: absolute; z-index: 2; width: 100%; height: 100%;}
+
+
+@media (min-width: 601px){
+.userbg{width: 601px; margin:0 auto; }
+}
+</style>
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+
+<div class="userbg">
+	<div class="bossbox">
+	    <!-- 标志 -->
+	    <div class="sign_in_logo">
+	    	<img src="http://weixin.17cct.com/Public/images/cheng.png">
+	    </div>
+
+        <div class="dlbox">
+            <span><i class="fa fa-mobile"></i></span>
+            <input type="tel" class="search" name="mobile" id="mobile" maxlength="11"  placeholder="输入您的手机号码">
+        </div>
+
+        <div class="dlbox" id="pwd_div">
+            <span><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+            <input type="password" class="search" name="pwd" id="pwd" placeholder="请输入密码(限6-12位字母或数字)">
+        </div>
+
+        <div class="dlbox">
+            <span><i class="fa fa-key"></i></span>
+            <input type="tel" class="search" name="code" id="code" placeholder="请输入4位验证码">
+            <button class="btn confirm" id="getcode" >获取验证码</button>
+        </div>
+
+        <button class="btn-block btn-lg btn-danger btn" id="reg_btn" onclick="registSubmit(this);" style="margin-top:20px;">立即注册</button>
+		
+    </div>
+
+	<input type="hidden" id="send_code_type" value="reg_code">
+	<input type="hidden" id="submit_url" value="<{:U('User/ajaxRegist')}>">
+<script type="text/javascript">
+
+var wait = 60;
+function time(o) {
+    if (wait == 0) {
+        wait = 60;
+        $(o).attr('disabled',false)
+        $(o).text('获取验证码');
+        $('#mobile').attr('readonly',false);
+    } else {
+        wait--;
+        $(o).attr('disabled',true)
+        $(o).text('重 发 (' + wait + ')');
+        $('#mobile').attr('readonly',true);
+        setTimeout(function(){time(o);},1000);
+    }
+}
+
+$('#mobile').keyup(function(){
+	if($(this).val().length>10){
+		 $.ajax({
+          url:'<{:U("User/checkMobile")}>',
+          type:'post',
+          dataType:'json',
+          data:{'mobile':$(this).val(),'type':'regist'},
+          success:function (d) {  
+
+			// hack在微信等webview中无法修改document.title的情况
+          	var $body = $('body');
+              if (d.status!=1) {
+              	      
+				        document.title = '绑定微信';
+				       
+              	  	MsgBox('手机号已注册,获取验证码绑定微信');
+              	  	$('#pwd_div').hide();
+              	  	$('#reg_btn').text('绑定微信');
+              	  	$('#send_code_type').val('wx_code');
+              	  	$('#submit_url').val("<{:U('User/ajaxbindWx')}>");
+              		//  SendCode(mobile,g);
+            	}else{
+            		document.title = '用户注册';
+            		$('#send_code_type').val('reg_code');
+              	  	$('#submit_url').val("<{:U('User/ajaxRegist')}>");
+            		$('#pwd_div').show();
+            		$('#reg_btn').text('立即注册');
+            	} 
+            	var $iframe = $('<iframe src="/favicon.ico"></iframe>');
+		        $iframe.on('load',function() {
+		            setTimeout(function() {
+		                $iframe.off('load').remove();
+		            }, 0);
+		        }).appendTo($body);
+          }
+        });
+	}
+})
+
+function MsgBox(alertdetail, alerttitle, gourl) {
+	if (alerttitle == 'undefined' || alerttitle == '' || alerttitle == null) {
+		$('#alerttitle').hide();
+	}else{
+		$('#alerttitle').text(alerttitle).show();
+	}
+	$('#alertdetail').text(alertdetail);
+	if (arguments.length == 1 || arguments.length == 2) {
+		$('#msgBox').show().fadeOut(4000);
+	} else if (arguments.length == 3) {
+		// $('#msgBox').show().fadeOut(3000, function() {
+		// 	location.href = gourl;
+		// });
+		location.href = gourl;
+		$('#msgBox').show().fadeOut(4000);
+	}
+}
+
+document.getElementById("getcode").onclick = function() {
+    var g = this;
+    var mobile = $.trim($("#mobile").val());//验证手机号
+    if(!isMobile(mobile)) {
+        MsgBox("请输入正确的手机号");
+        return false;
+    } else {
+        if(wait != 60){
+          return false;
+        }
+        SendCode(mobile,g);
+       /* $.ajax({
+          url:'<{:U("User/checkMobile")}>',
+          type:'post',
+          dataType:'json',
+          data:{'mobile':mobile,'type':'regist'},
+          success:function (d) {  
+              if (d.status == 1) {
+                SendCode(mobile,g);
+            } else {
+                MsgBox(d.info);
+            }
+          }
+        });*/
+    }
+}
+
+//发送手机验证码
+
+function SendCode(mobile,o) {
+    $.ajax({
+        url: "<{:U('User/sendCode')}>",
+        type: 'post',
+        dataType: 'json',
+        data:{'mobile':mobile,'type':$('#send_code_type').val()},
+        success: function(d) {
+            if (d.status == 1) {
+              MsgBox(d.info);
+              time(o);
+            } else {
+              MsgBox(d.info);
+            }
+        }
+    });
+}
+
+function isAlphaNumeric(val) {
+    return (/^[a-zA-Z0-9]+$/.test(val));
+}
+
+function registSubmit(obj) {
+    var _this = $(obj),
+        mobile = $.trim($("#mobile").val()),
+        code = $.trim($("#code").val()),
+        password1 = $.trim($("#pwd").val()),c = /^\d{4}$/i,send_code_type=$('#send_code_type').val(),sub_url=$('#submit_url').val();
+    if (!isMobile(mobile)) {
+        MsgBox("请输入正确的手机号");
+        return false;
+    }
+    if (!code||!c.test(code)) {
+        MsgBox("验证码格式错误");
+        return false;
+    }
+    if (!password1&&send_code_type=='reg_code') {
+        MsgBox("请输入密码");
+        return false;
+    }
+    if (password1.length<6&&send_code_type=='reg_code'||password1.length>16&&send_code_type=='reg_code') {
+        MsgBox("密码长度在6-16个字符之间");
+        return false;
+    }
+    if(!isAlphaNumeric(password1)&&send_code_type=='reg_code'){
+        MsgBox("密码必须为字母或数字");
+        return false;
+    }
+    _this.text('数据提交中').attr("disabled",true);
+    $.ajax({
+        url: sub_url,
+        type: 'post',
+        data: {"mobile": mobile, "code": code,'password1':password1},
+        dataType: 'json',
+        success: function(d) {
+            if (d.status == 1) { 
+              MsgBox(d.info,"",d.data);
+            } else {
+              _this.text('提交注册').attr("disabled", false);
+              MsgBox(d.info);
+            }
+        }
+    });
+}
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    WeixinJSBridge.call('hideToolbar');
+    WeixinJSBridge.call('hideOptionMenu');
+});
+</script>
+</div>
+</body>
+</html>

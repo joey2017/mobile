@@ -1,0 +1,87 @@
+<include file="Inc:zjy_header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="Current">
+        	<a href="javascript:history.back();"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="Search">
+            <h1>游记</h1>
+        </div>
+    </div>
+</div>
+
+<!--分割线-->
+<!--游记主体-->
+<div class="container-fluid line"></div>
+<div class="container-fluid">
+	<div class="row">
+    	<div class="col-xs-12 ">
+            <div id="travel_list">
+               
+            </div>
+        </div>
+    </div>
+</div>
+<!--加载-->
+<div class="container-fluid" id="load">
+    <div class="row">
+        <div class="col-xs-12" style="margin-top:10px;"><center><img src="__PUBLIC__/images/minilodging.gif" width="24" height="24">正在加载...</center></div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+        var stop=true; 
+        var currentpage=0;
+        ajaxRed()
+        $(window).scroll(function(){ 
+            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+            if($(document).height() <= totalheight){ 
+                if(stop==true){ 
+                    ajaxRed();
+                } 
+            } 
+        });
+        function ajaxRed(){
+              $("#load").show();
+              stop=false;
+              
+              $.get("<{:U('Route/ajax_get_travel')}>",{"p":currentpage}
+              ,function(html){ 
+                      if($.trim(html)!=""){ 
+                          if(currentpage==0)
+                          {
+                            $("#travel_list").html(html);
+                          } 
+                          else
+                          {
+                            $("#travel_list").append(html);
+                          }                          
+                       stop=true;
+                      }else{
+                         if(currentpage==0)
+                          {
+                            MsgBox('暂无游记');
+                          } 
+                          else
+                          {
+                            MsgBox('已加载全部结果');
+                          }
+                      }  
+                      currentpage++;
+                     $("#load").hide();  
+                 });              
+        }
+
+</script>
+
+
+<!--底部固定按钮-->
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<include file="Inc:footer"/>
+

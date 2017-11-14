@@ -1,0 +1,148 @@
+<include file="Inc:header"/>
+</head>
+
+<body id="">
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+        	<a href="javascript:history.go(-1)" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/shang.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>相册</a>
+        </div>      
+        <div class="pgbtn">
+        	<a href="javascript:button2()"><span class="glyphicon glyphicon-share" aria-hidden="true"></span></a>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    #mcover {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                display: none;
+                z-index: 20000;
+             }
+             #mcover img {
+                position: fixed;
+                right: 18px;
+                top: 5px;
+                width: 260px!important;
+                height: 180px!important;
+                z-index: 20001;
+             }
+             .text {
+                margin: 15px 0;
+                font-size: 14px;
+                word-wrap: break-word;
+                color: #727272;
+             }
+             #mess_share {
+                margin: 15px 0;
+                display: block;
+             }
+             #share_1 {
+                float: left;
+                width: 49%;
+                display: block;
+             }
+             #share_2 {
+                float: right;
+                width: 49%;
+                display: block;
+             }
+             .clr {
+                display: block;
+                clear: both;
+                height: 0;
+                overflow: hidden;
+             }
+            
+             #mess_share img {
+                width: 22px!important;
+                height: 22px!important;
+                vertical-align: top;
+                border: 0;
+             }
+</style>
+<script type="text/javascript">
+      function button2(){
+            $("#mcover").css("display","block")  // 分享给好友圈按钮触动函数
+        }
+      function weChat(){
+          $("#mcover").css("display","none");  // 点击弹出层，弹出层消失
+          }
+    var currentpage=0;
+    ajaxRed();
+    $(window).scroll(function(){ 
+            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+            if($(document).height() <= totalheight){ 
+                if(stop==true){ 
+                    ajaxRed();
+                } 
+            } 
+        });
+    function ajaxRed(){ 
+                $("#load").show();
+                  stop=false;
+                  var id=<{$aid}>;
+                  $.get("<{:U('Club/ajax_get_album_img')}>",{"id":id,"p":currentpage}
+                  ,function(html){
+                          if(html!=""){ 
+                             //baguetteBox.run('#thumbs',{buttons:false});                             
+                            if(currentpage==0) {
+                                $("#thumbs").html(html);
+                            }
+                            else {
+                               $("#thumbs").append(html);                                               
+                            } 
+                          }
+                          stop=true;
+                          currentpage++;
+                         $("#load").hide(); 
+                         $('#thumbs a').touchTouch(); 
+                     });
+                 
+      }
+
+
+</script>
+<!--相册列表-->
+<div id="thumbs">
+
+</div>
+<!--下面的空格要保留-->
+<p>&nbsp;</p>
+
+<!--加载-->
+<div class="container-fluid" id="load">
+  <div class="row">
+      <center><div style="line-height:40px;"><img src="__PUBLIC__/images/minilodging.gif">正在加载...</div></center>
+    </div>
+</div>
+<!--底部固定按钮-->
+
+<!--相册预览专用js
+
+<script src="__PUBLIC__/js/baguetteBox.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/css/baguetteBox.min.css">-->
+<!--相册预览专用js-->
+<script src="__PUBLIC__/js/touchTouch.jquery.js"></script>
+<script>
+window.onload = function() {
+   // baguetteBox.run('#thumbs',{buttons:false});
+   $('#thumbs a').touchTouch();
+}
+
+</script>
+<div id="mcover" onclick="weChat()" style="display:none;">
+      <img src="https://mmbiz.qlogo.cn/mmbiz/vV3bdMHsLIjY2s0npKT0FaJ6iaC1MaiciakM61zfqBsNjYH14ovUG145GEuwMPafiaPjh5drSaAg8DMTic3a2I3icbLg/0" />
+</div>
+<include file="Inc:footer"/>

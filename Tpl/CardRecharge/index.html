@@ -1,0 +1,143 @@
+<include file="Inc:header"/>
+<meta name="format-detection" content="telephone=no" />
+<!--商品图片-->
+<style type="text/css">
+
+.member{background:#474749; position:relative; height: 186px;}
+.member_info_box,.member_bottom{position: absolute;bottom: 0;}
+.member_info_box{width: 100%; padding: 0 8px; z-index: 2;}
+.member_bottom{width: 100%; height: 50px; background: #fff; z-index: 1; }
+.member_info{ height: 168px;border-radius: 6px; position: relative;}
+
+.vip_bg_0{background-color: #fdc52e;}
+.vip_bg_1{background-color: #fdc52e;}
+.vip_bg_2{background-color: #c1c1c1;}
+.vip_bg_3{background-color: #272b34;}
+.vip_bg_4{background-color: #dc2d2d;}
+.card_left,.card_right{position: absolute;}
+.card_left{width: 200px;left: 15px; top: 12px; color: #fff;height: 154px;}
+.card_left p {font-size: 18px; margin:16px 0;}
+.m_user{margin-bottom: 40px; position: relative;}
+.m_user h3{padding: 9px 0 4px 0; margin: 0;}
+.m_user img{width:64px;height:64px;border-radius: 50%; margin-right: 7px;}
+.m_user i{position: absolute; left: 4px; bottom: -20px; font-style: normal; font-size: 12px; background-color: #fff; color: #DA251D;   padding: 1px 4px; border-radius: 2px;}
+.card_right{z-index: 2; right: 0; width: 116px;  height: 186px;background: url(http://www.17cct.com/statics/v5/images/erp/card.png) no-repeat 0 -59px; background-size:125px;}
+.erp_react{display: block; text-align: center; padding: 24px 0;border-right: 1px solid #ddd8ce; position:relative;}
+.erp_react i{font-size: 24px;}
+.erp_react span{position: absolute; width: 20px; height: 20px; background-color: #FE3A3A;    border-radius: 15px;   color: #fff;}
+.erp_i_bg01{ color: #56ade8;}
+.erp_i_bg02{ color: #e68f41;}
+
+.recharge{ margin: 14px 0 0 0;}
+.recharge a {  display: block;  border-color: #eee; padding:13px 0; }
+.form-control-number{display: block;
+    width: 100%;
+    height: 47px;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #eee;
+    border-radius: 4px;}
+</style>
+ <!--弹出提示框-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="member">
+    <div class="member_info_box">
+        <div class="member_info vip_bg_<{$card.member_card_type}>">
+            <div class="card_left">
+                      <p>卡号：<b><{$card.member_card_number}></b></p>
+                    <p>卡种：<b><{$card.member_card_name}></b></p>                   
+                    <p>余额：<b>￥<{$card.member_card_balance|price}></b></p>
+                   
+               
+            </div>
+            <div class="card_right"></div>
+        </div>
+    </div>
+    <div class="member_bottom"></div>
+</div>
+
+
+
+<div class="container-fluid">
+	<div class="row">
+    	<div class="col-xs-12 recharge flex">
+            <a class="btn btn-default btn-danger col-xs-inner" onclick="select_recharge(200,this)" style="margin-right:5px;">200元</a>
+            <a class="btn btn-default col-xs-inner" onclick="select_recharge(300,this)" style="margin-right:5px;">300元</a>
+            <a class="btn btn-default col-xs-inner" onclick="select_recharge(500,this)" style="margin-right:5px;">500元</a>
+            <a class="btn btn-default col-xs-inner" onclick="select_recharge(1000,this)">1000元</a>
+        </div>
+        <div class="col-xs-12 recharge flex">    
+            <a class="btn btn-default col-xs-inner" onclick="select_recharge(2000,this)" style="margin-right:5px;">2000元</a>
+            <a class="btn btn-default col-xs-inner" onclick="select_recharge(3000,this)" style="margin-right:5px;">3000元</a>
+            <a class="btn btn-default col-xs-inner" onclick="select_recharge(5000,this)" style="margin-right:5px;">5000元</a>
+            <a class="btn btn-default col-xs-inner" onclick="select_recharge(10000,this)">10000元</a>
+         </div>
+        
+    </div>
+</div>
+
+
+<div class="container-fluid">
+	<form class="form-horizontal">
+    	  <div class="form-group">
+           
+            <div class="col-xs-12" style="margin-top:10px;">
+      			<input type="number" class="form-control-number" id="total_price" value="200" name="total_price" placeholder="输入其它充值金额">
+    		</div>
+              
+            <div class="col-xs-12" style="margin-top:10px;"><button id="submit_recharge" type="button" class="btn btn-warning btn-lg btn-block" onclick="ajax_submit_recharge_card();">确认充值</button></div>        
+        </div>                 
+    </form>
+</div>
+
+<script type="text/javascript">
+    function select_recharge(val,tag){
+        $('#total_price').val(val);
+        $('.flex').find('a').removeClass('btn-danger');
+        $(tag).addClass('btn-danger');
+    }
+
+    $(function(){
+        var p =/^[1-9](\d+(\.\d{1,2})?)?$/; 
+        var p1=/^[0-9](\.\d{1,2})?$/;
+          $('#total_price').blur(function(){
+            if (!(p.test($('#total_price').val()))&&!(p1.test($('#total_price').val()))||$('#total_price').val()<=0||$('#total_price').val()>10000){
+                  MsgBox('充值金额必须为正整数且不能大于10000');
+                  return false;
+             }
+          })
+    })
+
+    function ajax_submit_recharge_card(){
+     
+        var p =/^[1-9](\d+(\.\d{1,2})?)?$/; 
+        var p1=/^[0-9](\.\d{1,2})?$/;
+        if (!(p.test($('#total_price').val()))&&!(p1.test($('#total_price').val()))||$('#total_price').val()<=0||$('#total_price').val()>10000){
+          MsgBox('充值金额必须为正整数且不能大于10000');
+          return false;
+        }
+        $('#submit_recharge').attr('disabled',true);
+        $.ajax({
+            url: '<{:U("CardRecharge/ajax_submit_recharge_card")}>',
+            type: 'post',
+            dataType: 'json',
+            data:{'val':$('#total_price').val()},
+            success: function(d) {
+                MsgBox(d.info);
+               if(d.status==1){
+                 setTimeout('location.href="'+d.data+'"',2000);
+               }
+            }
+        });
+    }
+    
+</script>
+<include file="Inc:footer"/>

@@ -1,0 +1,108 @@
+<include file="Inc:header"/>
+
+<style type="text/css">
+body{background-color: #f2f2f2;}
+.pgt{padding: 0;}
+.tab_parent{padding-left: 10px;}
+.tab_subset{margin:0; padding: 0 10px 0 0;}
+ul{margin:0;list-style: none; padding: 0;}
+a{color: #333;}
+a:focus,a:active, a:hover{color: #333; text-decoration: none;}
+.box_flex{font-size:14px; display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -moz-flex; display: -ms-flexbox; display: flex;}
+.flex1{ -webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;}
+
+
+.imglist a{width: 100%; display: block;margin-top: 10px; background: #fff; padding: 5%; }
+.imgtab{overflow: hidden;}
+.imgtab img{width: 100%;}
+.stafftxt{line-height: 22px; margin: 3px; height: 22px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;  font-size: 14px;  word-break: break-all;}
+
+
+.no_record{height: 24px;  padding-top: 205px;  text-align: center;  background: url(http://s.17cct.com/v5/images/erp/empty.png) no-repeat center 20px;  background-size: 180px 180px;}
+</style>
+
+</head>
+
+<body>
+<!--头部-->
+
+<!-- <div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <a href="<{:U('Store/view',array('id'=>$id))}>" ><div class="pg-Current">
+        	<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pgt">
+        	<a>返回</a>
+        </div>
+    </div>
+</div> -->
+
+<div class="container-fluid imglist">
+
+    <div class="row tab_parent" id="list">
+       
+    </div>
+
+</div>
+<script type="text/javascript">
+      var stop=true; 
+        var currentpage=0;
+        ajaxRed()
+        $(window).scroll(function(){ 
+            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+            if($(document).height() <= totalheight){ 
+                if(stop==true){ 
+                    ajaxRed();
+                } 
+            } 
+        });
+        function ajaxRed(){
+              $("#load").show();
+              stop=false;
+              var sid="<{$id}>";
+              $.get("<{:U('Store/ajax_get_style')}>",{"p":currentpage,"id":sid}
+              ,function(html){ 
+                      if($.trim(html)!=""){ 
+                          if(currentpage==0)
+                          {
+                            $("#list").html(html);
+                          } 
+                          else
+                          {
+                            $("#list").append(html);
+                          }
+                           stop=true;
+                      }else{
+                         if(currentpage==0)
+                          {
+                            MsgBox('查无结果');
+                            $('#list').html('<div class="no_record col-sm-12">暂无信息</div>');
+                          } 
+                          else
+                          {
+                            MsgBox('已查出全部结果');
+                          }
+                      }                     
+                      currentpage++;
+                     $("#load").hide();  
+                 });  
+                             
+        }
+</script>
+<!-- <center>
+<ul class="pagination">
+    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+</ul>
+</center> -->
+
+
+<!--底栏-->
+<include file="Inc:store_bottom"/>
+<!--底部固定按钮-->
+<include file="Inc:footer"/>

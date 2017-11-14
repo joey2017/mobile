@@ -1,0 +1,14 @@
+<volist name="book_list" id="b" >
+    <div class="row" >
+        <a href="<{:U('Route/book_view',array('id'=>$b['id']))}>" class="tab_a">
+            <div class="col-xs-5" style="margin:10px 0 0 0;">
+                <img src="<{$b.thumb|getImgUrl=###,'90x70'}>" style=" width:100%; height:auto"> 
+            </div>
+            <div class="col-xs-7 txtbox" style="margin:0; padding:0;">
+                <h3><{$b.title}></h3>
+                <p> <span class="glyphicon glyphicon-eye-open"><{$b.view_count}></span></p>
+                <p><{$b.user_name}><span style="float:right;"><{$b.input_time|date="Y-m-d",###}></span></p>
+            </div>
+        </a>
+    </div>
+</volist>

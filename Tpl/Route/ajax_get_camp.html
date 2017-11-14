@@ -1,0 +1,16 @@
+<volist name="camp_list" id="c" > 
+    <div class="col-xs-12">        
+            <div class="media yingdi">
+              <div class="media-left media-middle">
+                <a href="<{:U('Route/camp_view',array('id'=>$c['id']))}>">
+                  <img class="media-object" src="<{$c.thumb|getImgUrl=###,'thumbnail'}>" width="64" height="64">
+                </a>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading"><{$c.title}></h4>
+                <p class="yingdi_p"><{$c.detail}></p>
+                <p class="yingdi_p"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><{$c.name}></p>
+              </div>
+            </div>
+        </div>
+</volist>

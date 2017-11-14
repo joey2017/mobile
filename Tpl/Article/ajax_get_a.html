@@ -1,0 +1,32 @@
+<if condition="$list neq ''">
+  <volist name="list" id="l" key='key'>
+      <!--车友会-->
+  <div class="container-fluid"><div class="row"><div class="col-xs-12">
+    <a href="<{:U('Article/view',array('id'=>$l['id']))}>" class="newsabox">
+      <div class="n_a_l"><h2><{$l.title}></h2><p><{$l.description}></p> 
+      <p><span>
+      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>&nbsp;<{$l.view}></span>   
+      <span>
+      <span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;<{$l.inputtime}></span></p> </div>
+      <div class="n_a_r"><img data-original="<{$l.thumb}>" src="http://s.17cct.com/v3/images/space.gif" class="lazyload" onerror="this.data-original='http://image.17cct.com/adv/new_login_bg.jpg';this.onerror=''" width="100" height="73"> 
+      </div>
+    </a>
+    </div>
+    </div>
+  </div>
+  <!--分割线-->
+  <div class="container-fluid line"></div>
+  </volist>
+
+  <script>
+  $(function(){
+    $("img.lazyload").lazyload({
+        effect: "fadeIn",
+        threshold: 200,
+        load: function() {
+          $(this).removeClass("lazyload")
+        }
+      });
+  })
+  </script>
+</if>

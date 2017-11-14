@@ -1,0 +1,359 @@
+<include file="Inc:header"/>
+<script type="text/javascript" src="__PUBLIC__/js/fastclick.js"></script>
+</head>
+
+<script type="text/javascript">
+	 $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
+
+<body>
+
+<style type="text/css">
+body{margin:0; padding: 0; border:0; font: 14px/1.5 "Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;}
+
+.tcbox{background-color: #f2f5f8; margin: 12px; border:1px solid #dcdcdc;padding: 10px; position: relative;}
+.tctitle{    width: 100px; height: 50px; position: absolute;top: 3px; left: -11px;  line-height: 32px;  text-indent: 12px; color: #fff;}
+.tctitle2{font-size: 18px;}
+.titlebg01{background: url(__PUBLIC__/images/tctitlebg1.png) no-repeat;background-size: 100px;}
+.titlebg02{background: url(__PUBLIC__/images/tctitlebg2.png) no-repeat;background-size: 100px;}
+
+.tcconten{padding-top:33px;overflow: hidden;}
+.tcleft,.tcright{float: left;}
+.tcleft{width: 138px; height: 138px; position: relative;}
+.song{position: absolute; bottom: 0; width: 100%; background: #f10b0b; height: 27px; line-height: 27px; text-indent: 5px;
+    color: #fff; font-size: 12px;}
+.hongjiu{position:absolute; right:-27px; top:0;}
+.tcright{padding-left: 35px;}
+.tcright h2,.tcright h3{font-size: 16px; margin: 0; color: #c40f0f;}
+.tcright p{margin: 0; color: #6d6d6d; line-height: 26px; border-bottom: 1px solid #dedede; font-size: 12px;}
+.tcright h3{text-align: right;}
+
+
+.tc_top_img{width: 100%;}
+.tc_top_img img{width: 100%;}
+
+.box_flex {display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -moz-flex; display: -ms-flexbox; display: flex;}
+.flex1{ -webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;}
+
+
+.gobay{width: 100%; left: 0; text-align: center; height: 47px; line-height: 47px; position: fixed; bottom: 0px; background:#e22727;}
+.gobay a{color: #fff; }
+
+.overlay-slidedown{height: 50%;}
+.tctitleh{margin:15px 0; font-size:16px; font-weight:bold;}
+.tcul{margin:0;padding: 0; overflow: hidden; }
+.tcul li{list-style: none; float: left; padding: 5px 15px; border-radius: 5px;margin: 0 14px 10px 0;}
+.tcli{background: #eee;}
+.tc_choose{background: #cd0000; color: #fff;}
+
+.btbtn{position: fixed;  bottom: 0;  background: #d24343;  width: 100%;  height: 50px;   color: #fff;  line-height: 50px;  text-indent: 15px;}
+
+.container-fluid{max-width: 1024px; margin: 0 auto;}
+
+
+/*配送方式*/
+.locate{position: relative;}
+.absolute_fix{position:absolute;}
+.tab_parent{padding-left: 15px;}
+.tab_subset{margin:0; padding: 0 15px 0 0;}
+.tc_project{background: #e0e0e0; padding: 5px 0; cursor: pointer; margin: 0 0 15px;}
+.tc_project p{margin: 5px 0 5px 0;}
+.tick{ width: 24px; height: 24px; display:none; bottom: 0; right: 0;}
+.tick img{width: 100%; height: 100%;}
+.userinfo{    height: 230px;  overflow-y: auto;}
+
+.tc_choose2{background: #fff; border:2px #e60012 solid; padding: 3px 0;}
+.tc_choose2 .tick{display: block;}
+
+
+
+/*二维码层*/
+.top_tx{width: 64px; height:64px; border-radius: 50%; background: #cd0000; padding: 7px; margin:0 auto 10px auto;}
+.top_tx img,.ewm_img img{width: 100%; height:100%;}
+hr{margin: 8px auto;}
+.ewm_tab{width: 100%; height: 100%; position: fixed; top:0; left: 0; z-index: 1; background: #000; background: rgba(0,0,0,0.8); filter: alpha(opacity=80);}
+.ewm_center{padding: 15px; background: #fff; position: relative; width: 280px; height: 450px; left: 50%; top:50%; margin-left: -140px; margin-top: -225px;border-radius: 8px;}
+.ewm_img{width:215px; margin:0 auto;}
+</style>
+
+
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+
+	
+
+<!-- 二维码层 -->
+<if condition="$show_info eq 0">
+	<div class="ewm_tab">
+		<div class="ewm_center text-center">
+			<div class="top_tx">
+				<img src="__PUBLIC__/images/cheng.png">
+			</div>
+			<b>诚车堂车主版公众号</b>
+			<hr>
+			<p class="text-left"><b>车堂盛世全返套餐-通卡活动邀您体验</b></p>
+			<p class="text-left" style="color:#989898; font-size:12px;">· 详情请查看公众号菜单【活动】</p>
+			<div class="ewm_img"><img src="http://s.17cct.com/v5/images/ewm.jpg"></div>
+			<p>长按识别二维码</p>
+		</div>
+	</div>
+</if>
+
+<style type="text/css">
+body,div,p{margin:0; padding: 0; border:0; font: 14px/1.5 "Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif; background: #f0f0f0;}
+
+
+.box_flex {display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -moz-flex; display: -ms-flexbox; display: flex;}
+.flex1{ -webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;}
+
+
+.topad{ position: fixed; z-index: 2;overflow: hidden;    height: 161px;}
+.topad img{width: 100%;  min-height: 100%;  -webkit-transform: translateY(-50%);  -ms-transform: translateY(-50%);    top: 50%;   position: relative;}
+
+
+ul{margin:0;list-style: none; padding: 0;}
+
+.scleft{overflow: hidden;background: #fff;float: left;height: 100%; position: fixed;width:100px;}
+
+#businessbox{max-width: 750px; margin: 0 auto;z-index: 1; padding-top:161px; }
+#businessbox li{margin:-1px 0 0 -1px; height:38px; line-height:38px; text-align:center;	cursor: pointer;border-bottom: 1px solid #d5d5d5;}
+#businessbox input{background:#09F;}
+#businessbox .b_active{background:#f0f0f0;}
+.businesstab{display:none; overflow: hidden; margin-left: 110px;}
+.goods{text-align: center; margin-top: 10px;}
+.goods a{ text-decoration: inherit; color: #3e3e3e;}
+.goods img{display: block;}
+.goodstxt{background: #fff; height: 36px; line-height: 36px; font-size: 12px;}
+
+.tab_parent{padding-left: 10px; margin-right: 0;}
+.tab_subset{padding: 0 10px 0 0;}
+
+</style>
+
+<script type="text/javascript">
+    window.onload=function(){
+    var oBox =document.getElementById('businessbox');
+    var oLi =oBox.getElementsByTagName('ul')[0].getElementsByTagName('li');
+    // var oDiv =oBox.getElementsByTagName('div');
+    var oDiv =oBox.getElementsByClassName('businesstab');
+    for(var i=0;i < oLi.length;i++){
+        oLi[i].index=i;
+        oLi[i].onclick=function(){
+            for(var i=0;i < oLi.length;i++){
+                oLi[i].className=''
+                oDiv[i].style.display=''
+                }
+            this.className='b_active'
+            
+            oDiv[this.index].style.display='block'
+            }
+        }
+    }
+</script>
+
+<div class="topad">
+	<img src="__PUBLIC__/images/tcx.jpg"></div>
+</div>
+
+<div id="businessbox">
+	<div class="scleft">
+		<ul>
+	        <li class="b_active">所有分类</li>	        
+	        <li>洗车全返</li>
+	        <li>美容全返</li>
+	        <li>保养全返</li>
+	        <li>镀晶全返</li>
+	        <li>套餐全返</li>
+	    </ul>
+	</div>
+	<!--所有分类-->
+    <div class="businesstab" style="display:block;">
+    	<div class="row tab_parent">
+			 <div class="goods tab_subset col-xs-6 col-sm-6">
+	       		<a href="<{:U('Package/detail',array('id'=>1))}>">
+					<img src="__PUBLIC__/images/xc.jpg" width="100%" height="100%">
+					<div class="goodstxt">5座精致洗车</div>
+				</a>
+	        </div>
+	        <div class="goods tab_subset  col-xs-6 col-sm-6">
+				<a href="<{:U('Package/detail',array('id'=>2))}>">
+					<img src="__PUBLIC__/images/xc.jpg" width="100%" height="100%">
+					<div class="goodstxt">SUV/7座精致洗车</div>
+				</a>
+	        </div>	        
+	        <div class="goods tab_subset col-xs-6 col-sm-6">
+	       		<a href="<{:U('Package/detail',array('id'=>3))}>">
+					<img src="__PUBLIC__/images/nsqj.jpg" width="100%" height="100%">
+					<div class="goodstxt">内饰清洁</div>
+				</a>
+	        </div>
+	        <div class="goods tab_subset  col-xs-6 col-sm-6">
+				<a href="<{:U('Package/detail',array('id'=>4))}>">
+					<img src="__PUBLIC__/images/ktqx.jpg" width="100%" height="100%">
+					<div class="goodstxt">空调清洗</div>
+				</a>
+	        </div>
+			<div class="goods tab_subset col-xs-6 col-sm-6">
+	       		<a href="<{:U('Package/detail',array('id'=>5))}>">
+					<img src="__PUBLIC__/images/xsby.jpg" width="100%" height="100%">
+					<div class="goodstxt">线束保养</div>
+				</a>
+	        </div>
+	        <div class="goods tab_subset  col-xs-6 col-sm-6">
+				<a href="<{:U('Package/detail',array('id'=>6))}>">
+					<img src="__PUBLIC__/images/scby.jpg" width="100%" height="100%">
+					<div class="goodstxt">刹车保养</div>
+				</a>
+	        </div>
+
+			<div class="goods tab_subset col-xs-6 col-sm-6">
+	       		<a href="<{:U('Package/detail',array('id'=>7))}>">
+					<img src="__PUBLIC__/images/jzdj.jpg" width="100%" height="100%">
+					<div class="goodstxt">极致镀晶</div>
+				</a>
+	        </div>
+	        <div class="goods tab_subset  col-xs-6 col-sm-6">
+				<a href="<{:U('Package/detail',array('id'=>8))}>">
+					<img src="__PUBLIC__/images/jgjd.jpg" width="100%" height="100%">
+					<div class="goodstxt">极光晶盾</div>
+				</a>
+	        </div>
+
+	        <div class="goods tab_subset col-xs-6 col-sm-6">
+	       		<a href="<{:U('Package/detail',array('id'=>9))}>">
+					<img src="__PUBLIC__/images/dl.jpg" width="100%" height="100%">
+					<div class="goodstxt">精致洗车+打蜡</div>
+				</a>
+	        </div>
+	        <div class="goods tab_subset  col-xs-6 col-sm-6">
+				<a href="<{:U('Package/detail',array('id'=>10))}>">
+					<img src="__PUBLIC__/images/sldw.jpg" width="100%" height="100%">
+					<div class="goodstxt">精致洗车+四轮定位</div>
+				</a>
+	        </div>
+	        <div class="goods tab_subset  col-xs-6 col-sm-6">
+				<a href="<{:U('Package/detail',array('id'=>11))}>">
+					<img src="__PUBLIC__/images/jzdj.jpg" width="100%" height="100%">
+					<div class="goodstxt">精致洗车+极致镀晶</div>
+				</a>
+	        </div>
+	        <div class="goods tab_subset  col-xs-6 col-sm-6">
+				<a href="<{:U('Package/detail',array('id'=>12))}>">
+					<img src="__PUBLIC__/images/jgjd.jpg" width="100%" height="100%">
+					<div class="goodstxt">精致洗车+极光晶盾</div>
+				</a>
+	        </div>
+        </div>
+    </div>
+    <!--洗车全返-->
+    <div class="businesstab">
+        <div class="row tab_parent">
+	        <div class="goods tab_subset col-xs-6 col-sm-6">
+	       		<a href="<{:U('Package/detail',array('id'=>1))}>">
+					<img src="__PUBLIC__/images/xc.jpg" width="100%" height="100%">
+					<div class="goodstxt">5座精致洗车</div>
+				</a>
+	        </div>
+	        <div class="goods tab_subset  col-xs-6 col-sm-6">
+				<a href="<{:U('Package/detail',array('id'=>2))}>">
+					<img src="__PUBLIC__/images/xc.jpg" width="100%" height="100%">
+					<div class="goodstxt">SUV/7座精致洗车</div>
+				</a>
+	        </div>	        
+        </div>
+    </div>
+    <!--美容全返-->
+    <div class="businesstab">
+        <div class="row tab_parent">
+	        <div class="goods tab_subset col-xs-6 col-sm-6">
+	       		<a href="<{:U('Package/detail',array('id'=>3))}>">
+					<img src="__PUBLIC__/images/nsqj.jpg" width="100%" height="100%">
+					<div class="goodstxt">内饰清洁</div>
+				</a>
+	        </div>
+	        <div class="goods tab_subset  col-xs-6 col-sm-6">
+				<a href="<{:U('Package/detail',array('id'=>4))}>">
+					<img src="__PUBLIC__/images/ktqx.jpg" width="100%" height="100%">
+					<div class="goodstxt">空调清洗</div>
+				</a>
+	        </div>
+	        
+        </div>
+    </div>
+	<!--保养全返-->
+    <div class="businesstab">
+        <div class="row tab_parent">
+	        <div class="goods tab_subset col-xs-6 col-sm-6">
+	       		<a href="<{:U('Package/detail',array('id'=>5))}>">
+					<img src="__PUBLIC__/images/xsby.jpg" width="100%" height="100%">
+					<div class="goodstxt">线束保养</div>
+				</a>
+	        </div>
+	        <div class="goods tab_subset  col-xs-6 col-sm-6">
+				<a href="<{:U('Package/detail',array('id'=>6))}>">
+					<img src="__PUBLIC__/images/scby.jpg" width="100%" height="100%">
+					<div class="goodstxt">刹车保养</div>
+				</a>
+	        </div>
+	        
+        </div>
+    </div>
+
+    <!--镀晶全返-->
+    <div class="businesstab">
+        <div class="row tab_parent">
+	        <div class="goods tab_subset col-xs-6 col-sm-6">
+	       		<a href="<{:U('Package/detail',array('id'=>7))}>">
+					<img src="__PUBLIC__/images/jzdj.jpg" width="100%" height="100%">
+					<div class="goodstxt">极致镀晶</div>
+				</a>
+	        </div>
+	        <div class="goods tab_subset  col-xs-6 col-sm-6">
+				<a href="<{:U('Package/detail',array('id'=>8))}>">
+					<img src="__PUBLIC__/images/jgjd.jpg" width="100%" height="100%">
+					<div class="goodstxt">极光晶盾</div>
+				</a>
+	        </div>
+	        
+        </div>
+    </div>
+     <!--套餐全返-->
+    <div class="businesstab">
+        <div class="row tab_parent">
+	        <div class="goods tab_subset col-xs-6 col-sm-6">
+	       		<a href="<{:U('Package/detail',array('id'=>9))}>">
+					<img src="__PUBLIC__/images/dl.jpg" width="100%" height="100%">
+					<div class="goodstxt">精致洗车+打蜡</div>
+				</a>
+	        </div>
+	        <div class="goods tab_subset  col-xs-6 col-sm-6">
+				<a href="<{:U('Package/detail',array('id'=>10))}>">
+					<img src="__PUBLIC__/images/sldw.jpg" width="100%" height="100%">
+					<div class="goodstxt">精致洗车+四轮定位</div>
+				</a>
+	        </div>
+	        <div class="goods tab_subset  col-xs-6 col-sm-6">
+				<a href="<{:U('Package/detail',array('id'=>11))}>">
+					<img src="__PUBLIC__/images/jzdj.jpg" width="100%" height="100%">
+					<div class="goodstxt">精致洗车+极致镀晶</div>
+				</a>
+	        </div>
+	        <div class="goods tab_subset  col-xs-6 col-sm-6">
+				<a href="<{:U('Package/detail',array('id'=>12))}>">
+					<img src="__PUBLIC__/images/jgjd.jpg" width="100%" height="100%">
+					<div class="goodstxt">精致洗车+极光晶盾</div>
+				</a>
+	        </div>
+	        
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

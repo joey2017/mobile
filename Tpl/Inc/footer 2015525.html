@@ -1,0 +1,88 @@
+<!--底部固定按钮-->
+<div class="bottombtn clearfix">
+    <div class="bmenu">
+        <div class="bt-name">
+          <a href="javascript:;"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 首页</a>
+        </div>
+    </div>
+    
+    <div class="bmenu">
+        <div class="bt-name">
+          <span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="color:#FFF;"></span> 服务
+        </div>
+        <div class="sanjiao"></div>
+        <div class="new-sub">
+             <ul>
+                  <li><a href="">微商城</a></li>
+                  <li><a href="">做美容</a></li>
+                  <li><a href="">做保养</a></li>
+                  <li><a href="">附近商家</a></li>
+            </ul>
+            <div class="tiggle"></div>
+            <div class="innertiggle"></div>
+        </div>     
+    </div>
+    
+    <div class="bmenu" >
+      <div class="bt-name">
+          <span class="glyphicon glyphicon-tags" aria-hidden="true" style="color:#FFF;"></span> 活动
+        </div>
+    <div class="sanjiao"></div>
+    <div  class="new-sub">
+        <ul>
+            <li><a href="">服务特卖</a></li>
+            <li><a href="">商品特卖</a></li>
+            <li><a href="">车友会</a></li>
+            <li><a href="">微社区</a></li>
+            <li><a href="">今日抽奖</a></li>
+        </ul>
+        <div class="tiggle"></div>
+        <div class="innertiggle"></div>
+    </div>
+    </div>
+    
+    <div class="bmenu" >
+      <div class="bt-name">
+          <span class="glyphicon glyphicon-user" aria-hidden="true" style="color:#FFF;"></span> 我的
+        </div>
+    <div class="sanjiao"></div>
+    <div  class="new-sub">
+        <ul>
+            <li><a href="">会员中心</a></li>
+            <li><a href="">我的订单</a></li>
+            <li><a href="">我的奖品</a></li>
+            <li><a href="">联系客服</a></li>
+            <li><a href="">商家入口</a></li>
+        </ul>
+        <div class="tiggle"></div>
+        <div class="innertiggle"></div>
+    </div>
+    </div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/js/scrolltopcontrol.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/swiper.min.js"></script>
+<script type="text/javascript">
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 2000,
+        autoplayDisableOnInteraction: false
+    });
+    //底部固定导航弹出垂直菜单
+    $(".bmenu").click(function() {
+        if ($(this).hasClass("cura")) {
+            $(this).children(".new-sub").hide(); //当前菜单下的二级菜单隐藏
+            $(".bmenu").removeClass("cura"); //同一级的菜单项
+        } else {
+            $(".bmenu").removeClass("cura"); //移除所有的样式
+            $(this).addClass("cura"); //给当前菜单添加特定样式
+            $(".bmenu").children(".new-sub").slideUp("fast"); //隐藏所有的二级菜单
+            $(this).children(".new-sub").slideDown("fast"); //展示当前的二级菜单
+        }
+    });
+</script>
+
+</body>
+</html>

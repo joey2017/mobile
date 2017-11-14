@@ -1,0 +1,29 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="pg-Current">
+        	<a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a><{$article.title}></a>
+        </div>     
+    </div>
+</div>
+<!--平台简介-->
+<div class="container-fluid">
+	<div class="row">
+    	<div class="col-xs-12">
+        	<h1 class="pf_hd" style="margin:5px 0 10px;height:auto;line-height:28px;"><{$article.title}></h1>
+        </div>
+        <div class="col-xs-12 pf_bd"><div class="sv_ps"><{$article.content}></div></div>
+    </div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<include file="Inc:footer"/>

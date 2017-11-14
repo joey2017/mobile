@@ -1,0 +1,167 @@
+<include file="Inc:header"/>
+<link rel="stylesheet" type="text/css" href="http://s.17cct.com/v3/js/dialog/skins/dialog.css" />
+<script src="http://s.17cct.com/v3/js/dialog/artDialog.js?v=20141216"></script>
+</head>
+<body>
+<!--头部-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top" style="background:#4b8dfc">
+        <div class="pg-Current">
+        	<a href="javascript:history.back();" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/jia.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>提交订单</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!--订单名-->
+<div class="container-fluid dd_name">
+	<div class="row">
+			<div class="col-xs-12"><{$route.title}></div>
+	</div>
+</div>
+<!--订单详细-->
+<div class="container-fluid" >
+  <div class="row ddxq">
+			<div class="col-xs-8">总价:</div>
+      <div class="col-xs-4"><p style="float:right; color:#ff7302;">¥<strong id="total_price"><{$price|price}></strong></p></div>
+	</div>
+</div>
+<div class="container-fluid" >
+  <div class="row ddxq">
+      <div class="col-xs-4">出行人数:</div>
+      <div class="col-xs-8"><p style="float:right; color:#ff7302;"><strong id="total_price"><{$people}></strong></p></div>
+  </div>
+</div>
+<volist name="arr" id="arr" key="key">
+  <div class="container-fluid" >
+    <div class="row ddxq">
+        <div class="col-xs-3"><{$arr.type}>:</div>
+        <div class="col-xs-6"><p id="show_msg_<{$key}>"><p></div>
+        <div class="col-xs-3"><p style="float:right; color:#ff7302;" onclick="javascript:write_msg(<{$key}>,<{$arr.guest_type}>)">填资料</p></div>
+    </div>
+  </div>
+</volist>
+
+<!--分割线-->
+<!--您绑定的手机号-->
+<div class="container-fluid dd_name" style="border-top:0;">
+	<div class="row">
+			<div class="col-xs-11">您绑定的手机号：</div>
+	</div>
+</div>
+<div class="container-fluid" >
+    <div class="row ddxq">
+        <div class="col-xs-4"><{$user_info.mobile}></div>
+        <div class="col-xs-8"><p style="float:right;"><a href="<{:U('User/account')}>" style="color:#c6c6c6">绑定新手机号<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p></div>
+    </div>
+</div>
+<!--分割线-->
+<div class="container-fluid line" style="border-top:0;"></div>
+<input type="hidden" name="id" value="<{$route.id}>">
+
+
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-xs-12" style="margin-top:25px;"><center><button type="button" id="orderSubmit" class="btn btn-warning btn-lg" style="padding-left:40px;padding-right:40px;" onclick="orderSubmit(this)" >提交订单</button></center></div>
+    </div>
+</div>
+<!--下面的空格要保留-->
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script type="text/javascript">
+  var msg = new Array();  
+  for(var k=1;k<=<{$number}>;k++){ //一维长度为i,i为变量，可以根据实际情况改变
+    msg[k]=new Array(); //声明二维，每一个一维数组里面的一个元素都是一个数组；
+  }
+  var guest_name,paper_number;
+  function write_msg(key,type){
+     msg[key]['guest_type']=type;
+     art.dialog({
+        title:'提示',
+        content:'<b class="asterisk">*</b>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<input type="text" name="guest_name" id="guest_name" required="required" style="height:25px"/><br><br><b class="asterisk">*</b>证件类型：<select name="paper_type" id="paper_type"><option value="1">身份证</option><option value="2">回乡证</option></select><br><br><b class="asterisk">*</b>证件号码：<input type="text" name="paper_number" required="required" id="paper_number" style="height:25px"/>',
+        noFn:true,
+        ok:function(){ 
+         guest_name=$('#guest_name').val();
+         if(guest_name==''){
+             MsgBox('请输入姓名');
+             $('#guest_name').focus();
+             return false; 
+         }
+         paper_number=$('#paper_number').val();
+         if(paper_number==''){
+             MsgBox('请输入证件号码');
+             $('#paper_number').focus();
+             return false; 
+         }         
+         $('#show_msg_'+key).html(guest_name+'&nbsp;&nbsp;'+$('#paper_type').find("option:selected").text())
+         msg[key]['guest_name']=guest_name;
+         msg[key]['paper_type']=$('#paper_type').val();
+         msg[key]['paper_number']=paper_number;
+        },cancel:true
+    });
+  }
+
+function orderSubmit(obj) {
+    var _this = $(obj),mid;
+    jsonstr="[";
+    for(i=1;i<msg.length;i++)
+    {  
+      if($('#show_msg_'+i).html()==''){
+         MsgBox('请填写完旅客'+i+'信息再提交');
+         return false;
+      }
+      
+      jsonstr+="{";    
+
+        jsonstr += "\"" +'guest_name' + "\""+ ":" + "\"" + msg[i]['guest_name'] + "\",";
+        jsonstr += "\"" +'paper_type' + "\""+ ":" + "\"" + msg[i]['paper_type'] + "\",";
+        jsonstr += "\"" +'paper_number' + "\""+ ":" + "\"" + msg[i]['paper_number'] + "\",";
+        jsonstr += "\"" +'guest_type' + "\""+ ":" + "\"" + msg[i]['guest_type'] + "\",";
+        jsonstr = jsonstr.substring(0,jsonstr.lastIndexOf(','));
+        if(i==msg.length-1){
+          jsonstr += "}";
+        }else{
+          jsonstr += "},";
+        }
+       
+    }    
+    jsonstr += "]";
+    _this.text('订单生成中').attr('disabled',true);
+    MsgBox('请稍候，订单生成中');
+    $.ajax({
+         type:'post',
+         url: '<{:U("Route/ajax_order_submit")}>',
+         datatype:'json',
+         traditional:true,
+         data:{"id":'<{$route.id}>','msg':jsonstr},
+         success:function( d ){  
+          if(d.status == 1){                         
+            MsgBox(d.info,'',d.data);
+          }else{
+            _this.text('提交订单').attr('disabled',false);
+            MsgBox(d.info);
+          }
+        }
+    });
+    return false;
+}  
+
+</script>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+  WeixinJSBridge.call('hideToolbar');
+  WeixinJSBridge.call('hideOptionMenu');
+});
+</script>
+
+<include file="Inc:footer"/>

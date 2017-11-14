@@ -1,0 +1,179 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current"> <a href="" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a> </div>
+        <div class="pgt" style=" width:85%; overflow:hidden; height:50px;"> <a><{$user_info.user_name}>的个人主页</a> </div>
+    </div>
+</div>
+<style type="text/css">
+.m-admin{background-image: -webkit-linear-gradient(top,#CD0000 20%,#A82222 100%);background-image: linear-gradient(to bottom,#CD0000 20%,#A82222 100%);background-color: #cd0000;}
+.m-admin-th {padding: 15px;overflow: hidden;zoom: 1;}
+.m-admin-th-fl {float: left;width: 70%;overflow: hidden;zoom: 1;}
+.m-admin-th-fl img {float: left;width: 40px;height: 40px;margin-right: 10px;border-radius: 3px;border: 2px solid #fff;}
+.m-admin-th-txt {overflow: hidden;zoom: 1;}
+.m-admin-th-txt em {overflow: hidden;text-overflow: ellipsis; font-style:normal;white-space: nowrap;display: inline-block;vertical-align: top;height: 25px;line-height: 25px;font-size: 16px;color: #fff;}
+.m-admin-th-txt span {display:block; height:15px; line-height:15px; font-size:12px; color:#D7D7D7;}
+</style>
+<!--banner-->
+<div class="m-admin">
+    <div class="m-admin-th">
+        <div class="m-admin-th-fl"> <img src="<{$user_info.head_img}>" onerror="imgError(this,'http://s.17cct.com/v3/images/man.jpg');" alt="">
+            <div class="m-admin-th-txt" id="userInf"> <em><{$user_info.user_name}></em> <span><{$club_info.circle_name}>会员</span> </div>
+        </div>
+    </div>
+</div>
+<div class="cy_line" style="margin-top:0; border:0">
+	<dl style="width: 50%;">
+    	<a href="<{:U('User/show',array('type'=>1,'id'=>$user_info['id']))}>">
+            <dt class="cy_line_2">主页</dt>
+        </a>       
+    </dl>
+    <!--
+    <dl>
+    	<a href="">
+            <dt class="cy_line_2">帖子</dt>
+        </a>       
+    </dl>
+    <dl>
+    	<a href="">
+            <dt class="cy_line_2">爱车</dt>
+        </a>       
+    </dl>
+    -->
+    <dl>
+    	<a href="<{:U('User/show',array('type'=>2,'id'=>$user_info['id']))}>">
+            <dt class="cy_line_2">活动</dt>
+        </a>       
+    </dl>
+</div>
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<!--line-->
+<div class="container-fluid line"></div>
+<if condition="$club_info['circle_id'] neq 0 and $type neq 2" >
+    <!--他的车友会-->
+    <div class="container-fluid">
+    	<div class="row" >
+        	<div class="col-xs-12" >
+            	<div class="tab_t">
+        			<h2>他的车友会</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="Cheyou_1">
+                <a href="<{$club_info.url}>"><img src="<{$club_info.circle_img}>"></a>
+            </div>
+            <div class="Cheyou_2">
+                <h3><a href="" style="color:#474747; text-decoration:none;"><{$club_info.circle_name}></a></h3>
+                <p class="Star"></p>
+                <p>会员：<{$club_info.circle_mcount}>人(已认证<{$club_info.circle_identification_count}>人)<span style="float:right;">油值：<{$club_info.circle_oil}>L</span></p>
+                <p>地区：<{$club_info.region_info}> <span style="float:right;">车系：<{$club_info.car_info}></span></p>
+            </div>
+        </div>    
+    </div>
+    <!--line-->
+    <div class="container-fluid line"></div>
+</if>
+
+
+<if condition="$user_info['car_info'] neq null and $type neq 2" >
+    <!--他的爱车-->
+    <div class="container-fluid">
+    	<div class="row" >
+        	<div class="col-xs-12" >
+            	<div class="tab_t">
+        			<h2>他的爱车</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <h4><a href="" style="color:#474747; text-decoration:none;"><{$user_info.car_info}></a></h4>
+            </div>
+        </div>    
+    </div>
+    <!--line-->
+    <div class="container-fluid line"></div>
+</if>
+<script type="text/javascript">
+        var stop=true; 
+        var currentpage=0;
+        ajaxRed()
+        $(window).scroll(function(){ 
+            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+            if($(document).height() <= totalheight){ 
+                if(stop==true){ 
+                    ajaxRed();
+                } 
+            } 
+        });
+        function ajaxRed(){
+              $("#load").show();
+              stop=false;
+              var uid="<{$user_info.id}>";
+              var type="<{$type}>"
+              $.get("<{:U('User/ajax_get_topic')}>",{"p":currentpage,"id":uid,"t":type}
+              ,function(html){ 
+                      if($.trim(html)!=""){ 
+
+                          if(currentpage==0)
+                          {
+                            $("#topic_list").html(html);
+                          } 
+                          else
+                          {
+                            $("#topic_list").append(html);
+                          }
+                        stop=true;
+                        
+                      }else{
+
+                         if(currentpage==0)
+                          {
+                            if(type!=2){
+                                MsgBox('他尚未发表帖子');
+                            }else{
+                                MsgBox('他尚未参加活动');
+                            }
+                           
+                          } 
+                          else
+                          {
+                            MsgBox('已查出全部结果');
+                          }
+                      } 
+                      $("#load").hide(); 
+                      currentpage++;
+                    
+                 });   
+            $("#load").hide();            
+        }
+
+</script>
+<!--帖子内容-->
+<div class="container-fluid" id="topic_list">
+    
+</div>
+<!--加载-->
+<div class="container-fluid" id="load">
+    <div class="row">
+        <center>
+            <div style="line-height:40px;"><img src="__PUBLIC__/images/minilodging.gif">正在加载...</div>
+        </center>
+    </div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<include file="Inc:footer"/>

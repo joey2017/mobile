@@ -1,0 +1,99 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+        	<a href="javascript:history.go(-1)" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/meng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a href="<{:U('Club/club',array('id'=>$circle['circle_id']))}>"><{$circle.circle_name}></a>
+        </div>        
+    </div>
+</div>
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<!--筛选按钮-->
+<div class="container-fluid" style="position:relative;">
+  <!--
+	<div class="row sxbtn">
+    	<a id="li-1" href="<{:U('Club/activity',array('id'=>$cid,'type'=>1))}>" class="col-xs-4 topbtn">报名中</a>
+      <a id="li-2" href="<{:U('Club/activity',array('id'=>$cid,'type'=>2))}>" class="col-xs-4 topbtn">进行中</a>
+      <a id="li-3" href="<{:U('Club/activity',array('id'=>$cid,'type'=>3))}>" class="col-xs-4 topbtn">已结束</a> 
+      <a id="li-4" href="<{:U('Club/activity',array('id'=>$cid,'type'=>1))}>" class="col-xs-4 topbtn">报名中</a>
+      <a id="li-5" href="<{:U('Club/activity',array('id'=>$cid,'type'=>2))}>" class="col-xs-4 topbtn">进行中</a>
+      <a id="li-6" href="<{:U('Club/activity',array('id'=>$cid,'type'=>3))}>" class="col-xs-4 topbtn">已结束</a>        
+    </div>
+    -->
+</div>
+<div class="black"></div>
+
+<script type="text/javascript">
+        var stop=true; 
+        var currentpage=0;
+        ajaxRed()
+        $(window).scroll(function(){ 
+            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+            if($(document).height() <= totalheight){ 
+                if(stop==true){ 
+                    ajaxRed();
+                } 
+            } 
+        });
+        function ajaxRed(){
+              $("#load").show();
+              stop=false;
+              var cid="<{$circle.circle_id}>";
+              var type="<{$type}>";
+              $.get("<{:U('Club/ajax_get_activity')}>",{"p":currentpage,"id":cid,"type":type}
+              ,function(html){ 
+                      if($.trim(html)!=""){ 
+                          if(currentpage==0)
+                          {
+                            $("#activity_list").html(html);
+                          } 
+                          else
+                          {
+                            $("#activity_list").append(html);
+                          }                          
+                       stop=true;
+                      }else{
+                         if(currentpage==0)
+                          {
+                            MsgBox('暂无活动');
+                          } 
+                          else
+                          {
+                            MsgBox('已加载全部结果');
+                          }
+                      }  
+                      currentpage++;
+                     $("#load").hide();  
+                 });              
+        }
+
+</script>
+
+<div id="activity_list">
+   
+</div>
+
+<!--加载-->
+<div class="container-fluid" id="load">
+	<div class="row">
+    	<div class="col-xs-12" style="margin-top:10px;"><center><img src="__PUBLIC__/images/minilodging.gif" width="24" height="24">正在加载...</center></div>
+    </div>
+</div>
+
+
+<p>&nbsp;</p><p>&nbsp;</p>
+
+<!--底部固定按钮-->
+<include file="Inc:footer"/>

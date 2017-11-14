@@ -1,0 +1,28 @@
+<volist name="club" id="c" key='key'>
+    <!--车友会-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="Cheyou_1">
+            <a href="<{$c.url}>"><img src="<{$c.circle_img}>" onerror="imgError(this,'http://s.17cct.com/v4/images/club_head.png');"></a>
+           
+             <if condition="$c['k'] eq 1 ">
+                 <div class="phico one1">1</div>
+                <elseif condition="$c['k'] eq 2 "/>
+                      <div class="phico two2">2</div>
+                <elseif condition="$c['k'] eq 3 "/>
+                     <div class="phico three3">3</div>
+                <else/>
+                <div class="phico ph_normal"><{$c.k}></div>
+            </if>
+        </div>
+        <div class="Cheyou_2">
+            <h3><a href="<{$c.url}>" style="color:#474747; text-decoration:none;"><{$c.circle_name}></a></h3>
+            <p class="Star"></p>
+            <p>会员：<{$c.circle_mcount}>人(已认证<{$c.circle_identification_count}>人)<span style="float:right;">油值：<{$c.circle_oil}>L</span></p>
+            <p>地区：<{$c.region_info}> <span style="float:right;">车系：<{$c.car_info}></span></p>
+        </div>
+    </div>    
+</div>
+<!--分割线-->
+<div class="container-fluid line"></div>
+</volist>

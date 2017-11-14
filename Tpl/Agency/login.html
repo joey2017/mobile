@@ -1,0 +1,84 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+        	<a href="" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>机构登录</a>
+        </div>             
+    </div>
+</div>
+<!--内容-->
+<div class="container-fluid">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="inputEmail3" class="col-xs-12" style="text-align:center; margin-top:10px;">机构登录</label>
+            <div class="col-xs-12" style="margin-top:10px;">
+      			<input type="email" class="form-control" style="height:55px" name='username' id="username" placeholder="用户名">
+    		</div>
+            <div class="col-xs-12" style="margin-top:10px;">
+      			<input type="password" class="form-control" style="height:55px" name='password' id="password" placeholder="密码">
+    		</div>    
+            <div class="col-xs-12" style="margin-top:10px;"><button style="height:50px" id="btn_submit" type="button" class="btn btn-warning btn-block" >确定</button></div>        
+        </div>                  
+    </form>
+</div>
+ <!--弹出提示框-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<script>
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+  WeixinJSBridge.call('hideToolbar');
+  WeixinJSBridge.call('hideOptionMenu');
+});
+$(function(){
+    $("#btn_submit").click(function(){
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var reg=/^[a-zA-Z0-9]\w{5,17}$/;
+        if (username == '') {
+            MsgBox("用户名不能为空！");
+            return false;
+        }else{
+            $("#error_username").hide();
+        } 
+        /*else if (reg.test(username) == false) {
+            $("#error_username").text("请输入6-18位数字或字母！").show();
+            return false;
+        } */
+         if (password == '') {
+            MsgBox("密码不能为空！");
+            return false;
+        }else{
+                $("#error_password").hide();
+        } /*else if (reg.test(password) == false) {
+            $("#error_password").text("请输入6-18位数字或字母！").show();
+            return false;
+        }*/ 
+        var parme = {
+            "username": username,
+            "password": password
+        };
+        $.post("<{:U('Agency/ajax_login')}>", parme, function(data) {
+            if (data.status) {
+                location.href = data.info;
+            } else {
+                MsgBox(data.info);
+            }
+        })
+        
+    });
+});
+</script>
+</body>
+</html>

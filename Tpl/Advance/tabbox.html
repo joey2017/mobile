@@ -1,0 +1,26 @@
+<div class="cbp-hrsub">
+    <!-- 选项卡开始 -->
+    <div class="nTab">
+        <!--属性二级-->
+        <div class="TabTitle">
+            <ul id="<{$mytab}>">
+                <foreach name="resultlist" item="r" key="r_k">
+                <li class="<{$r.class}>" onclick="nTabs(this,<{$r_k}>);"><{$r.name}></li>
+                </foreach>
+            </ul>
+        </div>
+        <!-- 属性三级 -->
+        <div class="TabContent">
+            <foreach name="resultlist" item="r" key="r_k">
+            <div id="<{$mytab}>_Content<{$r_k}>" class="<{$r.son_class}>">
+                <foreach name="r.son" item="s">
+                <ul><a href="<{$s.url}>" <{$s.style}>><li><{$s.name}></li></a></ul>
+                </foreach>
+            </div> 
+            </foreach>
+        </div>
+    </div>
+    <!-- 选项卡结束 --> 
+</div>
+
+

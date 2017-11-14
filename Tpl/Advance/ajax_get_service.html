@@ -1,0 +1,41 @@
+<volist name="service" id="s">
+	<div class="container-fluid">
+    <div class="row shoptitle">
+        <div class="col-xs-7">
+            <h4 class="my_od_f"><{$s.name}></h4>
+            <p  class="my_od_f"><a href=""><{$s.address}></a></p>
+        </div>
+
+        <div class="col-xs-5 text-right">
+            <p style="margin: 9px 0 0 0; font-size: 19px;color: #cd0000;"><{$s.distance}>km</p>
+            <em>等待<{$s.wait_time}></em>
+        </div>
+    </div>
+    <div class="<if condition='$s.count gt 2'>shoplist<else/>shoplist_2</if>">
+		<volist name="s['list']" id="sl">
+		    <div class="reservelist">
+		        <a href="<{:U('Advance/advance_add',array('id'=>$sl['id']))}>">
+		            <div class="col-xs-8" style="padding-left:0;">
+		                <span class="<{$sl.project_type}>"></span>
+		                <{$sl.goods_name}>
+		            </div>
+		            <div class="col-xs-4 text-right">
+		                <h5 class="money-h"><i><{$sl.selling_price|price}></i>元</h5>
+		                <i class="fa fa-angle-right"></i>
+		            </div>
+		        </a>
+		    </div>
+		</volist>
+	</div>
+	<if condition='$s.count gt 2'>
+	    <div class="row re_more" onclick="show_more(this)">
+	        <a  class="text-center more"  style="display:block;">
+	            <i class="fa fa-angle-down"></i>
+	            查看更多
+	        </a>
+	    </div>
+    </if>
+
+</div>
+
+</volist>

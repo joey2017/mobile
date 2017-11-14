@@ -1,0 +1,211 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+<!--头部-->
+<!--弹出提示框-->
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+        	<a href="javascript:history.go(-1)" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/meng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a href="<{:U('Club/club',array('id'=>$circle['circle_id']))}>"><{$circle.circle_name}></a>
+        </div>
+        <!--<div class="pgbtn">
+        	收藏按钮  没收藏之前的状态<a href=""><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span></a>
+            <a href=""><span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
+
+        </div> -->
+        <div class="pgbtn">
+        	<a href="javascript:button2()"><span class="glyphicon glyphicon-share" aria-hidden="true"></span></a>
+        </div>
+        <input type="hidden" id="circle_id" value="<{$circle.circle_id}>">
+    </div>
+</div>
+<!--banner-->
+<div class="cy_Detail">
+	<div class="cy_Detail_bn">
+    <if condition="$focus['img'] neq null">
+        <a href="<{$focus.link}>"><img src="<{$focus.img}>!small"></a>
+     <else/>
+        <a href="javascript:void(0)"><img src="__PUBLIC__/images/cyb.jpg"></a>
+    </if>
+   
+    </div>
+    <div class="cy_Detail_Title"><{$circle.circle_name}></div>
+    <div class="cy_Detail_Head"><a href=""><img src="<{$circle.circle_img}>" onerror="imgError(this,'http://s.17cct.com/v4/images/club_head.png');"></a></div>
+    
+     <if condition=" $join_info eq 1">
+             <a href="<if condition='$sign_status neq 1' >javascript:sign();<else/>javascript:void(0)</if>" class="btn btn-warning cy_Detail_btn" <if condition='$sign_status neq 0' >style="background-color: rgb(174, 174, 174);</if>  id="Jsignbtn"><if condition='$sign_status neq 1' >签到<else/>已签到</if></a>
+        <else/>
+            <if condition=" $join_info eq 2 ">
+                 <a href="<{:U('Club/apply',array('id'=>$circle['circle_id']))}>" class="btn btn-warning cy_Detail_btn" id="Jsignbtn" >申请加入</a>
+                <elseif condition=" $join_info eq 3"/>  
+                    <a href="javascript:void(0)" class="btn btn-warning cy_Detail_btn"  >审核中</a>
+                <elseif condition=" $join_info eq 4"/>  
+                    <a href="javascript:MsgBox('您已加入其它车友会')" class="btn btn-warning cy_Detail_btn" id="Jsignbtn" >申请加入</a>
+                <else />  
+                 <a href="javascript:apply()" class="btn btn-warning cy_Detail_btn" id="Jsignbtn">申请加入</a>
+            </if>
+        </if>
+	<div id="mcover" onclick="weChat()" style="display:none;">
+	      <img src="https://mmbiz.qlogo.cn/mmbiz/vV3bdMHsLIjY2s0npKT0FaJ6iaC1MaiciakM61zfqBsNjYH14ovUG145GEuwMPafiaPjh5drSaAg8DMTic3a2I3icbLg/0" />
+	</div>
+	 <style>
+             #mcover {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                display: none;
+                z-index: 20000;
+             }
+             #mcover img {
+                position: fixed;
+                right: 18px;
+                top: 5px;
+                width: 260px!important;
+                height: 180px!important;
+                z-index: 20001;
+             }
+             .text {
+                margin: 15px 0;
+                font-size: 14px;
+                word-wrap: break-word;
+                color: #727272;
+             }
+             #mess_share {
+                margin: 15px 0;
+                display: block;
+             }
+             #share_1 {
+                float: left;
+                width: 49%;
+                display: block;
+             }
+             #share_2 {
+                float: right;
+                width: 49%;
+                display: block;
+             }
+             .clr {
+                display: block;
+                clear: both;
+                height: 0;
+                overflow: hidden;
+             }
+            
+             #mess_share img {
+                width: 22px!important;
+                height: 22px!important;
+                vertical-align: top;
+                border: 0;
+             }
+        </style>
+
+    <script type="text/javascript">
+    /*各种提示*/
+        function button2(){
+            $("#mcover").css("display","block")  // 分享给好友圈按钮触动函数
+        }
+        function weChat(){
+            $("#mcover").css("display","none");  // 点击弹出层，弹出层消失
+        }	
+
+        function sign(){            
+                        $.get("<{:U('Club/ajax_sign')}>",{"cid":$('#circle_id').val()}
+                              ,function(data){  
+                                if (data.status) {
+                                    $('#oil_val').text(data.oil+'L');
+                                     MsgBox(data.msg,"提示");
+                                    $('#Jsignbtn').text("已签到").css('backgroundColor', '#aeaeae').attr('href', 'javascript:void(0);');
+                                } else {
+                                    MsgBox(data.desc,"提示");
+                                }
+                         }); 
+                }
+        function apply(){
+                $('#Jsignbtn').html('跳转登录中..');
+                  setTimeout(function() {
+                           window.location.href="<{:U('Club/jump',array('id'=>$circle['circle_id'],'action'=>'apply'))}>";
+                        }, 800);               
+        }
+    </script>
+
+    <div class="cy_Detail_Star">
+    	<p class="cy_Detail_Star_<{$circle.circle_oil_level}>"></p>
+        <p>会员：<{$circle.circle_mcount}>人(认证<{$circle.circle_identification_count}>人)<span style="float:right;">油值：<{$circle.circle_oil}>L</span></p>
+        <p>地区：<{$circle.region_info}> <span style="float:right;">车系：<{$circle.car_info}></span></p>
+    </div>
+</div>
+<!--车友会员 相册 车友贴 活动-->
+<div class="cy_line">
+	<dl>
+    	<a href="<{:U('Club/member',array('id'=>$circle['circle_id']))}>">
+        	<dt class="cy_line_1"><{$circle.circle_mcount}></dt>
+            <dt class="cy_line_2">成员</dt>
+        </a>       
+    </dl>
+    <dl>
+    	<a href="<{:U('Club/album',array('id'=>$circle['circle_id']))}>">
+        	<dt class="cy_line_1"><{$circle.album_count}></dt>
+            <dt class="cy_line_2">相册</dt>
+        </a>       
+    </dl>
+    <dl>
+    	<a href="<{:U('Club/topic',array('id'=>$circle['circle_id']))}>">
+        	<dt class="cy_line_1"><{$circle.topic_count}></dt>
+            <dt class="cy_line_2">车友贴</dt>
+        </a>       
+    </dl>
+    <dl>
+    	<a href="<{:U('Club/activity',array('id'=>$circle['circle_id']))}>">
+        	<dt class="cy_line_1"><{$circle.activity_count}></dt>
+            <dt class="cy_line_2">活动</dt>
+        </a>       
+    </dl>
+</div>
+ <volist name="list" id="list">
+    <!--帖子内容-->
+    <div class="container-fluid">
+    	<div class="row">        
+            <div class="Posts_img">
+                <a href="<{:U('User/show',array('id'=>$list['member_id']))}>"><img src="<{$list.head_img}>" onerror="imgError(this,'http://s.17cct.com/v3/images/man.jpg');"></a>
+            </div>
+            <div class="Posts_cts">
+                <div class="Posts_cts_top">
+                    <div style="float:left;">
+                    	<a href="<{:U('User/show',array('id'=>$list['member_id']))}>" style="font-weight:bold;color:#474747;text-decoration:none;"><{$list.user_name}></a>                    
+                    </div>
+                    <div class="time"><{$list.theme_addtime|date="Y-m-d H:i",###}></div>               
+                </div>
+                <h3><a href="<{:U('Club/topic_detail',array('id'=>$list['theme_id']))}>" style=" color:#474747; text-decoration:none;"><{$list.theme_name}></a></h3>
+                <p class="my_od_f"><{$list.theme_content}></p>
+                 <p class="Posts_cts_img">
+                     <volist name="list['img_items']" id="ii">
+                         <a href="<{:U('Club/topic_detail',array('id'=>$list['theme_id']))}>"><img src="<{$ii}>"/></a>
+                    </volist>              
+                </p>
+            </div>
+    	</div>
+    </div>
+
+    <!--line-->
+    <div class="container-fluid line"></div>
+</volist>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<!--底部固定按钮-->
+<include file="Inc:footer"/>

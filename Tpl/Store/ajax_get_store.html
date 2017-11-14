@@ -1,0 +1,11 @@
+<volist name="list" id="gs" key='k'>            
+	<div class="col-xs-6 zsimg" <if condition="$k eq 3">style="clear: both;"</if>>
+    	<a href="<{:U('Store/view',array('id'=>$gs['id']))}>">
+        	<img class="lazy_img" src="<{$gs.preview|getImgUrl=###,'large'}>"  onerror="imgError(this,'http://s.17cct.com/v3/images/errorimg.jpg');">
+            <div><{$gs.name}><{$gs.preview}></div>
+        </a>
+    </div>
+</volist>
+<script type="text/javascript">
+
+</script>

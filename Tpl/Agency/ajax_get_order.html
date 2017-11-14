@@ -1,0 +1,33 @@
+<if condition="$list neq null">
+<volist name="list" id="list">
+    <div class="container-fluid line"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="Business">
+                <p><span class="Business_et">订单号：</span><{$list.order_sn}></p>
+                <p><span class="Business_et">金额：</span><span class="Business_cl">￥<{$list.total_price|price}></span></p>
+                <p><span class="Business_et">下单时间：</span><{$list.create_time|date="Y-m-d H:i:s",###}></p>
+                <p><span class="Business_et">会员：</span><{$list.user_name}></p>
+                <p><span class="Business_et">手机号码：</span><{$list.mobile}></p>
+                <p><span class="Business_et">产品/服务：</span><{$list.name}></p>
+                <p><span class="Business_et">状态：</span><span class="Business_cl">
+                <switch name="list.status"> 
+                    <case value="2" >未消费</case>
+                    <case value="4" >已消费</case>
+                </switch>
+                </span></p>      
+            </div>  
+        </div>
+    </div>
+</volist>
+<else />
+ <div class="container-fluid line"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="Business">
+                <p></p><p></p><p></p>
+                <p style="text-align: center;">暂无订单</p>      
+            </div>  
+        </div>
+    </div>
+</if>

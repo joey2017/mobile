@@ -1,0 +1,14 @@
+<volist name="route_list" id="r" >
+    <div class="row" >
+        <a href="<{:U('Route/view',array('id'=>$r['id']))}>" class="tab_a">
+            <div class="col-xs-5" style="margin:10px 0 0 0;">
+                <img src="<{$r.img|getImgUrl=###,'large'}>" style=" width:100%; height:auto"> 
+            </div>
+            <div class="col-xs-7 txtbox" style="margin:0; padding:0;">
+                <h3><{$r.title}></h3>
+                <p class="tcont"><{$r.brief}></p>
+                <p><b> <?php echo price($r['adult_price']); ?>元</b> <button type="button" class="btn <{$r.color}> btn-sm" style="float:right;"><{$r.word}></button></p>
+            </div>
+        </a>
+    </div>
+</volist>

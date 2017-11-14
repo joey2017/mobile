@@ -1,0 +1,66 @@
+<include file="Inc:zjy_header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top">
+        <div class="Current">
+        	<a href="javascript:history.back();"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="Search">
+            <h1>路书</h1>
+        </div>
+    </div>
+</div>
+
+<if condition="$book.thumb neq ''">
+<div class="spshow">
+    <a href="javascript;:">
+        <img class="yjbgimg" src="<{$book.thumb|getImgUrl=###,'big'}>" />
+    </a>
+</div>
+</if>
+
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-xs-12 title_h">
+            <{$book.title}>
+        </div>
+    </div>
+</div>
+
+<!--
+<div class="container-fluid" >
+    <div class="row">
+            <div class="col-xs-12" style="margin-bottom:10px;">
+        <button type="button" class="btn btn-primary  btn-block">获取路书</button>
+        </div>
+    </div>
+</div>
+-->
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--路书详情-->
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>路书详情</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 txtcontent">
+           <{$book.content}>
+        </div>
+    </div>
+</div>
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<include file="Inc:footer"/>

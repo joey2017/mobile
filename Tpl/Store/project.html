@@ -1,0 +1,118 @@
+<include file="Inc:header"/>
+
+
+<style type="text/css">
+
+.tab_parent{padding-left: 15px;}
+.tab_subset{margin:0; padding: 0 15px 0 0;}
+ul{margin:0;list-style: none; padding: 0;}
+a{color: #333;}
+a:focus,a:active, a:hover{color: #333; text-decoration: none;}
+.box_flex{font-size:14px; display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -moz-flex; display: -ms-flexbox; display: flex;}
+.flex1{ -webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;}
+
+
+
+
+
+
+.top-header{ background-color: #f60; width: 100%; overflow: hidden; position: relative; display: table;}
+.top-header h3{ font-size: 1.6em; padding: 1em; margin: 0 30%;   white-space: nowrap; text-align: center; overflow: hidden; text-overflow: ellipsis; display: block; color: #fff; font-weight: normal; display: table-cell;}
+.top-header a:first-child{width: 14%; display: table-cell;  padding:0 4%;vertical-align: middle;}
+.top-header a:last-child{ width: 14%; display:table-cell;padding:0 4%; vertical-align: middle;}
+.top-header img{ width: 100%;  display: block;} 
+body{ background-color: #f2f2f2;}
+/*瀑布流开始*/
+.wall {display: block; position: relative;}
+.wall-column { display: block; position: relative; width: 50%; float: left; padding: 0 2%; box-sizing: border-box;}
+.article { display: block; margin: 8% 0 0 0; padding: 5%; background: white; border-radius: 3px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);  transition: all 100; overflow: hidden; position: relative;}
+.article:hover{ transform: scale(1.01);}
+.article img { display: block; width: 100%; margin: 0 0 5% 0;}
+.article a{ color: #666;}
+.article p{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 1.2em; line-height: 1.5; margin: 0;}
+/*瀑布流结束*/
+
+
+.no_record{height: 24px;  padding-top: 205px;  text-align: center;  background: url(http://s.17cct.com/v5/images/erp/empty.png) no-repeat center 20px;  background-size: 180px 180px;}
+
+.rot_label{overflow: hidden; margin-top: 10px; padding: 0 10px}
+.container{padding: 0 10px}
+.rot_label ul{margin: 0; padding: 0}
+.rot_label li{float: left; margin: 0 5px 5px 0;}
+.rot_label li a{display: block; padding: 5px 10px; border: 1px solid #ddd; border-radius: 5px;}
+
+.rotcurrent{background:#f57a30; color: #fff !important;border: 1px solid #f57a30 !important;}
+</style>
+
+</head>
+
+<body>
+<!--头部-->
+
+<!-- <div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <a href="<{:U('Store/view',array('id'=>$id))}>" ><div class="pg-Current">
+        	<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pgt">
+        	<a>返回</a>
+        </div>
+    </div>
+</div> -->
+
+
+
+<div class="container">
+    <div class="row" >
+        <div class="col-xs-12" >
+            <div class="tab_t">
+                <h2>案例分类</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="rot_label">
+    <ul>
+            <li><a href="<{:U('Store/project',array('id'=>$id))}>" <if condition='$cid eq 0'> class="rotcurrent" </if> >全部案例</a></li>  
+            <volist name="cate_list" id="cl">     
+            <li><a href="<{:U('Store/project',array('id'=>$id,'cid'=>$cl['id']))}>" <if condition="$cid eq $cl['id']"> class="rotcurrent" </if>><{$cl.name}></a></li>
+            </volist>
+           <!--  <li><a href="<{:U('Store/project_detail',array('id'=>$id,'cid'=>12))}>" <if condition='$cid eq 12'> class="rotcurrent" </if>>汽车改装</a></li>
+            <li><a href="<{:U('Store/project_detail',array('id'=>$id,'cid'=>13))}>" <if condition='$cid eq 13'> class="rotcurrent" </if>>服务施工</a></li>
+            <li><a href="<{:U('Store/project_detail',array('id'=>$id,'cid'=>14))}>" <if condition='$cid eq 14'> class="rotcurrent" </if>>钣金油漆</a></li>
+            <li><a href="<{:U('Store/project_detail',array('id'=>$id,'cid'=>15))}>" <if condition='$cid eq 15'> class="rotcurrent" </if>>汽车保养</a></li>
+            <li><a href="<{:U('Store/project_detail',array('id'=>$id,'cid'=>16))}>" <if condition='$cid eq 16'> class="rotcurrent" </if>>汽车装潢</a></li>
+            <li><a href="<{:U('Store/project_detail',array('id'=>$id,'cid'=>17))}>" <if condition='$cid eq 17'> class="rotcurrent" </if>>汽车美容</a></li> -->
+            
+    </ul>
+</div>
+<div class="wrapper">
+    <if condition='$list neq null'>
+            <ul class="wall">
+                <volist name="list" id="l">
+                    <li class="article">
+                        <a href="<{:U('Store/project_detail',array('id'=>$l['sid']))}>">
+                            <img src="<{$l.thumb}>" />
+                            <p><{$l.title}></p>
+                        </a>
+                    </li>
+                </volist>          
+            </ul>
+        <else/>
+        <div class="no_record col-sm-12">暂无案例</div>
+    </if>
+</div>
+
+
+<div style="height:60px; clear:both;"></div>
+<script src="__PUBLIC__/js/jaliswall.js"></script>
+<script>
+   $(function(){
+        $('.wall').jaliswall({ item: '.article' });
+    });
+</script>
+<!--底栏-->
+<include file="Inc:store_bottom"/>
+<!--底部固定按钮-->
+<include file="Inc:footer"/>
+

@@ -1,0 +1,353 @@
+<include file="Inc:header"/>
+</head>
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+        	<a href="" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/cheng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>会员中心</a>
+        </div>      
+    </div>
+</div>
+
+<div class="alertBg" id="msgBox" style="display:none;">
+    <h4 class="alerttitle" id="alerttitle"></h4>
+    <span class="vm f20" id='alertdetail'></span>
+</div>
+<!-- 样式 -->
+<style type="text/css">
+.Project_i {width: 24px;height: 24px;line-height: 24px;border-radius: 15px;background: #cd0000;display: block;float: left;text-align: center;color: #fff;font-style: normal;margin: -4px 5px 0 0;}
+.tab_t{border:none;}
+.none{display:none;}
+.f_l{float: left;}
+.time_zhi{text-align: center;line-height: 34px;}
+.results_Time, .projectbox, .moneybox{float: left; text-align: center; height: 34px; line-height: 34px; border-bottom: 1px solid #eee;}
+.results_Time{width: 30%;}
+.projectbox{width: 55%;}
+.moneybox{width: 15%;}
+</style>
+
+<script type="text/javascript">
+    function nTabs(thisObj,Num){
+    if(thisObj.className == "btn btn-danger")return;
+    var tabObj = thisObj.parentNode.parentNode.id;
+    var tabList = document.getElementById(tabObj).getElementsByTagName("button");
+    for(i=0; i <tabList.length; i++)
+    {
+      if (i == Num)
+      {
+       thisObj.className = "btn btn-danger"; 
+          document.getElementById(tabObj+"_Content"+i).style.display = "block";
+      }else{
+       tabList[i].className = "btn btn-default"; 
+       document.getElementById(tabObj+"_Content"+i).style.display = "none";
+      }
+    } 
+    }
+</script>
+
+
+<!--记录-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12" >
+        	<div class="btn-group btn-group-justified" id="myTab0" role="group" style="margin-top: 15px;">
+                <div class="btn-group" role="group">
+      			    <button type="button" class="btn btn-danger" onclick="nTabs(this,0);">记 账</button>
+      			</div>
+                <div class="btn-group" role="group">
+      			    <button type="button" class="btn btn-default" onclick="nTabs(this,1);">查 询</button>
+      			</div>
+    		</div>
+            <form action='<{:U("User/pay_note_add")}>' name="form0" method="post">
+            <div id="myTab0_Content0">
+			    <div class="tab_t">
+				    <h2><i class="Project_i">1</i>车牌号选择</h2>
+				</div>
+                  <select class= "form-control selectpicker" name="user_car_sn" id="user_car_sn" >
+				      
+					 <foreach name="car_sn" item="car" key="key">
+				       <option value="<{$car.car_id}>,<{$car.car_sn}>"><{$car.car_sn}></option>
+					 </foreach>
+                 </select>
+                <div class="tab_t">
+                    <h2><i class="Project_i">2</i>消费金额</h2>
+                </div>
+				<div id="p" style="color:red"></div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">￥</span>
+                    <input type="number" class="form-control" placeholder="消费金额" name="price" id="price"  >
+                </div>
+
+                <div class="tab_t">
+                    <h2><i class="Project_i">3</i>消费内容</h2>
+                </div>
+                <select class= "form-control selectpicker" name="cat">			  
+                   <foreach name="categorys" item="cg" key="key">
+					 <option value="<{$key}>"><{$cg}></option>
+					</foreach>
+                </select>
+
+                <div class="tab_t">
+                    <h2><i class="Project_i">4</i>消费时间</h2>
+                </div>
+				
+                <input type="text" name="USER_AGE" id="USER_AGE" class="form-control" placeholder="请填写你的消费日期" />
+                <a class="btn btn-danger btn-block " href="javascript:void(0)" role="button" style="margin-top: 15px;" id="note">记上一笔</a>
+				
+                <!--<input type="submit" value="记上一笔" class="btn btn-danger btn-block " role="button" style="margin-top: 15px;"/>-->
+            </div>
+			 </form>
+			 
+            <div id="myTab0_Content1" class="none">
+			  <form action='' method="post" name="form1">
+                <div style="overflow:hidden; margin-top:15px;">
+                    <input type="text" style="width:46%;" name="timestart" id="timestart" class="form-control f_l" placeholder="消费开始日期"  />
+                    <span class="f_l time_zhi" style="width:8%;">至</span>
+                    <input type="text" style="width:46%;" name="timesend" id="timesend" class="form-control f_l" placeholder="消费结束日期"  />			
+                </div>
+				<div class="tab_t">
+				    <h2>车牌号选择</h2>
+				</div>
+                  <select class= "form-control selectpicker" name="car_sn" id="car_sn" >			  
+                      <foreach name="car_sn" item="car" key="key">
+				       <option value="<{$car.car_id}>"><{$car.car_sn}></option>
+					 </foreach>
+                 </select>
+                <div class="tab_t">
+                    <h2>消费内容</h2>
+                </div>
+                <select class= "form-control selectpicker" name="category"  id="category" >
+				    <option value="'0'">全部</option>
+                    <foreach name="categorys" item="cg" key="key">
+                     <option value="'<{$key}>'"><{$cg}></option>
+				  </foreach>		
+                </select>
+				<a class="btn btn-danger btn-block " href="javascript:void(0)" role="button" style="margin-top: 15px;" id="selet" onclick="u_load();">查询</a>
+                </form>
+				<div class="tab_t" id="num">
+                   <h2></h2>
+                </div>
+                <div class="tab_t">
+                    <h2>查询结果</h2>
+                </div>
+				<div id="cont">
+				    <div class="results_Time" style="width:90px;">消费时间</div>
+                    <div class="projectbox" style="width:120px;">消费类别</div>
+                    <div class="moneybox" style="width:80px;">消费金额</div>
+                    
+				</div>
+				<div id="route_list">
+				
+				</div>
+				<div id="load" style="display:none">
+				   <div class="results_Time" style="width:300px;">正在加载...</div>
+				</div>
+            </div>
+			
+       </div>
+    </div>
+</div>
+
+<!-- 时间插件 start -->
+<link href="__PUBLIC__/css/mobiscroll.css" rel="stylesheet" />
+<link href="__PUBLIC__/css/mobiscroll_date.css" rel="stylesheet" />
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="__PUBLIC__/js/mobiscroll_date.js" charset="gb2312"></script> 
+<script src="__PUBLIC__/js/mobiscroll.js"></script> 
+<script>
+    $(function () {
+        var currYear = (new Date()).getFullYear();  
+        var opt={};
+        opt.date = {preset : 'date'};
+        opt.datetime = {preset : 'datetime'};
+        opt.time = {preset : 'time'};
+        opt.default = {
+            theme: 'android-ics light', //皮肤样式
+            display: 'modal', //显示方式 
+            mode: 'scroller', //日期选择模式
+            dateFormat: 'yyyy-mm-dd',
+            lang: 'zh',
+            showNow: true,
+            nowText: "今天",
+			dayText: '日', 
+            monthText: '月',
+            yearText: '年',
+            startYear: currYear - 50, //开始年份
+            endYear: currYear + 10 //结束年份
+        };
+
+        $("#USER_AGE").mobiscroll($.extend(opt['date'], opt['default']));
+        $("#timestart").mobiscroll($.extend(opt['date'], opt['default']));
+        $("#timesend").mobiscroll($.extend(opt['date'], opt['default']));
+
+    });
+	<!-- 时间插件 end -->
+</script>
+<script>
+	var d = new Date()
+	var vYear = d.getFullYear();
+	var vMon = d.getMonth() + 1;
+	var vDay = d.getDate();
+	var nowtime=vYear+""+vMon+""+vDay;
+	var currentpage=0;
+  //消费记录查询ajax滚动加载   
+  function u_load(){
+		currentpage=0;
+	 	ajaxRed();
+			
+  }
+  $(window).scroll(function(){ 
+				totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()); 
+				if($(document).height() <= totalheight){ 
+				   
+					if(stop==true){ 
+					
+						 ajaxRed();	
+                       					
+					}
+				
+				} 
+			});
+		
+ function ajaxRed(){ 
+		   var car_sn=document.form1.car_sn.value;
+		   var timestart=document.form1.timestart.value;
+		   var timesend=document.form1.timesend.value;
+		   var category=document.form1.category.value;
+		   var stime=timestart.replace(/-/g,'');
+		   var etime=timesend.replace(/-/g,'');
+		  
+		   if(timestart==''){
+			  MsgBox('请选择开始日期');
+			  return false;
+		   }
+			if(stime>nowtime){
+			 
+			 MsgBox('请选择正确日期');
+			 return false;
+		   
+		   }
+		   if(timestart!=''){
+			 if(timesend==''){
+			 
+				MsgBox('请选择结束日期');
+				return false;
+			 }
+		   
+		   }
+		   if(etime>nowtime){
+			 
+			 MsgBox('请选择正确日期');
+			 return false;
+		   
+		   }
+		   if(stime>etime){
+			 MsgBox('结束消费日期不能小于开始日期');
+			 return false;
+		   }	     	
+			
+					  $("#load").show(); 
+					  stop=false;
+					   
+					  $.get("<{:U('User/ajax_pay_note')}>",{"timestart":timestart,"timesend":timesend,"category":category,"p":currentpage,"car_sn":car_sn}
+					  ,function(html){
+					       
+							  if(html!=""){ 
+								 
+								if(currentpage==0) {
+									
+									$("#route_list").html(html);
+									$("#num h2").html('总消费金额为:￥'+$("#sum_price").val());
+								}
+								else {
+								  
+								   $("#route_list").append(html);  
+								   $("#num h2").html('总消费金额为:￥'+$("#sum_price").val());
+								} 
+							  }else{
+							      
+							     if(currentpage==0) {
+									   $("#num h2").html('');					       
+									   $("#route_list").html(" "); 
+									   $("#route_list").empty();
+								      MsgBox('已经无数据加载');
+								 }
+							 }
+													    
+							  stop=true;	
+                             currentpage++;  							  								 	
+							 $("#load").hide();  
+						 });
+				 
+		  }
+//消费记录添加   
+$(function(){
+    $("#note").click(function(){
+	    var user_car_sn=document.form0.user_car_sn.value;
+	    var price=document.form0.price.value;
+	    var cat=document.form0.cat.value;
+	    var paytime=document.form0.USER_AGE.value;
+		var time=paytime.replace(/-/g,'');
+		var reg = /^[0-9]+([.]{1}[0-9]+){0,1}$/;
+	    var value1=price;
+	    var result1=reg.exec(value1);
+		
+		if(result1==null){
+		    MsgBox('请输入正确金额！');	  
+		   return false;	
+		}
+		if(cat==0){		
+		   MsgBox('请选择消费类别！');
+		   return false;	
+		}
+		if(result1!=null){
+			if(paytime==''){
+			  MsgBox('请选择日期！');
+			  return false;
+			}
+		}
+		if(time>nowtime){
+		
+		   MsgBox('请选择正确的日期！');
+			  
+			  return false;
+		}
+	    $.ajax({
+            url:'<{:U("User/pay_note_add")}>',
+            type:'post',
+            dataType:'json',
+            data:{'user_car_sn':user_car_sn,'price':price,'cat':cat,'paytime':paytime},
+		    success: function(msg){
+	         if(msg==0){
+			    MsgBox('记账失败');
+			   return false;
+			 }else{
+			  MsgBox('记账成功');
+			  $('#price').val('');
+			  $('#USER_AGE').val('');
+			  		  
+			 }
+	         
+	
+	    }
+		
+	  });
+	
+	
+	})
+})
+  
+</script>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<!--底部固定按钮-->
+<include file="Inc:footer"/>

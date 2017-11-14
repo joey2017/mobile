@@ -1,0 +1,58 @@
+<include file="Inc:header"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="container-fluid topbox">
+    <div class="row top"><h1 style="display:none;">诚车堂汽车网</h1>
+        <div class="pg-Current">
+        	<a href="" ><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+        </div>
+        <div class="pg-Current">
+        	<img src="__PUBLIC__/images/meng.png" width="30" height="30">
+        </div>
+        <div class="pgt">
+        	<a>创建车友会</a>
+        </div>
+    </div>
+</div>
+
+<!--流程-->
+<div class="container-fluid">
+    <div class="row">
+    	<div class="col-xs-12 crumbs">
+        	<center>
+            	<i>车友会信息</i> > <i >个人信息</i> > <i class="c-active">待审状态</i>
+            </center>
+        </div>
+    </div>
+</div>
+
+<!--分割线-->
+<div class="container-fluid line"></div>
+
+<!--车友会创建-->
+<div class="container-fluid" >
+	<div class="row phon">
+			<center>
+          	<p class="successp">您申请创建的车友会正在审核！</p>
+              <p class="btn-wrapper" id="show"></p>
+              <script type="text/javascript"> 
+				var t=5;//设定跳转的时间 
+				setInterval("refer()",1000); //启动1秒定时 
+				function refer(){  
+					if(t==0){ 
+						location="<{:U('Club/index')}>"; //#设定跳转的链接地址 
+					} 
+					document.getElementById('show').innerHTML=""+t+"秒后自动跳转"; // 显示倒计时 
+					t--; // 计数器递减 
+				} 
+			</script> 
+          </center>
+	</div>
+</div>
+
+<p>&nbsp;</p><p>&nbsp;</p>
+
+<!--底部固定按钮-->
+<include file="Inc:footer"/>

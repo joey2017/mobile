@@ -1,0 +1,869 @@
+.box {
+  max-width: 640px;
+  margin: auto;
+  overflow: hidden;
+  padding-bottom: 45px;
+}
+.box a:active {
+  background: #EEEEEE;
+}
+.portrait-all {
+  height: 110px;
+  background: #cc0000;
+  overflow: hidden;
+}
+.portrait-all .portrait {
+  margin: 25px 20px;
+  width: 60px;
+  height: 60px;
+  float: left;
+  border: solid 2px #FFFFFF;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.portrait-all .portrait img {
+  width: 100%;
+  height: 100%;
+}
+.portrait-all .por-name {
+  color: #FFFFFF;
+  float: left;
+  margin-left: 0.3rem;
+  margin: 25px 0px;
+  overflow: hidden;
+}
+.portrait-all .por-name h2 {
+  font-size: 18px;
+  margin-top: 5px;
+}
+.portrait-all .por-name p {
+  font-size: 14px;
+  line-height: 24px;
+}
+.nav-top {
+  height: 62px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+.nav-top div {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.nav-top div:before {
+  content: '';
+  height: 45px;
+  width: 1px;
+  background: #EEEEEE;
+  position: absolute;
+  right: 0;
+  top: 8.5px;
+}
+.nav-top a {
+  overflow: hidden;
+  text-align: center;
+  display: block;
+  color: #535353;
+  padding-top: 8px;
+  text-decoration: none;
+}
+.nav-top a i {
+  margin-top: 5px ;
+  font-size: 22px;
+}
+.nav-top a p {
+  font-size: 14px;
+}
+.title {
+  overflow: hidden;
+  height: 32px;
+  background: #f2f2f2;
+}
+.title h2 {
+  line-height: 32px;
+  margin: 0;
+  font-size: 16px;
+  color: #444444;
+  font-weight: normal;
+}
+.order {
+  padding: 0 15px;
+  border-bottom: solid 1px #eeeeee;
+  border-top: solid 1px #eeeeee;
+  overflow: hidden;
+}
+.order div {
+  width: 20%;
+  margin: 0;
+  padding: 0;
+  border-right: solid 1px #eeeeee;
+}
+.order div a {
+  overflow: hidden;
+  text-align: center;
+  display: block;
+  padding: 10px 0;
+  text-decoration: none;
+}
+.order div a i {
+  font-size: 30px;
+  color: #cc0000;
+}
+.order div a p {
+  font-size: 14px;
+  color: #535353;
+}
+.query {
+  height: 211px;
+  border-top: solid 1px #eeeeee;
+  padding-bottom: 20px;
+  overflow: hidden;
+  margin: 0;
+}
+.query div {
+  height: 105px;
+  padding: 0;
+  margin: 0;
+  border-right: solid 1px #eeeeee;
+  border-bottom: solid 1px #eeeeee;
+  overflow: hidden;
+}
+.query a {
+  overflow: hidden;
+  padding-top: 25px ;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+}
+.query a i {
+  font-size: 24px;
+  color: #FFFFFF;
+}
+.query a p {
+  font-size: 14px;
+  color: #535353;
+  line-height: 40px;
+}
+.query a .icon-1,
+.query a .icon-2,
+.query a .icon-3,
+.query a .icon-4,
+.query a .icon-xiaoxi,
+.query a .icon-feiji,
+.query a .icon-mima,
+.query a .icon-xiadan,
+.query a .icon-jiesuan,
+.query a .icon-dingdanchaxun,
+.query a .icon-kehuxinxi,
+.query a .icon-xiaoshoue,
+.query a .icon-m-summary,
+.query a .icon-kucunchaxun,
+.query a .icon-kucunyujing,
+.query a .icon-baobiao,
+.query a .icon-tuihuo{
+  padding: 7px 8px;
+  border-radius: 3px;
+}
+.query a .icon-2 {
+  background: #a5b392;
+}
+.query a .icon-3 {
+  background: #ff3300;
+}
+.query a .icon-4 {
+  background: #55ACA8;
+}
+.query a .icon-xiaoxi {
+  background:#F36861;
+}
+.query a .icon-feiji {
+  background:#00ACEE;
+}
+.query a .icon-mima {
+  background:#46B692;
+}
+
+.query a .icon-xiaoshoue {
+  background:#80511B;
+}
+.query a .icon-m-summary {
+  background:#6F64C0;
+}
+.query a .icon-kucunchaxun {
+  background:#F76C02;
+}
+.query a .icon-kucunyujing {
+  background:#9654B6;
+}
+.query a .icon-baobiao {
+  background:#687E8C;
+}
+.query a .icon-tuihuo {
+  background:#F26432;
+}
+
+.pos-nav {
+  margin: 0;
+  height: 45px;
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+  background: #FFFFFF;
+  border-top: solid 1px #eeeeee;
+  padding-top: 1px;
+  overflow: hidden;
+}
+.pos-nav div {
+  padding: 0;
+}
+.pos-nav a {
+  text-decoration: none;
+  overflow: hidden;
+  color: #535353;
+  display: block;
+  text-align: center;
+}
+.pos-nav i {
+  font-size: 16px;
+  overflow: hidden;
+}
+.pos-nav p {
+  font-size: 14px;
+  color: #535353;
+}
+.pos-nav .nav-red i {
+  color: #cc0000 !important;
+}
+.pos-nav .nav-red p {
+  color: #cc0000 !important;
+}
+.listing {
+  overflow: hidden;
+}
+.listing li {
+  height: 50px;
+  padding: 0 15px;
+  border-bottom: solid 1px #eeeeee;
+  overflow: hidden ;
+}
+.listing li:active {
+  background: #eee;
+}
+.listing li a {
+  text-decoration: none;
+  overflow: hidden;
+  color: #535353;
+  display: block;
+}
+.listing li a i {
+  font-size: 17px;
+  color: #FFF;
+  float: left;
+}
+.listing li a p {
+  text-align: left;
+  font-size: 14px;
+  margin-left: 10px ;
+  line-height: 50px;
+  float: left;
+}
+.listing li a span {
+  font-size: 17px;
+  color: #707070;
+  float: right;
+  line-height: 50px;
+}
+a .li-icon1,
+a .li-icon2,
+a .li-icon3,
+a .li-icon4,
+a .li-icon5,
+a .li-icon6,
+a .li-icon7,
+a .li-icon8,
+a .li-icon9,
+a .li-icon10,
+a .li-icon11{
+  background: #af5ef9;
+  padding: 3px 7px;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+a .li-icon2 {
+  background: #a5b392;
+}
+a .li-icon3 {
+  background: #ff3300;
+}
+a .li-icon4 {
+  background: #77C316
+}
+a .li-icon5 {
+  background: #80511B
+}
+a .li-icon6 {
+  background: #6F64C0;
+}
+a .li-icon7 {
+  background: #F76C02;
+}
+a .li-icon8 {
+  background: #9654B6;
+}
+a .li-icon9 {
+  background: #55ACA8;
+}
+a .li-icon10 {
+  background: #687E8C;
+}
+a .li-icon11 {
+  background: #F26432;
+}
+.search {
+  height: 60px;
+  border-bottom: solid 1px #EEEEEE;
+  padding: 0 15px;
+  overflow: hidden ;
+}
+.search div {
+  height: 60px;
+  margin: 0;
+  padding: 0 5px;
+}
+.search div:nth-child(1) {
+  width: 80%;
+}
+.search div:nth-child(2) {
+  width: 20%;
+  margin: 10px 0;
+}
+.search .search-input {
+  overflow: hidden;
+  width: 100%;
+  height: 42px;
+  margin: 10px 0;
+  border: solid 1px #eeeeee;
+  border-radius: 5px;
+  position: relative;
+}
+.search .search-input i {
+  position: absolute;
+  font-size: 22px;
+  line-height: 40px;
+  padding-left: 5px;
+  margin-top: 2px;
+  color: #CCCCCC;
+}
+.search .search-input input {
+  width: 100%;
+  height: 44px;
+  padding-left: 30px;
+  background: #eaeaea;
+  margin-top: -1px;
+  color: #535353;
+  font-size: 14px;
+  font-weight: normal;
+  border: none;
+}
+.search a {
+  height: 40px;
+  display: block;
+  text-align: center;
+  padding: 0;
+  text-decoration: none;
+  font-size: 16px;
+  color: #FFFFFF;
+  line-height: 40px;
+  background: #eeb415;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.shaixuan {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  position: absolute;
+  background: #CCCCCC;
+  margin: 0;
+  z-index: 999;
+}
+.shaixuan .sx-lfet ul {
+  overflow: hidden;
+}
+.shaixuan .sx-lfet ul li {
+  height: 40px;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+.shaixuan .sx-lfet ul li a {
+  text-decoration: none;
+  display: block;
+  line-height: 40px;
+}
+.select {
+  overflow: hidden;
+}
+.select div {
+  text-align: center;
+  overflow: hidden;
+  border-bottom: solid 1px #eeeeee;
+  position: relative;
+}
+.select div:active {
+  background: #EEEEEE;
+}
+.select div:before {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 20px;
+  right: 0;
+  top: 10px;
+  background: #eeeeee;
+}
+.select div p {
+  font-size: 14px;
+  line-height: 40px;
+  margin: 0;
+  padding: 0;
+}
+.select div p span {
+  padding-left: 5px;
+}
+.their {
+  overflow: hidden;
+}
+.their .modal-dialog {
+  margin-top: 120px;
+}
+.their .modal-header {
+  padding: 0;
+}
+.their .modal-header button {
+  padding: 10px;
+}
+.their .modal-footer {
+  padding: 10px;
+}
+.their .modal-footer button {
+  padding: 5px;
+}
+.their .modal-footer button:first {
+  background: #E4B9B9 !important;
+}
+.their h4 {
+  font-size: 16px;
+  padding: 10px;
+}
+.brief {
+  overflow: hidden;
+}
+.brief li {
+  height: 82.5px;
+  border-bottom: solid 1px #eeeeee;
+  overflow: hidden;
+}
+.brief .brief-left {
+  padding: 0 10px;
+  float: left;
+  overflow: hidden;
+}
+.brief .brief-left h2 {
+  font-size: 16px;
+  margin-top: 6px;
+}
+.brief .brief-left strong {
+  font-size: 14px;
+  color: #a0a0a0;
+  padding-top: 5px;
+  font-weight: normal;
+  display: block;
+}
+.brief .brief-right {
+  padding: 0 10px;
+  float: right;
+  overflow: hidden;
+}
+.brief .brief-right p {
+  margin: 0;
+  margin-top: 6px;
+  font-size: 14px ;
+  text-align: right;
+}
+.brief .brief-right span {
+  color: #eeb415;
+}
+.stock {
+  overflow: hidden;
+}
+.stock li {
+  height: 105px;
+  border-bottom: solid 1px #eeeeee;
+  overflow: hidden;
+}
+.stock div {
+  height: 110px;
+  padding: 10px 0;
+  overflow: hidden;
+}
+.stock div:nth-child(1) {
+  width: 195px;
+  float: left;
+  margin-left: 25px ;
+  overflow: hidden;
+}
+.stock div:nth-child(1) p {
+  font-size: 16px;
+  margin: 0;
+  color: #535353;
+  margin-bottom: 5px;
+}
+.stock div:nth-child(1) span {
+  font-size: 14px;
+  color: #a0a0a0;
+}
+.stock div:nth-child(2) {
+  width: 105px;
+  float: right;
+  margin-right: 25px;
+  overflow: hidden;
+}
+.stock div:nth-child(2) p {
+  text-align: right;
+  font-size: 14px;
+}
+.stock div:nth-child(2) p span {
+  color: #eeb415;
+}
+.stock div:nth-child(2) P:nth-child(2) {
+  margin: 0;
+  margin-top: 25px;
+}
+.serial {
+  height: 30px;
+  text-align: left;
+  line-height: 30px;
+  background: #fcf0d0;
+  color: #7d7d7d;
+  padding: 0 10px;
+  overflow: hidden;
+  font-size: 14px;
+}
+.product-name {
+  height: 55px;
+  font-size: 16px;
+  padding: 10px 10px;
+  overflow: hidden;
+}
+.shoujia {
+  height: 60px;
+  margin-top: 15px;
+  border-bottom: solid 1px #eeeeee;
+  overflow: hidden;
+}
+.shoujia div {
+  padding: 0 25px;
+}
+.shoujia p {
+  font-size: 16px;
+  color: #959595;
+  text-align: left;
+}
+.shoujia strong {
+  font-weight: normal;
+  color: #eeb415;
+}
+.kc-list {
+  overflow: hidden;
+}
+.kc-list li {
+  height: 40px;
+  padding: 0 10px;
+  border-bottom: solid 1px #eeeeee;
+  overflow: hidden;
+}
+.kc-list li p {
+  font-size: 14px;
+  line-height: 40px;
+}
+.kc-list li p span {
+  float: right;
+  color: #a0a0a0;
+}
+.kc-list li p .ts-color {
+  color: #eeb415;
+}
+.dope {
+  overflow: hidden;
+}
+.dope a {
+    height: 60px;
+    border-bottom: solid 1px #eeeeee;
+    overflow: hidden;
+    padding: 10px 10px;
+    display: block;
+    position: relative;
+}
+.dope a .next-more {
+    position: absolute;
+    top: 16px;
+    font-size: 20px;
+    right: 4px;
+    color: #a0a0a0;
+    overflow: hidden;
+}
+
+.dope a .dope-icon {
+  width: 35px;
+  height: 35px;
+  background: #eeb415;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 34px;
+  color: #FFF;
+  font-size: 22px;
+  float: left;
+  overflow: hidden;
+  position: absolute;
+}
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+}
+.dope a .dope-show {
+    width: 100%;
+    float: right;
+    overflow: hidden;
+    padding-left: 44px;
+    padding-right: 20px;
+}
+.dope li .dope-show span {
+  font-size: 14px;
+  color: #535353;
+}
+.dope li .dope-show span strong {
+  font-weight: normal;
+  font-size: 14px;
+  float: right;
+}
+.dope li .dope-show p {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0;
+  color: #a0a0a0;
+}
+.gather-top {
+  height: 60px;
+  border-bottom: solid 1px #eeeeee;
+  padding: 10px 0;
+  overflow: hidden;
+}
+.gather-top .gather-cont {
+  height: 40px;
+  overflow: hidden;
+  position: relative;
+}
+.gather-top .gather-cont div:nth-child(1) {
+  width: 80%;
+  padding-left: 35px;
+  overflow: hidden;
+}
+.gather-top .gather-cont div:nth-child(1) select {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  padding: 0 10px;
+  background: #EEEEEE;
+  color: #969696;
+}
+.gather-top .gather-cont div:nth-child(1) select option {
+  border-color: #EEEEEE ;
+}
+.gather-top .gather-cont div:nth-child(1) .fugai {
+  width: 20px;
+  height: 20px;
+  background: #EEEEEE;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  overflow: hidden;
+  color: #707070;
+}
+.gather-top .gather-cont div:nth-child(2) {
+  width: 20%;
+  margin: 0;
+  padding: 0;
+  padding-right: 35px;
+  overflow: hidden;
+}
+.gather-top .gather-cont div:nth-child(2) a {
+  height: 40px;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  color: #FFFFFF;
+  line-height: 40px;
+  background: #eeb415;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.gather-top .gather-cont div:nth-child(2) a:active {
+  background: #EEEEEE;
+}
+.gather-time {
+  overflow: hidden;
+}
+.gather-time div {
+  height: 60px;
+  padding: 0;
+  margin: 0;
+}
+.gather-time div:nth-child(1) {
+  width: 45%;
+  position: relative;
+  overflow: hidden;
+  padding-left: 20px;
+  padding-top: 10px;
+}
+.gather-time div:nth-child(1) select {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  padding: 0 10px;
+  background: #EEEEEE;
+  color: #535353;
+}
+.gather-time div:nth-child(1) select option {
+  color: #535353;
+}
+.gather-time div:nth-child(2) {
+  width: 10%;
+  text-align: center;
+  line-height: 60px;
+  font-size: 22px;
+}
+.gather-time div:nth-child(3) {
+  width: 45%;
+  position: relative;
+  overflow: hidden;
+  padding-right: 20px;
+  padding-top: 10px;
+}
+.gather-time div:nth-child(3) select {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  padding: 0 10px;
+  background: #EEEEEE;
+  color: #535353;
+}
+.gather-time div:nth-child(3) select option {
+  text-align: center;
+  border-color: #EEEEEE ;
+}
+.kewu,
+.kehen,
+.wunai {
+  position: absolute;
+  right: 5px;
+  top: 20px;
+  background: #EEEEEE;
+}
+.kehen {
+  right: 25px;
+}
+.wunai {
+  width: 40px;
+  right: 20px;
+  top: 10px;
+  background: #FFFFFF;
+}
+.debt {
+  overflow: hidden;
+}
+.debt .debt-l,
+.debt .debt-r {
+  float: left;
+  font-size: 14px;
+  line-height: 30px;
+  padding-left: 10px;
+}
+.debt .debt-r {
+  float: right;
+  padding-right: 10px;
+}
+.debt span {
+  color: #eeb415;
+}
+.yuer {
+  overflow: hidden;
+}
+.yuer div:nth-child(1) {
+  height: 60px;
+  overflow: hidden;
+  padding-left: 20px;
+}
+.yuer div:nth-child(1) select {
+  width: 100%;
+  height: 40px;
+  border: none;
+  padding-left: 30px;
+}
+.yuer div:nth-child(2) {
+  height: 60px;
+  overflow: hidden;
+  padding-left: 40px;
+}
+.yuer div:nth-child(2) select {
+  width: 100%;
+  height: 40px;
+  border: none;
+}
+.should {
+  width: 101%;
+  margin-left: -1px;
+  border: solid 1px #CCCCCC;
+  overflow: hidden;
+}
+.should td {
+  height: 40px;
+  color: #626262;
+  text-align: center;
+}
+.should td tr {
+  width: 25%;
+}
+.detail-text {
+  padding: 10px;
+  border-bottom: solid 1px #EEEEEE;
+  overflow: hidden;
+}
+.detail-text p {
+  font-size: 16px;
+  margin-bottom: inherit;
+  line-height: 1.5;
+  color: #444;
+}
+.detail-time {
+  overflow: hidden;
+}
+.detail-time p {
+  padding: 10px;
+  margin-top: 10px;
+  color: #7d7d7d;
+  margin-bottom: inherit;
+}
+.detail-time p a {
+  color: #535353;
+  display: block;
+  text-decoration: none;
+  float: right;
+  padding: 5px;
+  margin-top: -5px;
+  border-radius: 5px ;
+}
