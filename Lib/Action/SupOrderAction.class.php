@@ -1,6 +1,19 @@
 <?php
 class SupOrderAction extends SupBaseAction
 {
+     /**
+     * 权限白名单，白名单中的操作方法不受权限限制
+     * 该名单主要用于一些特殊无涉及权限分配的方法
+     *
+     * @var array
+     * @access protected
+     */
+    protected $accessAllowed = array(
+        'order_list','get_pay_account','store_order_add','select_pay_way','get_act_list','get_coupon_list',
+        'get_location','get_store_info','location_existence','get_deal_record','location_edit','had_store',
+        'order_settlement'
+        );
+
     /**
      * 支付方式 
      */
@@ -602,7 +615,7 @@ class SupOrderAction extends SupBaseAction
                 'is_del' => 0,
                 'id'     => $login_info['supplier_id']
             )
-        )->select();
+        )->find();
         return $supplier_info;
     }
 

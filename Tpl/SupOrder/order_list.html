@@ -23,8 +23,8 @@
 	                    <div class="infopad">优惠金额：￥<{$ol.discount_price|price}></div>
 	                    <div class="infopad">订单金额：￥<{$ol.total_price|price}></div>
 	                    <if condition="$type eq 1">
-	                    <div class="infopad">已核销金额：<{$ol.paid_amount}></div>
-	                    <div class="infopad">未核销金额：<{$ol.unpay_amount}></div>
+	                    <div class="infopad">已核销金额：<{$ol.paid_amount|price}></div>
+	                    <div class="infopad">未核销金额：<{$ol.unpay_amount|price}></div>
 	                    </if>
 	                    <div class="infopad">下单时间：<{$ol.create_time|date="Y-m-d H:i:s",###}></div>
 	                </div>

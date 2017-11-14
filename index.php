@@ -8,7 +8,7 @@ define('APP_NAME','mweixin');
 define('APP_PATH','./');
 
 
-define('APP_DEBUG',true);
+define('APP_DEBUG',false);
 
 
 

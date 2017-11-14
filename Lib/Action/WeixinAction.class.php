@@ -365,7 +365,7 @@ class WeixinAction extends BaseAction
 
 		   $json[0]['name']=urlencode('供应商登录');
 		   $json[0]['type']='view';
-		   $json[0]['url']='http://m.17cct.com/index.php/Supplier/login.html';
+		   $json[0]['url']='http://m.17cct.com/index.php/SupLogin/login.html';
 
 		   $json[1]['name']=urlencode('门店登录');
 		   $json[1]['type']='view';

@@ -739,12 +739,12 @@ function sumTotalPrice(){
 		var goods_num  = $(this).parent().parent().find('.d-main').find('.pull-right').attr('data-num');
 		var goods_id   = $(this).attr('data-val');
 		if($(this).hasClass('gift')){
-			var goods_gift = {};
+			var goods_gift = {num:0,gid:0};
 			goods_gift.num = goods_num;
 			goods_gift.gid = goods_id;
 			goods_arr_gift.push(goods_gift);
 		}else{
-			var goods       = {};
+			var goods       = {price:0,num:0,gid:0};
 			var goods_price = $(this).parent().parent().find('.d-main').find('.price').attr('data-price');
 			// var goods_num   = $(this).parent().parent().find('.d-main').find('.pull-right').attr('data-num');
 			// var goods_id    = $(this).attr('data-val');

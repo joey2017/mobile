@@ -9,7 +9,7 @@
 <script src="__PUBLIC__/js/mobiscroll.js"></script>
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/bootstrap-select.css">
 <script type="text/javascript" src="__PUBLIC__/js/bootstrap-select.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/alertPopShow.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/alertPopShow.js?v=201711141833"></script>
 
 <style type="text/css">
 
@@ -349,7 +349,7 @@ $(function () {
                         //必不可少的刷新
                         $("#id_select").selectpicker('refresh');
                         var id = $('#id_select').find('option').first().val();
-                        ajaxGetStoreInfo(id,location);
+                        ajaxGetStoreInfo(id);
                     }
                 });
             }else{ 
@@ -1364,23 +1364,7 @@ $('.confirm').on('click', function(){
                 if(button == 'ok'){
                     //按下确定按钮执行的操作
                     this.hide();
-                    btn.attr('disabled', true).text('正在处理');
-
-                    $.post("<{:U('SupOrder/store_order_add')}>",args,function(data){
-                        btn.removeAttr('disabled').text(text);
-                        if(data && typeof(data.status) != 'undefined'){
-                            if(data.status > 0){
-                                MsgBox(data.msg);
-                                var nexUrl = '<{:U("SupOrder/index")}>';
-                                setTimeout("location.href='"+nexUrl+"'", 1000);
-                            }else{
-                                MsgBox(data.msg);
-                            }
-                        }else{
-                            MsgBox('服务器未响应，请稍后重试');
-                        }
-                    },'json');
-
+                    store_order_save(btn);
                 }
 
                 if(button == 'cancel') {
@@ -1388,8 +1372,27 @@ $('.confirm').on('click', function(){
                     this.hide();
                 }
             });
+    }else{
+        store_order_save(btn);
     }
 });
+function store_order_save(btn){
+    btn.attr('disabled', true).text('正在处理');
+    $.post("<{:U('SupOrder/store_order_add')}>",args,function(data){
+        btn.removeAttr('disabled').text(text);
+        if(data && typeof(data.status) != 'undefined'){
+            if(data.status > 0){
+                MsgBox(data.msg);
+                var nexUrl = '<{:U("SupOrder/index")}>';
+                setTimeout("location.href='"+nexUrl+"'", 1000);
+            }else{
+                MsgBox(data.msg);
+            }
+        }else{
+            MsgBox('服务器未响应，请稍后重试');
+        }
+    },'json');
+}
 
 </script>
 

@@ -56,7 +56,7 @@ function callback(func, result) {
         var d = {},
             h = d.exports = {};
         e(null, h, d);
-        window.popTipShow = window.notification = d.exports
+        window.popTipShow = window.notification = d.exports;
     } else define(e)
 })(function(require, exports, module) {
     function e(a) {
@@ -132,8 +132,9 @@ function callback(func, result) {
                 g = a.body,
                 e, d, f;
             this.isHide() || (a = g.scrollTop, g = g.scrollLeft, e = b.clientWidth, b = b.clientHeight, d = c.width(), f = c.height(), c.css({
+                position: "absolute",
                 top: a + (b - f) / 2,
-                left: g + (e - d) / 2
+                left: (e - d) / 2
             }))
         },
         isShow: function() {

@@ -228,7 +228,7 @@ class SupMemberAction extends SupBaseAction
 
         // 关键字搜索
         if($keyword !== ''){
-            $where .= " and (por.order_sn like '%".$keyword."%' or por.refund_sn like '%".$keyword."%' or po.location_name like '%".$keyword."%') ";
+            $where .= " and (por.refund_sn like '%".$keyword."%' or po.location_name like '%".$keyword."%') ";
         }
 
         // 根据时间搜索
@@ -281,7 +281,7 @@ class SupMemberAction extends SupBaseAction
         // 关键字搜索
         if ($keyword !== '') {
             $where['po.order_sn']      = array('like', '%'.$keyword.'%');
-            $where['po.receive_user']  = array('like', '%'.$keyword.'%');
+            // $where['po.receive_user']  = array('like', '%'.$keyword.'%');
             $where['po.location_name'] = array('like', '%'.$keyword.'%');
             $where['_logic']        = 'or';
             $which['_complex']      = $where;
