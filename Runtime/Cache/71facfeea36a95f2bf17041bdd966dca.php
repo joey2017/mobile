@@ -31,10 +31,12 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
 <link rel="stylesheet" href="__PUBLIC__/css/drawer.min.css">
 <link href="__PUBLIC__/css/mobiscroll.css" rel="stylesheet" />
 <link href="__PUBLIC__/css/mobiscroll_date.css" rel="stylesheet" />
+<link rel="stylesheet" href="__PUBLIC__/css/alertPopShow.css" />
 <script src="__PUBLIC__/js/mobiscroll_date.js" charset="gb2312"></script> 
 <script src="__PUBLIC__/js/mobiscroll.js"></script>
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/bootstrap-select.css">
 <script type="text/javascript" src="__PUBLIC__/js/bootstrap-select.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/alertPopShow.js"></script>
 
 <style type="text/css">
 
@@ -178,8 +180,8 @@ a:focus,a:active, a:hover{color: #333; text-decoration: none;}
 .searchtab{position: relative; width: 100%; height: 36px; border-radius: 5px; margin-right:10px; }
 .searchtab span{position: absolute; width: 30px; height: 30px; display: block; top: 2px; left: 2px; background:url(__PUBLIC__/images/searchico.svg) no-repeat; background-size: 30px;}
 .searchtab input{border:0; background:#efefef; text-indent: 2em;}
-.searchbtn{width: 80px; height: 36px;}
-.searchbtn button{width: 80px; height: 33px; border:0; background: #f6a915; color: #fff; border-radius: 5px;}
+.searchbtn{width: 90px; height: 36px;}
+.searchbtn button{width: 90px; height: 33px; border:0; background: #f6a915; color: #fff; border-radius: 5px;}
 
 /*筛选按钮*/
 .screen{height: 42px; clear: both; text-align: center; border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2; padding: 10px 0; position: relative;}
@@ -478,57 +480,57 @@ function ajaxGetStoreInfo(id){
 
 <!-- 历史营业额 -->
 <div id="location_info" style="display: none">
-<div class="box-flex text-center">
-    <div class="flex1 turnover data_rb head_border">
-        <h5><span id="purchase_number"></span></h5>
-        <p>本月采购</p>
+    <div class="box-flex text-center">
+        <div class="flex1 turnover data_rb head_border">
+            <h5><span id="purchase_number"></span></h5>
+            <p>本月采购</p>
+        </div>
+       
+        <div class="flex1 turnover head_border">
+            <h5><span id="purchase_time"></span></h5>
+            <p>上次采购</p>
+        </div>
     </div>
-   
-    <div class="flex1 turnover head_border">
-        <h5><span id="purchase_time"></span></h5>
-        <p>上次采购</p>
-    </div>
-</div>
 
 
-<!-- 历史营业额 -->
-<div class="box-flex text-center">
-    <div class="flex1 turnover data_rb head_border">
-        <h5><span id="price-box"></span></h5>
-        <p>历史挂账</p>
+    <!-- 历史营业额 -->
+    <div class="box-flex text-center">
+        <div class="flex1 turnover data_rb head_border">
+            <h5><span id="price-box"></span></h5>
+            <p>历史挂账</p>
+        </div>
+        <div class="flex1 turnover data_rb head_border">
+            <h5><span id="credit-line-box"></span></h5>
+            <p>授信额度</p>
+        </div>
+        <div class="flex1 turnover head_border">
+            <h5><span id="balance"></span></h5>
+            <p>预付款余额</p>
+        </div>
     </div>
-    <div class="flex1 turnover data_rb head_border">
-        <h5><span id="credit-line-box"></span></h5>
-        <p>授信额度</p>
+
+    <div class="bundlev bline">
+        <p><span class="pull-left">门店名称：</span><span class="pull-right" id="location_name"></span></p>
     </div>
-    <div class="flex1 turnover head_border">
-        <h5><span id="balance"></span></h5>
-        <p>预付款余额</p>
+    <div class="bundlev bline">
+        <p><span class="pull-left">联系人：</span><span class="pull-right" id="receive_user"></span></p>
     </div>
+    <div class="bundlev bline">
+        <p><span class="pull-left">联系电话：</span><span class="pull-right" id="receive_tel"></span></p>
+    </div>
+    <div style="padding: 10px 16px;height: 60px;">
+        <p><span class="pull-left">地址：</span><span class="pull-right" id="receive_address"></span></p>
+    </div>
+    <div>
+        <div class="topsearch col-xs-12" style="border-top: 1px solid #e6e6e6;">
+            <div class="searchbtn" style="float:right;"><button type="button" style="width:90px;margin-top: 5px" onclick="deal_record()">交易记录</button></div>
+            <!-- <div class="searchbtn" style="margin-right: -244px;"><button type="button" style="width:80px;" onclick="search_goods(2)">修改资料</button></div> -->
+        </div>
+    </div>
+
+    <div class="container-fluid line"></div>
 </div>
 
-<div class="bundlev bline">
-    <p><span class="pull-left">门店名称：</span><span class="pull-right" id="location_name"></span></p>
-</div>
-<div class="bundlev bline">
-    <p><span class="pull-left">联系人：</span><span class="pull-right" id="receive_user"></span></p>
-</div>
-<div class="bundlev bline">
-    <p><span class="pull-left">联系电话：</span><span class="pull-right" id="receive_tel"></span></p>
-</div>
-<div style="padding: 10px 16px;height: 60px;">
-    <p><span class="pull-left">地址：</span><span class="pull-right" id="receive_address"></span></p>
-</div>
-<div>
-    <div class="topsearch col-xs-12" style="border-top: 1px solid #e6e6e6;">
-        <div class="searchbtn" style="float:right;"><button type="button" style="width:80px;margin-top: 5px" onclick="deal_record()">交易记录</button></div>
-        <!-- <div class="searchbtn" style="margin-right: -244px;"><button type="button" style="width:80px;" onclick="search_goods(2)">修改资料</button></div> -->
-    </div>
-</div>
-
-</div>
-
-<div class="container-fluid line"></div>
 
 <div class="bundlev bline" onclick="bomb_screen(1,'goods')">
     <a class="">
@@ -705,7 +707,7 @@ function ajaxGetStoreInfo(id){
     <div class="row" style="margin-top:15px;">
         <center>        
             <div class="col-xs-12">
-                <button class="btn btn-lg btn-block btn-warning" style="border-radius:0" onclick="submitOrder(this)">确定下单</button>
+                <button class="btn btn-lg btn-block btn-warning confirm" style="border-radius:0">确定下单</button>
             </div>
         </center>
     </div>
@@ -940,8 +942,9 @@ function get_goods_info(type)
             goods.goods_img   = $(this).find('img').attr('src');
             goods.goods_name  = $(this).find('h3').text().trim();
             goods.goods_price = $(this).find('.price').text().trim();
+            goods.goods_stock = parseInt($(this).find('.stock').text());
 
-            goods.goods_html = '<div class="goodsinfo" data-type="'+type+'" data-goodsid = "'+goods.goods_id+'">'+
+            goods.goods_html = '<div class="goodsinfo" data-type="'+type+'" data-goodsid = "'+goods.goods_id+'" data-stock="'+goods.goods_stock+'">'+
                 '<div class="productlist box_flex">'+
                         '<div class="leftimg">'+
                             '<a href="<?php echo U("SupGoods/detail");?>?id='+goods.goods_id+'"><img src="'+goods.goods_img+'"></a>'+
@@ -1255,15 +1258,14 @@ function get_discount(){
 }
 
 
-//获取预约信息并提交
-function submitOrder(_this){
-    
-    var btn = $(_this);
+//获取商品信息并提交
+$('.confirm').on('click', function(){
+    var btn = $(this);
     if(btn.attr('disabled'))
         return false;
 
     var text = btn.text(),gid = [],
-        gid_gift = [],price = [],num = [],num_gift=[],
+        gid_gift = [],price = [],num = [],num_gift=[],stock=[],stock_gift=[],
         means_of_payment = $('#pay_method').val(),
         reg = /^[1-9]\d*$/,
         coupon_list = $('#coupon_list').val().split('_'),
@@ -1278,6 +1280,8 @@ function submitOrder(_this){
         price.push(prices);
         var nums   = $(item).find('.text_box').val();
         num.push(nums);
+        var good_stock = $(item).attr("data-stock");
+        stock.push(good_stock);
     });
 
     var goods_list_gift = $('.goods_list_gift .goodsinfo');
@@ -1286,6 +1290,8 @@ function submitOrder(_this){
         gid_gift.push(good_id);
         var nums   = $(item).find('.text_box').val();
         num_gift.push(nums);
+        var good_stock = $(item).attr("data-stock");
+        stock_gift.push(good_stock);
     });
 
     //确保json数据格式正确
@@ -1317,19 +1323,19 @@ function submitOrder(_this){
     if(args.location_id == undefined){
         MsgBox('请选择门店');
         return false;
-    }
+    };
 
     if(args.gid.length == 0){
         MsgBox('请选择商品');
         return false;
-    }
+    };
 
     if(args.make_user_id == 0){
         MsgBox('请选择制单人');
         return false;
-    }
+    };
 
-    var is_price = 1,is_num = 1;
+    var is_price = 1,is_num = 1,is_stock = 1,is_stock_gift = 1;;
     $.each(args.price, function(i, n){
         if(n == '' || Number(n)<=0 || isNaN(n)){
             is_price = 0;
@@ -1340,37 +1346,63 @@ function submitOrder(_this){
             is_num = 0;
         }
     });
+
+    $.each(stock, function(i, n){
+        if(Number(n)<=0){
+            is_stock = 0;
+        }
+    });
+
+    $.each(stock_gift, function(i, n){
+        if(Number(n)<=0){
+            is_stock_gift = 0;
+        }
+    });
     
     if(is_num == 0){
         MsgBox('数量必须为正整数');
         return false;
-    }
+    };
 
     
     if(means_of_payment == 7 && Number($('#new_total_price').text().trim()) > Number($('#pay-balance-account').find('option:selected').attr('data-val'))){
         MsgBox('余额不足，请先充值或选择其他支付方式');
         return false;
+    };
+    if(is_stock == 0 || is_stock_gift == 0){
+        popTipShow.confirm('库存报警','商品库存低于0是否继续开单?',['确 定','取 消'],
+            function(e){
+                //callback 处理按钮事件
+                var button = $(e.target).attr('class');
+                if(button == 'ok'){
+                    //按下确定按钮执行的操作
+                    this.hide();
+                    btn.attr('disabled', true).text('正在处理');
+
+                    $.post("<?php echo U('SupOrder/store_order_add');?>",args,function(data){
+                        btn.removeAttr('disabled').text(text);
+                        if(data && typeof(data.status) != 'undefined'){
+                            if(data.status > 0){
+                                MsgBox(data.msg);
+                                var nexUrl = '<?php echo U("SupOrder/index");?>';
+                                setTimeout("location.href='"+nexUrl+"'", 1000);
+                            }else{
+                                MsgBox(data.msg);
+                            }
+                        }else{
+                            MsgBox('服务器未响应，请稍后重试');
+                        }
+                    },'json');
+
+                }
+
+                if(button == 'cancel') {
+                    //按下取消按钮执行的操作
+                    this.hide();
+                }
+            });
     }
-
-    btn.attr('disabled', true).text('正在处理');
-
-    $.post("<?php echo U('SupOrder/store_order_add');?>",args,function(data){
-        btn.removeAttr('disabled').text(text);
-        if(data && typeof(data.status) != 'undefined'){
-            if(data.status > 0){
-                MsgBox(data.msg);
-                var nexUrl = '<?php echo U("SupOrder/index");?>';
-                setTimeout("location.href='"+nexUrl+"'", 1000);
-            }else{
-                MsgBox(data.msg);
-            }
-        }else{
-            MsgBox('服务器未响应，请稍后重试');
-        }
-    },'json');
-    
-}
-
+});
 
 </script>
 

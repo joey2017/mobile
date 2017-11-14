@@ -9,13 +9,11 @@ class SupGoodsAction extends SupBaseAction {
         $class_id   = isset($_REQUEST['class_id']) ? intval($_REQUEST['class_id']) : 2;//默认轮胎分类id
         $page       = isset($_GET['p']) ? intval($_GET['p'])  : 0;
         $keyword    = isset($_GET['k']) ? htmlspecialchars(strip_tags($_GET['k']), ENT_QUOTES, 'UTF-8') : '';
-        // $is_gift    = I('get.is_gift');
         $attr       = isset($_REQUEST['attr']) ? trim($_REQUEST['attr']) : '';
         $sort       = intval($_REQUEST['sort']);
         $limit      = ($page * 10).",10";
 
         $map = array(
-            // 'pwg.goods_id'    => array('neq', null),
             'pg.is_del'       => 0,
             'pg.is_sale'      => 1,
             'pwg.is_del'      => 0,
@@ -101,7 +99,6 @@ class SupGoodsAction extends SupBaseAction {
             ->limit($limit)
             ->select();
 
-        // echo M()->getLastSql();die;
         if(empty($results))
             $this->ajaxReturn(0);
 
@@ -113,9 +110,6 @@ class SupGoodsAction extends SupBaseAction {
 
     /**
      * @DateTime  2017-11-06
-     * @copyright [copyright]
-     * @license   [license]
-     * @version   [version]
      * @param     [id]
      * @return    [type]      [description]
      */

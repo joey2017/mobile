@@ -1,6 +1,15 @@
 <?php
 class SupInfoAction extends SupBaseAction {
 
+    /**
+     * 权限白名单，白名单中的操作方法不受权限限制
+     * 该名单主要用于一些特殊无涉及权限分配的方法
+     *
+     * @var array
+     * @access protected
+     */
+    protected $accessAllowed = array('ajax_get_warehouse','msg_list');
+
 	public function index(){
         $this->assign('title', '消息中心');
         $this->display();
@@ -52,8 +61,6 @@ class SupInfoAction extends SupBaseAction {
                 $value['time'] = intval($value['time']/24).'天';
             }
         }
-       // echo M()->getLastSql();die;
-       // dump($order_list);die;
 
         $this->assign('msg_list', $msg_list);
         echo $html=$this->fetch();

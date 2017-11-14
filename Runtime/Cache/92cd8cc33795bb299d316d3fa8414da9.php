@@ -98,8 +98,8 @@ body{position: relative;}
         <div class="rightinfo flex1">
           <h3><a href="<?php echo U('SupGoods/detail',array('id'=>$goods['goods_id']));?>"><?php echo ($goods["goods_name"]); ?></a></h3>
           <div class="d-main">
-            <span class="price">￥:<?php echo (price($goods["sell_price"])); ?></span> 
-            <span>/<?php echo ($goods["unit"]); ?></span>
+            <span class="price"><?php if($goods["is_gift"] == 1): ?>赠品<?php else: ?>￥:<?php echo (price($goods["sell_price"])); ?></span> 
+            <span>/<?php echo ($goods["unit"]); ?></span><?php endif; ?>
             <span class="pull-right">× <?php echo ($goods["num"]); ?></span>
           </div>
         </div>

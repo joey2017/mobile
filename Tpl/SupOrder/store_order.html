@@ -153,8 +153,8 @@ a:focus,a:active, a:hover{color: #333; text-decoration: none;}
 .searchtab{position: relative; width: 100%; height: 36px; border-radius: 5px; margin-right:10px; }
 .searchtab span{position: absolute; width: 30px; height: 30px; display: block; top: 2px; left: 2px; background:url(__PUBLIC__/images/searchico.svg) no-repeat; background-size: 30px;}
 .searchtab input{border:0; background:#efefef; text-indent: 2em;}
-.searchbtn{width: 80px; height: 36px;}
-.searchbtn button{width: 80px; height: 33px; border:0; background: #f6a915; color: #fff; border-radius: 5px;}
+.searchbtn{width: 90px; height: 36px;}
+.searchbtn button{width: 90px; height: 33px; border:0; background: #f6a915; color: #fff; border-radius: 5px;}
 
 /*筛选按钮*/
 .screen{height: 42px; clear: both; text-align: center; border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2; padding: 10px 0; position: relative;}
@@ -459,57 +459,57 @@ function ajaxGetStoreInfo(id){
 
 <!-- 历史营业额 -->
 <div id="location_info" style="display: none">
-<div class="box-flex text-center">
-    <div class="flex1 turnover data_rb head_border">
-        <h5><span id="purchase_number"></span></h5>
-        <p>本月采购</p>
+    <div class="box-flex text-center">
+        <div class="flex1 turnover data_rb head_border">
+            <h5><span id="purchase_number"></span></h5>
+            <p>本月采购</p>
+        </div>
+       
+        <div class="flex1 turnover head_border">
+            <h5><span id="purchase_time"></span></h5>
+            <p>上次采购</p>
+        </div>
     </div>
-   
-    <div class="flex1 turnover head_border">
-        <h5><span id="purchase_time"></span></h5>
-        <p>上次采购</p>
-    </div>
-</div>
 
 
-<!-- 历史营业额 -->
-<div class="box-flex text-center">
-    <div class="flex1 turnover data_rb head_border">
-        <h5><span id="price-box"></span></h5>
-        <p>历史挂账</p>
+    <!-- 历史营业额 -->
+    <div class="box-flex text-center">
+        <div class="flex1 turnover data_rb head_border">
+            <h5><span id="price-box"></span></h5>
+            <p>历史挂账</p>
+        </div>
+        <div class="flex1 turnover data_rb head_border">
+            <h5><span id="credit-line-box"></span></h5>
+            <p>授信额度</p>
+        </div>
+        <div class="flex1 turnover head_border">
+            <h5><span id="balance"></span></h5>
+            <p>预付款余额</p>
+        </div>
     </div>
-    <div class="flex1 turnover data_rb head_border">
-        <h5><span id="credit-line-box"></span></h5>
-        <p>授信额度</p>
+
+    <div class="bundlev bline">
+        <p><span class="pull-left">门店名称：</span><span class="pull-right" id="location_name"></span></p>
     </div>
-    <div class="flex1 turnover head_border">
-        <h5><span id="balance"></span></h5>
-        <p>预付款余额</p>
+    <div class="bundlev bline">
+        <p><span class="pull-left">联系人：</span><span class="pull-right" id="receive_user"></span></p>
     </div>
+    <div class="bundlev bline">
+        <p><span class="pull-left">联系电话：</span><span class="pull-right" id="receive_tel"></span></p>
+    </div>
+    <div style="padding: 10px 16px;height: 60px;">
+        <p><span class="pull-left">地址：</span><span class="pull-right" id="receive_address"></span></p>
+    </div>
+    <div>
+        <div class="topsearch col-xs-12" style="border-top: 1px solid #e6e6e6;">
+            <div class="searchbtn" style="float:right;"><button type="button" style="width:90px;margin-top: 5px" onclick="deal_record()">交易记录</button></div>
+            <!-- <div class="searchbtn" style="margin-right: -244px;"><button type="button" style="width:80px;" onclick="search_goods(2)">修改资料</button></div> -->
+        </div>
+    </div>
+
+    <div class="container-fluid line"></div>
 </div>
 
-<div class="bundlev bline">
-    <p><span class="pull-left">门店名称：</span><span class="pull-right" id="location_name"></span></p>
-</div>
-<div class="bundlev bline">
-    <p><span class="pull-left">联系人：</span><span class="pull-right" id="receive_user"></span></p>
-</div>
-<div class="bundlev bline">
-    <p><span class="pull-left">联系电话：</span><span class="pull-right" id="receive_tel"></span></p>
-</div>
-<div style="padding: 10px 16px;height: 60px;">
-    <p><span class="pull-left">地址：</span><span class="pull-right" id="receive_address"></span></p>
-</div>
-<div>
-    <div class="topsearch col-xs-12" style="border-top: 1px solid #e6e6e6;">
-        <div class="searchbtn" style="float:right;"><button type="button" style="width:80px;margin-top: 5px" onclick="deal_record()">交易记录</button></div>
-        <!-- <div class="searchbtn" style="margin-right: -244px;"><button type="button" style="width:80px;" onclick="search_goods(2)">修改资料</button></div> -->
-    </div>
-</div>
-
-</div>
-
-<div class="container-fluid line"></div>
 
 <div class="bundlev bline" onclick="bomb_screen(1,'goods')">
     <a class="">

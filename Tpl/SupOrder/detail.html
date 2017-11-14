@@ -73,8 +73,8 @@ body{position: relative;}
         <div class="rightinfo flex1">
           <h3><a href="<{:U('SupGoods/detail',array('id'=>$goods['goods_id']))}>"><{$goods.goods_name}></a></h3>
           <div class="d-main">
-            <span class="price">￥:<{$goods.sell_price|price}></span> 
-            <span>/<{$goods.unit}></span>
+            <span class="price"><if condition="$goods.is_gift eq 1">赠品<else />￥:<{$goods.sell_price|price}></span> 
+            <span>/<{$goods.unit}></span></if>
             <span class="pull-right">× <{$goods.num}></span>
           </div>
         </div>

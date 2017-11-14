@@ -132,15 +132,6 @@ a:focus,a:active, a:hover{color: #333; text-decoration: none;}
 					<li class="col-xs-4">
 						<a href="javascript:;" class="tc_project tc_choose" value="0">不限</a>
 					</li>
-					<li class="col-xs-4">
-						<a href="javascript:;" class="tc_project" value="status:1">未打印</a>
-					</li>
-                    <li class="col-xs-4">
-                        <a href="javascript:;" class="tc_project" value="status:2">未拣货</a>
-                    </li>
-                    <li class="col-xs-4">
-                        <a href="javascript:;" class="tc_project" value="status:3">未发货</a>
-                    </li>
                     <li class="col-xs-4">
                         <a href="javascript:;" class="tc_project" value="status:4">已发货</a>
                     </li>
@@ -160,9 +151,6 @@ a:focus,a:active, a:hover{color: #333; text-decoration: none;}
                 <ul class="row li_choose">
                     <li class="col-xs-4">
                         <a href="javascript:;" class="tc_project tc_choose" value="0">不限</a>
-                    </li>
-                    <li class="col-xs-4">
-                        <a href="javascript:;" class="tc_project" value="pay_status:0">未付款</a>
                     </li>
                     <li class="col-xs-4">
                         <a href="javascript:;" class="tc_project" value="pay_status:1">已付款</a>

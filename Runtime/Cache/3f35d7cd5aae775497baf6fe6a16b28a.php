@@ -230,7 +230,7 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
 </div>
 <div class="query row" style="height:105px;">
     <div class="col-xs-4">
-        <a href="<?php echo U('SupMember/order_refund_search');?>">
+        <a href="<?php echo U('SupMember/refund_search');?>">
             <i class="iconfont icon-tuihuo"></i>
             <p>门店退货</p>
         </a>
@@ -240,7 +240,6 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
 <div class="container-fluid title" style="height:16px;">
     <h2 style="margin-top: 1px;"></h2>
 </div>
-<p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <!--漂浮导航 开始-->

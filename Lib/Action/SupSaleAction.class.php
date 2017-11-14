@@ -1,6 +1,17 @@
 <?php
 class SupSaleAction extends SupBaseAction
 {
+    /**
+     * 权限白名单，白名单中的操作方法不受权限限制
+     * 该名单主要用于一些特殊无涉及权限分配的方法
+     *
+     * @var array
+     * @access protected
+     */
+    protected $accessAllowed = array(
+        'lists','ajax_get_sale_detail_goods','get_sales_summary','get_order_location'
+        );
+
     public function sale_detail()
     {
         $t=intval($_REQUEST['t'])==0?2:intval($_REQUEST['t']);
@@ -90,11 +101,6 @@ class SupSaleAction extends SupBaseAction
         foreach ($sale_list as $k => &$v) {
             $v['total_price'] = $v['sell_price']*$v['num'];
         }
-        // echo M()->getLastSql();die;
-       
-        // echo '<pre>';
-        //     print_r($sale_list);
-        // echo '</pre>';die;
         if(!empty($sale_list)){
             $this->assign('sale_list',$sale_list);
             echo $this->fetch();
@@ -198,7 +204,6 @@ class SupSaleAction extends SupBaseAction
             ->where($whereBase)
             ->limit($limit)->select();
 
-        // echo M()->getLastSql();die;
         if(!empty($order_list)){
             $this->assign('order_list',$order_list);
             $this->assign('start_time',$start_time);
@@ -234,8 +239,11 @@ class SupSaleAction extends SupBaseAction
         $end_time   = isset($_REQUEST['end_time']) ? intval(strtotime($_REQUEST['end_time'])) : '';
 
         $where = array(
-            'location_id'=>$id ,
-            'supplier_id'=>$login_info['supplier_id']
+            'location_id' => $id,
+            'supplier_id' => $login_info['supplier_id'],
+            'is_del'      => 0,
+            'is_refund'   => 0,
+            'system'      => 0,
         );
 
         // 根据时间搜索
@@ -285,7 +293,7 @@ class SupSaleAction extends SupBaseAction
     //经营报表
     public function operating_statement()
     {
-        $start_time     = isset($_REQUEST['start_time']) ? intval(strtotime(trim($_REQUEST['start_time']))) : '';
+        $start_time     = isset($_REQUEST['start_time']) ? intval(strtotime('2017-05-05')) : '';
         $end_time       = isset($_REQUEST['end_time']) ? intval(strtotime(trim($_REQUEST['end_time']))) : '';
         $login_info     = session('pms_supplier');
         $which_payments = array('system' => 0, 'is_refund' => 0, 'is_del' => 0, 'supplier_id' => $login_info['supplier_id']);

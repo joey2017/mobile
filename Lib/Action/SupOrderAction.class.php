@@ -56,7 +56,7 @@ class SupOrderAction extends SupBaseAction
         // 关键字搜索
         if ($keyword !== '') {
             $where['po.order_sn']      = array('like', '%'.$keyword.'%');
-            $where['po.receive_user']  = array('like', '%'.$keyword.'%');
+            // $where['po.receive_user']  = array('like', '%'.$keyword.'%');
             $where['po.location_name'] = array('like', '%'.$keyword.'%');
             $where['_logic']        = 'or';
             $which['_complex']      = $where;
@@ -133,7 +133,7 @@ class SupOrderAction extends SupBaseAction
         $location_id = $login_info['supplier_id'];
 
         $goods = M('pms_order_item as poi')
-            ->field('poi.goods_name,poi.goods_id,poi.sell_price,poi.num,poi.thumbnail,pg.supplier_id,pg.unit,fps.name,fps.mobile,fpo.*')
+            ->field('poi.goods_name,poi.goods_id,poi.sell_price,poi.num,poi.thumbnail,poi.is_gift,pg.supplier_id,pg.unit,fps.name,fps.mobile,fpo.*')
             ->join('fw_pms_goods as pg on pg.id=poi.goods_id')
             ->join('fw_pms_supplier as fps on fps.id=pg.supplier_id')
             ->join('fw_pms_order as fpo on fpo.id=poi.order_id')
@@ -1138,15 +1138,14 @@ class SupOrderAction extends SupBaseAction
     public function get_location(){
         $val        = I('post.name');
         $login_info = session('pms_supplier');
-        $search     = array();
-        $html       = "";
+        // $search     = array();
         $map = array('supplier_id'=>$login_info['supplier_id'],'is_del'=>0);
         if($val){
-            $search['location_name'] = array('like', '%' . $val . '%');
-            $search['contact']       = array('like', '%' . $val . '%');
-            $search['address']       = array('like', '%' . $val . '%');
-            $search['_logic']        = 'or';
-            $map['_complex']         = $search;
+            $map['location_name'] = array('like', '%' . $val . '%');
+            // $search['contact']       = array('like', '%' . $val . '%');
+            // $search['address']       = array('like', '%' . $val . '%');
+            // $search['_logic']        = 'or';
+            // $map['_complex']         = $search;
         }
         $location = M('pms_location')
             ->field('id,location_id,location_name,contact,mobile,address')

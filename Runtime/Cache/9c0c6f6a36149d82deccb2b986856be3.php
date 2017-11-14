@@ -34,7 +34,7 @@
 	    	
 	        <div class="col-xs-12">
 	        <?php if($type == 1): ?><!-- <a type="button" href="" style="float:right;margin:10px 6px;" class="btn btn-warning btn-sm">确认收款</a> --><?php endif; ?>
-	            <a class="btn btn-danger btn-sm" href="<?php echo U('SupMember/refund',array('id'=>$ol['id']));?>"  style="float:right;margin:10px 0;">退货</a>                   
+	            <a class="btn btn-danger btn-sm" href="<?php echo U('SupMember/refund',array('id'=>$ol['id']));?>"  style="float:right;margin:10px 0;width:60px;">退货</a>                   
 	               
 	        </div>
 	    </div>

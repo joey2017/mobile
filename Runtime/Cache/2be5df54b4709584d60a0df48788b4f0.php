@@ -210,10 +210,10 @@ a:focus,a:active, a:hover{color: #333; text-decoration: none;}
     <div class="topsearch col-xs-12 box_flex">
    		<div class="flex1 searchtab">
    			<span></span>
-   			<input type="text" class="form-control enter-search" id="keyword" value="" placeholder="请输入订单号/联系人/门店名称">
+   			<input type="text" class="form-control enter-search" id="keyword" value="" placeholder="请输入订单号/门店名称">
    		</div>
    		<div class="searchbtn">
-   			<button onclick="search_goods(2)">搜索</button>
+   			<button>搜索</button>
    		</div>
     </div>
     <div class="screen">
@@ -275,6 +275,8 @@ a:focus,a:active, a:hover{color: #333; text-decoration: none;}
 <div id="goods_list">
     
 </div>
+
+</div>
 <div style="height: 45px;clear: both;"></div>
 <!--底栏-->
 <!--漂浮导航 开始-->
@@ -308,8 +310,6 @@ a:focus,a:active, a:hover{color: #333; text-decoration: none;}
 
 </body>
 </html>
-
-</div>
 <script type="text/javascript">
 document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
   WeixinJSBridge.call('hideToolbar');

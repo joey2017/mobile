@@ -20,7 +20,9 @@
 	                    <div class="infopad">门店名称：<?php echo ($ol["location_name"]); ?></div>
 	                    <div class="infopad">订单状态：<?php echo ($ol["status_msg"]); ?></div>
 	                    <div class="infopad">优惠金额：￥<?php echo (price($ol["discount_price"])); ?></div>
-	                    <div class="infopad">订单金额：<span style="font-weight:bold;color:#F00;">￥<?php echo (price($ol["total_price"])); ?></span></div>
+	                    <div class="infopad">订单金额：￥<?php echo (price($ol["total_price"])); ?></div>
+	                    <?php if($type == 1): ?><div class="infopad">已核销金额：<?php echo ($ol["paid_amount"]); ?></div>
+	                    <div class="infopad">未核销金额：<?php echo ($ol["unpay_amount"]); ?></div><?php endif; ?>
 	                    <div class="infopad">下单时间：<?php echo (date("Y-m-d H:i:s",$ol["create_time"])); ?></div>
 	                </div>
 	            </a>
@@ -30,7 +32,7 @@
 	    <div class="row">
 	    	
 	        <div class="col-xs-12">
-	        <?php if($type == 1): ?><!-- <a type="button" href="" style="float:right;margin:10px 6px;" class="btn btn-warning btn-sm">确认收款</a> --><?php endif; ?>
+	        <?php if($type == 1): ?><!-- <button type="button" href="<?php echo U('SupOrder/receipt',array('id'=>$ol['id']));?>" style="float:right;margin:10px 6px;" class="btn btn-warning confirm btn-sm">确认收款</button> --><?php endif; ?>
 	            <a class="btn btn-default btn-sm" href="<?php echo U('SupOrder/detail',array('id'=>$ol['id']));?>"  style="float:right;margin:10px 0;">查看详情</a>                   
 	               
 	        </div>

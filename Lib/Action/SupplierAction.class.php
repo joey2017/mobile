@@ -2,9 +2,20 @@
 // 本类由系统自动生成，仅供测试用途
 require_once 'jiami.php';
 class SupplierAction extends SupBaseAction {
+
+	/**
+     * 权限白名单，白名单中的操作方法不受权限限制
+     * 该名单主要用于一些特殊无涉及权限分配的方法
+     *
+     * @var array
+     * @access protected
+     */
+    protected $accessAllowed = array(
+        'ajaxModifyPassWord','index'
+        );
+	
     public function _initialize()
     {
-        $this->accessAllowed = array('index');
         parent::_initialize();
     }
     public function index(){
@@ -536,7 +547,7 @@ class SupplierAction extends SupBaseAction {
      * 通知信息
      **/
 
-    public function get_purchase_info()
+    protected function get_purchase_info()
     {
 
         $stime       = strtotime(date('Y-m-d'));
@@ -567,18 +578,6 @@ class SupplierAction extends SupBaseAction {
             $top_count['untreated_count']++;
         }
 
-        // 获取消息提醒数量
-  /*      $top_count['msg_total'] = M('pms_message')->where("status=0 and supplier_id=" . $supplier_id . " and account_id=" . $account_id)->count();
-
-		$condition['start_time'] = array('elt',time());
-		$condition['end_time']   = array('egt',time());
-
-        $top_count['new_order_audio'] = M('pms_audio')->where("type=1 and supplier_id=" . $supplier_id . " and account_id=" . $account_id)->where($condition)->find();
-
-        if ($top_count['new_order_audio']) //删除已提示的消息
-        	M('pms_audio')->where('type = 1 and supplier_id = '.$supplier_id)->delete();
-
-        $this->ajaxReturn($top_count);*/
         return $top_count;
 
     }

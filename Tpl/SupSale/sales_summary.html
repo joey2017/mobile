@@ -36,11 +36,11 @@ a{color: #333;}
 a:focus,a:active, a:hover{color: #333; text-decoration: none;}
 .topsearch{height: 34px; margin:10px 0;}
 
+
 /*筛选按钮*/
-.screen{height: 42px; clear: both; text-align: center; border-bottom:1px solid #e2e2e2; padding: 5px 0; position: relative;}
-.screen .col-xs-4 {padding-left: 0; padding-right: 0;}
-.sepline{border-right:1px solid #e2e2e2;}
-.searchbtn button{width: 80px; height: 33px; border:0; background: #f6a915; color: #fff; border-radius: 5px; margin-top: 10px}
+.screen{height: 42px; clear: both; text-align: center; position: relative}
+.screen .col-xs-5 {padding-left: 10px; padding-right: 0;}
+.searchbtn input{width: 50px; height: 33px; border:0; background: #f6a915; color: #fff; border-radius: 5px;}
 
 .bundlev {
     height: 40px;
@@ -68,13 +68,16 @@ a:focus,a:active, a:hover{color: #333; text-decoration: none;}
     </div>
 
     <div class="screen">
-        <div class="col-xs-6 sepline" style="margin-top: -7px;">
-            <input class="form-control mobiscroll" readonly="true" id="start_time" name="start_time" type="text"
+        <div class="col-xs-5">
+            <input class="form-control mobiscroll" readonly="true" id="start_time" name="start_time" type="text" value="<{$start_time}>"
                    placeholder="开始时间">
         </div>
-        <div class="col-xs-6" style="margin-top: -7px;">
-            <input class="form-control mobiscroll" readonly="true" id="end_time" name="end_time" type="text"
+        <div class="col-xs-5" >
+            <input class="form-control mobiscroll" readonly="true" id="end_time" name="end_time" type="text" value="<{$end_time}>"
                    placeholder="结束时间">
+        </div>
+        <div class="searchbtn col-xs-2" style="padding: 0;">
+            <input type="button" value="搜索" onclick="ajaxGetStoreInfo()">
         </div>
     </div>
 
@@ -134,15 +137,13 @@ a:focus,a:active, a:hover{color: #333; text-decoration: none;}
         <div style="padding: 10px 16px;height: 60px;">
             <p><span class="pull-left">地址：</span><span class="pull-right" id="receive_address"></span></p>
         </div>
-        <div>
-            <div class="topsearch col-xs-12"  style="border-top: 1px solid #e6e6e6;">
-                <div class="searchbtn" style="float:right;"><button type="button" style="width:80px;" onclick="deal_record()">交易记录</button></div>
-            </div>
+        <div class="searchbtn " style="float:right;margin-right: 15px;">
+            <input type="button" value="交易记录" onclick="deal_record()" style="width:80px;" >
         </div>
 
     </div>
 
-    <div style="display: block;height: 50px"></div>
+    <div style="display: block;height: 120px"></div>
     <!--底栏-->
     <include file="Inc:sup_footer"/>
 
@@ -196,10 +197,9 @@ a:focus,a:active, a:hover{color: #333; text-decoration: none;}
             });
         })
 
-        function ajaxGetStoreInfo(id){
-            var end_time = $("#end_time").val();
-            var start_time = $("#start_time").val();
-
+        function ajaxGetStoreInfo(id)
+        {
+            id = id ? id : $('#id_select').find('option').first().val();
             $.post('<{:U("SupOrder/get_store_info")}>', {id: id}, function(data) {
                 if(data.status == 1){
                     $('#location_name').text(data.info.location_name);
@@ -220,7 +220,11 @@ a:focus,a:active, a:hover{color: #333; text-decoration: none;}
                 }
             },'json');
 
-            $.post('<{:U("SupSale/get_sales_summary")}>', {id: id,end_time: end_time,start_time: start_time}, function(data) {
+
+            var localhost_id = $('#id_select').find('option:selected').attr('data-val');
+            var end_time = $("#end_time").val();
+            var start_time = $("#start_time").val();
+            $.post('<{:U("SupSale/get_sales_summary")}>', {id: localhost_id,end_time: end_time,start_time: start_time}, function(data) {
                 if(data.status == 1){
                     $('#total_num').html(data.results.total_num);
                     $('#total_price').html(data.results.total_price * 1);
@@ -229,6 +233,15 @@ a:focus,a:active, a:hover{color: #333; text-decoration: none;}
                     $('#total_price').html('');
                 }
             },'json');
+        }
+
+        function deal_record(){
+            var location_id = $('#id_select').find('option:selected').attr('data-val');
+            if($.type(location_id) == 'undefined' || location_id == ''){
+                MsgBox('请选择门店');
+                return false;
+            }
+            location.href = '<{:U("SupOrder/deal_record")}>?location_id='+location_id;
         }
     </script>
 </div>

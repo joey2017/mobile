@@ -3,7 +3,7 @@
             <span class="resimg"><img src="<?php echo (getimgurl($r["thumbnail"],'large')); ?>" width="100%" height="100%"></span>
             <div class="flex1">
                 <h3><?php echo ($r["goods_name"]); ?></h3>
-                <p>库存:<span style="color: #eb5211;font-size: 13px;"><?php echo ($r["stock"]); ?></span></p>
+                <p>库存:<span class="stock" style="color: #eb5211;font-size: 13px;"><?php echo ($r["stock"]); ?></span></p>
 
                 <p>￥:<span class="price"><?php echo ($r["price"]); ?></span>/<?php echo ($r["unit"]); ?></p>
             </div>

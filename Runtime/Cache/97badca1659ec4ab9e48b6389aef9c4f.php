@@ -143,26 +143,6 @@ a:focus,a:active, a:hover{color: #333; text-decoration: none;}
 
         <div class="sift_row">
             <div class="row_title">
-                支付状态
-                <span class="fa fa-caret-down pull-right"></span>
-            </div>
-            <div class="row_body">
-                <ul class="row li_choose">
-                    <li class="col-xs-4">
-                        <a href="javascript:;" class="tc_project tc_choose" value="0">不限</a>
-                    </li>
-                    <li class="col-xs-4">
-                        <a href="javascript:;" class="tc_project" value="pay_status:1">已付款</a>
-                    </li>
-                    <li class="col-xs-4">
-                        <a href="javascript:;" class="tc_project" value="pay_status:2">已收款</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="sift_row">
-            <div class="row_title">
                 区域经理
                 <span class="fa fa-caret-down pull-right"></span>
             </div>

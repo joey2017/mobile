@@ -1,6 +1,17 @@
 <?php
 class SupWarehouseAction extends SupBaseAction {
 
+     /**
+     * 权限白名单，白名单中的操作方法不受权限限制
+     * 该名单主要用于一些特殊无涉及权限分配的方法
+     *
+     * @var array
+     * @access protected
+     */
+    protected $accessAllowed = array(
+        'ajax_get_goods','ajax_get_attr','ajax_get_warehouse','ajax_get_alarm_goods'
+        );
+
 	public function index(){
 
 		$t=intval($_REQUEST['t'])==0?2:intval($_REQUEST['t']);
@@ -37,15 +48,7 @@ class SupWarehouseAction extends SupBaseAction {
     {
         $this->display();
     }
-    /**
-     * @DateTime  2017-11-06
-     * @param     [param]
-     * @return    [type]      [description]
-     */
-    public function gross(){
-        $this->display();
-    }
-
+    
 	//获取商品
 	public function ajax_get_goods(){
 
@@ -120,11 +123,9 @@ class SupWarehouseAction extends SupBaseAction {
 		if(!empty($warehouse)){
 			$where.=" and pwg.is_del=0 and pwg.warehouse_id in (".$warehouse.")";
 			$goods=M()->query("select pg.id,pg.goods_name,pg.thumbnail,pg.price,pg.unit,pg.promotion_price,ps.name as supplier_name,pg.sales,pwg.stock,pw.warehouse_name from ".C('DB_PREFIX')."pms_goods as pg left join ".C('DB_PREFIX')."pms_goods_attr as pga on pga.goods_id=pg.id left join ".C('DB_PREFIX')."pms_supplier as ps on ps.id=pg.supplier_id left join ".C('DB_PREFIX')."pms_warehouse_goods as pwg on pwg.goods_id=pg.id left join ".C('DB_PREFIX')."pms_warehouse as pw on pw.id=pwg.warehouse_id where pw.is_del=0 and pg.is_sale=1 and pg.is_del=0 ".$where.$sort." limit ".$limit);
-//			$total = M()->query("select sum(pwg.stock) as total from ".C('DB_PREFIX')."pms_goods as pg left join ".C('DB_PREFIX')."pms_goods_attr as pga on pga.goods_id=pg.id left join ".C('DB_PREFIX')."pms_supplier as ps on ps.id=pg.supplier_id left join ".C('DB_PREFIX')."pms_warehouse_goods as pwg on pwg.goods_id=pg.id left join ".C('DB_PREFIX')."pms_warehouse as pw on pw.id=pwg.warehouse_id where pw.is_del=0 and pg.is_sale=1 and pg.is_del=0 ".$where);
 		}else{
 			
 			$goods=M()->query("select pg.id,pg.goods_name,pg.thumbnail,pg.price,pg.unit,pg.promotion_price,ps.name as supplier_name,pg.sales,pg.stock from ".C('DB_PREFIX')."pms_goods as pg left join ".C('DB_PREFIX')."pms_goods_attr as pga on pga.goods_id=pg.id left join ".C('DB_PREFIX')."pms_supplier as ps on ps.id=pg.supplier_id where pg.is_sale=1 and pg.is_del=0 ".$where.$sort." limit ".$limit);
-//			$total = M()->query("select sum(pg.stock) as total from ".C('DB_PREFIX')."pms_goods as pg left join ".C('DB_PREFIX')."pms_goods_attr as pga on pga.goods_id=pg.id left join ".C('DB_PREFIX')."pms_supplier as ps on ps.id=pg.supplier_id where pg.is_sale=1 and pg.is_del=0 ".$where);
 		}
 
 		foreach ($goods as $k => $v) {

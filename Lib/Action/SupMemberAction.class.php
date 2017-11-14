@@ -2,6 +2,16 @@
 class SupMemberAction extends SupBaseAction
 {
     /**
+     * 权限白名单，白名单中的操作方法不受权限限制
+     * 该名单主要用于一些特殊无涉及权限分配的方法
+     *
+     * @var array
+     * @access protected
+     */
+    protected $accessAllowed = array(
+        'ajax_get_member','ajax_get_credit','get_order_refund','can_refund_list','order_refund_search','refund_save','recharge'
+        );
+    /**
      * 支付方式 
      */
     private $payments = array(
@@ -538,7 +548,6 @@ class SupMemberAction extends SupBaseAction
 
             $this->assign("warehouse_list", $warehouse);
             $this->assign("employee_list", $employees);
-            $this->assign("account", $account);
             $this->assign("unpay", $unpay);
             $this->assign("account", $account);
             $this->assign("employee", $employee);

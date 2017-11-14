@@ -1,6 +1,15 @@
 <?php
 require_once LIB_PATH.'Action/jiami.php';
 class SupLoginAction extends EmptyAction {
+
+    /**
+     * 不需要登录及权限的方法列表
+     * 此列表中的方法属于开放方法
+     *
+     * @array
+     * @access protected
+     */
+    protected $accessExclude = array('login','ajax_login','login_out');
 	
 	public function login()
     {
