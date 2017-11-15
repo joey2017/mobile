@@ -1,0 +1,1 @@
+<?php	return array ( 0 => 'account_id', 1 => 'location_id', '_autoinc' => false, '_pk' => 'location_id', '_type' => array ( 'account_id' => 'int(11)', 'location_id' => 'int(11)', ), );?>

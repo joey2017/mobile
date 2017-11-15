@@ -1,0 +1,1 @@
+<?php	return array ( 0 => 'id', 1 => 'employee_id', 2 => 'post_id', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(11) unsigned', 'employee_id' => 'int(11) unsigned', 'post_id' => 'int(11) unsigned', ), );?>

@@ -1,6 +1,6 @@
 <foreach name="results" item="r">
     <div class="storebox" data-gid="<{$r.id}>"> 
-        <a class="btn-block box_flex stopname">
+        <a class="btn-block box_flex stopname" href="javascrpipt:void(0);">
             <span class="resimg"><img src="<{$r.thumbnail|getImgUrl=###,'large'}>" width="100%" height="100%"></span>
             <div class="flex1">
                 <h3><{$r.goods_name}></h3>
@@ -19,6 +19,6 @@
 </foreach>
 <script type="text/javascript" >
     $(function () {
-        $(".bomb_screen1").height(document.body.clientHeight + 20);
+        $(".bomb_screen1").height(document.body.clientHeight + 500);
     })
 </script>

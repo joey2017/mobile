@@ -1805,15 +1805,18 @@ class SupOrderAction extends SupBaseAction
             $this->ajaxReturn($data);
         }
         else{
-            // 订单商品
-            $items = M('pms_order_item')->where(array('order_id' => $id))->select();
             
+            $result['status_msg'] = get_order_status_mes($result['status']);
+            $result['unpay']      = $result['total_price'] - $result['paid_amount'];
             // 已核销列表
             $paid = M('pms_order_deal as pod')->field('pod.*, b.bank_name, b.account as bank_account')
             ->where(array('pod.order_id' => $id))
             ->join('fw_pms_bank_account as b ON b.id=pod.trade_id')
             ->order('id asc')
             ->select();
+            foreach ($paid as $k => &$v) {
+                $v['pay_msg'] = $this->payments[$v['means_of_payment']];
+            }
 
             // 银行账户
             $account = M('pms_bank_account')
@@ -1826,14 +1829,14 @@ class SupOrderAction extends SupBaseAction
             $recharge_account = M('pms_recharge')->field('id, account, balance')->where(
                 array(
                     'supplier_id' => $login_info['supplier_id'],
-                    'location_id'=>$result['location_id'],
-                    'is_del'=>0))->order('id desc')->select();
+                    'location_id' => $result['location_id'],
+                    'is_del'=>0))
+            ->order('id desc')->select();
             
             // 收款人
             $employee = get_supplier_employee($login_info['supplier_id'], 5);
             
             $this->assign('result', $result);
-            $this->assign('items', $items);
             $this->assign('paid', $paid);
             $this->assign('account', $account);
             $this->assign('recharge_account', $recharge_account);

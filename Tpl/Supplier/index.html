@@ -22,8 +22,29 @@
 .turnover h5{font-size: 16px; color: #ff3e3e; font-weight: bold;margin-bottom: 10px}
 .turnover{padding: 10px 0;}
 .data_rb{border-right:1px solid #eee;}
-.pos-nav a{margin-top: 4px;}
+.pos-nav a{height: 52px;margin-top: 2px;}
+.pos-nav div{height: 52px;}
+.pos-nav a p{margin-top: 4px;}
 
+.tuichu {
+    z-index: 4;
+    width: 36px;
+    height: 36px;
+    top: 70px;
+    right: 40px;
+}
+
+.absolute_fix {
+    position: absolute;
+}
+.tuichuico {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    vertical-align: middle;
+    background: url(http://www.17cct.com/mobile/Public/images/bossico.svg) no-repeat -53px 5px;
+    background-size: 110px;
+}
 </style>
 </head>
 <body>
@@ -48,6 +69,7 @@
                 </p>
                 <p style="text-align: left;font-size: 13px;margin-top: 10px;">登录账号：<{$supplier_account.a_name}></p>
             </div>
+            <a href="<{:U('SupLogin/login_out')}>" class="pull-right absolute_fix tuichu"><span class="tuichuico"></span></a>
     </div>
 
     <div class="box-flex">

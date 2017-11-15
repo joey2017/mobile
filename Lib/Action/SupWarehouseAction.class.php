@@ -179,7 +179,7 @@ class SupWarehouseAction extends SupBaseAction {
 		$warehouse = array($warehouse);
 
 		$this->assign('warehouse',$warehouse);
-		echo $html=$this->fetch('Purchase:ajax_get_warehouse');
+		echo $html=$this->fetch();
 	}
 
 	//商品库存详情

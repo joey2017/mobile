@@ -1,45 +1,8 @@
-<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title><?php if($title != null): echo ($title); else: ?>诚车堂-全心全意为车主服务<?php endif; ?></title>
-<meta name="keywords" content="诚车堂,养车网,汽车服务平台,自助保养,汽车保养,汽车养护,汽车美容,钣金喷漆,汽车维修,汽车配件,汽车养护,养车无忧,养车无忧网,一站式汽车保养" />
-<meta name="description" content="修车养车，上诚车堂，省心，省钱，省时间！诚车堂，致力于为广大车主提供一个在线解决汽车服务问题、满足车主在汽车美容、保养、维修、配件等方面的需求， 服务范围包括汽车美容、汽车保养、汽车养护、钣金油漆、汽车维修等，是中国领先的网上汽车服务平台。诚车堂在努力成为车主们首选汽车服务平台的同时,以'让车主享有便捷、高效、经济的爱车养车生活'为己任，希望在用户心中树立起'修车养车,上诚车堂'的良好口碑。" />
-
-<link rel="shortcut icon" href="http://s.17cct.com/favicon.ico" type="image/vnd.microsoft.icon">
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<?php if( $no_include != 1): ?><link rel="stylesheet" href="__PUBLIC__/css/swiper.min.css"><?php endif; ?>
-<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/css.css?v=20150617">
-<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/wap.lazy.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/jquery.cookie.js"></script> 
-<script type="text/javascript" src="__PUBLIC__/js/wap_v4_common.js"></script>
-<div id='wx_pic' style='margin:0 auto;display:none;'>
-<img src='http://s.17cct.com/v4/images/pic300.jpg' />
-</div>
-<script type="text/javascript">
-document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /><title><?php if($title != null): echo ($title); else: ?>诚车堂-全心全意为车主服务<?php endif; ?></title><meta name="keywords" content="诚车堂,养车网,汽车服务平台,自助保养,汽车保养,汽车养护,汽车美容,钣金喷漆,汽车维修,汽车配件,汽车养护,养车无忧,养车无忧网,一站式汽车保养" /><meta name="description" content="修车养车，上诚车堂，省心，省钱，省时间！诚车堂，致力于为广大车主提供一个在线解决汽车服务问题、满足车主在汽车美容、保养、维修、配件等方面的需求， 服务范围包括汽车美容、汽车保养、汽车养护、钣金油漆、汽车维修等，是中国领先的网上汽车服务平台。诚车堂在努力成为车主们首选汽车服务平台的同时,以'让车主享有便捷、高效、经济的爱车养车生活'为己任，希望在用户心中树立起'修车养车,上诚车堂'的良好口碑。" /><link rel="shortcut icon" href="http://s.17cct.com/favicon.ico" type="image/vnd.microsoft.icon"><link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"><?php if( $no_include != 1): ?><link rel="stylesheet" href="__PUBLIC__/css/swiper.min.css"><?php endif; ?><link rel="stylesheet" type="text/css" href="__PUBLIC__/css/css.css?v=20150617"><script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script><script type="text/javascript" src="__PUBLIC__/js/bootstrap.min.js"></script><script type="text/javascript" src="__PUBLIC__/js/wap.lazy.min.js"></script><script type="text/javascript" src="__PUBLIC__/js/jquery.cookie.js"></script><script type="text/javascript" src="__PUBLIC__/js/wap_v4_common.js"></script><div id='wx_pic' style='margin:0 auto;display:none;'><img src='http://s.17cct.com/v4/images/pic300.jpg' /></div><script type="text/javascript">document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
   WeixinJSBridge.call('showToolbar');
   WeixinJSBridge.call('showOptionMenu');
 });
-</script>
-<link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css">
-<link href="http://s.17cct.com/v5/js/time/mobiscroll_date.css" rel="stylesheet" />
-<script src="http://s.17cct.com/v5/js/time/mobiscroll_date.js" charset="gb2312"></script>
-<script src="http://s.17cct.com/v5/js/time/mobiscroll.js"></script>
-<link rel="stylesheet" href="__PUBLIC__/css/iconfont.css" />
-<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/text.css"/>
-<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/bootstrap-select.css">
-<script type="text/javascript" src="__PUBLIC__/js/bootstrap-select.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/sup.common.js"></script>
-</head>
-
-<body class="drawer drawer-right">
-<link rel="stylesheet" href="__PUBLIC__/css/drawer.min.css">
-<style type="text/css">
+</script><link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css"><link href="http://s.17cct.com/v5/js/time/mobiscroll_date.css" rel="stylesheet" /><script src="http://s.17cct.com/v5/js/time/mobiscroll_date.js" charset="gb2312"></script><script src="http://s.17cct.com/v5/js/time/mobiscroll.js"></script><link rel="stylesheet" href="__PUBLIC__/css/iconfont.css" /><link rel="stylesheet" type="text/css" href="__PUBLIC__/css/text.css"/><script type="text/javascript" src="__PUBLIC__/js/sup.common.js"></script></head><body class="drawer drawer-right"><link rel="stylesheet" href="__PUBLIC__/css/drawer.min.css"><style type="text/css">*{font-size: 14px;}
 
 /*导航*/
 .sidebarbox{ height: 100%; overflow:auto; }
@@ -66,7 +29,7 @@ a:focus,a:active, a:hover{color: #33; text-decoration: none;}
 .searchtab span{position: absolute; width: 30px; height: 30px; display: block; top: 2px; left: 2px; background:url(__PUBLIC__/images/searchico.svg) no-repeat; background-size: 30px;}
 .searchtab input{border:0; background:#efefef; text-indent: 2em;}
 .searchbtn{width: 65px; height: 34px;}
-.searchbtn button{width: 52px; height: 33px; border:0; background: #f6a915; color: #fff; border-radius: 5px;}
+.searchbtn button{width: 60px; height: 33px; border:0; background: #f6a915; color: #fff; border-radius: 5px;}
 
 /*筛选按钮*/
 .screen{height: 42px; clear: both; text-align: center; border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2; padding: 10px 0; position: relative;}
@@ -117,151 +80,12 @@ a:focus,a:active, a:hover{color: #33; text-decoration: none;}
 .no_record{height: 24px;  padding-top: 205px;  text-align: center;  background: url(http://s.17cct.com/v5/images/erp/empty.png) no-repeat center 20px;  background-size: 180px 180px;}
 
 
-</style>
-
-<div class="alertBg" id="msgBox" style="display:none;">
-	<h4 class="alerttitle" id="alerttitle"></h4>
-	<span class="vm f20" id='alertdetail'></span>
-</div>
-
-<div class="drawer-main drawer-default">
-
-	<nav role="navigation" style="height:auto;">
-        <div id="attr_list" >
-            <?php if(is_array($attr_list)): $i = 0; $__LIST__ = $attr_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$a): $mod = ($i % 2 );++$i;?><div class="sift_row">
-                    <div class="row_title">
-                        <?php echo ($a["attr_name"]); ?>
-                        <span class="switch_btn pull-right"></span>
-                    </div>
-                    <div class="row_body">
-                        <ul class="row" >
-                                <li class="col-xs-4">
-                                    <a href="javascript:;" class="tc_project tc_choose" value="0">不限</a>
-                                </li>
-                            <?php if(is_array($a['attr_val'])): $k = 0; $__LIST__ = $a['attr_val'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$av): $mod = ($k % 2 );++$k;?><li class="col-xs-4">
-                                    <a href="javascript:;" class="tc_project" value="<?php echo ($a["id"]); ?>:<?php echo ($av); ?>"><?php echo ($av); ?></a>
-                                </li><?php endforeach; endif; else: echo "" ;endif; ?>                   
-                        </ul>
-                    </div>
-                </div><?php endforeach; endif; else: echo "" ;endif; ?>
-        </div>
-        <div id='common'>
-
-        </div>
-	</nav>
-
-	<div class="sift_bottom">
-		<div class="sift-btn" id="reset_attr">
-			重置
-		</div>
-		<div class="sift-btn sift-btn-ok" onclick="$('.drawer').drawer('close');">
-			确定
-		</div>
-	</div>
-</div>
-
-<input type="hidden" id="class_id" value="<?php echo ($t); ?>">
-<input type="hidden" id="sort" value="0">
-<input type="hidden" id="attr_value" value="">
-
-<div class="">
-	<div class="topsearch_min col-xs-12 box_flex">
-		<div class="flex1 searchtab">
-			<span></span>
-			<input type="text" class="form-control enter-search" id="keyword" value="" placeholder="请输入商品名称">
-		</div>
-	</div>
-	<div class="topsearch_min col-xs-12 box_flex" style="margin-bottom: 5px;">
-		<div class="col-xs-6 tab_subset">
-			<input type="text" class="form-control mobiscroll" id="start_time" name="start_time" value="<?php if($start_time != null): echo (date("Y-m-d",$start_time)); endif; ?>" placeholder=" 起始时间">
-		</div>
-		<div class="col-xs-6 tab_subset">
-			<input type="text" class="form-control mobiscroll" id="end_time" name="end_time" value="<?php if($start_time != null): echo (date("Y-m-d",$end_time)); endif; ?>" placeholder=" 结束时间">
-		</div>
-		<div class="searchbtn searchtab">
-			<button>搜索</button>
-		</div>
-	</div>
-
-	<div class="screen" style="margin-bottom:-1px;">
-		<div class="col-xs-4 "><a href="javascript:;" id="comprehensive">综合排序 <span class="arrowico"></span></a></div>
-        <div class="col-xs-4 sepline"><a href="javascript:;" id="classification"><?php echo ($class_name); ?> <span class="arrowico"></span></a></div>
-        <div class="col-xs-4 js-trigger">筛选 <span class="screenico"></span></div>
-        <div class="sort_sele">
-            <p class="ptick tick" onclick="mob.setSort(0,this)"><a href="javascript:;">综合排序</a><span></span></p>
-            <p class="ptick" onclick="mob.setSort(1,this)"><a href="javascript:;">价格从低到高</a><span></span></p>
-            <p class="ptick" onclick="mob.setSort(2,this)"><a href="javascript:;">价格从高到低</a><span></span></p>
-            <p class="ptick" onclick="mob.setSort(3,this)"><a href="javascript:;">数量从高到低</a><span></span></p>
-            <p class="ptick" onclick="mob.setSort(4,this)"><a href="javascript:;">数量从低到高</a><span></span></p>
-        </div>
-
-        <div class="sort_sele2">
-    
-            <ul class="metismenu " id="menu">
-            <?php if(is_array($class_list)): $i = 0; $__LIST__ = $class_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><li>
-                    <a href="#">
-                        <i class="fa fa-circle-o"></i>
-                        <?php echo ($c["c_name"]); ?>
-                        <span class="fa arrow fa-fw"></span>
-                    </a>
-                    <ul aria-expanded="false" class="collapse">
-                      <?php if(is_array($c['item'])): $i = 0; $__LIST__ = $c['item'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$ci): $mod = ($i % 2 );++$i;?><li <?php if($ci["id"] == $t): ?>class="select"<?php endif; ?>>
-                                <a href="<?php echo U('SupSale/sale_detail',array('t'=>$ci['id']));?>" class="present"><?php echo ($ci["class_name"]); ?> <i class="fa fa-angle-right pull-right"></i></a>
-                            </li><?php endforeach; endif; else: echo "" ;endif; ?>                 
-                    </ul>
-                </li><?php endforeach; endif; else: echo "" ;endif; ?>
-            </ul>
-            
-            <!-- 导航插件 -->
-            <script type="text/javascript" src="__PUBLIC__/js/metisMenu.js"></script>
-            <script>
-                $(function () {
+</style><div class="alertBg" id="msgBox" style="display:none;"><h4 class="alerttitle" id="alerttitle"></h4><span class="vm f20" id='alertdetail'></span></div><div class="drawer-main drawer-default"><nav role="navigation" style="height:auto;"><div id="attr_list" ><?php if(is_array($attr_list)): $i = 0; $__LIST__ = $attr_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$a): $mod = ($i % 2 );++$i;?><div class="sift_row"><div class="row_title"><?php echo ($a["attr_name"]); ?><span class="switch_btn pull-right"></span></div><div class="row_body"><ul class="row" ><li class="col-xs-4"><a href="javascript:;" class="tc_project tc_choose" value="0">不限</a></li><?php if(is_array($a['attr_val'])): $k = 0; $__LIST__ = $a['attr_val'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$av): $mod = ($k % 2 );++$k;?><li class="col-xs-4"><a href="javascript:;" class="tc_project" value="<?php echo ($a["id"]); ?>:<?php echo ($av); ?>"><?php echo ($av); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?></ul></div></div><?php endforeach; endif; else: echo "" ;endif; ?></div><div id='common'></div></nav><div class="sift_bottom"><div class="sift-btn" id="reset_attr">			重置
+		</div><div class="sift-btn sift-btn-ok" onclick="$('.drawer').drawer('close');">			确定
+		</div></div></div><input type="hidden" id="class_id" value="<?php echo ($t); ?>"><input type="hidden" id="sort" value="0"><input type="hidden" id="attr_value" value=""><div class=""><div class="topsearch_min col-xs-12 box_flex"><div class="flex1 searchtab"><span></span><input type="text" class="form-control enter-search" id="keyword" value="" placeholder="请输入商品名称"></div></div><div class="topsearch_min col-xs-12 box_flex" style="margin-bottom: 5px;"><div class="col-xs-6 tab_subset"><input type="text" class="form-control mobiscroll" id="start_time" name="start_time" value="<?php if($start_time != null): echo (date("Y-m-d",$start_time)); endif; ?>" placeholder=" 起始时间"></div><div class="col-xs-6 tab_subset"><input type="text" class="form-control mobiscroll" id="end_time" name="end_time" value="<?php if($start_time != null): echo (date("Y-m-d",$end_time)); endif; ?>" placeholder=" 结束时间"></div><div class="searchbtn searchtab"><button>搜索</button></div></div><div class="screen" style="margin-bottom:-1px;"><div class="col-xs-4 "><a href="javascript:;" id="comprehensive">综合排序 <span class="arrowico"></span></a></div><div class="col-xs-4 sepline"><a href="javascript:;" id="classification"><?php echo ($class_name); ?><span class="arrowico"></span></a></div><div class="col-xs-4 js-trigger">筛选 <span class="screenico"></span></div><div class="sort_sele"><p class="ptick tick" onclick="mob.setSort(0,this)"><a href="javascript:;">综合排序</a><span></span></p><p class="ptick" onclick="mob.setSort(1,this)"><a href="javascript:;">价格从低到高</a><span></span></p><p class="ptick" onclick="mob.setSort(2,this)"><a href="javascript:;">价格从高到低</a><span></span></p><p class="ptick" onclick="mob.setSort(3,this)"><a href="javascript:;">数量从高到低</a><span></span></p><p class="ptick" onclick="mob.setSort(4,this)"><a href="javascript:;">数量从低到高</a><span></span></p></div><div class="sort_sele2"><ul class="metismenu " id="menu"><?php if(is_array($class_list)): $i = 0; $__LIST__ = $class_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><li><a href="#"><i class="fa fa-circle-o"></i><?php echo ($c["c_name"]); ?><span class="fa arrow fa-fw"></span></a><ul aria-expanded="false" class="collapse"><?php if(is_array($c['item'])): $i = 0; $__LIST__ = $c['item'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$ci): $mod = ($i % 2 );++$i;?><li <?php if($ci["id"] == $t): ?>class="select"<?php endif; ?>><a href="<?php echo U('SupSale/sale_detail',array('t'=>$ci['id']));?>" class="present"><?php echo ($ci["class_name"]); ?><i class="fa fa-angle-right pull-right"></i></a></li><?php endforeach; endif; else: echo "" ;endif; ?></ul></li><?php endforeach; endif; else: echo "" ;endif; ?></ul><!-- 导航插件 --><script type="text/javascript" src="__PUBLIC__/js/metisMenu.js"></script><script>                $(function () {
                     $('#menu').metisMenu();
                 });
-            </script>
-
-        </div>
-	</div>
-
-	<div id="order_list">
-
-	</div>
-</div>
-<div style="height:45px;clear:both"></div>
-<!--漂浮导航 开始-->
-<div class="row pos-nav">
-    <div class="col-xs-3">
-        <a href="<?php echo U('Supplier/index');?>" <?php if(MODULE_NAME == Supplier): ?>class="nav-red"<?php endif; ?>>
-            <i class="iconfont icon-shangdian1"></i>
-            <p>首页</p>
-        </a>
-    </div>
-    <div class="col-xs-3">
-        <a href="<?php echo U('SupOrder/navig');?>" <?php if(MODULE_NAME == SupOrder): ?>class="nav-red"<?php endif; ?>>
-            <i class="iconfont icon-kehu"></i>
-            <p>交易/客户</p>
-        </a>
-    </div>
-    <div class="col-xs-3">
-        <a href="<?php echo U('SupWarehouse/navig');?>" <?php if(MODULE_NAME == SupWarehouse): ?>class="nav-red"<?php endif; ?>>
-            <i class="iconfont icon-kucun"></i>
-            <p>财务/库存</p>
-        </a>
-    </div>
-    <div class="col-xs-3">
-        <a href="<?php echo U('SupMember/navig');?>" <?php if(MODULE_NAME == SupMember): ?>class="nav-red"<?php endif; ?>>
-            <i class="iconfont icon-shouhou"></i>
-            <p>售后</p>
-        </a>
-    </div>  
-</div>
-<!--漂浮导航 结束-->
-
-</body>
-</html>
-<script type="text/javascript">
-
-    mob.timePlugin();
+            </script></div></div><div id="order_list"></div></div><div style="height:45px;clear:both"></div><!--漂浮导航 开始--><div class="row pos-nav"><div class="col-xs-3"><a href="<?php echo U('Supplier/index');?>" <?php if(MODULE_NAME == Supplier): ?>class="nav-red"<?php endif; ?>><i class="iconfont icon-shangdian1"></i><p>首页</p></a></div><div class="col-xs-3"><a href="<?php echo U('SupOrder/navig');?>" <?php if(MODULE_NAME == SupOrder): ?>class="nav-red"<?php endif; ?>><i class="iconfont icon-kehu"></i><p>交易/客户</p></a></div><div class="col-xs-3"><a href="<?php echo U('SupWarehouse/navig');?>" <?php if(MODULE_NAME == SupWarehouse): ?>class="nav-red"<?php endif; ?>><i class="iconfont icon-kucun"></i><p>财务/库存</p></a></div><div class="col-xs-3"><a href="<?php echo U('SupMember/navig');?>" <?php if(MODULE_NAME == SupMember): ?>class="nav-red"<?php endif; ?>><i class="iconfont icon-shouhou"></i><p>售后</p></a></div></div><!--漂浮导航 结束--></body></html><script type="text/javascript">    mob.timePlugin();
     $(document).ready(function(){
         $('.drawer').drawer();
         $('.js-trigger').click(function(){
@@ -315,13 +139,8 @@ a:focus,a:active, a:hover{color: #33; text-decoration: none;}
         $('.tc_project').removeClass('tc_choose');
     })
 
-</script>
-
-<script type="text/javascript">
-document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+</script><script type="text/javascript">document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
   WeixinJSBridge.call('hideToolbar');
   WeixinJSBridge.call('hideOptionMenu');
 });
-</script>
-<script src="__PUBLIC__/js/iscroll.js"></script>
-<script src="__PUBLIC__/js/jquery.drawer.min.js"></script>
+</script><script src="__PUBLIC__/js/iscroll.js"></script><script src="__PUBLIC__/js/jquery.drawer.min.js"></script>

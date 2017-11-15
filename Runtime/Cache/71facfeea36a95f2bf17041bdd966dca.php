@@ -1,46 +1,8 @@
-<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title><?php if($title != null): echo ($title); else: ?>诚车堂-全心全意为车主服务<?php endif; ?></title>
-<meta name="keywords" content="诚车堂,养车网,汽车服务平台,自助保养,汽车保养,汽车养护,汽车美容,钣金喷漆,汽车维修,汽车配件,汽车养护,养车无忧,养车无忧网,一站式汽车保养" />
-<meta name="description" content="修车养车，上诚车堂，省心，省钱，省时间！诚车堂，致力于为广大车主提供一个在线解决汽车服务问题、满足车主在汽车美容、保养、维修、配件等方面的需求， 服务范围包括汽车美容、汽车保养、汽车养护、钣金油漆、汽车维修等，是中国领先的网上汽车服务平台。诚车堂在努力成为车主们首选汽车服务平台的同时,以'让车主享有便捷、高效、经济的爱车养车生活'为己任，希望在用户心中树立起'修车养车,上诚车堂'的良好口碑。" />
-
-<link rel="shortcut icon" href="http://s.17cct.com/favicon.ico" type="image/vnd.microsoft.icon">
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<?php if( $no_include != 1): ?><link rel="stylesheet" href="__PUBLIC__/css/swiper.min.css"><?php endif; ?>
-<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/css.css?v=20150617">
-<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/wap.lazy.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/jquery.cookie.js"></script> 
-<script type="text/javascript" src="__PUBLIC__/js/wap_v4_common.js"></script>
-<div id='wx_pic' style='margin:0 auto;display:none;'>
-<img src='http://s.17cct.com/v4/images/pic300.jpg' />
-</div>
-<script type="text/javascript">
-document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /><title><?php if($title != null): echo ($title); else: ?>诚车堂-全心全意为车主服务<?php endif; ?></title><meta name="keywords" content="诚车堂,养车网,汽车服务平台,自助保养,汽车保养,汽车养护,汽车美容,钣金喷漆,汽车维修,汽车配件,汽车养护,养车无忧,养车无忧网,一站式汽车保养" /><meta name="description" content="修车养车，上诚车堂，省心，省钱，省时间！诚车堂，致力于为广大车主提供一个在线解决汽车服务问题、满足车主在汽车美容、保养、维修、配件等方面的需求， 服务范围包括汽车美容、汽车保养、汽车养护、钣金油漆、汽车维修等，是中国领先的网上汽车服务平台。诚车堂在努力成为车主们首选汽车服务平台的同时,以'让车主享有便捷、高效、经济的爱车养车生活'为己任，希望在用户心中树立起'修车养车,上诚车堂'的良好口碑。" /><link rel="shortcut icon" href="http://s.17cct.com/favicon.ico" type="image/vnd.microsoft.icon"><link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"><?php if( $no_include != 1): ?><link rel="stylesheet" href="__PUBLIC__/css/swiper.min.css"><?php endif; ?><link rel="stylesheet" type="text/css" href="__PUBLIC__/css/css.css?v=20150617"><script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script><script type="text/javascript" src="__PUBLIC__/js/bootstrap.min.js"></script><script type="text/javascript" src="__PUBLIC__/js/wap.lazy.min.js"></script><script type="text/javascript" src="__PUBLIC__/js/jquery.cookie.js"></script><script type="text/javascript" src="__PUBLIC__/js/wap_v4_common.js"></script><div id='wx_pic' style='margin:0 auto;display:none;'><img src='http://s.17cct.com/v4/images/pic300.jpg' /></div><script type="text/javascript">document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
   WeixinJSBridge.call('showToolbar');
   WeixinJSBridge.call('showOptionMenu');
 });
-</script>
-<link rel="stylesheet" href="__PUBLIC__/css/common_home.css">
-<link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="__PUBLIC__/css/drawer.min.css">
-<link href="__PUBLIC__/css/mobiscroll.css" rel="stylesheet" />
-<link href="__PUBLIC__/css/mobiscroll_date.css" rel="stylesheet" />
-<link rel="stylesheet" href="__PUBLIC__/css/alertPopShow.css" />
-<script src="__PUBLIC__/js/mobiscroll_date.js" charset="gb2312"></script> 
-<script src="__PUBLIC__/js/mobiscroll.js"></script>
-<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/bootstrap-select.css">
-<script type="text/javascript" src="__PUBLIC__/js/bootstrap-select.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/alertPopShow.js"></script>
-
-<style type="text/css">
-
-/*主要数据*/
+</script><link rel="stylesheet" href="__PUBLIC__/css/common_home.css"><link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css"><link rel="stylesheet" href="__PUBLIC__/css/drawer.min.css"><link href="__PUBLIC__/css/mobiscroll.css" rel="stylesheet" /><link href="__PUBLIC__/css/mobiscroll_date.css" rel="stylesheet" /><link rel="stylesheet" href="__PUBLIC__/css/alertPopShow.css" /><script src="__PUBLIC__/js/mobiscroll_date.js" charset="gb2312"></script><script src="__PUBLIC__/js/mobiscroll.js"></script><link rel="stylesheet" type="text/css" href="__PUBLIC__/css/bootstrap-select.css"><script type="text/javascript" src="__PUBLIC__/js/bootstrap-select.js"></script><script type="text/javascript" src="__PUBLIC__/js/alertPopShow.js?v=201711141833"></script><style type="text/css">/*主要数据*/
 .main_data{ overflow: hidden; color: #fff; }
 .box-flex{ display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -moz-flex; display: -ms-flexbox;  display: flex; }
 .turnover h5{font-size: 20px; color: #ff3e3e; font-weight: bold;margin-bottom: 4px}
@@ -51,6 +13,7 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
 
 .reserve_tab {
     padding: 15px;
+    background-color: #ffffff;
 }
 .bomb_screen1{position: absolute; z-index: 5; width: 100%; min-height: 100%; background: #fff; display: none; top: 0;}
 
@@ -343,10 +306,7 @@ a:focus,a:active, a:hover{color: #333; text-decoration: none;}
     font-size: 14px;
 }
 
-</style>
-
-<script>
-$(function () {
+</style><script>$(function () {
     $("#flag").on('keyup', function(e) {
          var target = $(e.target);
          if (target.is(".bs-searchbox input") || target.parents().is(".bs-searchbox input")) {
@@ -376,7 +336,7 @@ $(function () {
                         //必不可少的刷新
                         $("#id_select").selectpicker('refresh');
                         var id = $('#id_select').find('option').first().val();
-                        ajaxGetStoreInfo(id,location);
+                        ajaxGetStoreInfo(id);
                     }
                 });
             }else{ 
@@ -417,376 +377,12 @@ function ajaxGetStoreInfo(id){
     update_discount_list();
 }
 
-</script>  
-
-
-</head>
-<body class="drawer drawer-right">
-
-<!--弹出提示框-->
-<div class="alertBg" id="msgBox" style="display:none;">
-    <h4 class="alerttitle" id="alerttitle"></h4>
-    <span class="vm f20" id='alertdetail'></span>
-</div>
-
-<div class="drawer-main drawer-default">
-    <nav role="navigation" style="height:auto;">
-        <div id="attr_list">
-            <?php if(is_array($attr_list)): $i = 0; $__LIST__ = $attr_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$a): $mod = ($i % 2 );++$i;?><div class="sift_row">
-                    <div class="row_title">
-                        <?php echo ($a["attr_name"]); ?>
-                        <span class="switch_btn pull-right"></span>
-                    </div>
-                    <div class="row_body">
-                        <ul class="row" >
-                                <li class="col-xs-4">
-                                    <a href="javascript:;" class="tc_project tc_choose" value="0">不限</a>
-                                </li>
-                            <?php if(is_array($a['attr_val'])): $k = 0; $__LIST__ = $a['attr_val'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$av): $mod = ($k % 2 );++$k;?><li class="col-xs-4">
-                                    <a href="javascript:;" class="tc_project" value="<?php echo ($a["id"]); ?>:<?php echo ($av); ?>"><?php echo ($av); ?></a>
-                                </li><?php endforeach; endif; else: echo "" ;endif; ?>                   
-                        </ul>
-                    </div>
-                </div><?php endforeach; endif; else: echo "" ;endif; ?>
-        </div>
-        
-    </nav>
-
-    <div class="sift_bottom">
-        <div class="sift-btn" id="reset_attr">
-            重置
-        </div>
-        <div class="sift-btn sift-btn-ok" onclick="$('.drawer').drawer('close');">
-            确定
-        </div>
-    </div>
-</div>
-<!-- 顶部筛选 刷新 -->
-<script type="text/javascript" src="__PUBLIC__/js/countUp.min.js"></script>
-
-<div class="main_data text-center" style="overflow: visible;">
-    <div class="topsearch box_flex" id="flag">
-            <select id="id_select" class="selectpicker col-xs-12" data-live-search="true" name="location_name" style="">
-                <option value="0">--请选择门店--</option>
-                <?php if(is_array($location)): foreach($location as $key=>$l): ?><option value="<?php echo ($l["id"]); ?>" data-val="<?php echo ($l["location_id"]); ?>"><?php echo ($l["location_name"]); ?></option><?php endforeach; endif; ?>
-            </select>
-        <!-- <div class="searchbtn" ><button onclick="search_goods(2)" style="margin-right: -29px;width:65px;">搜索<button></div> -->
-        <!-- <div class="searchbtn" ><button onclick="search_goods(2)" style="margin-right: -15px;width:65px;">新增<button></div> -->
-    </div>
-</div>
-
-
-<div class="container-fluid line"></div>
-
-<!-- 历史营业额 -->
-<div id="location_info" style="display: none">
-    <div class="box-flex text-center">
-        <div class="flex1 turnover data_rb head_border">
-            <h5><span id="purchase_number"></span></h5>
-            <p>本月采购</p>
-        </div>
-       
-        <div class="flex1 turnover head_border">
-            <h5><span id="purchase_time"></span></h5>
-            <p>上次采购</p>
-        </div>
-    </div>
-
-
-    <!-- 历史营业额 -->
-    <div class="box-flex text-center">
-        <div class="flex1 turnover data_rb head_border">
-            <h5><span id="price-box"></span></h5>
-            <p>历史挂账</p>
-        </div>
-        <div class="flex1 turnover data_rb head_border">
-            <h5><span id="credit-line-box"></span></h5>
-            <p>授信额度</p>
-        </div>
-        <div class="flex1 turnover head_border">
-            <h5><span id="balance"></span></h5>
-            <p>预付款余额</p>
-        </div>
-    </div>
-
-    <div class="bundlev bline">
-        <p><span class="pull-left">门店名称：</span><span class="pull-right" id="location_name"></span></p>
-    </div>
-    <div class="bundlev bline">
-        <p><span class="pull-left">联系人：</span><span class="pull-right" id="receive_user"></span></p>
-    </div>
-    <div class="bundlev bline">
-        <p><span class="pull-left">联系电话：</span><span class="pull-right" id="receive_tel"></span></p>
-    </div>
-    <div style="padding: 10px 16px;height: 60px;">
-        <p><span class="pull-left">地址：</span><span class="pull-right" id="receive_address"></span></p>
-    </div>
-    <div>
-        <div class="topsearch col-xs-12" style="border-top: 1px solid #e6e6e6;">
-            <div class="searchbtn" style="float:right;"><button type="button" style="width:90px;margin-top: 5px" onclick="deal_record()">交易记录</button></div>
-            <!-- <div class="searchbtn" style="margin-right: -244px;"><button type="button" style="width:80px;" onclick="search_goods(2)">修改资料</button></div> -->
-        </div>
-    </div>
-
-    <div class="container-fluid line"></div>
-</div>
-
-
-<div class="bundlev bline" onclick="bomb_screen(1,'goods')">
-    <a class="">
-        <p><span class="pull-left">采购</span></p>
-        <div class="pull-right">                   
-            <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-        </div>  
-    </a>    
-</div>
-
-
-<div class="good_info_list" style="display:none">
-    <div class="goods_list_goods">
-    </div>
-
-    <div class="flex1 bline">
-        <div class="wholebtn text-center"></div>
-
-        <span class="pull-right cartbottom">
-            数量：<span class="price" id="total_count_goods"></span> 
-            总金额: <span class="price">￥<span id="total_price_goods"></span></span>
-        </span>
-    </div>
-    <div class="flex1 bline" style="display: none;">
-        <div class="wholebtn text-center"></div>
-
-        <span class="pull-right cartbottom">
-            优惠金额: <span class="price">￥<span id="discount_price"></span></span>
-            实际金额: <span class="price">￥<span id="new_total_price"></span></span>
-        </span>
-    </div>
-   
-</div>
-
-
-<div class="bundlev bline" onclick="bomb_screen(1,'gift')">
-    <a class="">
-        <span class="navig" style="">赠品</span>
-        <div class="pull-right">                   
-            <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-        </div>  
-    </a>    
-</div>
-
-
-<div class="good_info_list" style="display:none">
-    <div class="goods_list_gift">
-    </div>
-
-    <div class="flex1 bline">
-        <div class="wholebtn text-center"></div>
-        <span class="pull-right cartbottom">数量：<span class="price" id="total_count_gift"></span> 合计: <span class="price">￥<span id="total_price_gift"></span></span></span>
-    </div>
-</div>
-
-
-<div class="bundlev bline">
-    <a class="">
-        <p><span class="pull-left">参与活动</span></p>
-        <div class="box_flex">
-            <select id="act_list" class="col-xs-12 form-control" name="pay_method" style="margin:3px 0 3px 10px;">
-                <option value="0">无</option>
-            <select>
-        </div>  
-    </a>       
-</div>
-
-
-<div class="bundlev bline">
-    <a class="">
-        <p><span class="pull-left">使用优惠券</span></p>
-        <div class="box_flex">
-            <select id="coupon_list" class="col-xs-12 form-control" name="coupon_list" style="margin:3px 0 3px 10px;">
-                <option value="0">无</option>
-            <select>
-        </div>  
-    </a>       
-</div>
-
-<div class="bundlev bline">
-    <a class="">
-        <p><span class="pull-left">配送方式</span></p>
-        <div class="box_flex">
-            <select id="distribution_type" class="col-xs-12 form-control" name="distribution_type" style="margin:3px 0 3px 10px;">
-                <option value="0">--请选择配送方式--</option>
-                    <option value="1">物流配送</option>
-                    <option value="2">公司自配</option>
-                    <option value="3">摩的配送</option>
-                    <option value="4">自提</option>
-            <select>
-        </div>  
-    </a>    
-</div>
-
-<div class="bundlev bline" style="display: none" id="express-name-block">
-    <a class="">
-        <p><span class="pull-left">物流公司</span></p>
-        <div class="box_flex">
-            <select id="express" class="col-xs-12 form-control" name="express" style="margin:3px 0 3px 10px;">
-                <option value="0">--请选择物流公司--</option>
-                <?php if(is_array($express_list)): foreach($express_list as $key=>$e_l): ?><option value="<?php echo ($e_l["id"]); ?>"><?php echo ($e_l["name"]); ?></option><?php endforeach; endif; ?>
-            <select>
-        </div>  
-    </a>    
-</div>
-
-<div class="bundlev"  style="padding: 0">
-    <input type="text" name="distribution_remark" id="distribution_remark" placeholder="配送备注：此处填写配送备注" class="form-control">
-</div>
-
-<div class="container-fluid line"></div>
-
-<div class="bundlev bline">
-    <a class="">
-        <p><span class="pull-left">支付类型</span></p>
-        <div class="box_flex">
-            <select id="pay_type" class="col-xs-12 form-control" name="pay_type" style="margin:3px 0 3px 10px;">
-                <option value="0">--请选择支付类型--</option>
-                    <option value="1">现金挂账结算</option>
-                    <option value="2">月底挂账结算</option>
-                    <option value="3">约定挂账结算</option>
-                    <option value="4">预付款结算</option>
-            <select>
-        </div>  
-    </a>    
-</div>
-
-
-<div class="bundlev bline">
-    <a class="">
-        <p><span class="pull-left">支付方式</span></p>
-        <div class="box_flex">
-            <select id="pay_method" class="col-xs-12 form-control" name="pay_method" style="margin:3px 0 3px 10px;">
-                <option value="0">--请选择支付方式--</option>
-            <select>
-        </div>  
-    </a>    
-</div>
-
-<div class="bundlev bline" style="display: none" id="account-name-block">
-    <a class="">
-        <p><span class="pull-left">余额支付</span></p>
-        <div class="box_flex">
-            <select id="account_name" class="col-xs-12 form-control" name="pay_method" style="margin:3px 0 3px 10px;">
-                <option value="0">--请选择支付账号--</option>
-            <select>
-        </div>  
-    </a>    
-</div>
-
-<div class="bundlev" style="padding: 0">
-    <input type="text" name="pay_remark" id="pay_remark" placeholder="支付备注：此处填写支付备注" class="form-control">
-</div>
-
-<div class="container-fluid line"></div>
-
-<div class="bundlev bline">
-    <a class="">
-        <p><span class="pull-left">制单人</span></p>
-        <div class="box_flex">
-            <select id="select_maker" class="col-xs-12 form-control" name="select_maker" style="margin:3px 0 3px 10px;">
-                <option value="0">--请选择制单人--</option>
-                    <?php if(is_array($employee_list)): foreach($employee_list as $key=>$el): ?><option value="<?php echo ($el["id"]); ?>"><?php echo ($el["name"]); ?></option><?php endforeach; endif; ?>
-            <select>
-        </div>  
-    </a>    
-</div>
-
-<div class="bundlev" style="padding: 0">
-    <input type="text" name="make_remark" id="make_remark" placeholder="制单备注：此处填写制单备注" class="form-control">
-</div>
-
-<div class="container-fluid" style="padding: 0">
-    <div class="row" style="margin-top:15px;">
-        <center>        
-            <div class="col-xs-12">
-                <button class="btn btn-lg btn-block btn-warning confirm" style="border-radius:0">确定下单</button>
-            </div>
-        </center>
-    </div>
-</div>
-
-
-<!-- 选择商品 -->
-<div class="bomb_screen1">
-    <div class="topsearch col-xs-12 box_flex">
-        <div class="flex1 searchtab">
-            <span></span>
-            <input type="text" class="form-control" id="keyword" value="" placeholder="请输入商品名称">
-        </div>
-        <div class="searchbtn">
-            <button onclick="search_goods(2)">搜索</button>
-        </div>
-    </div>
-    <div class="screen">
-        <div class="col-xs-4 "><a href="javascript:;" id="comprehensive">综合排序 <span class="arrowico"></span></a></div>
-        <div class="col-xs-4 sepline">
-            <a href="javascript:;" id="classification"><?php echo ($class_name); ?> <span class="arrowico"></span></a>
-        </div>
-        <div class="col-xs-4 js-trigger">筛选 <span class="screenico"></span></div>
-
-        <div class="sort_sele">
-            <p class="ptick tick" onclick="set_sort(0,this)"><a href="javascript:;">综合排序</a><span></span></p>
-            <p class="ptick" onclick="set_sort(1,this)"><a href="javascript:;">价格从低到高</a><span></span></p>
-            <p class="ptick" onclick="set_sort(2,this)"><a href="javascript:;">价格从高到低</a><span></span></p>
-            <p class="ptick" onclick="set_sort(3,this)"><a href="javascript:;">销量从高到低</a><span></span></p>
-            <p class="ptick" onclick="set_sort(4,this)"><a href="javascript:;">销量从低到高</a><span></span></p>
-        </div>
-
-        <div class="sort_sele2">
-            <ul class="metismenu " id="menu">
-            <?php if(is_array($class_list)): $i = 0; $__LIST__ = $class_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><li>
-                    <a href="#">
-                        <i class="fa fa-circle-o"></i>
-                        <?php echo ($c["c_name"]); ?>
-                        <span class="fa arrow fa-fw"></span>
-                    </a>
-                    <ul aria-expanded="false" class="collapse">
-                      <?php if(is_array($c['item'])): $i = 0; $__LIST__ = $c['item'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$ci): $mod = ($i % 2 );++$i;?><li <?php if($ci["id"] == $class_id): ?>class="select"<?php endif; ?> onclick="set_class('<?php echo ($ci["id"]); ?>',this)">
-                                <a href="javascript:;" class="present"><?php echo ($ci["class_name"]); ?> <i class="fa fa-angle-right pull-right"></i></a>
-                            </li><?php endforeach; endif; else: echo "" ;endif; ?>                 
-                    </ul>
-                </li><?php endforeach; endif; else: echo "" ;endif; ?>
-            </ul>
-            
-            <!-- 导航插件 -->
-            <script type="text/javascript" src="__PUBLIC__/js/metisMenu.js"></script>
-            <script>
-                $(function () {
+</script></head><body class="drawer drawer-right"><!--弹出提示框--><div class="alertBg" id="msgBox" style="display:none;"><h4 class="alerttitle" id="alerttitle"></h4><span class="vm f20" id='alertdetail'></span></div><div class="drawer-main drawer-default"><nav role="navigation" style="height:auto;"><div id="attr_list"><?php if(is_array($attr_list)): $i = 0; $__LIST__ = $attr_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$a): $mod = ($i % 2 );++$i;?><div class="sift_row"><div class="row_title"><?php echo ($a["attr_name"]); ?><span class="switch_btn pull-right"></span></div><div class="row_body"><ul class="row" ><li class="col-xs-4"><a href="javascript:;" class="tc_project tc_choose" value="0">不限</a></li><?php if(is_array($a['attr_val'])): $k = 0; $__LIST__ = $a['attr_val'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$av): $mod = ($k % 2 );++$k;?><li class="col-xs-4"><a href="javascript:;" class="tc_project" value="<?php echo ($a["id"]); ?>:<?php echo ($av); ?>"><?php echo ($av); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?></ul></div></div><?php endforeach; endif; else: echo "" ;endif; ?></div></nav><div class="sift_bottom"><div class="sift-btn" id="reset_attr">            重置
+        </div><div class="sift-btn sift-btn-ok" onclick="$('.drawer').drawer('close');">            确定
+        </div></div></div><!-- 顶部筛选 刷新 --><script type="text/javascript" src="__PUBLIC__/js/countUp.min.js"></script><div class="main_data text-center" style="overflow: visible;"><div class="topsearch box_flex" id="flag"><select id="id_select" class="selectpicker col-xs-12" data-live-search="true" name="location_name" style=""><option value="0">--请选择门店--</option><?php if(is_array($location)): foreach($location as $key=>$l): ?><option value="<?php echo ($l["id"]); ?>" data-val="<?php echo ($l["location_id"]); ?>"><?php echo ($l["location_name"]); ?></option><?php endforeach; endif; ?></select><!-- <div class="searchbtn" ><button onclick="search_goods(2)" style="margin-right: -29px;width:65px;">搜索<button></div> --><!-- <div class="searchbtn" ><button onclick="search_goods(2)" style="margin-right: -15px;width:65px;">新增<button></div> --></div></div><div class="container-fluid line"></div><!-- 历史营业额 --><div id="location_info" style="display: none"><div class="box-flex text-center"><div class="flex1 turnover data_rb head_border"><h5><span id="purchase_number"></span></h5><p>本月采购</p></div><div class="flex1 turnover head_border"><h5><span id="purchase_time"></span></h5><p>上次采购</p></div></div><!-- 历史营业额 --><div class="box-flex text-center"><div class="flex1 turnover data_rb head_border"><h5><span id="price-box"></span></h5><p>历史挂账</p></div><div class="flex1 turnover data_rb head_border"><h5><span id="credit-line-box"></span></h5><p>授信额度</p></div><div class="flex1 turnover head_border"><h5><span id="balance"></span></h5><p>预付款余额</p></div></div><div class="bundlev bline"><p><span class="pull-left">门店名称：</span><span class="pull-right" id="location_name"></span></p></div><div class="bundlev bline"><p><span class="pull-left">联系人：</span><span class="pull-right" id="receive_user"></span></p></div><div class="bundlev bline"><p><span class="pull-left">联系电话：</span><span class="pull-right" id="receive_tel"></span></p></div><div style="padding: 10px 16px;height: 60px;"><p><span class="pull-left">地址：</span><span class="pull-right" id="receive_address"></span></p></div><div><div class="topsearch col-xs-12" style="border-top: 1px solid #e6e6e6;"><div class="searchbtn" style="float:right;"><button type="button" style="width:90px;margin-top: 5px" onclick="deal_record()">交易记录</button></div><!-- <div class="searchbtn" style="margin-right: -244px;"><button type="button" style="width:80px;" onclick="search_goods(2)">修改资料</button></div> --></div></div><div class="container-fluid line"></div></div><div class="bundlev bline" onclick="bomb_screen(1,'goods')"><a class=""><p><span class="pull-left">采购</span></p><div class="pull-right"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div></a></div><div class="good_info_list" style="display:none"><div class="goods_list_goods"></div><div class="flex1 bline"><div class="wholebtn text-center"></div><span class="pull-right cartbottom">            数量：<span class="price" id="total_count_goods"></span>            总金额: <span class="price">￥<span id="total_price_goods"></span></span></span></div><div class="flex1 bline" style="display: none;"><div class="wholebtn text-center"></div><span class="pull-right cartbottom">            优惠金额: <span class="price">￥<span id="discount_price"></span></span>            实际金额: <span class="price">￥<span id="new_total_price"></span></span></span></div></div><div class="bundlev bline" onclick="bomb_screen(1,'gift')"><a class=""><span class="navig" style="">赠品</span><div class="pull-right"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div></a></div><div class="good_info_list" style="display:none"><div class="goods_list_gift"></div><div class="flex1 bline"><div class="wholebtn text-center"></div><span class="pull-right cartbottom">数量：<span class="price" id="total_count_gift"></span> 合计: <span class="price">￥<span id="total_price_gift"></span></span></span></div></div><div class="bundlev bline"><a class=""><p><span class="pull-left">参与活动</span></p><div class="box_flex"><select id="act_list" class="col-xs-12 form-control" name="pay_method" style="margin:3px 0 3px 10px;"><option value="0">无</option><select></div></a></div><div class="bundlev bline"><a class=""><p><span class="pull-left">使用优惠券</span></p><div class="box_flex"><select id="coupon_list" class="col-xs-12 form-control" name="coupon_list" style="margin:3px 0 3px 10px;"><option value="0">无</option><select></div></a></div><div class="bundlev bline"><a class=""><p><span class="pull-left">配送方式</span></p><div class="box_flex"><select id="distribution_type" class="col-xs-12 form-control" name="distribution_type" style="margin:3px 0 3px 10px;"><option value="0">--请选择配送方式--</option><option value="1">物流配送</option><option value="2">公司自配</option><option value="3">摩的配送</option><option value="4">自提</option><select></div></a></div><div class="bundlev bline" style="display: none" id="express-name-block"><a class=""><p><span class="pull-left">物流公司</span></p><div class="box_flex"><select id="express" class="col-xs-12 form-control" name="express" style="margin:3px 0 3px 10px;"><option value="0">--请选择物流公司--</option><?php if(is_array($express_list)): foreach($express_list as $key=>$e_l): ?><option value="<?php echo ($e_l["id"]); ?>"><?php echo ($e_l["name"]); ?></option><?php endforeach; endif; ?><select></div></a></div><div class="bundlev"  style="padding: 0"><input type="text" name="distribution_remark" id="distribution_remark" placeholder="配送备注：此处填写配送备注" class="form-control"></div><div class="container-fluid line"></div><div class="bundlev bline"><a class=""><p><span class="pull-left">支付类型</span></p><div class="box_flex"><select id="pay_type" class="col-xs-12 form-control" name="pay_type" style="margin:3px 0 3px 10px;"><option value="0">--请选择支付类型--</option><option value="1">现金挂账结算</option><option value="2">月底挂账结算</option><option value="3">约定挂账结算</option><option value="4">预付款结算</option><select></div></a></div><div class="bundlev bline"><a class=""><p><span class="pull-left">支付方式</span></p><div class="box_flex"><select id="pay_method" class="col-xs-12 form-control" name="pay_method" style="margin:3px 0 3px 10px;"><option value="0">--请选择支付方式--</option><select></div></a></div><div class="bundlev bline" style="display: none" id="account-name-block"><a class=""><p><span class="pull-left">余额支付</span></p><div class="box_flex"><select id="account_name" class="col-xs-12 form-control" name="pay_method" style="margin:3px 0 3px 10px;"><option value="0">--请选择支付账号--</option><select></div></a></div><div class="bundlev" style="padding: 0"><input type="text" name="pay_remark" id="pay_remark" placeholder="支付备注：此处填写支付备注" class="form-control"></div><div class="container-fluid line"></div><div class="bundlev bline"><a class=""><p><span class="pull-left">制单人</span></p><div class="box_flex"><select id="select_maker" class="col-xs-12 form-control" name="select_maker" style="margin:3px 0 3px 10px;"><option value="0">--请选择制单人--</option><?php if(is_array($employee_list)): foreach($employee_list as $key=>$el): ?><option value="<?php echo ($el["id"]); ?>"><?php echo ($el["name"]); ?></option><?php endforeach; endif; ?><select></div></a></div><div class="bundlev" style="padding: 0"><input type="text" name="make_remark" id="make_remark" placeholder="制单备注：此处填写制单备注" class="form-control"></div><div class="container-fluid" style="padding: 0"><div style="margin-top:15px;"><center><div><button class="btn btn-lg btn-block btn-warning confirm" style="border-radius:0">确定下单</button></div></center></div></div><!-- 选择商品 --><div class="bomb_screen1"><div class="topsearch col-xs-12 box_flex"><div class="flex1 searchtab"><span></span><input type="text" class="form-control" id="keyword" value="" placeholder="请输入商品名称"></div><div class="searchbtn"><button onclick="search_goods(2)">搜索</button></div></div><div class="screen"><div class="col-xs-4 "><a href="javascript:;" id="comprehensive">综合排序 <span class="arrowico"></span></a></div><div class="col-xs-4 sepline"><a href="javascript:;" id="classification"><?php echo ($class_name); ?><span class="arrowico"></span></a></div><div class="col-xs-4 js-trigger">筛选 <span class="screenico"></span></div><div class="sort_sele"><p class="ptick tick" onclick="set_sort(0,this)"><a href="javascript:;">综合排序</a><span></span></p><p class="ptick" onclick="set_sort(1,this)"><a href="javascript:;">价格从低到高</a><span></span></p><p class="ptick" onclick="set_sort(2,this)"><a href="javascript:;">价格从高到低</a><span></span></p><p class="ptick" onclick="set_sort(3,this)"><a href="javascript:;">销量从高到低</a><span></span></p><p class="ptick" onclick="set_sort(4,this)"><a href="javascript:;">销量从低到高</a><span></span></p></div><div class="sort_sele2"><ul class="metismenu " id="menu"><?php if(is_array($class_list)): $i = 0; $__LIST__ = $class_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$c): $mod = ($i % 2 );++$i;?><li><a href="#"><i class="fa fa-circle-o"></i><?php echo ($c["c_name"]); ?><span class="fa arrow fa-fw"></span></a><ul aria-expanded="false" class="collapse"><?php if(is_array($c['item'])): $i = 0; $__LIST__ = $c['item'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$ci): $mod = ($i % 2 );++$i;?><li <?php if($ci["id"] == $class_id): ?>class="select"<?php endif; ?> onclick="set_class('<?php echo ($ci["id"]); ?>',this)"><a href="javascript:;" class="present"><?php echo ($ci["class_name"]); ?><i class="fa fa-angle-right pull-right"></i></a></li><?php endforeach; endif; else: echo "" ;endif; ?></ul></li><?php endforeach; endif; else: echo "" ;endif; ?></ul><!-- 导航插件 --><script type="text/javascript" src="__PUBLIC__/js/metisMenu.js"></script><script>                $(function () {
                     $('#menu').metisMenu();
                 });
-            </script>
-
-        </div>
-    </div>
-    <div class="reserve_tab" id="CarWash">
-        
-
-    </div>
-
-    <div style="height:90px; clear:both;"></div>
-    <div class="col-xs-12 row" style=" position: fixed; bottom: 5px; background: #fff; padding-bottom: 10px;">
-        <button class="btn btn-lg btn-block btn-danger" style="margin-left: 15px;" id="confirm-button" data-type='' onclick="confirm(1,this)">确定</button>
-    </div>
-
-    <input type="hidden" id="class_id" value="<?php echo ($class_id); ?>">
-    <input type="hidden" id="sort" value="0">
-    <input type="hidden" id="attr_value" value="">
-</div>
-
-</body>
-</html>
-
-<script type="text/javascript">
-
-$(document).ready(function(){  
+            </script></div></div><div class="reserve_tab" id="CarWash"></div><div style="height:90px; clear:both;"></div><div class="col-xs-12 row" style=" position: fixed; bottom: 5px; background: #fff; padding-bottom: 10px;"><button class="btn btn-lg btn-block btn-danger" style="margin-left: 15px;" id="confirm-button" data-type='' onclick="confirm(1,this)">确定</button></div><input type="hidden" id="class_id" value="<?php echo ($class_id); ?>"><input type="hidden" id="sort" value="0"><input type="hidden" id="attr_value" value=""></div></body></html><script type="text/javascript">$(document).ready(function(){  
     $('#comprehensive').click(function(){
         $(".sort_sele").slideToggle(200);
         $(".sort_sele2").hide();
@@ -1377,23 +973,7 @@ $('.confirm').on('click', function(){
                 if(button == 'ok'){
                     //按下确定按钮执行的操作
                     this.hide();
-                    btn.attr('disabled', true).text('正在处理');
-
-                    $.post("<?php echo U('SupOrder/store_order_add');?>",args,function(data){
-                        btn.removeAttr('disabled').text(text);
-                        if(data && typeof(data.status) != 'undefined'){
-                            if(data.status > 0){
-                                MsgBox(data.msg);
-                                var nexUrl = '<?php echo U("SupOrder/index");?>';
-                                setTimeout("location.href='"+nexUrl+"'", 1000);
-                            }else{
-                                MsgBox(data.msg);
-                            }
-                        }else{
-                            MsgBox('服务器未响应，请稍后重试');
-                        }
-                    },'json');
-
+                    store_order_save(btn);
                 }
 
                 if(button == 'cancel') {
@@ -1401,10 +981,26 @@ $('.confirm').on('click', function(){
                     this.hide();
                 }
             });
+    }else{
+        store_order_save(btn);
     }
 });
+function store_order_save(btn){
+    btn.attr('disabled', true).text('正在处理');
+    $.post("<?php echo U('SupOrder/store_order_add');?>",args,function(data){
+        btn.removeAttr('disabled').text(text);
+        if(data && typeof(data.status) != 'undefined'){
+            if(data.status > 0){
+                MsgBox(data.msg);
+                var nexUrl = '<?php echo U("SupOrder/index");?>';
+                setTimeout("location.href='"+nexUrl+"'", 1000);
+            }else{
+                MsgBox(data.msg);
+            }
+        }else{
+            MsgBox('服务器未响应，请稍后重试');
+        }
+    },'json');
+}
 
-</script>
-
-<script src="__PUBLIC__/js/iscroll.js"></script>
-<script src="__PUBLIC__/js/jquery.drawer.min.js"></script>
+</script><script src="__PUBLIC__/js/iscroll.js"></script><script src="__PUBLIC__/js/jquery.drawer.min.js"></script>

@@ -32,7 +32,7 @@ class SupInfoAction extends SupBaseAction {
 		$warehouse = array($warehouse);
 
 		$this->assign('warehouse',$warehouse);
-		echo $html=$this->fetch('Purchase:ajax_get_warehouse');
+		echo $html=$this->fetch('SupWarehouse:ajax_get_warehouse');
 	}
 
     public function msg_list()

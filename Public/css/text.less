@@ -15,13 +15,15 @@
     height: 110px;
     background: #cc0000;
     overflow: hidden;
+    position: relative;
     .portrait{
-        margin:25px 20px;
+        margin:25px 10px;
         width: 60px;
         height: 60px;
         float: left;
         border: solid 2px #FFFFFF;
         border-radius: 50%;
+        position: absolute;
         overflow: hidden;
         img{
             width: 100%;
@@ -31,24 +33,31 @@
     .por-name{
         color: #FFFFFF;
         float: left;
-        margin-left: 0.3rem;
+        padding-left:80px;
         margin:25px 0px;
+        max-width:100%;
+        padding-right:6px ;
         overflow: hidden;
-        h2{      
+        h2{     
+            text-overflow:ellipsis;
+            white-space: nowrap;
             font-size:18px;
-            margin-top:5px; 
+            margin-top:5px;
+            overflow: hidden; 
         }  
         p{
+            text-overflow:ellipsis;
+            white-space: nowrap;
             font-size: 14px;
             line-height: 24px;
+            margin: 0;
+            overflow: hidden; 
         }
     }   
 }
 //------头像end--------
 @fontcolor:#535353;@borcolor:#eee;
 .nav-top{
-    height: 62px;
-    margin:10px 0;
     overflow: hidden;
     div{
         margin: 0;
@@ -73,7 +82,6 @@
         padding-top:8px;               
         text-decoration: none;
         i{
-            margin-top:5px ;
             font-size: 22px;
         }
         p{
@@ -84,18 +92,22 @@
 //------分类 end--------
 .title{
     overflow: hidden;
+    margin: 0;
+    padding: 0;
     height: 32px;
     background: #f2f2f2;
     h2{
         line-height: 32px;
         margin: 0;
-        font-size: 16px;
-        color: #444444;
+        padding-left: 10px;
+        font-size: 14px;
+        color: #999;
         font-weight: normal;        
     }
 }
 .order{
-    padding:0 15px;
+    height: 76px;
+    padding:0 10px;
     border-bottom: solid 1px @borcolor;
     border-top: solid 1px @borcolor;
     overflow: hidden;
@@ -108,7 +120,7 @@
             overflow: hidden;
             text-align: center;
             display: block;
-            padding: 10px 0;             
+            padding: 5px 0;             
             text-decoration: none;
             i{
                 font-size: 30px;
@@ -123,13 +135,12 @@
 }
 //------订单  end--------
 .query{
-    height: 213px;
+    height: 193px;
     border-top: solid 1px @borcolor;
-    padding-bottom: 20px;
     overflow: hidden;
     margin: 0;
     div{
-        height: 105px;
+        height: 86px;
         padding:0;
         margin: 0;
         border-right: solid 1px @borcolor;
@@ -138,7 +149,7 @@
     }
     a{
         overflow: hidden;
-        padding-top:25px ;
+        padding-top:15px ;
         text-align: center;
         display: block;               
         text-decoration: none;
@@ -171,7 +182,6 @@
 //------漂浮导航--------
 .pos-nav{
     margin: 0;
-    height: 45px;
     width: 100%;
     position: fixed;
     z-index: 999;
@@ -182,6 +192,7 @@
     overflow: hidden;
     div{
         padding: 0;
+        overflow: hidden;
     }
     a{
         text-decoration:none;
@@ -191,12 +202,13 @@
         text-align: center;
     }
     i{
-        font-size: 16px;
+        font-size: 20px;
         overflow: hidden;
     }
     p{
        font-size: 14px;
        color: @fontcolor; 
+       margin: 0;
     }
     .nav-red{
         i{
@@ -212,7 +224,7 @@
     overflow: hidden;
     li{
         height: 50px;
-        padding: 0 15px;
+        padding: 0 10px;
         border-bottom:solid 1px @borcolor ;
         overflow:hidden ;
         &:active{
@@ -231,15 +243,17 @@
             p{
                 text-align: left;
                 font-size: 14px;
+                margin: 0;
                 margin-left:10px ;
                 line-height: 50px;
-                float: left;
+                float: left; 
             }
             span{
                font-size: 22px;
-               color: #707070; 
-               float: right;
+               color: #707070;
+               float: right; 
                line-height: 50px;
+               margin-right: -5px;
             }
         .li-icon1,.li-icon2,.li-icon3,.li-icon4{
             background: #af5ef9;
@@ -262,11 +276,11 @@
 //------客户信息------------
 .search{
     height: 60px;
+    margin: 0;
     border-bottom: solid 1px #EEEEEE;
-    padding: 0 15px;
+    padding: 0 5px;
     overflow:hidden ;
     div{
-        height: 60px;
         margin: 0;
         padding:0 5px;
     }
@@ -275,29 +289,31 @@
     }
     div:nth-child(2){
       width: 20%;
-      margin: 10px 0;
+      margin-top: 10px;
     }
     .search-input{
         overflow: hidden;
         width: 100%;
-        height: 42px;
+        height:40px;
         margin: 10px 0;
         border: solid 1px @borcolor;
         border-radius: 5px;
         position: relative;
+        label{
+            margin-bottom: 0;
+        }
         i{
             position: absolute;
             font-size: 22px;
-            line-height: 40px;
+            line-height: 38px;
             padding-left: 5px;
-            margin-top: 2px;
             color: #CCCCCC;
         }
         input{
             width:100%;
-            height: 44px;
+            height: 40px;
             padding-left: 30px;
-            background: #eaeaea;
+            background: #FFFFFF;
             margin-top: -1px;
             color: @fontcolor;
             font-size: 14px;
@@ -322,27 +338,68 @@
 //---筛选样式----------
 .shaixuan{
     width: 100%;
-    height: 500px;
     overflow: hidden;
     position: absolute;
-    background: #CCCCCC;
+    background: #FFF;
     margin: 0;
     z-index: 999;
-    .sx-lfet{
+    display: none;
+    .sx-left{
+        padding-right: 0;
+        overflow:hidden;
+        div{
+            background: #FFF;
+            height: 40px;
+            line-height: 40px;
+        }
         ul{
             overflow:hidden;
             li{
                 height: 40px;
                 background: #FFFFFF;
+                border-bottom: solid 1px #bbb;
+                overflow: hidden;
+                color: #535353;
+                line-height: 40px;
+                &:active{
+                    background: #EEEEEE;
+                }
+               a{
+                   text-decoration: none;
+                   display: block;
+                   
+               }
+            }
+        }
+    }
+    .sx-right{
+       padding: 0;
+       display: none;
+       overflow: hidden;
+       div{
+            background: #FFF;
+            height: 40px;
+            line-height: 40px;
+        }
+        ul{
+            overflow:hidden;
+            li{
+                height: 40px;
+                background: #FFFFFF;
+                border-bottom: solid 1px #bbb;
                 overflow: hidden;
                a{
                    text-decoration: none;
                    display: block;
                    line-height: 40px;
+                   color: #535353;
                }
             }
-        }
+        } 
     }
+}
+.display-b{
+    display: block !important;
 }
 //------------选择
 .select{
@@ -359,14 +416,14 @@
             content: '';
             position: absolute;
             width: 1px;
-            height: 20px;
+            height:15px;
             right: 0;
             top: 10px;
             background: @borcolor;
         }
         p{
             font-size: 14px;
-            line-height: 40px;
+            line-height: 30px;
             margin: 0;
             padding: 0;
             span{
@@ -404,6 +461,8 @@
     overflow: hidden;
     li{
         height: 82.5px;
+        margin: 0;
+        padding: 0;
         border-bottom: solid 1px @borcolor;
         overflow: hidden;
     }
@@ -413,12 +472,14 @@
         overflow: hidden;
         h2{
             font-size: 16px;
+            padding-top: 2px;
             margin-top: 6px;
+            color: #333;
         }
         strong{
             font-size: 14px;
             color: #a0a0a0;
-            padding-top: 5px;
+            margin-top: -3px;
             font-weight: normal;
             display: block;
         }
@@ -427,14 +488,38 @@
         padding: 0 10px;        
         float: right;
         overflow: hidden;
-        p{  margin: 0;
-            margin-top:6px;
-            font-size:14px ;
-            text-align: right;
+        .br-all{
+            min-width: 101px;
+            float: right;
+            overflow: hidden;
+            p{
+                margin: 0;
+                color: #666;
+                margin-top:5px;
+            }
+            div:nth-child(1){
+                float: left;
+                text-align: right;
+            }
+            div:nth-child(2){
+                float: left;
+                text-align: left;
+                max-width:80px;
+                p{   
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden; 
+                }
+            }
+
+            span{
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                color: #eeb415;
+            }
         }
-        span{
-            color: #eeb415;
-        }
+      
     }
     
 }
@@ -442,70 +527,116 @@
 .stock{
     overflow: hidden;
     li{
-        height: 105px;
+        height: 100px;
         border-bottom: solid 1px @borcolor;
         overflow: hidden;
     }
     div{
-        height: 110px;
-        padding:10px 0;
+        padding:  0; 
+        padding-top:8px;
         overflow: hidden;
     }
-    div:nth-child(1){
-        width:195px;
+    .stock-left{
+        width: 63%;
         float: left;
-        margin-left:25px ;
+        padding-left:25px ;
         overflow: hidden;
         p{
+            height: 43px;
             font-size: 16px;
             margin: 0;
+            overflow: hidden;
             color: #535353;
-            margin-bottom: 5px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
         }
         span{
+            max-width: 200px;
             font-size: 14px;
+            display: block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
             color: #a0a0a0;
         }
     }
-    div:nth-child(2){
-        width: 105px;
+    .stock-right{
+        
+        width: 37%;
         float: right;
-        margin-right: 25px;
+        padding-top: 0;
+        padding-right: 15px;
         overflow: hidden;
-        p{
-            text-align: right;
-            font-size: 14px;
+        div{
+            p{color: #535353;}
             span{
                 color: #eeb415;
+            }
+        }
+        .sr-all{ padding-right:10px ;}
+        .sr-all div:nth-child(1){
+            margin-top: -14.5px;
+            padding: 0;
+            float: left;
+            p{
+                overflow: hidden;
+                text-align: right;
+                margin: 0;
+                color: #666;
+                margin-top: 12.5px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+               
             }   
         }
-        P:nth-child(2){
-            margin: 0;
-            margin-top: 25px;
+        .sr-all div:nth-child(2){
+            margin-top: -15px;            
+            float: left;
+            padding: 0;
+            max-width: 120px;
+            p{  
+                max-width: 50px;
+                padding: 0;
+                margin: 0;
+                margin-top: 13px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                text-align:left;
+                overflow: hidden;
+                span{
+                    display: block;
+                }
+            }   
         }
+          
     }
     
 }
 //------------库存数量
 .serial{
-    height: 30px;
+    height: 40px;
     text-align: left;
-    line-height: 30px;
+    line-height: 40px;
     background: #fcf0d0;
     color: #7d7d7d;
-    padding: 0 10px;
+    padding-left:10px;
     overflow: hidden;
     font-size: 14px;
 }
 .product-name{
     height: 55px;
     font-size: 16px;
-    padding: 10px 10px;
+    padding: 10px 10px 0px 10px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
     overflow: hidden;
 }
 .shoujia{
     height: 60px;
-    margin-top: 15px;
+    margin-top: 10px;
     border-bottom: solid 1px @borcolor;
     overflow: hidden;
     div{
@@ -531,6 +662,7 @@
         p{
             font-size: 14px;
             line-height: 40px;
+            padding: 0;
             span{
                 float: right;
                 color: #a0a0a0;
@@ -545,11 +677,16 @@
 //------------信息
 .dope{
     overflow: hidden;
-    li{
-        height: 75px;
+    a{
+        height: 60px;
         border-bottom: solid 1px @borcolor;
         overflow: hidden;
-        padding: 20px 10px;
+        padding: 10px 10px;
+        display: block;
+        position: relative;
+        a:active{
+            background: #000;
+        }
         .dope-icon{
             width: 35px;
             height: 35px;
@@ -560,15 +697,26 @@
             color: #FFF;
             font-size: 22px;
             float: left;
+            position: absolute;
             overflow: hidden;   
         }
+        .next-more{
+                position: absolute;
+                top: 16px;
+                font-size: 20px;
+                right:4px;
+                color: #a0a0a0;
+                overflow: hidden;
+            }
         .dope-show{
-            width:83%;
+            width:100%;
             float: right;
             overflow: hidden;
+            padding-left: 44px;
+            padding-right: 20px;
             span{
                 font-size: 14px;
-                color: #a0a0a0;
+                color: #535353;
                 strong{
                     font-weight: normal;
                     font-size: 14px;
@@ -579,7 +727,8 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 overflow: hidden;
-                color: #535353;   
+                margin: 0;
+                color: #a0a0a0;   
             }
         }
     }
@@ -594,28 +743,30 @@
         height: 40px;
         overflow: hidden;
         position: relative;
+        padding: 0;
+        margin: 0;
         div:nth-child(1){
             width: 80%;
-            padding-left: 35px;
-            overflow: hidden;      
+            padding-left: 25px;
+            padding-right: 10px;
+            overflow: hidden;
+            position:relative; 
+            overflow:hidden;  
+            height: 60px;      
         select{
             width: 100%;
             height: 40px;
             border-radius: 5px;
             padding: 0 10px;
-            background: #EEEEEE;
+            background: #FFFFFF;
             color: #969696;
-            option{
-                border-color:#EEEEEE ;
-            }
         }
     .fugai{
-        width: 20px;
-        height: 20px;
-        background: #EEEEEE;
+        background: #FFF;
         position: absolute;
-        right:20px;
+        right:15px;
         top: 10px;
+        color: #969696;
         overflow: hidden;
         color: #707070;
         }
@@ -624,7 +775,7 @@
             width: 20%;
             margin: 0;
             padding: 0;
-            padding-right: 35px;
+            padding-right: 25px;
             overflow: hidden;
             a{
                 height: 40px;
@@ -646,6 +797,8 @@
 }
 .gather-time{
     overflow: hidden;
+    margin: 0;
+    padding: 0;
     div{
         height: 60px;
         padding: 0;
@@ -656,18 +809,15 @@
         width: 45%;
         position:relative;
         overflow: hidden;
-        padding-left: 20px;
+        padding-left: 10px;
         padding-top: 10px;
         select{
             width: 100%;
             height: 40px;
             border-radius: 5px;
             padding: 0 10px;
-            background: #EEEEEE;
+            background: #FFFFFF;
             color: #535353;
-            option{
-                color: #535353;
-            }
         }
     }
     div:nth-child(2){ width: 10%;text-align: center; line-height: 60px; font-size: 22px;}
@@ -675,14 +825,16 @@
         width: 45%;
         position:relative;
         overflow: hidden;
-        padding-right: 20px;
+        padding-right: 10px;
         padding-top: 10px;
         select{
+//          clip:rect(40 80% 2 80%);
+//          margin: -2px 0;
             width: 100%;
             height: 40px;
             border-radius: 5px;
             padding: 0 10px;
-            background: #EEEEEE;
+            background: #FFFFFF;
             color: #535353;
             option{
                 text-align: center;
@@ -691,69 +843,94 @@
         }
     }
 }
-.kewu,.kehen,.wunai{
+.kewu,.kehen,.wunai,.wunai2{
     position: absolute;
     right: 5px;
     top: 20px;
-    background: #EEEEEE;
+    background: #FFFFFF;
 }
 .kehen{
-    right: 25px;
+    right: 15px;
 }
-.wunai{
-    width: 40px;
-    right: 20px;
+.wunai,.wunai2{
+    right:5px;
     top: 10px;
     background: #FFFFFF;
 }
+.wunai2{
+    right: 15px;
+}
 .debt{
     overflow: hidden;
+    padding: 0;
+    margin: 0;
     .debt-l,.debt-r{
         float: left;
         font-size: 14px;
-        line-height: 30px;
         padding-left: 10px;
     }
     .debt-r{
+        width: 45%;
         float: right;
+        padding-left: 0px;
         padding-right: 10px;
+    }
+    p{
+        margin: 0;
+        margin-top: 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
     span{
         color: #eeb415;
+         max-width: 175px;
     }
 }
 //------------余额
 .yuer{
     overflow: hidden;
+    height: 42px;
+    margin: 0;
+    padding: 0;
+    border-bottom: solid 1px @borcolor;
+    border-top: solid 1px @borcolor;
     div:nth-child(1){
-        height: 60px;
         overflow: hidden;
-        padding-left: 20px;
+        width: 45%;
+        margin: 0;
+        padding: 0;
+        padding-left:10px ;
         select{
-            width: 100%;
+            width:100%;
             height: 40px;
-            border: none; 
-            padding-left:30px;  
+            border: none;
+            padding-left:10px;  
         }
         option{
             
         }
     }
     div:nth-child(2){
-        height: 60px;
         overflow: hidden;
-        padding-left: 40px;
+        margin: 0;
+        padding: 0;
+        padding-right: 10px;
+        width: 45%;
+        float: right;
         select{
             width: 100%;
             height: 40px;
-            border: none;   
+            padding:0 10px;
+            border:none ;   
         }
     }
 }
 .should{
     width: 101%;
     margin-left: -1px;
-    border: solid 1px #CCCCCC;
+    border: solid 1px #EEEEEE;
+
     overflow: hidden;
     td{
        height: 40px;
@@ -765,6 +942,454 @@
         }
     }
 }
+.detail-text{
+    padding: 10px;
+    border-bottom: solid 1px #EEEEEE;
+    overflow: hidden;
+    p{
+        font-size: 16px;
+        margin-bottom: inherit;
+        line-height: 1.5;
+        color: #444;
+    }
+}
+.detail-time{
+    overflow: hidden;
+    p{
+        padding:10px;
+        margin-top: 10px;
+        color: #7d7d7d;
+        margin-bottom:inherit;
+        a{
+            color: #535353;
+            display: block;
+            text-decoration: none;
+            float: right;
+            padding: 5px;
+            margin-top: -5px;
+            border-radius:5px ;
+        }
+    }
+}
+//-------补充页面-------------
+.identifier{
+    height: 40px;
+    text-align: left;
+    line-height: 40px;
+    color: #898989;
+    background:#fef9ec;
+    padding:0 10px;
+    border-bottom: solid 1px #EEEEEE;
+    overflow: hidden;
+    font-size: 12px;
+    span{
+        float: right;
+        color: #46b692;
+    }
+}
+.money{
+    overflow: hidden;
+
+    margin: 0;
+    padding:0;
+    padding:0 10px;
+    border-bottom: solid 1px #EEEEEE;
+    div{
+        overflow: hidden;
+        margin: 0;
+        padding: 0 !important;
+        margin: 10px 0;
+        text-align: center;
+        border-right: solid 1px #eee;
+        h2{
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            text-align: center;
+            color: #eeb415;
+        }
+        p{
+            margin: 0;
+            padding: 0;
+            color: #535353;
+            margin-top:10px ;
+        }
+    }
+    div:last-child{
+        border: none;
+    }
+    
+}
+.record{
+    background: #FFFFFF;
+    color: #535353;
+}
+.record-all{
+    overflow: hidden;
+    margin: 0;
+}
+.record-all li{
+    margin: 0;
+    padding: 0;
+    margin:10px 0;
+    padding: 0 10px;
+    height: 105px;
+    border-bottom: solid 1px #EEEEEE;
+    overflow: hidden;
+}
+.record-left{
+    overflow: hidden;
+    margin: 0;
+    padding: 0 !important;
+    background: #fff;
+    p{
+        font-size:14px ;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        line-height: 30px;
+        margin-top: -5px;
+        color: #535353;
+        span{
+            color: #898989;
+            font-size:12px ;
+        }
+    }
+   
+}
+.append{
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    overflow: hidden;
+    a{
+        width: 100%;
+        height: 60px;
+        text-align: center;
+        font-size: 16px;
+        display: block;
+        line-height: 60px;
+        background: #fabf00;
+        color: #FFFFFF;
+        text-decoration:none !important;
+        overflow: hidden;
+    }
+}
+.popup{
+    width: 100%;
+    height:100%;
+    background: #000000;
+    opacity:0.8;
+    position: fixed;
+    top: 0;
+    display: none;
+    overflow: hidden;
+}
+.popup-all{
+    width: 100%;
+    height:100%;
+    display: none;
+    position: fixed;
+    top: 50%;
+    margin-top: -200px;
+    overflow: hidden; 
+}
+.popup-conter{
+    height: 400px;
+    width: 95%;
+    opacity: 1;
+    margin-left: 2.5%;
+    border-radius:5px;
+    background: #FFF !important;
+    position:absolute;
+    overflow: hidden;
+}
+.keng{
+    margin: 0;
+    padding: 0 !important;   
+    height: 40px;
+    div{
+        color: #535353;
+        height: 50px;
+    }
+    input{
+        color: #535353 !important;
+        height: 48px !important;
+        font-size: 14px !important;
+    }
+    select{
+        color: #535353 ;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.append-top{
+    height: 50px;
+    border-bottom: solid 1px #EEEEEE;
+    margin: 0;
+    padding: 0;
+    background: #EEEEEE;
+    overflow: hidden;
+    div:nth-child(1){
+        width: 8% !important;
+        padding: 0;
+        padding-left: 10px;        
+        text-align: left;
+        i{
+            line-height: 50px;
+            font-size: 20px;
+        }
+    }
+     div:nth-child(2){
+        width: 92% !important;
+        text-align: center;
+        line-height: 50px;
+        font-size: 14px;
+        color: #535353; 
+     }
+}
+.ap-conter{
+    overflow: hidden;
+    li{
+        height: 50px;
+        position: relative;
+        overflow: hidden;
+        select{
+            height: 50px;
+            display: block;
+            color: #535353;
+            border-bottom: solid 1px #EEEEEE;
+        }
+        div{
+            position: absolute;
+            right: 0;
+            background: #FFF;
+            margin-top: 15px;
+            margin-right: 2px;
+            padding-right: 10px;
+            color: #535353;
+        }
+        
+    }
+    .jiner{
+        margin: 0;
+        width: 30%;
+        float:left;
+        padding-left: 10px;
+        height: 50px;
+        line-height: 50px;
+        color: #535353;
+    }
+    input{
+        width: 70%;
+        height: 50px !important;
+        border: solid 1px #000;
+        float: right;
+    }
+    .shuru{
+        margin: 0;
+        width: 90px;
+        height: 50px;
+        float: right;
+        line-height: 50px;
+        color: #535353;
+        input{
+            font-size: 14px ;
+            float: right;
+        }
+    }
+    .queren{
+        width: 100%;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        background: #f75a53;
+        color:#FFF;
+        font-size: 14px;
+        overflow: hidden;
+    }
+}
+.send{
+    height: 96px;
+    margin: 0;
+    padding: 0;
+    margin: 10px 0;
+    border-bottom: solid 1px #EEEEEE;
+    overflow: hidden;
+    div{
+        margin: 0;
+        padding: 0 !important;
+    }
+    div:nth-child(1){
+       .yuan{
+        margin-left: 10px;
+        margin-top: 30px;
+        label:before{
+            top: 3px;
+            left: 4px;
+        }
+        label:after{
+            content: '';
+            width: 25px;
+            height:25px;
+            border-radius:50%;
+            border: 1px solid #CCCCCC;
+            top: 0px;
+            left: 0;
+            z-index: 0
+        }
+       }
+        
+    }
+}
+.shangpin{
+    margin:-10px;
+     width:70px;
+     height: 82px;
+     padding-left: 10px;
+     padding-top: 15px;
+     overflow: hidden;
+     img{
+         overflow: hidden;
+         margin-left: 10px;
+     }
+}
+.send-title{
+    p{
+        width: 88%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        float: left;
+        text-align: left;
+        padding-right: 20px;
+    }
+    span{
+        width: 10%;
+        color: #a0a0a0;
+    }
+}
+.price{
+    margin: 0;
+   li{
+        padding: 0 !important;
+        p{
+            color: #535353;
+            span{
+                color: #eeb415;
+            }
+        }    
+   }
+   li:nth-child(2){
+       text-align: right;
+       p{
+           padding-right: 10px;
+       }
+   }
+}
+.shuliang{
+    overflow: hidden;
+    span{
+        display: block;
+        float: left;
+        line-height: 24px;
+    }
+}
+.sl-sum{
+    float: right;
+    margin-right: 10px;
+    width: 133px;
+    border-bottom: solid 1px #EEEEEE;
+    border-top: solid 1px #EEEEEE;
+    li{
+        width: 44.3px;
+        height: 20px;
+        font-size: 14px;
+        border-left: solid 1px #EEEEEE;
+        border-right: solid 1px #EEEEEE;
+        text-align: center;
+        line-height: 20px;
+        float: left;
+        overflow: hidden;
+    }
+}
+.tianxie{
+    border: none !important;
+    input{
+        width: 44.3px;
+        height: 20px !important;
+        margin: 0;
+        overflow: hidden;
+        border: none !important;
+        font-size: 14px !important;
+        text-align: center;
+    }
+}
+.tuihuo{
+    height: 60px;
+    width: 100%;
+    overflow: hidden;
+    border-top: solid 1px #EEEEEE;
+    border-bottom: solid 1px #EEEEEE;
+    position: fixed;
+    bottom: 0px;
+    margin-bottom: 0;
+    div{
+        margin: 0;
+        padding: 0 !important;
+    }
+    div:nth-child(2){
+        text-align: right;
+        p{
+            margin: 0;
+            margin-right: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #fabf00;
+        }
+        span{
+           margin-right: 10px; 
+        }
+    }
+    div:nth-child(3){
+        background: #fabf00;
+        height: 60px;
+        overflow: hidden;
+        a{
+            display: block;
+            color: #FFF;
+            text-decoration: none;
+            text-align: center;
+            line-height: 60px;    
+        }
+    }
+    .quanxuan{
+       margin-top: 15px ;
+       margin-left: 10px;
+        overflow: hidden;
+     label:before{
+            top: 3px !important;
+            left: 4px !important;
+        }
+        label:after{
+            content: '';
+            width: 25px !important;
+            height:25px !important;
+            border-radius:50% !important;
+            border: 1px solid #CCCCCC !important;
+            top: 0px;
+            left: 0;
+            z-index: 0
+        }  
+    }
+}
+
+
+
 
 
 
