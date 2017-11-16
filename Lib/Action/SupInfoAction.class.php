@@ -8,31 +8,11 @@ class SupInfoAction extends SupBaseAction {
      * @var array
      * @access protected
      */
-    protected $accessAllowed = array('ajax_get_warehouse','msg_list');
+    protected $accessAllowed = array('msg_list');
 
 	public function index(){
         $this->assign('title', '消息中心');
         $this->display();
-	}
-	
-	public function ajax_get_warehouse(){
-		//仓库列表
-		$warehouse_list=M('pms_warehouse')
-            ->field('id,warehouse_name')
-            ->where('is_del=0 and supplier_id='.$_SESSION['pms_supplier']['supplier_id'])
-            ->order('id desc')
-            ->select();
-
-		$warehouse['attr_name'] = '仓库';
-		$warehouse['attr_val'] = array();
-		foreach($warehouse_list as $k => $v){
-			$warehouse['attr_val'][$warehouse_list[$k]['id']] = $v['warehouse_name'];
-		}
-
-		$warehouse = array($warehouse);
-
-		$this->assign('warehouse',$warehouse);
-		echo $html=$this->fetch('SupWarehouse:ajax_get_warehouse');
 	}
 
     public function msg_list()

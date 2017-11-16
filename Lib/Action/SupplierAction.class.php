@@ -11,7 +11,7 @@ class SupplierAction extends SupBaseAction {
      * @access protected
      */
     protected $accessAllowed = array(
-        'ajaxModifyPassWord','index'
+        'ajaxModifyPassWord','index','authorize_add','authorize_del'
         );
 	
     public function _initialize()

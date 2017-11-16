@@ -245,7 +245,17 @@ a:link, a:active {
 	border-top: 1px solid #e7e7e7;
 }
 .no_record{height: 24px;  padding-top: 205px;  text-align: center;  background: url(http://s.17cct.com/v5/images/erp/empty.png) no-repeat center 20px;  background-size: 180px 180px;}
-
+/*.identifier {
+    height: 40px;
+    text-align: left;
+    line-height: 40px;
+    color: #898989;
+    background: #fef9ec;
+    padding: 0 10px;
+    border-bottom: solid 1px #EEEEEE;
+    overflow: hidden;
+    font-size: 12px;
+}*/
 
 </style>
 
@@ -340,7 +350,7 @@ a:link, a:active {
 <div class="bundlev bline">
   <span class="storeico"></span><{$order.location_name}>
 </div>
-
+<!-- <div class="identifier">商品默认以全部数量退货，如需要部分退货请手动选择数量</div> -->
 <volist name="order_info" id="oi">
   <div class="productlist box_flex bline">
   <a class="tickbtn2 text-center"><span class="tickNull goods_item <if condition='$oi.is_gift eq 1'>gift</if>" data-val="<{$oi.goods_id}>"></span></a>

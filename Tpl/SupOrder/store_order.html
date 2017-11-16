@@ -1357,27 +1357,27 @@ $('.confirm').on('click', function(){
         MsgBox('余额不足，请先充值或选择其他支付方式');
         return false;
     };
-    if(is_stock == 0 || is_stock_gift == 0){
-        popTipShow.confirm('库存报警','商品库存低于0是否继续开单?',['确 定','取 消'],
-            function(e){
-                //callback 处理按钮事件
-                var button = $(e.target).attr('class');
-                if(button == 'ok'){
-                    //按下确定按钮执行的操作
-                    this.hide();
-                    store_order_save(btn);
-                }
+    // if(is_stock == 0 || is_stock_gift == 0){
+    //     popTipShow.confirm('库存报警','商品库存低于0是否继续开单?',['确 定','取 消'],
+    //         function(e){
+    //             //callback 处理按钮事件
+    //             var button = $(e.target).attr('class');
+    //             if(button == 'ok'){
+    //                 //按下确定按钮执行的操作
+    //                 this.hide();
+    //                 store_order_save(btn,args,text);
+    //             }
 
-                if(button == 'cancel') {
-                    //按下取消按钮执行的操作
-                    this.hide();
-                }
-            });
-    }else{
-        store_order_save(btn);
-    }
+    //             if(button == 'cancel') {
+    //                 //按下取消按钮执行的操作
+    //                 this.hide();
+    //             }
+    //         });
+    // }else{
+        store_order_save(btn,args,text);
+    // }
 });
-function store_order_save(btn){
+function store_order_save(btn,args,text){
     btn.attr('disabled', true).text('正在处理');
     $.post("<{:U('SupOrder/store_order_add')}>",args,function(data){
         btn.removeAttr('disabled').text(text);

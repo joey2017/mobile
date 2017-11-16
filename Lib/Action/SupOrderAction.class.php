@@ -11,7 +11,7 @@ class SupOrderAction extends SupBaseAction
     protected $accessAllowed = array(
         'order_list','get_pay_account','store_order_add','select_pay_way','get_act_list','get_coupon_list',
         'get_location','get_store_info','location_existence','get_deal_record','location_edit','had_store',
-        'order_settlement'
+        'order_settlement','navig'
         );
 
     /**

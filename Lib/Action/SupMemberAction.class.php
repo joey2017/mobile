@@ -9,7 +9,7 @@ class SupMemberAction extends SupBaseAction
      * @access protected
      */
     protected $accessAllowed = array(
-        'ajax_get_member','ajax_get_credit','get_order_refund','can_refund_list','order_refund_search','refund_save','recharge'
+        'ajax_get_member','ajax_get_credit','get_order_refund','can_refund_list','order_refund_search','refund_save','recharge','navig'
         );
     /**
      * 支付方式 

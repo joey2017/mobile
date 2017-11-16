@@ -9,7 +9,7 @@ class SupWarehouseAction extends SupBaseAction {
      * @access protected
      */
     protected $accessAllowed = array(
-        'ajax_get_goods','ajax_get_attr','ajax_get_warehouse','ajax_get_alarm_goods'
+        'ajax_get_goods','ajax_get_attr','ajax_get_warehouse','ajax_get_alarm_goods','navig'
         );
 
 	public function index(){

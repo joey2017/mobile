@@ -29,7 +29,7 @@ class SupBaseAction extends EmptyAction {
     }
 
     //检查登录
-	public function check_login(){
+	private function check_login(){
 
         $is_logged = session('pms_supplier');
 
